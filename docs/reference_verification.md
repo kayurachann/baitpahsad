@@ -58,5 +58,9 @@ Cách kiểm chứng: đối chiếu tác giả, tiêu đề, venue, tập/số,
 | SRM [6] | "BOSSbase 0.92, 512 × 512", "P_E", "Not reported" | Thông tin dữ liệu lấy từ đoạn trích PDF của tác giả. Cột metric và low-FPR chưa được kiểm từ toàn văn |
 | CSM [10] | "Several cover sources, spatial and JPEG", "Not reported" | Chỉ kiểm từ tóm tắt |
 | Yedroudj-Net [8], SRNet [9] | "Not reported" ở cột Low-FPR | Hai bài này có vẽ đường ROC nhưng không báo cáo chỉ số tại một FPR cố định. Nên kiểm lại |
+| Butora & Fridrich [13] | "P_MD", Low-FPR "Not reported" | **Đã xác minh từ toàn văn**: bài báo cáo P_MD (P_Err) tại mức false alarm ngang với detector cover-vs-all, không phải tại một FPR cố định |
+| MODE [18] | "Pretrained SRNet", "FPR 10⁻³–10⁻¹" | **Đã xác minh từ toàn văn**: "JIN-pretrained SRNet"; đánh giá ở α ∈ {10⁻¹, 10⁻², 10⁻³} |
+| ALASKA [16] | Shift "Cover source, algorithm" | ALASKA trộn nhiều nguồn ảnh và nhiều thuật toán nhúng JPEG. Nên đối chiếu thêm với toàn văn |
+| CSM [10] | Detector "Feature-based, various dimensions" | Lấy theo tóm tắt ("feature-based detectors of various dimensionality") |
 
 Nếu ô nào không xác nhận được, ghi "Not reported" chỉ khi bài thực sự không báo cáo. Nếu chưa đọc được toàn văn thì bỏ dòng đó khỏi bảng.

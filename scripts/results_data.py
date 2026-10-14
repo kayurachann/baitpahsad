@@ -7,6 +7,8 @@ from the stored per-image prediction scores with ``verify_stats.py`` before
 submission.
 """
 
+from decimal import Decimal, ROUND_HALF_EVEN
+
 DETECTORS = ["Residual-LR", "SRM+Ensemble"]
 PROTOCOLS = ["P1", "P2", "P3"]
 ALGORITHMS = ["WOW", "S-UNIWARD", "HILL"]
@@ -109,12 +111,13 @@ def low_fpr_summary():
             fprs = {c[5] for c in cells}
             assert len(fprs) == 1, "test FPR must not depend on the stego condition"
             fpr = fprs.pop()
-            recalls = [c[4] for c in cells]
+            recalls = [Decimal(str(c[4])) for c in cells]
             rows.append({
                 "detector": det, "protocol": p, "fpr": fpr,
                 "fp_total": fpr_to_fp_total(fpr),
-                "recall_mean": sum(recalls) / len(recalls),
-                "recall_min": min(recalls), "recall_max": max(recalls),
+                # exact decimal mean of the reported 3-decimal recalls, rounded half-even
+                "recall_mean": float((sum(recalls) / len(recalls)).quantize(Decimal("0.001"), ROUND_HALF_EVEN)),
+                "recall_min": float(min(recalls)), "recall_max": float(max(recalls)),
             })
     return rows
 

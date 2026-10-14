@@ -37,7 +37,14 @@ plt.rcParams.update({
     "text.color": INK,
     "axes.labelcolor": INK,
     "savefig.dpi": 600,
+    "mathtext.fontset": "custom",
+    "mathtext.rm": "Liberation Sans",
+    "mathtext.it": "Liberation Sans:italic",
+    "mathtext.cal": "Liberation Sans",
+    "mathtext.sf": "Liberation Sans",
+    "mathtext.bf": "Liberation Sans:bold",
 })
+TAU_LOW = r"$\tau_{\mathrm{low}}$"
 
 
 def save(fig, name):
@@ -96,7 +103,7 @@ def figure1():
     ax.text(tx + tw / 2, 2.71, "5  Detector training", ha="center", va="center", fontsize=7.2,
             fontweight="bold")
     lanes = [("Residual-LR", "76 residual\nstatistics", "logistic regression\n360 pairs per run"),
-             ("SRM+Ensemble", "SRM features\n34,671-D", "FLD ensemble\nL = 50, d_sub = 500")]
+             ("SRM+Ensemble", "SRM features\n34,671-D", "FLD ensemble\nL = 50, $d_{\\mathrm{sub}}$ = 500")]
     for (name, feat, clf), y in zip(lanes, lane_y):
         c = COLOR[name]
         ax.add_patch(FancyBboxPatch((fx - 0.06, y - 0.05), tx + tw - fx + 0.12, lh + 0.27,
@@ -131,13 +138,13 @@ def figure1():
         arrow(ax, (tx + tw + 0.06, y + lh / 2), (ex, y + lh / 2))
 
     # branches
-    bw, bh, by = 1.13, 0.42, 0.43
+    bw, bh, by = 1.13, 0.5, 0.42
     gap = (FIG1_W - 0.02 - 4 * bw) / 3
     bxs = [0.01 + i * (bw + gap) for i in range(4)]
-    branches = [("RQ1  Algorithm", "P1: WOW 0.4 → HILL 0.4"),
-                ("RQ2  Mixed training", "P3 vs P2 on HILL 0.4"),
-                ("RQ3  Payload", "0.4 → 0.1 bpp, 18 pairs"),
-                ("Operating point", "τ: val FPR ≤ 1% → test")]
+    branches = [("RQ1  Algorithm", "P1: WOW 0.4 (matched)\nvs HILL 0.4 (unseen)"),
+                ("RQ2  Mixed training", "P3 vs P2\non unseen HILL 0.4"),
+                ("RQ3  Payload", "0.4 → 0.1 bpp\n18 comparisons"),
+                ("Operating point", TAU_LOW + ": val. FPR ≤ 1%\nrecall, test FPR")]
     for (t, b), x in zip(branches, bxs):
         box(ax, x, by, bw, bh, t, b, fc="white", tsize=7.0, bsize=6.6)
     bus = 0.95
@@ -148,7 +155,7 @@ def figure1():
 
     # stage 7: metrics
     box(ax, 0.01, 0.01, FIG1_W - 0.02, 0.34, "7  Robustness and security metrics",
-        "ROC-AUC, F1, BER  ·  paired ΔAUC + source-cover bootstrap 95% CI  ·  recall and test FPR at τ",
+        "ROC-AUC, F1, BER  ·  paired ΔAUC + source-cover bootstrap 95% CI  ·  recall and test FPR at " + TAU_LOW,
         tsize=7.0, bsize=6.6)
     for x in bxs:
         arrow(ax, (x + bw / 2, by), (x + bw / 2, 0.35))

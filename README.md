@@ -5,10 +5,10 @@ Algorithm and Payload Shift*, làm theo góp ý của thầy, với bố cục t
 
 | Thư mục | Nội dung |
 |---|---|
-| `manuscript/` | `StegaGuard_revised.docx` (bản để chỉnh tiếp trong Word) và `.pdf` (12 trang) |
+| `manuscript/` | `StegaGuard_revised.docm` (bản nộp), `.docx` (cùng nội dung) và `.pdf` (12 trang) |
 | `supplementary/` | Bảng đầy đủ S1–S3, chuyển ra khỏi bài chính để giữ giới hạn 12 trang |
 | `figures/` | Hình 1 (pipeline) và Hình 2 (payload shift), dạng PNG 600 dpi và PDF vector |
-| `docs/BAO_CAO_SUA_BAI.md` | Đối chiếu từng góp ý với phần đã sửa, kèm **checklist 28 chỗ tô vàng cần điền từ code** |
+| `docs/BAO_CAO_SUA_BAI.md` | Đối chiếu từng góp ý với phần đã sửa, kèm danh sách chi tiết còn cần bổ sung từ code và kết quả đợt kiểm tra độc lập |
 | `docs/reference_verification.md` | Kiểm chứng 21 tài liệu tham khảo và các ô của Table 1 |
 | `docs/references.ris` | Danh mục tài liệu để import vào EndNote |
 | `scripts/` | Mã sinh hình, bản thảo và supplementary; `verify_stats.py` và `audit_manifest.py` để kiểm chứng lại số liệu từ dữ liệu gốc |

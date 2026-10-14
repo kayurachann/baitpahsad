@@ -33,11 +33,12 @@ ABSTRACT = (
     "cover. Three training protocols of 360 cover–stego pairs were run with three seeds, and paired "
     "differences were assessed by a bootstrap over test covers. Trained on WOW at 0.4 bpp, SRM+Ensemble "
     "reached an AUC of 0.714 on matched WOW and 0.645 on unseen HILL (ΔAUC = −0.070, 95% CI [−0.093, "
-    "−0.046]). Adding 0.1 bpp variants to a WOW/S-UNIWARD training pool gave no reliable change on unseen "
-    "HILL (ΔAUC = −0.022, 95% CI [−0.050, +0.005]). AUC at 0.1 bpp was lower than at 0.4 bpp in all 18 "
-    "comparisons (ΔAUC −0.022 to −0.183). At thresholds set for a validation false-positive rate (FPR) of at "
-    "most 1%, mean recall was 0.062 and 0.080 while the test FPR was 0.045 and 0.034, so neither detector "
-    "operated reliably at a 1% false-alarm budget on this resized BOSSbase subset.")
+    "−0.046]). Adding 0.1 bpp variants to a WOW/S-UNIWARD training pool gave SRM+Ensemble no reliable "
+    "change on unseen HILL (ΔAUC = −0.022, 95% CI [−0.050, +0.005]). AUC at 0.1 bpp was lower than at "
+    "0.4 bpp in all 18 comparisons (ΔAUC −0.022 to −0.183). At thresholds set for a validation "
+    "false-positive rate (FPR) of at most 1%, mean recall was 0.062 for Residual-LR and 0.080 for "
+    "SRM+Ensemble at mean test FPRs of 0.045 and 0.034, so neither detector operated reliably at a 1% "
+    "false-alarm budget on this resized BOSSbase subset.")
 
 KEYWORDS = ("**Keywords:** Image Steganalysis, Robustness Evaluation, Algorithm Mismatch, Payload Mismatch, "
             "Spatial Rich Model, Low False-Positive Rate.")
@@ -85,8 +86,7 @@ def introduction(d):
         "syndrome-trellis coding, or a simulation of it, to place most changes in textured regions that are "
         "hard to model \\cite{stc,wow,uniward,hill}. Steganalysis detectors either train a classifier on "
         "statistics of noise residuals, such as SPAM or the Spatial Rich Model (SRM) \\cite{spam,srm,ens}, or "
-        "learn the residual filters with a convolutional network such as Yedroudj-Net or SRNet "
-        "\\cite{yedroudj,srnet}.")
+        "train a convolutional neural network (CNN) such as Yedroudj-Net or SRNet \\cite{yedroudj,srnet}.")
     d.p("In a security setting the detector does not choose its test data: a defender trains on a few "
         "algorithms at known payloads, while an adversary may use an unseen algorithm or a shorter message. "
         "The operating point matters as well: a "
@@ -108,7 +108,8 @@ def introduction(d):
     if FIG1_POS == "intro_mid":
         fig1(d)
     d.bullets([
-        "**RQ1 (unseen algorithm).** Under protocol P1, which trains on WOW at 0.4 bpp, how does detection of "
+        "**RQ1 (unseen algorithm).** Under protocol P1, which trains on WOW at 0.4 bits per pixel (bpp), how does "
+        "detection of "
         "unseen HILL at 0.4 bpp compare with detection of matched WOW at 0.4 bpp on the same test covers?",
         "**RQ2 (mixed training).** With training size fixed at 360 cover–stego pairs, does adding 0.1 bpp "
         "variants to a WOW/S-UNIWARD training pool (P3 versus P2) improve detection of unseen HILL at 0.4 bpp?",
@@ -118,8 +119,8 @@ def introduction(d):
     d.runin("Contributions.", "(i) A controlled evaluation in which both detectors share covers, training "
             "size, seeds and test images, so that differences between protocols P1–P3 trace back to the "
             "training pool. (ii) Source-cover leakage prevention: the split is fixed before embedding and "
-            "audited against a hashed manifest. (iii) A robustness assessment of algorithm, mixed-training and "
-            "payload shift with paired ΔAUC and bootstrap intervals over test covers. (iv) A security "
+            "audited against a hashed manifest. (iii) A robustness assessment of algorithm and payload shift and "
+            "of mixed training with paired ΔAUC and bootstrap intervals over test covers. (iv) A security "
             "operating-point analysis that separates the validation-selected threshold from the FPR observed "
             "on test covers.")
     if FIG1_POS == "intro":
@@ -147,79 +148,78 @@ def methodology(d):
         "the covers. Training, validation and test hold 2,160, 720 and 720 stego images (360, 120 and 120 per "
         "condition). Each stego file inherits the cover_id and split of its source, so a cover and its six "
         "variants always share a partition. The manifest records cover_id, split, algorithm, payload, "
-        "embedding seed and SHA-256 hash; an audit confirmed that every cover_id lies in exactly one partition "
-        "with exactly six variants and that no cover_id overlaps (manifest SHA-256 13c01ca9…2799e8c).")
+        "embedding seed and SHA-256 hash; a manifest audit confirmed that every stego variant stays in the "
+        "partition of its source cover (manifest SHA-256 13c01ca9…2799e8c).")
 
     d.h2("Feature Extraction and Detectors")
-    d.p("Both detectors output a real-valued score, higher for stego, that is used for every metric; "
+    d.p("Both detectors output a score, higher for stego, that is used for every metric; "
         "{tab:detectors} summarizes their configuration. Residual-LR, the lightweight baseline, describes each "
         "image by 76 statistics of its noise residuals and classifies them with scikit-learn logistic "
         "regression \\cite{sklearn}. SRM+Ensemble, the established reference, extracts the 106 SRM submodels "
-        "(34,671 features) \\cite{srm} with the sealwatch library \\cite{sealwatch} and trains the Fisher "
-        "linear discriminant (FLD) ensemble of \\cite{ens} with L = 50 base learners and random feature "
-        "subspaces of dimension d_{sub} = 500. Both detectors keep the same settings in every protocol and "
-        "seed, so differences between protocols come from the training data alone.")
+        "(34,671 features) \\cite{srm} with the sealwatch library \\cite{sealwatch} and trains the FLD "
+        "ensemble of \\cite{ens} with L = 50 base learners and random feature subspaces of dimension "
+        "d_{sub} = 500. Both detectors keep the same settings in every protocol and seed, so the configuration "
+        "cannot explain differences between protocols.")
     d.table("tab:detectors", "Detector configuration.",
             [1650, 2634, 2634],
             [["Setting", "Residual-LR", "SRM+Ensemble"]],
             [["Features", "76 residual statistics", "SRM: 106 submodels, 34,671 dimensions"],
              ["Classifier", "logistic regression (scikit-learn)", "FLD ensemble, L = 50, d_{sub} = 500"],
              ["Training data per run", "360 cover–stego pairs", "360 cover–stego pairs"],
-             ["Seed-dependent parts", "variant sampling (P2, P3)",
-              "variant sampling (P2, P3); random parts of ensemble training"],
-             ["Output", "real-valued score, higher for stego", "real-valued score, higher for stego"]],
+             ["Seed-dependent parts", "variant sampling (P2, P3); random parts of model fitting",
+              "variant sampling (P2, P3); random parts of model fitting"]],
             aligns=["left", "left", "left"])
 
     d.h2("Experimental Protocols")
     d.p("The protocols in {tab:protocols} differ only in the stego variant attached to each of the 360 "
         "training covers. For every training cover and seed, one variant is sampled from the protocol's pool, "
         "so each run sees 360 cover–stego pairs built from the same 360 covers; P1 involves no sampling. "
-        "Validation images serve only to set thresholds. HILL never enters training or validation, and "
-        "S-UNIWARD is unseen under P1. Seeds 42, 43 and 44 "
+        "Validation images serve only to set thresholds. HILL is never used for model fitting or threshold "
+        "selection, and S-UNIWARD is unseen under P1. Seeds 42, 43 and 44 "
         "control the variant draws and the random parts of model fitting.")
     d.table("tab:protocols", "Training protocols. All share the same 360 training, 120 validation and 120 "
             "test covers; every model is tested on all six conditions (3 algorithms × 2 payloads).",
             [600, 2500, 1050, 2768],
-            [["Protocol", "Training stego pool", "Variants in pool", "Role"]],
+            [["P", "Training stego pool", "Variants in pool", "Role"]],
             [["P1", "WOW 0.4 bpp", "1", "RQ1 (WOW 0.4 matched, HILL 0.4 unseen); RQ3"],
              ["P2", "WOW and S-UNIWARD at 0.4 bpp", "2", "RQ2 reference; RQ3"],
              ["P3", "WOW and S-UNIWARD at 0.1 and 0.4 bpp", "4", "RQ2 (P3 − P2 on HILL 0.4); RQ3"]],
             aligns=["center", "left", "left", "left"])
-    d.p("RQ1 uses P1 because only there is WOW 0.4 the sole training condition, so WOW 0.4 is matched and "
-        "HILL 0.4 unseen for the same model. P2 and P3 differ only in the 0.1 bpp variants, which RQ2 isolates. "
+    d.p("RQ1 uses P1 because it trains on WOW 0.4 alone, so WOW 0.4 is matched and HILL 0.4 unseen for the "
+        "same model. P2 and P3 differ only in the 0.1 bpp variants, which RQ2 isolates. "
         "In every comparison both conditions are scored on the same 120 test covers.")
 
     d.h2("Evaluation Metrics")
     d.p("For each run and test condition a detector produces 240 scores (120 test covers and their 120 stego "
         "variants), from which ROC-AUC is computed. Two thresholds are fixed from validation scores alone, "
-        "never from test labels. The first, τ_{BER}, minimizes the balanced error rate BER = (P_{FA} + "
-        "P_{MD})/2 on the validation scores, where P_{FA} and P_{MD} are the false-alarm and missed-detection "
-        "rates; F1 = 2·Prec·Rec/(Prec + Rec) and BER are reported on test at this threshold. The second "
-        "threshold defines the security operating point. With s(c) the score of cover c and V the set of 120 "
-        "validation covers,")
-    d.equation(msub(mr("τ"), mr("low", True)) + mr("=", True) + mr("min", True) +
-               mparen(mr("τ") + mr(" : ", True) +
-                      mparen(mparen(mr("c") + mr("∈", True) + mr("V") + mr(" : ", True) + mr("s") +
-                                    mparen(mr("c")) + mr("≥", True) + mr("τ"), "{", "}"), "|", "|") +
-                      mr("≤", True) + mr("0.01", True) + mr("·", True) + mparen(mr("V"), "|", "|"), "{", "}"), 1)
-    d.p("With |V| = 120, the constraint allows at most one validation false positive (0.83%). At τ_{low} we "
-        "report recall, the share of the 120 test stego images with s ≥ τ_{low}, and the observed test FPR, the "
-        "share of the 120 test covers with s ≥ τ_{low}. The first is the quantity of security interest; the "
-        "second shows whether the 1% target transfers from validation to test, which Eq. (1) does not "
-        "guarantee.", style="p1a")
+        "never from test labels. The first, τ_{BER}, is the balanced-error point on the validation scores, with "
+        "BER = (FPR + P_{MD})/2 and P_{MD} the missed-detection rate; F1 = 2·Prec·Rec/(Prec + Rec) and BER are "
+        "reported on test at this threshold. The second, τ_{low}, defines the security operating point. It is "
+        "set on the set V of 120 validation covers so that, with s(c) the score of cover c,")
+    d.equation(msub(mr("FPR"), mr("V", False)) + mparen(msub(mr("τ"), mr("low", True))) + mr("=", True) +
+               mfrac(mparen(mparen(mr("c") + mr("∈", True) + mr("V") + mr(" : ", True) + mr("s") +
+                                   mparen(mr("c")) + mr("≥", True) + msub(mr("τ"), mr("low", True)), "{", "}"),
+                            "|", "|"), mparen(mr("V"), "|", "|")) +
+               mr("≤", True) + mr("0.01", True), 1)
+    d.p("With |V| = 120, this allows at most one validation false positive (0.83%). At τ_{low} we report "
+        "recall, the share of the 120 test stego images with s ≥ τ_{low}, and the observed test FPR, the share "
+        "of the 120 test covers with s ≥ τ_{low}. The first is the quantity of security interest; the second "
+        "shows whether the 1% target transfers from validation to test, which Eq. (1) does not guarantee.",
+        style="p1a")
 
     d.h2("Statistical Analysis and Reproducibility")
     d.p("Each comparison is a paired difference ΔAUC = AUC(shifted) − AUC(reference): HILL 0.4 minus WOW 0.4 "
         "under P1 (RQ1), P3 minus P2 on HILL 0.4 (RQ2), and 0.1 minus 0.4 bpp for each detector, protocol and "
         "algorithm (RQ3, 18 comparisons). Negative values mean a loss under the shift. The point estimate is the "
-        "mean of the three per-seed differences, which equals the difference of the seed-mean AUCs. Its 95% "
-        "interval comes from a paired bootstrap in which the resampling unit is the source test cover: each "
-        "replicate draws 120 test cover IDs with replacement, and a drawn cover brings its cover score together "
-        "with its stego scores under both compared conditions, so the pairing is preserved. Individual stego "
+        "mean of the three per-seed differences, which equals the difference of the unrounded seed-mean AUCs "
+        "(rounded table values may differ by 0.001). Its 95% interval comes from a paired bootstrap in which the "
+        "resampling unit is the source test cover: each replicate draws 120 test cover IDs with replacement, "
+        "and a drawn cover brings all of its cover and stego scores under both compared conditions, so the "
+        "pairing is preserved. Individual stego "
         "images are never resampled on their own.")
     d.p("Seed standard deviations (at most 0.028, Supplementary Table S1) describe training randomness on "
         "fixed data; the bootstrap describes the sampling of test covers given the trained models. Neither "
-        "covers another choice of covers or split, so the intervals are conditional on this partition. A direction is called supported only when its interval excludes zero; an interval "
+        "reflects a different choice of covers or split, so the intervals are conditional on this partition. A direction is called supported only when its interval excludes zero; an interval "
         "containing zero is inconclusive, not evidence of equivalence. The 18 RQ3 intervals are not adjusted "
         "for multiplicity. Every run stores its per-image prediction scores, and the manifest stores the "
         "embedding seed and SHA-256 hash of every image, so all tables can be recomputed from the saved "
@@ -256,9 +256,9 @@ def results(d):
     s, r = RQ1["SRM+Ensemble"], RQ1["Residual-LR"]
     d.p(f"Under P1, SRM+Ensemble falls from {f3(s[0])} on matched WOW 0.4 to {f3(s[1])} on unseen HILL 0.4 "
         f"({tab_ref('tab:rq12')}); the interval of the paired ΔAUC excludes zero, and BER rises from 0.347 to "
-        f"0.386. For Residual-LR the difference is {f3(r[2], True)} {ci(*r[3])}, but with a matched AUC of "
-        f"{f3(r[0])} there is no matched signal against which a shift could be measured.")
-    d.p("This loss is not a pure effect of algorithm mismatch. HILL was designed to be harder to detect than "
+        f"0.386. For Residual-LR the difference is {f3(r[2], True)} {ci(*r[3])}, but with a matched AUC of only "
+        f"{f3(r[0])} the matched signal is too weak to serve as a reference for a shift.")
+    d.p("This loss need not be a pure effect of algorithm mismatch. HILL was designed to be harder to detect than "
         "WOW with rich-model features \\cite{hill}, so part of the gap may reflect its intrinsic difficulty; the "
         "P1 ordering WOW 0.714 > S-UNIWARD 0.689 > HILL 0.645 fits both explanations. Separating them needs a "
         "matched HILL reference (trained and tested on HILL), which this study did not run.")
@@ -273,7 +273,7 @@ def results(d):
         for det in DETECTORS:
             a, b, dd, (lo, hi) = rq[det]
             if det == "Residual-LR" and name == "RQ1":
-                reading = "No matched signal"
+                reading = "Weak matched signal"
             else:
                 reading = "Loss, CI excludes 0" if hi < 0 else "Inconclusive"
             rows.append([det, f3(a), f3(b), f3(dd, True), ci(lo, hi), reading])
@@ -300,11 +300,9 @@ def results(d):
     d.h2("RQ3: Payload Shift")
     d.p("{fig:rq3} shows ΔAUC between 0.1 and 0.4 bpp for all 18 comparisons, and {tab:rq3} summarizes them per "
         "detector and protocol; Supplementary Table S2 lists every interval. All 18 differences are negative "
-        "and all 18 intervals lie below zero. For SRM+Ensemble the losses range from −0.115 to −0.183 with "
-        "upper bounds no higher than −0.088; for Residual-LR they are smaller (−0.022 to −0.060) and one interval "
-        "ends at −0.001 (P3 WOW). As the intervals are unadjusted and share covers and models, the common sign "
-        "is not 18 independent confirmations, and the weakest Residual-LR intervals are not strong evidence on "
-        "their own.")
+        "and all 18 intervals lie below zero. The SRM+Ensemble losses are about three times those of "
+        "Residual-LR, and one Residual-LR interval ends at −0.001 (P3 WOW). As the intervals are unadjusted and share covers and models, the common sign "
+        "is not 18 independent confirmations.")
     d.figure("fig:rq3", FIG / "fig2_payload_shift.png", 4.46,
              "Payload shift: ΔAUC = AUC(0.1 bpp) − AUC(0.4 bpp) with 95% paired bootstrap intervals. Under P1 "
              "and P2 the 0.1 bpp payload is absent from training; under P3 it is included.")
@@ -318,13 +316,15 @@ def results(d):
                          f"{f3(min(deltas), True)} to {f3(max(deltas), True)}",
                          f3(sum(deltas) / 3, True), f3(max(x[2] for x in ds), True),
                          f"{sum(1 for x in ds if x[2] < 0)}/3"])
-    d.table("tab:rq3", "RQ3 summary over the three algorithms, ΔAUC = AUC(0.1 bpp) − AUC(0.4 bpp).",
+    d.table("tab:rq3", "RQ3 summary over the three algorithms, ΔAUC = AUC(0.1 bpp) − AUC(0.4 bpp), computed "
+            "from unrounded AUCs.",
             [1350, 400, 1150, 1350, 900, 1000, 768],
             [["Detector", "P", "AUC at 0.1 bpp", "ΔAUC range", "Mean ΔAUC", "Highest CI upper bound",
               "CIs < 0"]], rows, size=17,
             aligns=["left", "center", "center", "center", "center", "center", "center"], group_rules=(3,))
-    d.runin("Answer to RQ3.", "Lowering the payload from 0.4 to 0.1 bpp reduced AUC in every tested "
-            "combination, and for SRM+Ensemble (0.517–0.550 at 0.1 bpp) it removed most of the usable signal. "
+    d.runin("Answer to RQ3.", "Lowering the payload from 0.4 to 0.1 bpp lowered the AUC point estimate in all "
+            "18 combinations. The loss is clear for SRM+Ensemble, whose AUC of 0.517–0.550 at 0.1 bpp leaves "
+            "little usable signal, whereas the weakest Residual-LR intervals end close to zero. "
             "The loss persists under P3, whose pool contains 0.1 bpp examples, so at 360 pairs training on the "
             "lower payload did not offset the weaker signal. The finding is limited to the three algorithms, "
             "two payloads and image size studied.")
@@ -332,10 +332,12 @@ def results(d):
     d.h2("Security Operating Point at Low FPR")
     d.p("{tab:lowfpr} reports the operating point of Eq. (1). The threshold allows at most one false positive "
         "among the 120 validation covers, yet on test covers every detector–protocol cell exceeds the 1% "
-        "target, with observed FPRs of 0.022–0.053. Residual-LR under P1 is deterministic "
-        "and gives 5 false positives in 120 test covers per run; the exact 95% Clopper–Pearson interval for "
-        "5/120, [1.4%, 9.5%], excludes 1%. A likely reason is that τ_{low} depends on the one or two highest "
-        "validation cover scores, an extreme order statistic that varies strongly between samples of 120.")
+        "target, with observed FPRs of 0.022–0.053. Residual-LR under P1 has 15 false positives in 360 test "
+        "cover evaluations; if its three runs are identical, as its zero seed spread suggests, that is 5/120 per "
+        "run, whose exact 95% Clopper–Pearson interval, [1.4%, 9.5%], excludes 1%. A likely reason is that a 1% "
+        "target on 120 covers places τ_{low} among the one or two highest validation scores, an extreme order "
+        "statistic that varies strongly between samples. The least strict threshold allowed, just above the "
+        "second-highest score, is exceeded by an exchangeable test cover with probability 2/121 ≈ 1.7%.")
     rows = []
     for r_ in low_fpr_summary():
         fp = r_["fp_total"]
@@ -343,8 +345,9 @@ def results(d):
                      f"{r_['fpr']:.3f}", f"{r_['recall_mean']:.3f}", f"{r_['recall_min']:.3f}–{r_['recall_max']:.3f}"])
     rows.append({"group": "Pooled: Residual-LR 49/1,080 (FPR 0.045, mean recall 0.062); SRM+Ensemble 37/1,080 "
                           "(FPR 0.034, mean recall 0.080)"})
-    d.table("tab:lowfpr", "Operating point at τ_{low} (validation FPR ≤ 1%). False positives are summed over "
-            "seeds 42–44 (3 × 120 test covers); recall is the mean and range over the six test conditions.",
+    d.table("tab:lowfpr", "Operating point at τ_{low} (validation FPR ≤ 1%). False positives over seeds 42–44 "
+            "(3 × 120 test covers) are implied by the reported mean test FPR (Suppl. Table S3); recall is the "
+            "mean and range over the six test conditions.",
             [1450, 400, 1300, 1300, 1150, 1318],
             [["Detector", "P", "Test false positives", "Observed test FPR", "Mean recall", "Recall range"]],
             rows, size=17, aligns=["left", "center", "center", "center", "center", "center"], group_rules=(3, 6))
@@ -378,7 +381,7 @@ def conclusion(d):
         "covers and was not met on test covers, and no cross-source data were evaluated.")
     d.p("Future work will use the full BOSSbase at its original resolution, add stronger detectors such as "
         "SRNet under the same split, include a matched HILL reference and test cover-source shift. StegaGuard "
-        "is an evaluation protocol rather than a new detector, and the results do not indicate readiness for "
+        "is a controlled evaluation study rather than a new detector, and the results do not indicate readiness for "
         "deployment.")
 
 
