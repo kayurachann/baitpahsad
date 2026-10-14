@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+selftest_scores.csv
+manuscript/_lncs_template*/
+supplementary/_lncs_template*/
