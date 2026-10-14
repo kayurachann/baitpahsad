@@ -1,5 +1,8 @@
 """Regenerate Figures 1-2 of the manuscript at print size (LNCS text width 12.2 cm).
 
+Plain journal style: serif font matching the Times body text, black lines on white,
+square-cornered boxes, no colour (PNG stored as single-channel grayscale).
+
 Usage: python3 make_figures.py [output_dir]
 """
 import sys
@@ -9,43 +12,28 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
+from matplotlib.patches import Rectangle, FancyArrowPatch
 
 from results_data import RQ3, PROTOCOLS, ALGORITHMS
 
 OUT = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).resolve().parent.parent / "figures"
 OUT.mkdir(parents=True, exist_ok=True)
 
-TEXT_WIDTH_IN = 12.2 / 2.54
-# Grayscale only (no colour): detectors differ by marker shape and line style, not by hue.
-INK = "#000000"
-INK_2 = "#404040"
-GRID = "#d0d0d0"
-FILL = "#f0f0f0"
-COLOR = {"Residual-LR": "#000000", "SRM+Ensemble": "#595959"}
-LANE_STYLE = {"Residual-LR": (0, (3, 1.5)), "SRM+Ensemble": (0, (6, 1.5, 1, 1.5))}
-MARKER = {"Residual-LR": "o", "SRM+Ensemble": "s"}
-
+LW = 0.6
 plt.rcParams.update({
-    "font.family": "Liberation Sans",
-    "font.size": 8,
-    "axes.labelsize": 8,
-    "xtick.labelsize": 7.5,
-    "ytick.labelsize": 7.5,
-    "legend.fontsize": 7.5,
-    "axes.edgecolor": INK_2,
-    "axes.linewidth": 0.6,
-    "xtick.color": INK_2,
-    "ytick.color": INK_2,
-    "text.color": INK,
-    "axes.labelcolor": INK,
+    "font.family": "serif",
+    "font.serif": ["Times New Roman", "Liberation Serif", "DejaVu Serif"],
+    "mathtext.fontset": "stix",
+    "font.size": 7.5,
+    "axes.labelsize": 7.5,
+    "xtick.labelsize": 7,
+    "ytick.labelsize": 7,
+    "axes.linewidth": LW,
+    "xtick.major.width": LW,
+    "ytick.major.width": LW,
+    "xtick.direction": "out",
+    "ytick.direction": "out",
     "savefig.dpi": 600,
-    "mathtext.fontset": "custom",
-    "mathtext.rm": "Liberation Sans",
-    "mathtext.it": "Liberation Sans:italic",
-    "mathtext.cal": "Liberation Sans",
-    "mathtext.sf": "Liberation Sans",
-    "mathtext.bf": "Liberation Sans:bold",
 })
 TAU_LOW = r"$\tau_{\mathrm{low}}$"
 
@@ -56,156 +44,127 @@ def to_gray(png):
     Image.open(png).convert("L").save(png, dpi=(600, 600))
 
 
-def save(fig, name):
-    for ext in ("png", "pdf"):
-        fig.savefig(OUT / f"{name}.{ext}", bbox_inches="tight", pad_inches=0.02)
-    plt.close(fig)
-    to_gray(OUT / f"{name}.png")
-
-
 # --------------------------------------------------------------------------- Fig. 1
-FIG1_W, FIG1_H = 4.8, 2.8  # inches; data coordinates are inches
+W, H = 4.8, 2.5   # inches; data coordinates are inches
 
 
-def box(ax, x, y, w, h, title, body="", fc=FILL, ec=INK_2, lw=0.7, tsize=7.2, bsize=6.9):
-    ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0,rounding_size=0.04",
-                                fc=fc, ec=ec, lw=lw))
-    if body:
-        ax.text(x + w / 2, y + h - 0.05, title, ha="center", va="top", fontsize=tsize, fontweight="bold")
-        ax.text(x + w / 2, y + h - 0.18, body, ha="center", va="top", fontsize=bsize, color=INK_2,
+def rect(ax, x, y, w, h, text, ls="-", size=7.2, style="normal"):
+    ax.add_patch(Rectangle((x, y), w, h, fill=False, ec="black", lw=LW, ls=ls))
+    if text:
+        ax.text(x + w / 2, y + h / 2, text, ha="center", va="center", fontsize=size, style=style,
                 linespacing=1.15)
-    else:
-        ax.text(x + w / 2, y + h / 2, title, ha="center", va="center", fontsize=tsize, fontweight="bold")
 
 
 def arrow(ax, p, q):
-    ax.add_patch(FancyArrowPatch(p, q, arrowstyle="-|>", mutation_scale=6, lw=0.7, color=INK_2,
+    ax.add_patch(FancyArrowPatch(p, q, arrowstyle="-|>", mutation_scale=5.5, lw=LW, color="black",
                                  shrinkA=0, shrinkB=0))
 
 
 def line(ax, xs, ys):
-    ax.plot(xs, ys, color=INK_2, lw=0.7, solid_capstyle="butt")
+    ax.plot(xs, ys, color="black", lw=LW, solid_capstyle="butt")
 
 
 def figure1():
-    fig = plt.figure(figsize=(FIG1_W, FIG1_H))
+    fig = plt.figure(figsize=(W, H))
     ax = fig.add_axes([0, 0, 1, 1])
-    ax.set_xlim(0, FIG1_W)
-    ax.set_ylim(0, FIG1_H)
+    ax.set_xlim(0, W)
+    ax.set_ylim(0, H)
     ax.axis("off")
 
-    # stages 1-3: data preparation (left column, top to bottom)
-    cw, ch = 1.22, 0.5
-    ys = [2.29, 1.67, 1.05]
-    box(ax, 0.01, ys[0], cw, ch, "1  BOSSbase 1.01", "600 source covers\n512×512 → 256×256")
-    box(ax, 0.01, ys[1], cw, ch, "2  Source-cover split", "360 / 120 / 120 covers\nbefore embedding")
-    box(ax, 0.01, ys[2], cw, ch, "3  Stego generation", "WOW, S-UNIWARD, HILL\n0.1, 0.4 bpp: 3,600 stego")
+    # data preparation: left column, top to bottom
+    cw, ch = 1.15, 0.46
+    ys = [1.98, 1.40, 0.82]
+    rect(ax, 0.005, ys[0], cw, ch, "BOSSbase 1.01\n600 covers\n256 × 256")
+    rect(ax, 0.005, ys[1], cw, ch, "Source-cover split\n360 / 120 / 120\n(before embedding)")
+    rect(ax, 0.005, ys[2], cw, ch, "Stego generation\nWOW, S-UNIWARD,\nHILL; 0.1, 0.4 bpp")
     for a, b in zip(ys[:-1], ys[1:]):
-        arrow(ax, (0.01 + cw / 2, a), (0.01 + cw / 2, b + ch))
+        arrow(ax, (0.005 + cw / 2, a), (0.005 + cw / 2, b + ch))
 
-    # stages 4-5: two parallel detector lanes
-    fx, fw = 1.45, 0.92
-    tx, tw = 2.5, 0.95
-    lh = 0.4
-    lane_y = [1.9, 1.12]
-    ax.text(fx + fw / 2, 2.71, "4  Feature extraction", ha="center", va="center", fontsize=7.2,
-            fontweight="bold")
-    ax.text(tx + tw / 2, 2.71, "5  Detector training", ha="center", va="center", fontsize=7.2,
-            fontweight="bold")
-    lanes = [("Residual-LR", "76 residual\nstatistics", "logistic regression\n360 pairs per run"),
-             ("SRM+Ensemble", "SRM features\n34,671-D", "FLD ensemble\nL = 50, $d_{\\mathrm{sub}}$ = 500")]
+    # feature extraction and detector training: two parallel detectors
+    fx, fw, tx, tw, lh = 1.42, 0.86, 2.47, 0.86, 0.38
+    lane_y = [1.62, 0.98]
+    ax.text(fx + fw / 2, 2.36, "Feature extraction", ha="center", va="center", fontsize=7.5)
+    ax.text(tx + tw / 2, 2.36, "Detector training", ha="center", va="center", fontsize=7.5)
+    lanes = [("Residual-LR", "76 residual\nstatistics", "Logistic\nregression"),
+             ("SRM+Ensemble", "SRM features\n(34,671-D)", "FLD ensemble\n$L$ = 50, $d_{\\mathrm{sub}}$ = 500")]
+    ax.add_patch(Rectangle((1.33, 0.82), 2.09, 1.42, fill=False, ec="black", lw=LW, ls=(0, (3, 2))))
     for (name, feat, clf), y in zip(lanes, lane_y):
-        c = COLOR[name]
-        ax.add_patch(FancyBboxPatch((fx - 0.06, y - 0.05), tx + tw - fx + 0.12, lh + 0.27,
-                                    boxstyle="round,pad=0,rounding_size=0.05", fc="none", ec=c, lw=0.9,
-                                    ls=LANE_STYLE[name]))
-        ax.text(fx, y + lh + 0.11, name, ha="left", va="center", fontsize=7.2, fontweight="bold", color=c)
-        ax.text(tx + tw, y + lh + 0.11, "P1–P3 × 3 seeds", ha="right", va="center", fontsize=6.4,
-                color=INK_2)
-        for x, w, txt in ((fx, fw, feat), (tx, tw, clf)):
-            ax.add_patch(FancyBboxPatch((x, y), w, lh, boxstyle="round,pad=0,rounding_size=0.04",
-                                        fc="white", ec=c, lw=0.8))
-            ax.text(x + w / 2, y + lh / 2, txt, ha="center", va="center", fontsize=6.7, linespacing=1.1)
+        ax.text(fx, y + lh + 0.07, name, ha="left", va="center", fontsize=7.2, style="italic")
+        rect(ax, fx, y, fw, lh, feat)
+        rect(ax, tx, y, tw, lh, clf)
         arrow(ax, (fx + fw, y + lh / 2), (tx, y + lh / 2))
-    # fan-out from stage 3 to both lanes
-    mid = 1.33
+    ax.text(3.37, 0.88, "P1–P3, 3 seeds, 360 pairs per run", ha="right", va="center", fontsize=6.6,
+            style="italic")
+    # stego images feed both detectors
+    mid = 1.25
     y3 = ys[2] + ch / 2
-    line(ax, [0.01 + cw, mid], [y3, y3])
+    line(ax, [0.005 + cw, mid], [y3, y3])
     line(ax, [mid, mid], [y3, lane_y[0] + lh / 2])
     for y in lane_y:
         arrow(ax, (mid, y + lh / 2), (fx, y + lh / 2))
 
-    # stage 6: evaluation on shared test covers
-    ex, ew = 3.62, 1.17
-    ey, eh = 1.07, 1.6
-    ax.add_patch(FancyBboxPatch((ex, ey), ew, eh, boxstyle="round,pad=0,rounding_size=0.04",
-                                fc=FILL, ec=INK_2, lw=0.7))
-    ax.text(ex + ew / 2, ey + eh - 0.07, "6  P1/P2/P3\nevaluation", ha="center", va="top", fontsize=7.2,
-            fontweight="bold", linespacing=1.1)
-    ax.text(ex + ew / 2, ey + eh - 0.45, "same 120 test\ncovers for all\nprotocols\n\n6 conditions:\n"
-            "3 algorithms\n× 2 payloads", ha="center", va="top", fontsize=6.7, color=INK_2, linespacing=1.12)
+    # evaluation of every trained model on the shared test covers
+    ex, ew, ey, eh = 3.60, 1.195, 0.98, 1.02
+    rect(ax, ex, ey, ew, eh, "P1/P2/P3 evaluation\n\n120 test covers\n6 test conditions\n(3 algorithms × 2 payloads)",
+         size=7)
     for y in lane_y:
-        arrow(ax, (tx + tw + 0.06, y + lh / 2), (ex, y + lh / 2))
+        arrow(ax, (tx + tw + 0.09, y + lh / 2), (ex, y + lh / 2))
 
-    # branches
-    bw, bh, by = 1.13, 0.5, 0.42
-    gap = (FIG1_W - 0.02 - 4 * bw) / 3
-    bxs = [0.01 + i * (bw + gap) for i in range(4)]
-    branches = [("RQ1  Algorithm", "P1: WOW 0.4 (matched)\nvs HILL 0.4 (unseen)"),
-                ("RQ2  Mixed training", "P3 vs P2\non unseen HILL 0.4"),
-                ("RQ3  Payload", "0.4 → 0.1 bpp\n18 comparisons"),
-                ("Operating point", TAU_LOW + ": val. FPR ≤ 1%\nrecall, test FPR")]
-    for (t, b), x in zip(branches, bxs):
-        box(ax, x, by, bw, bh, t, b, fc="white", tsize=7.0, bsize=6.6)
-    bus = 0.95
+    # evaluation branches
+    bw, bh, by = 1.13, 0.24, 0.43
+    gap = (W - 0.01 - 4 * bw) / 3
+    bxs = [0.005 + i * (bw + gap) for i in range(4)]
+    labels = ["RQ1: algorithm shift", "RQ2: mixed training", "RQ3: payload shift", "Low-FPR operating point"]
+    for x, t in zip(bxs, labels):
+        rect(ax, x, by, bw, bh, t, size=7)
+    bus = 0.75
     line(ax, [ex + ew / 2, ex + ew / 2], [ey, bus])
     line(ax, [bxs[0] + bw / 2, ex + ew / 2], [bus, bus])
     for x in bxs:
         arrow(ax, (x + bw / 2, bus), (x + bw / 2, by + bh))
 
-    # stage 7: metrics
-    box(ax, 0.01, 0.01, FIG1_W - 0.02, 0.34, "7  Robustness and security metrics",
-        "ROC-AUC, F1, BER  ·  paired ΔAUC + source-cover bootstrap 95% CI  ·  recall and test FPR at " + TAU_LOW,
-        tsize=7.0, bsize=6.6)
+    # metrics
+    rect(ax, 0.005, 0.005, W - 0.01, 0.30,
+         "Robustness and security metrics: ROC-AUC, F1, BER; paired ΔAUC with bootstrap 95% CI;\n"
+         "recall and observed test FPR at " + TAU_LOW, size=7)
     for x in bxs:
-        arrow(ax, (x + bw / 2, by), (x + bw / 2, 0.35))
+        arrow(ax, (x + bw / 2, by), (x + bw / 2, 0.305))
     fig.savefig(OUT / "fig1_pipeline.png", dpi=600)
     fig.savefig(OUT / "fig1_pipeline.pdf")
-    to_gray(OUT / "fig1_pipeline.png")
     plt.close(fig)
+    to_gray(OUT / "fig1_pipeline.png")
 
 
 # --------------------------------------------------------------------------- Fig. 2
 def figure2():
-    fig, axes = plt.subplots(1, 2, figsize=(4.7, 1.85), sharey=True, gridspec_kw={"wspace": 0.08})
+    fig, axes = plt.subplots(1, 2, figsize=(4.7, 1.9), sharey=True, gridspec_kw={"wspace": 0.1})
     pairs = [(p, a) for p in PROTOCOLS for a in ALGORITHMS]
-    labels = [f"{p} {a}" for p, a in pairs]
-    ys = list(range(len(labels)))[::-1]
-    for ax, d in zip(axes, ["Residual-LR", "SRM+Ensemble"]):
+    ys = list(range(len(pairs)))[::-1]
+    style = {"Residual-LR": dict(fmt="o", mfc="black"), "SRM+Ensemble": dict(fmt="s", mfc="white")}
+    for ax, d, tag in zip(axes, ["Residual-LR", "SRM+Ensemble"], ["(a)", "(b)"]):
         for y, (p, a) in zip(ys, pairs):
             delta, lo, hi = RQ3[(d, p, a)]
-            ax.plot([lo, hi], [y, y], color=COLOR[d], lw=1.3, solid_capstyle="butt")
-            ax.scatter([delta], [y], s=14, marker=MARKER[d], color=COLOR[d], zorder=3, edgecolor="white",
-                       lw=0.5)
-        ax.axvline(0, color=INK_2, lw=0.7, ls=(0, (3, 2)))   # zero reference, not a frame
+            ax.errorbar([delta], [y], xerr=[[delta - lo], [hi - delta]], color="black", ms=3.2, mec="black",
+                        elinewidth=0.7, capsize=1.8, capthick=0.7, **style[d])
+        ax.axvline(0, color="black", lw=0.5, ls=(0, (3, 2)))
         for yy in (2.5, 5.5):
-            ax.axhline(yy, color=GRID, lw=0.5)
+            ax.axhline(yy, color="0.75", lw=0.4, ls=(0, (1, 1.5)))
         ax.set_xlim(-0.225, 0.04)
         ax.set_xticks([-0.20, -0.15, -0.10, -0.05, 0.0], ["−0.20", "−0.15", "−0.10", "−0.05", "0"])
-        ax.grid(axis="x", color=GRID, lw=0.5)
-        ax.set_axisbelow(True)
-        ax.tick_params(length=2, labelsize=7)
-        ax.set_title(d, fontsize=7.2, loc="left", pad=2, fontweight="bold", color=INK)
+        ax.set_title(f"{tag} {d}", fontsize=7.5, loc="center", pad=3)
+        ax.tick_params(length=2)
         for s in ("top", "right"):
             ax.spines[s].set_visible(False)
-        ax.tick_params(axis="y", left=(d == "Residual-LR"))
     axes[1].spines["left"].set_visible(False)
-    axes[0].set_yticks(ys, labels)
-    axes[0].set_ylim(-0.6, len(labels) - 0.4)
-    fig.subplots_adjust(bottom=0.22, top=0.9)
-    fig.supxlabel("ΔAUC = AUC(0.1 bpp) − AUC(0.4 bpp), point estimate and 95% paired bootstrap CI",
-                  fontsize=7, y=0.01)
-    save(fig, "fig2_payload_shift")
+    axes[1].tick_params(axis="y", left=False)
+    axes[0].set_yticks(ys, [f"{p} {a}" for p, a in pairs])
+    axes[0].set_ylim(-0.6, len(pairs) - 0.4)
+    fig.subplots_adjust(bottom=0.2, top=0.9)
+    fig.supxlabel("ΔAUC = AUC(0.1 bpp) − AUC(0.4 bpp)", fontsize=7.5, y=0.01)
+    for ext in ("png", "pdf"):
+        fig.savefig(OUT / f"fig2_payload_shift.{ext}", bbox_inches="tight", pad_inches=0.02)
+    plt.close(fig)
+    to_gray(OUT / "fig2_payload_shift.png")
 
 
 if __name__ == "__main__":

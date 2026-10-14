@@ -215,8 +215,7 @@ def methodology(d):
         "(rounded table values may differ by 0.001). Its 95% interval comes from a paired bootstrap in which the "
         "resampling unit is the source test cover: each replicate draws 120 test cover IDs with replacement, "
         "and a drawn cover brings all of its cover and stego scores under both compared conditions, so the "
-        "pairing is preserved. Individual stego "
-        "images are never resampled on their own.")
+        "pairing is preserved.")
     d.p("Seed standard deviations (at most 0.028, Supplementary Table S1) describe training randomness on "
         "fixed data; the bootstrap describes the sampling of test covers given the trained models. Neither "
         "reflects a different choice of covers or split, so the intervals are conditional on this partition. A direction is called supported only when its interval excludes zero; an interval "
@@ -304,8 +303,9 @@ def results(d):
         "Residual-LR, and one Residual-LR interval ends at −0.001 (P3 WOW). As the intervals are unadjusted and share covers and models, the common sign "
         "is not 18 independent confirmations.")
     d.figure("fig:rq3", FIG / "fig2_payload_shift.png", 4.46,
-             "Payload shift: ΔAUC = AUC(0.1 bpp) − AUC(0.4 bpp) with 95% paired bootstrap intervals. Under P1 "
-             "and P2 the 0.1 bpp payload is absent from training; under P3 it is included.")
+             "Payload shift for (a) Residual-LR and (b) SRM+Ensemble: seed-mean ΔAUC = AUC(0.1 bpp) − "
+             "AUC(0.4 bpp) with 95% paired bootstrap intervals. Under P1 and P2 the 0.1 bpp payload is absent "
+             "from training; under P3 it is included.")
     rows = []
     for det in DETECTORS:
         for p in PROTOCOLS:
