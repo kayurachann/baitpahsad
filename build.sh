@@ -6,6 +6,7 @@ python3 results_data.py > /dev/null          # arithmetic / sign checks on the r
 python3 make_figures.py
 python3 build_manuscript.py
 python3 build_supplementary.py
+python3 to_docm.py ../manuscript/StegaGuard_revised.docx ../manuscript/StegaGuard_revised.docm
 if command -v soffice > /dev/null; then
   soffice --headless --convert-to pdf --outdir ../manuscript ../manuscript/StegaGuard_revised.docx > /dev/null
   soffice --headless --convert-to pdf --outdir ../supplementary ../supplementary/StegaGuard_supplementary.docx > /dev/null

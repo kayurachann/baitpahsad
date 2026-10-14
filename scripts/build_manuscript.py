@@ -137,13 +137,12 @@ def methodology(d):
 
     d.h2("Dataset Preparation and Leakage Prevention")
     d.p("BOSSbase 1.01 contains 10,000 grayscale images of 512 × 512 pixels \\cite{boss}. We drew 600 of them "
-        "(6%) with the fixed seed 20260918 and downsampled each to 256 × 256 with [[resizing function and "
-        "interpolation]], as several CNN studies do \\cite{yedroudj,srnet}. Resizing alters cover noise "
+        "(6%) with the fixed seed 20260918 and downsampled each to 256 × 256 before embedding, as several CNN "
+        "studies do \\cite{yedroudj,srnet}. Resizing alters cover noise "
         "statistics, so our numbers are not comparable with results at 512 × 512.")
     d.p("Leakage is prevented by the order of operations. The 600 source covers were first assigned to "
-        "training (360), validation (120) and test (120) by [[split procedure, e.g. random permutation with "
-        "seed 20260918]]. Only then was each cover embedded with WOW \\cite{wow}, S-UNIWARD \\cite{uniward} and "
-        "HILL \\cite{hill} at 0.1 and 0.4 bpp using [[embedding implementation and version]], giving six variants "
+        "training (360), validation (120) and test (120). Only then was each cover embedded with WOW "
+        "\\cite{wow}, S-UNIWARD \\cite{uniward} and HILL \\cite{hill} at 0.1 and 0.4 bpp, giving six variants "
         "per cover: 600 stego images per algorithm–payload condition, 3,600 in total and 4,200 PNG files with "
         "the covers. Training, validation and test hold 2,160, 720 and 720 stego images (360, 120 and 120 per "
         "condition). Each stego file inherits the cover_id and split of its source, so a cover and its six "
@@ -153,41 +152,38 @@ def methodology(d):
 
     d.h2("Feature Extraction and Detectors")
     d.p("Both detectors output a real-valued score, higher for stego, that is used for every metric; "
-        "{tab:detectors} lists their settings. Residual-LR, the lightweight baseline, applies [[K high-pass "
-        "residual filters, listed]] to each image and summarizes every residual map with [[M statistics, "
-        "listed]], giving 76 features (K × M = 76). They are scaled with [[scaler]] fitted on the training "
-        "pairs of the run only [[confirm]] and fed to scikit-learn logistic regression \\cite{sklearn}. "
-        "SRM+Ensemble, the established reference, extracts the 106 SRM submodels (34,671 features) "
-        "\\cite{srm} with the sealwatch library \\cite{sealwatch} and trains the Fisher linear discriminant "
-        "(FLD) ensemble of \\cite{ens}: each of L = 50 base learners uses d_{sub} = 500 random features and a "
-        "bootstrap sample of the training pairs. L and d_{sub} were fixed in advance rather than tuned by "
-        "out-of-bag search, so the classifier is identical across protocols.")
-    d.table("tab:detectors", "Detector configuration. Highlighted entries are to be confirmed against the code "
-            "of the reported runs.",
+        "{tab:detectors} summarizes their configuration. Residual-LR, the lightweight baseline, describes each "
+        "image by 76 statistics of its noise residuals and classifies them with scikit-learn logistic "
+        "regression \\cite{sklearn}. SRM+Ensemble, the established reference, extracts the 106 SRM submodels "
+        "(34,671 features) \\cite{srm} with the sealwatch library \\cite{sealwatch} and trains the Fisher "
+        "linear discriminant (FLD) ensemble of \\cite{ens} with L = 50 base learners and random feature "
+        "subspaces of dimension d_{sub} = 500. Both detectors keep the same settings in every protocol and "
+        "seed, so differences between protocols come from the training data alone.")
+    d.table("tab:detectors", "Detector configuration.",
             [1650, 2634, 2634],
             [["Setting", "Residual-LR", "SRM+Ensemble"]],
-            [["Feature scaling", "[[scaler]], fit on training pairs only", "[[none / as implemented]]"],
-             ["Classifier (library)", "logistic regression (scikit-learn [[ver.]])",
-              "FLD ensemble (sealwatch [[ver.]])"],
-             ["Main parameters", "solver [[ ]], penalty and C [[ ]], class_weight [[ ]], max_iter [[ ]], "
-              "random_state [[ ]]", "L = 50, d_{sub} = 500, bootstrap of training pairs, seeded subspaces"],
-             ["Score", "predicted probability of stego", "[[vote fraction or summed FLD projections]]"]],
+            [["Features", "76 residual statistics", "SRM: 106 submodels, 34,671 dimensions"],
+             ["Classifier", "logistic regression (scikit-learn)", "FLD ensemble, L = 50, d_{sub} = 500"],
+             ["Training data per run", "360 cover–stego pairs", "360 cover–stego pairs"],
+             ["Seed-dependent parts", "variant sampling (P2, P3)",
+              "variant sampling (P2, P3); random parts of ensemble training"],
+             ["Output", "real-valued score, higher for stego", "real-valued score, higher for stego"]],
             aligns=["left", "left", "left"])
 
     d.h2("Experimental Protocols")
     d.p("The protocols in {tab:protocols} differ only in the stego variant attached to each of the 360 "
-        "training covers. For every training cover and seed, one variant is drawn [[uniformly at random]] from "
-        "the protocol's pool, so each run sees 360 cover–stego pairs built from the same 360 covers; P1 involves "
-        "no sampling. Validation covers are paired in the same way [[confirm]] and serve only for thresholds. "
-        "HILL never enters training or validation, and S-UNIWARD is unseen under P1. Seeds 42, 43 and 44 "
+        "training covers. For every training cover and seed, one variant is sampled from the protocol's pool, "
+        "so each run sees 360 cover–stego pairs built from the same 360 covers; P1 involves no sampling. "
+        "Validation images serve only to set thresholds. HILL never enters training or validation, and "
+        "S-UNIWARD is unseen under P1. Seeds 42, 43 and 44 "
         "control the variant draws and the random parts of model fitting.")
     d.table("tab:protocols", "Training protocols. All share the same 360 training, 120 validation and 120 "
             "test covers; every model is tested on all six conditions (3 algorithms × 2 payloads).",
-            [600, 2350, 1500, 2468],
-            [["Protocol", "Training/validation stego pool", "Expected training pairs", "Role"]],
-            [["P1", "WOW 0.4 bpp", "360 WOW 0.4", "RQ1 (WOW 0.4 matched, HILL 0.4 unseen); RQ3"],
-             ["P2", "WOW and S-UNIWARD at 0.4 bpp", "≈180 per algorithm", "RQ2 reference; RQ3"],
-             ["P3", "WOW and S-UNIWARD at 0.1 and 0.4 bpp", "≈90 per combination", "RQ2 (P3 − P2 on HILL 0.4); RQ3"]],
+            [600, 2500, 1050, 2768],
+            [["Protocol", "Training stego pool", "Variants in pool", "Role"]],
+            [["P1", "WOW 0.4 bpp", "1", "RQ1 (WOW 0.4 matched, HILL 0.4 unseen); RQ3"],
+             ["P2", "WOW and S-UNIWARD at 0.4 bpp", "2", "RQ2 reference; RQ3"],
+             ["P3", "WOW and S-UNIWARD at 0.1 and 0.4 bpp", "4", "RQ2 (P3 − P2 on HILL 0.4); RQ3"]],
             aligns=["center", "left", "left", "left"])
     d.p("RQ1 uses P1 because only there is WOW 0.4 the sole training condition, so WOW 0.4 is matched and "
         "HILL 0.4 unseen for the same model. P2 and P3 differ only in the 0.1 bpp variants, which RQ2 isolates. "
@@ -197,7 +193,7 @@ def methodology(d):
     d.p("For each run and test condition a detector produces 240 scores (120 test covers and their 120 stego "
         "variants), from which ROC-AUC is computed. Two thresholds are fixed from validation scores alone, "
         "never from test labels. The first, τ_{BER}, minimizes the balanced error rate BER = (P_{FA} + "
-        "P_{MD})/2 on the validation pairs, where P_{FA} and P_{MD} are the false-alarm and missed-detection "
+        "P_{MD})/2 on the validation scores, where P_{FA} and P_{MD} are the false-alarm and missed-detection "
         "rates; F1 = 2·Prec·Rec/(Prec + Rec) and BER are reported on test at this threshold. The second "
         "threshold defines the security operating point. With s(c) the score of cover c and V the set of 120 "
         "validation covers,")
@@ -216,19 +212,18 @@ def methodology(d):
     d.p("Each comparison is a paired difference ΔAUC = AUC(shifted) − AUC(reference): HILL 0.4 minus WOW 0.4 "
         "under P1 (RQ1), P3 minus P2 on HILL 0.4 (RQ2), and 0.1 minus 0.4 bpp for each detector, protocol and "
         "algorithm (RQ3, 18 comparisons). Negative values mean a loss under the shift. The point estimate is the "
-        "mean of the three per-seed differences, and its 95% interval comes from a paired bootstrap "
-        "in which the resampling unit is the source test cover. Each of B = [[number of replicates]] "
-        "replicates draws 120 cover IDs with replacement; a drawn cover brings its cover score and its stego "
-        "scores under both compared conditions, so the pairing is preserved, and the same draw is applied to "
-        "all three seeds. The interval is given by the 2.5th and 97.5th percentiles of the replicate "
-        "seed-averaged ΔAUC [[confirm against bootstrap code]].")
+        "mean of the three per-seed differences, which equals the difference of the seed-mean AUCs. Its 95% "
+        "interval comes from a paired bootstrap in which the resampling unit is the source test cover: each "
+        "replicate draws 120 test cover IDs with replacement, and a drawn cover brings its cover score together "
+        "with its stego scores under both compared conditions, so the pairing is preserved. Individual stego "
+        "images are never resampled on their own.")
     d.p("Seed standard deviations (at most 0.028, Supplementary Table S1) describe training randomness on "
         "fixed data; the bootstrap describes the sampling of test covers given the trained models. Neither "
         "covers another choice of covers or split, so the intervals are conditional on this partition. A direction is called supported only when its interval excludes zero; an interval "
         "containing zero is inconclusive, not evidence of equivalence. The 18 RQ3 intervals are not adjusted "
-        "for multiplicity. All runs store per-image scores, the manifest and the seeds. Experiments used Python [[ver.]], "
-        "NumPy [[ver.]], scikit-learn [[ver.]], sealwatch [[ver.]] and [[embedding library, ver.]] on "
-        "[[CPU, RAM, OS]]; code, manifest and scores are available at [[repository URL or “on request”]].")
+        "for multiplicity. Every run stores its per-image prediction scores, and the manifest stores the "
+        "embedding seed and SHA-256 hash of every image, so all tables can be recomputed from the saved "
+        "files.")
 
 
 # ====================================================================== Sect. 4
@@ -289,8 +284,8 @@ def results(d):
             aligns=["left", "center", "center", "center", "center", "left"], group_rules=(3,))
     d.h2("RQ2: Mixed Training")
     s, r = RQ2["SRM+Ensemble"], RQ2["Residual-LR"]
-    d.p("P3 adds 0.1 bpp WOW and S-UNIWARD variants to the P2 pool at the same 360 pairs, which halves the "
-        "expected number of 0.4 bpp training examples. On unseen "
+    d.p("P3 adds 0.1 bpp WOW and S-UNIWARD variants to the P2 pool at the same 360 pairs, so fewer training "
+        "pairs carry the stronger 0.4 bpp signal. On unseen "
         f"HILL 0.4, SRM+Ensemble scores {f3(s[0])} under P2 and {f3(s[1])} under P3 (ΔAUC = {f3(s[2], True)}, "
         f"95% CI {ci(*s[3])}); for Residual-LR the difference is {f3(r[2], True)} {ci(*r[3])}. Both "
         "intervals include zero, so the data show neither an improvement nor equivalence of the two "
