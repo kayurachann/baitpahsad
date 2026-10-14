@@ -45,18 +45,17 @@ def to_gray(png):
 
 
 # --------------------------------------------------------------------------- Fig. 1
-W, H = 4.8, 2.5   # inches; data coordinates are inches
+W, H = 4.8, 1.6   # inches; data coordinates are inches
+Y0 = 0.19         # lowest drawn element; the figure is cropped below it
 
 
-def rect(ax, x, y, w, h, text, ls="-", size=7.2, style="normal"):
-    ax.add_patch(Rectangle((x, y), w, h, fill=False, ec="black", lw=LW, ls=ls))
-    if text:
-        ax.text(x + w / 2, y + h / 2, text, ha="center", va="center", fontsize=size, style=style,
-                linespacing=1.15)
+def rect(ax, x, y, w, h, text, size=7):
+    ax.add_patch(Rectangle((x, y), w, h, fill=False, ec="black", lw=LW))
+    ax.text(x + w / 2, y + h / 2, text, ha="center", va="center", fontsize=size, linespacing=1.15)
 
 
 def arrow(ax, p, q):
-    ax.add_patch(FancyArrowPatch(p, q, arrowstyle="-|>", mutation_scale=5.5, lw=LW, color="black",
+    ax.add_patch(FancyArrowPatch(p, q, arrowstyle="-|>", mutation_scale=5, lw=LW, color="black",
                                  shrinkA=0, shrinkB=0))
 
 
@@ -65,70 +64,55 @@ def line(ax, xs, ys):
 
 
 def figure1():
-    fig = plt.figure(figsize=(W, H))
+    fig = plt.figure(figsize=(W, H - Y0))
     ax = fig.add_axes([0, 0, 1, 1])
     ax.set_xlim(0, W)
-    ax.set_ylim(0, H)
+    ax.set_ylim(Y0, H)
     ax.axis("off")
 
-    # data preparation: left column, top to bottom
-    cw, ch = 1.15, 0.46
-    ys = [1.98, 1.40, 0.82]
-    rect(ax, 0.005, ys[0], cw, ch, "BOSSbase 1.01\n600 covers\n256 × 256")
-    rect(ax, 0.005, ys[1], cw, ch, "Source-cover split\n360 / 120 / 120\n(before embedding)")
-    rect(ax, 0.005, ys[2], cw, ch, "Stego generation\nWOW, S-UNIWARD,\nHILL; 0.1, 0.4 bpp")
-    for a, b in zip(ys[:-1], ys[1:]):
-        arrow(ax, (0.005 + cw / 2, a), (0.005 + cw / 2, b + ch))
+    # data preparation (left column)
+    dx, dw, dh = 0.005, 0.95, 0.36
+    dys = [1.17, 0.69, 0.21]
+    for y, t in zip(dys, ["BOSSbase 1.01\n600 covers", "Source-cover split\n360 / 120 / 120",
+                          "Stego generation\n3,600 images"]):
+        rect(ax, dx, y, dw, dh, t)
+    for a, b in zip(dys[:-1], dys[1:]):
+        arrow(ax, (dx + dw / 2, a), (dx + dw / 2, b + dh))
 
-    # feature extraction and detector training: two parallel detectors
-    fx, fw, tx, tw, lh = 1.42, 0.86, 2.47, 0.86, 0.38
-    lane_y = [1.62, 0.98]
-    ax.text(fx + fw / 2, 2.36, "Feature extraction", ha="center", va="center", fontsize=7.5)
-    ax.text(tx + tw / 2, 2.36, "Detector training", ha="center", va="center", fontsize=7.5)
-    lanes = [("Residual-LR", "76 residual\nstatistics", "Logistic\nregression"),
-             ("SRM+Ensemble", "SRM features\n(34,671-D)", "FLD ensemble\n$L$ = 50, $d_{\\mathrm{sub}}$ = 500")]
-    ax.add_patch(Rectangle((1.33, 0.82), 2.09, 1.42, fill=False, ec="black", lw=LW, ls=(0, (3, 2))))
-    for (name, feat, clf), y in zip(lanes, lane_y):
-        ax.text(fx, y + lh + 0.07, name, ha="left", va="center", fontsize=7.2, style="italic")
-        rect(ax, fx, y, fw, lh, feat)
-        rect(ax, tx, y, tw, lh, clf)
-        arrow(ax, (fx + fw, y + lh / 2), (tx, y + lh / 2))
-    ax.text(3.37, 0.88, "P1–P3, 3 seeds, 360 pairs per run", ha="right", va="center", fontsize=6.6,
-            style="italic")
-    # stego images feed both detectors
-    mid = 1.25
-    y3 = ys[2] + ch / 2
-    line(ax, [0.005 + cw, mid], [y3, y3])
-    line(ax, [mid, mid], [y3, lane_y[0] + lh / 2])
-    for y in lane_y:
-        arrow(ax, (mid, y + lh / 2), (fx, y + lh / 2))
+    # two detectors in parallel: feature extraction -> training
+    fx, tx, cw, lh = 1.12, 2.09, 0.80, 0.34
+    lanes = [(0.95, "Residual-LR", "76 residual\nfeatures", "Logistic\nregression"),
+             (0.33, "SRM+Ensemble", "SRM features\n(34,671-D)", "FLD\nensemble")]
+    for y, name, feat, clf in lanes:
+        ax.text(fx, y + lh + 0.07, name, ha="left", va="center", fontsize=6.8, style="italic")
+        rect(ax, fx, y, cw, lh, feat)
+        rect(ax, tx, y, cw, lh, clf)
+        arrow(ax, (fx + cw, y + lh / 2), (tx, y + lh / 2))
+    ys_in = dys[2] + dh / 2
+    line(ax, [dx + dw, 1.04], [ys_in, ys_in])
+    line(ax, [1.04, 1.04], [ys_in, lanes[0][0] + lh / 2])
+    for y, *_ in lanes:
+        arrow(ax, (1.04, y + lh / 2), (fx, y + lh / 2))
 
-    # evaluation of every trained model on the shared test covers
-    ex, ew, ey, eh = 3.60, 1.195, 0.98, 1.02
-    rect(ax, ex, ey, ew, eh, "P1/P2/P3 evaluation\n\n120 test covers\n6 test conditions\n(3 algorithms × 2 payloads)",
-         size=7)
-    for y in lane_y:
-        arrow(ax, (tx + tw + 0.09, y + lh / 2), (ex, y + lh / 2))
+    # evaluation of P1/P2/P3 models on the same test covers
+    ex, ew, ey, eh = 3.06, 0.64, 0.33, 0.96
+    rect(ax, ex, ey, ew, eh, "P1/P2/P3\nevaluation")
+    for y, *_ in lanes:
+        arrow(ax, (tx + cw, y + lh / 2), (ex, y + lh / 2))
 
-    # evaluation branches
-    bw, bh, by = 1.13, 0.24, 0.43
-    gap = (W - 0.01 - 4 * bw) / 3
-    bxs = [0.005 + i * (bw + gap) for i in range(4)]
-    labels = ["RQ1: algorithm shift", "RQ2: mixed training", "RQ3: payload shift", "Low-FPR operating point"]
-    for x, t in zip(bxs, labels):
-        rect(ax, x, by, bw, bh, t, size=7)
-    bus = 0.75
-    line(ax, [ex + ew / 2, ex + ew / 2], [ey, bus])
-    line(ax, [bxs[0] + bw / 2, ex + ew / 2], [bus, bus])
-    for x in bxs:
-        arrow(ax, (x + bw / 2, bus), (x + bw / 2, by + bh))
-
-    # metrics
-    rect(ax, 0.005, 0.005, W - 0.01, 0.30,
-         "Robustness and security metrics: ROC-AUC, F1, BER; paired ΔAUC with bootstrap 95% CI;\n"
-         "recall and observed test FPR at " + TAU_LOW, size=7)
-    for x in bxs:
-        arrow(ax, (x + bw / 2, by), (x + bw / 2, 0.305))
+    # robustness and security metrics (evaluation branches)
+    mx, mw, bh, gap = 3.85, 0.945, 0.22, 0.07
+    labels = ["RQ1: algorithm shift", "RQ2: mixed training", "RQ3: payload shift", "Low-FPR operation"]
+    bys = [0.20 + k * (bh + gap) for k in range(4)][::-1]
+    ax.text(mx + mw / 2, 1.46, "Robustness and\nsecurity metrics", ha="center", va="center", fontsize=7,
+            linespacing=1.1)
+    for y, t in zip(bys, labels):
+        rect(ax, mx, y, mw, bh, t, size=6.8)
+    bus = 3.78
+    line(ax, [ex + ew, bus], [ey + eh / 2, ey + eh / 2])
+    line(ax, [bus, bus], [bys[-1] + bh / 2, bys[0] + bh / 2])
+    for y in bys:
+        arrow(ax, (bus, y + bh / 2), (mx, y + bh / 2))
     fig.savefig(OUT / "fig1_pipeline.png", dpi=600)
     fig.savefig(OUT / "fig1_pipeline.pdf")
     plt.close(fig)
