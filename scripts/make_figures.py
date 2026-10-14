@@ -17,10 +17,13 @@ OUT = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).resolve().paren
 OUT.mkdir(parents=True, exist_ok=True)
 
 TEXT_WIDTH_IN = 12.2 / 2.54
-INK = "#0b0b0b"
-INK_2 = "#52514e"
-GRID = "#d9d8d4"
-COLOR = {"Residual-LR": "#2a78d6", "SRM+Ensemble": "#eb6834"}
+# Grayscale only (no colour): detectors differ by marker shape and line style, not by hue.
+INK = "#000000"
+INK_2 = "#404040"
+GRID = "#d0d0d0"
+FILL = "#f0f0f0"
+COLOR = {"Residual-LR": "#000000", "SRM+Ensemble": "#595959"}
+LANE_STYLE = {"Residual-LR": (0, (3, 1.5)), "SRM+Ensemble": (0, (6, 1.5, 1, 1.5))}
 MARKER = {"Residual-LR": "o", "SRM+Ensemble": "s"}
 
 plt.rcParams.update({
@@ -47,17 +50,24 @@ plt.rcParams.update({
 TAU_LOW = r"$\tau_{\mathrm{low}}$"
 
 
+def to_gray(png):
+    """Store the PNG as single-channel grayscale so no colour can remain in the published figure."""
+    from PIL import Image
+    Image.open(png).convert("L").save(png, dpi=(600, 600))
+
+
 def save(fig, name):
     for ext in ("png", "pdf"):
         fig.savefig(OUT / f"{name}.{ext}", bbox_inches="tight", pad_inches=0.02)
     plt.close(fig)
+    to_gray(OUT / f"{name}.png")
 
 
 # --------------------------------------------------------------------------- Fig. 1
 FIG1_W, FIG1_H = 4.8, 2.8  # inches; data coordinates are inches
 
 
-def box(ax, x, y, w, h, title, body="", fc="#f3f2ef", ec=INK_2, lw=0.7, tsize=7.2, bsize=6.9):
+def box(ax, x, y, w, h, title, body="", fc=FILL, ec=INK_2, lw=0.7, tsize=7.2, bsize=6.9):
     ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0,rounding_size=0.04",
                                 fc=fc, ec=ec, lw=lw))
     if body:
@@ -108,7 +118,7 @@ def figure1():
         c = COLOR[name]
         ax.add_patch(FancyBboxPatch((fx - 0.06, y - 0.05), tx + tw - fx + 0.12, lh + 0.27,
                                     boxstyle="round,pad=0,rounding_size=0.05", fc="none", ec=c, lw=0.9,
-                                    ls=(0, (3, 1.5))))
+                                    ls=LANE_STYLE[name]))
         ax.text(fx, y + lh + 0.11, name, ha="left", va="center", fontsize=7.2, fontweight="bold", color=c)
         ax.text(tx + tw, y + lh + 0.11, "P1–P3 × 3 seeds", ha="right", va="center", fontsize=6.4,
                 color=INK_2)
@@ -129,7 +139,7 @@ def figure1():
     ex, ew = 3.62, 1.17
     ey, eh = 1.07, 1.6
     ax.add_patch(FancyBboxPatch((ex, ey), ew, eh, boxstyle="round,pad=0,rounding_size=0.04",
-                                fc="#f3f2ef", ec=INK_2, lw=0.7))
+                                fc=FILL, ec=INK_2, lw=0.7))
     ax.text(ex + ew / 2, ey + eh - 0.07, "6  P1/P2/P3\nevaluation", ha="center", va="top", fontsize=7.2,
             fontweight="bold", linespacing=1.1)
     ax.text(ex + ew / 2, ey + eh - 0.45, "same 120 test\ncovers for all\nprotocols\n\n6 conditions:\n"
@@ -161,6 +171,7 @@ def figure1():
         arrow(ax, (x + bw / 2, by), (x + bw / 2, 0.35))
     fig.savefig(OUT / "fig1_pipeline.png", dpi=600)
     fig.savefig(OUT / "fig1_pipeline.pdf")
+    to_gray(OUT / "fig1_pipeline.png")
     plt.close(fig)
 
 
@@ -176,10 +187,10 @@ def figure2():
             ax.plot([lo, hi], [y, y], color=COLOR[d], lw=1.3, solid_capstyle="butt")
             ax.scatter([delta], [y], s=14, marker=MARKER[d], color=COLOR[d], zorder=3, edgecolor="white",
                        lw=0.5)
-        ax.axvline(0, color=INK_2, lw=0.8)
+        ax.axvline(0, color=INK_2, lw=0.7, ls=(0, (3, 2)))   # zero reference, not a frame
         for yy in (2.5, 5.5):
             ax.axhline(yy, color=GRID, lw=0.5)
-        ax.set_xlim(-0.225, 0.015)
+        ax.set_xlim(-0.225, 0.04)
         ax.set_xticks([-0.20, -0.15, -0.10, -0.05, 0.0], ["−0.20", "−0.15", "−0.10", "−0.05", "0"])
         ax.grid(axis="x", color=GRID, lw=0.5)
         ax.set_axisbelow(True)
@@ -187,6 +198,8 @@ def figure2():
         ax.set_title(d, fontsize=7.2, loc="left", pad=2, fontweight="bold", color=INK)
         for s in ("top", "right"):
             ax.spines[s].set_visible(False)
+        ax.tick_params(axis="y", left=(d == "Residual-LR"))
+    axes[1].spines["left"].set_visible(False)
     axes[0].set_yticks(ys, labels)
     axes[0].set_ylim(-0.6, len(labels) - 0.4)
     fig.subplots_adjust(bottom=0.22, top=0.9)

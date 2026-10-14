@@ -106,7 +106,7 @@ Nội dung của 581 (văn bản, biểu đồ, dữ liệu EndNote, VBA) đã b
 ### 6. Hình, bảng, định dạng
 
 - Bảng được đánh số tự động bằng trường SEQ, liên tục 1–7. Mọi chỗ "Table n" / "Fig. n" trong bài là **cross-reference** (trường REF), không gõ tay.
-- Cỡ chữ trong hình ở kích thước in là 6,6–7,6 pt (bản cũ khoảng 5 pt). Hình xuất 600 dpi; có thêm bản PDF vector trong `figures/`.
+- Hình in đen trắng (không màu): hai detector phân biệt bằng kiểu nét và hình dạng marker. Biểu đồ không có viền trên và viền phải; vạch ΔAUC = 0 vẽ nét đứt. Cỡ chữ trong hình ở kích thước in là 6,6–7,6 pt (bản cũ khoảng 5 pt). Hình xuất 600 dpi; có thêm bản PDF vector trong `figures/`.
 - Các phần trùng lặp đã gộp hoặc bỏ:
   - Fig. 4 cũ trùng với Table 8 cũ, nay gộp thành Table 7 có thêm số FP.
   - Fig. 2 cũ chỉ lặp lại các giá trị AUC đã có ở Table 4 và 5, nên đã bỏ để giữ giới hạn 12 trang.
