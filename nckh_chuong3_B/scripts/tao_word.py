@@ -1,21 +1,25 @@
-"""Tạo phần Word của người B: ch3_3_3_3_5_1_3_5_2.docx (mục 3.3, 3.5.1, 3.5.2 và Bảng 3.2 chuyển cho C).
+"""Tạo phần Word của người B.
+
+  ch3_3_3_3_5_1_3_5_2.docx  mục 3.3, 3.5.1, 3.5.2 (bản hoàn chỉnh để gửi A ráp chương)
+  ch3_bang_3_2_cho_C.docx   số liệu Bảng 3.2 chuyển cho C (mục 3.4)
 
 Mọi số của 3.5.2 đọc từ ../bang/bang_3_5_2.csv. Số của tệp chính ở 3.5.1 lấy từ lần chạy thật trong
-notebook của nhóm. Các số liên quan đến tệp Original chưa chạy được đúng tệp nên được tô vàng.
+notebook của nhóm; các số của tệp Original lấy từ kết quả chạy thử trong file kế hoạch.
+Đặt TO_VANG = True để tô vàng các số của tệp Original (bản nháp chờ chạy lại notebook).
 Cách chạy: python3 tao_word.py
 """
 from pathlib import Path
 
 import pandas as pd
 from docx import Document
-from docx.enum.section import WD_SECTION
 from docx.enum.table import WD_TABLE_ALIGNMENT
-from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK, WD_COLOR_INDEX
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_COLOR_INDEX
 from docx.oxml.ns import qn
 from docx.shared import Cm, Pt, RGBColor
 
 GOC = Path(__file__).resolve().parent.parent
 FONT = "Times New Roman"
+TO_VANG = False
 
 # ---------------------------------------------------------------- số liệu
 b2 = pd.read_csv(GOC / "bang" / "bang_3_5_2.csv")
@@ -49,13 +53,6 @@ muc1 = [dem(b)["1"] for b in YEU_TO]
 pct1 = [round(100 * dem(b)["1"] / N, 1) for b in YEU_TO]
 
 # ---------------------------------------------------------------- định dạng
-doc = Document()
-sec = doc.sections[0]
-sec.page_height, sec.page_width = Cm(29.7), Cm(21.0)
-sec.top_margin = sec.bottom_margin = Cm(2)
-sec.left_margin, sec.right_margin = Cm(3), Cm(2)
-
-
 def dat_font(style_or_run, size=13, bold=None, italic=None):
     f = style_or_run.font
     f.name, f.size = FONT, Pt(size)
@@ -75,17 +72,28 @@ def dat_font(style_or_run, size=13, bold=None, italic=None):
         rfonts.attrib.pop(qn(k), None)
 
 
-normal = doc.styles["Normal"]
-dat_font(normal)
-pf = normal.paragraph_format
-pf.line_spacing, pf.space_before, pf.space_after = 1.5, Pt(0), Pt(6)
-for ten_style, size in (("Heading 2", 13), ("Heading 3", 13)):
-    st = doc.styles[ten_style]
-    dat_font(st, size, bold=True, italic=(ten_style == "Heading 3"))
-    st.font.color.rgb = RGBColor(0, 0, 0)
-    st.paragraph_format.space_before, st.paragraph_format.space_after = Pt(12), Pt(6)
-    st.paragraph_format.line_spacing = 1.5
-    st.paragraph_format.keep_with_next = True
+def moi_doc():
+    """Văn bản mới: A4, lề trái 3 cm, các lề khác 2 cm, Times New Roman 13, giãn dòng 1,5."""
+    d = Document()
+    sec = d.sections[0]
+    sec.page_height, sec.page_width = Cm(29.7), Cm(21.0)
+    sec.top_margin = sec.bottom_margin = Cm(2)
+    sec.left_margin, sec.right_margin = Cm(3), Cm(2)
+    normal = d.styles["Normal"]
+    dat_font(normal)
+    pf = normal.paragraph_format
+    pf.line_spacing, pf.space_before, pf.space_after = 1.5, Pt(0), Pt(6)
+    for ten_style, size in (("Heading 2", 13), ("Heading 3", 13)):
+        st = d.styles[ten_style]
+        dat_font(st, size, bold=True, italic=(ten_style == "Heading 3"))
+        st.font.color.rgb = RGBColor(0, 0, 0)
+        st.paragraph_format.space_before, st.paragraph_format.space_after = Pt(12), Pt(6)
+        st.paragraph_format.line_spacing = 1.5
+        st.paragraph_format.keep_with_next = True
+    return d
+
+
+doc = moi_doc()
 
 
 def doan(*phan, thut=True, canh=WD_ALIGN_PARAGRAPH.JUSTIFY, size=None, italic=False, keep=False):
@@ -104,7 +112,7 @@ def doan(*phan, thut=True, canh=WD_ALIGN_PARAGRAPH.JUSTIFY, size=None, italic=Fa
         r.italic = italic or kieu == "nghieng"
         if kieu == "dam":
             r.bold = True
-        if kieu == "vang":
+        if kieu == "vang" and TO_VANG:
             r.font.highlight_color = WD_COLOR_INDEX.YELLOW
     return p
 
@@ -163,7 +171,7 @@ def bang(dong, do_rong, can_giua_tu=1, o_vang=(), can_trai=(), co_chu=None, giu_
             r = p.add_run(str(gt))
             r.font.size = Pt(co_chu.get(j, 12) if i else 12)
             r.bold = i == 0
-            if (i, j) in o_vang:
+            if (i, j) in o_vang and TO_VANG:
                 r.font.highlight_color = WD_COLOR_INDEX.YELLOW
             if i < len(dong) - 1 and (giu_lien or i == 0):
                 p.paragraph_format.keep_with_next = True
@@ -174,8 +182,9 @@ def tieu_de(text, muc):
     doc.add_heading(text, level=muc)
 
 
-# ---------------------------------------------------------------- ghi chú đầu file (xóa khi ráp)
-doan(("Ghi chú cho nhóm (xóa đoạn này khi ráp chương): ", "dam"),
+# ---------------------------------------------------------------- ghi chú đầu file (chỉ ở bản nháp)
+if TO_VANG:
+    doan(("Ghi chú cho nhóm (xóa đoạn này khi ráp chương): ", "dam"),
      "các chỗ ", ("tô vàng", "vang"), " là số của tệp Original lấy từ kết quả chạy thử trong file kế hoạch, vì "
      "notebook hiện tại đọc nhầm tệp. Chạy lại notebook B_3_5_1_3_5_2.ipynb; nếu số in ra giống thì bỏ tô vàng, "
      "nếu khác thì sửa theo số in ra. Các số còn lại đã lấy từ lần chạy thật trên tệp chính.",
@@ -308,10 +317,13 @@ doan(f"Một số tỉ lệ cao cần được đọc thận trọng. Chẳng h�
 doan(f"Kết luận: chất lượng giấc ngủ phân bố hai đầu ({pct(SQ, [1, 2])}% tệ, {pct(SQ, [4, 5])}% tốt). Bốn yếu tố "
      "tập trung ở mức cao, ít người ở mức thấp, nên phần so sánh nhóm phải gộp các mức thấp.")
 
-# ================================================================= Bảng 3.2 chuyển cho C
-p = doc.add_paragraph()
-p.add_run().add_break(WD_BREAK.PAGE)
-doan(("Phần chuyển cho C (mục 3.4): số liệu cho Bảng 3.2", "dam"), thut=False)
+ra = GOC / "ch3_3_3_3_5_1_3_5_2.docx"
+doc.save(ra)
+print("đã ghi", ra)
+
+# ================================================================= Bảng 3.2 chuyển cho C (file riêng)
+doc = moi_doc()
+doan(("Số liệu cho Bảng 3.2 (mục 3.4, người C)", "dam"), thut=False)
 doan("Số liệu dưới đây lấy từ cùng lần chạy bảng tần số của mục 3.5.2 (bang_3_5_2.csv). C chép bảng này vào "
      "mục 3.4.", thut=False, size=12, italic=True)
 chu_thich(f"Bảng 3.2. Đặc điểm mẫu (n = {N})")
@@ -327,6 +339,6 @@ ghi_nguon("Nguồn: Kết quả chạy trên Google Colab (bang_3_5_2.csv).")
 doan(f"Lưu ý cho C: năm 1 chỉ có {nh['First year']} người nên không so sánh riêng theo năm học.",
      thut=False, size=12, italic=True)
 
-ra = GOC / "ch3_3_3_3_5_1_3_5_2.docx"
+ra = GOC / "ch3_bang_3_2_cho_C.docx"
 doc.save(ra)
 print("đã ghi", ra)
