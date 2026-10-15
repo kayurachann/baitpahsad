@@ -65,7 +65,7 @@ def sua_noi_dung(blks):
     # 3.1: ảnh stego tạo bằng mô phỏng nhúng của conseal (preparation.json của bộ 600 cover)
     p = tim(blks, "Leakage is prevented by the order of operations")
     de.thay(p, " at 0.1 and 0.4 bpp, giving six variants per cover",
-            " at 0.1 and 0.4 bpp using the conseal embedding simulator, giving six variants per cover")
+            " at 0.1 and 0.4 bpp by the simulators in the conseal library, giving six variants per cover")
 
     # 3.2: 76 đặc trưng, chuẩn hóa, tham số LR
     p = tim(blks, "Both detectors output a score")

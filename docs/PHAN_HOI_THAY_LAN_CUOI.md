@@ -24,7 +24,7 @@ Bài báo thì báo cáo thí nghiệm **600 cover (360/120/120) với cả Resi
   - việc chọn 600/10.000 ảnh BOSSbase: `random.Random(20260918).sample(...)` ra đúng 600/600 file;
   - việc chia split của `sg.py prepare`: 600/600 cover;
   - seed nhúng: 3.600/3.600;
-- ảnh stego tạo bằng **mô phỏng nhúng của thư viện conseal** (không chứa thông điệp thật). Bài đã thêm chi tiết này vào 3.1 ("using the conseal embedding simulator"). Câu bicubic cũng được viết gọn lại để bài vẫn 12 trang.
+- ảnh stego tạo bằng **mô phỏng nhúng của thư viện conseal** (không chứa thông điệp thật). Bài đã thêm chi tiết này vào 3.1 ("by the simulators in the conseal library"). Không thêm trích dẫn cho conseal, vì thêm tài liệu mới sẽ đổi số [19], [20] và làm bài vượt 12 trang. Câu bicubic cũng được viết gọn lại để bài vẫn 12 trang.
 
 Như vậy phần **dữ liệu** của bài đã được xác nhận đầy đủ, và `sg.py` chính là code đã dùng cho bộ 600 cover. Phần **kết quả** thì vẫn chưa có file. Để làm nốt các chỗ còn thiếu, nhóm cần gửi:
 - thư mục kết quả của 18 lần chạy (2 detector × 3 protocol × 3 seed). Mỗi lần chạy gồm `config.json`, `thresholds.json`, và thư mục `*_test` có `predictions.csv`, `metrics.csv`, `evaluation.json`;
