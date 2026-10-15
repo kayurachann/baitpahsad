@@ -3,6 +3,8 @@
 Các bước (mỗi bước một lệnh con, có thể chạy lại từng bước):
   kiem-anh  <thư_mục_pgm>                  SHA-256 từng ảnh khớp data/stegaguard_600/source_provenance.json
   chuan-bi  <thư_mục_pgm> <thư_mục_dữ_liệu>  sg.prepare (seed 20260918, 256 × 256, conseal), so manifest với bản của nhóm
+  tu-cover  <thư_mục_zip> <thư_mục_dữ_liệu>  thay cho 2 bước trên khi chỉ có 600 cover (code_nhom/gom_cover_600.py):
+            kiểm SHA-256 cover, tạo lại 3.600 stego bằng conseal với embedding_seed của manifest, so SHA-256
   dac-trung <thư_mục_dữ_liệu> <thư_mục_đặc_trưng> [--workers 4]
             76 đặc trưng residual (sg.residual_features) và 34.671 đặc trưng SRM (sealwatch) cho 4.200 ảnh;
             lưu vào .npy, chạy dở thì chạy lại sẽ làm tiếp
@@ -70,6 +72,68 @@ def chuan_bi(thu_muc_pgm, ra):
         n = sum(cu[p]["algorithm"] == loai for p in khac)
         print(f"  {loai}: {n} ảnh khác")
     return sha_moi
+
+
+# ------------------------------------------------------------------ 2b. dựng lại từ 600 cover
+def tu_cover(thu_muc_zip, ra):
+    """Giải nén covers600_phan*.zip (từ code_nhom/gom_cover_600.py), kiểm SHA-256 của cover, tạo lại 3.600 ảnh
+    stego bằng conseal với đúng embedding_seed trong manifest (giống sg.prepare), rồi so SHA-256 với manifest."""
+    import zipfile
+    import conseal
+    from PIL import Image
+    ra = Path(ra)
+    ra.mkdir(parents=True, exist_ok=True)
+    zips = sorted(Path(thu_muc_zip).glob("*.zip"))
+    for z in zips:
+        with zipfile.ZipFile(z) as zf:
+            for ten in zf.namelist():
+                dich = (ra / ten).resolve()
+                if not str(dich).startswith(str(ra.resolve())):
+                    raise ValueError(f"đường dẫn lạ trong zip: {ten}")
+            zf.extractall(ra)
+    print(f"đã giải nén {len(zips)} file zip")
+    sha_man = sha256(ra / "manifest.csv")
+    if sha_man != sha256(DU_LIEU_NHOM / "manifest.csv"):
+        raise ValueError("manifest.csv trong zip khác bản data/stegaguard_600/manifest.csv")
+    rows = sg.read_rows(ra)
+    covers = {r["cover_id"]: r for r in rows if r["label"] == "0"}
+    sai_cover = [r["path"] for r in covers.values() if sha256(ra / r["path"]) != r["sha256"]]
+    print(f"{len(covers)} cover, sai SHA-256: {len(sai_cover)}")
+    if sai_cover:
+        raise ValueError(f"cover sai SHA-256: {sai_cover[:3]}")
+    # Bộ mã PNG ở đây có ghi ra đúng từng byte như máy của nhóm không? (lưu lại một cover và so)
+    r0 = next(iter(covers.values()))
+    x0 = np.asarray(Image.open(ra / r0["path"]))
+    tmp = ra / "_thu_png.png"
+    Image.fromarray(x0).save(tmp)
+    png_giong = sha256(tmp) == r0["sha256"]
+    tmp.unlink()
+    print("bộ mã PNG ghi giống byte của nhóm:", png_giong)
+    khop = khac = 0
+    lech = []
+    for r in rows:
+        if r["label"] != "1":
+            continue
+        c = covers[r["cover_id"]]
+        x = np.asarray(Image.open(ra / c["path"]))
+        y = getattr(conseal, r["algorithm"]).simulate_single_channel(
+            x0=x, alpha=float(r["payload"]), seed=int(r["embedding_seed"]))
+        y = np.asarray(y)
+        if y.shape != x.shape or y.min() < 0 or y.max() > 255 or np.abs(y.astype(int) - x.astype(int)).max() > 1:
+            raise ValueError(f"đầu ra conseal bất thường: {r['path']}")
+        dich = ra / r["path"]
+        Image.fromarray(y.astype(np.uint8)).save(dich)
+        if sha256(dich) == r["sha256"]:
+            khop += 1
+        else:
+            khac += 1
+            lech.append(r["path"])
+    import importlib.metadata as md
+    print(f"conseal {md.version('conseal')}: stego khớp SHA-256 {khop}/{khop + khac}")
+    (ra / "tu_cover_ket_qua.json").write_text(json.dumps(dict(
+        conseal=md.version("conseal"), png_giong=png_giong, stego_khop=khop, stego_khac=khac,
+        vi_du_khac=lech[:10]), ensure_ascii=False, indent=2), encoding="utf-8")
+    return khac
 
 
 # ------------------------------------------------------------------ 3. đặc trưng
@@ -223,6 +287,7 @@ if __name__ == "__main__":
     sub = ap.add_subparsers(dest="lenh", required=True)
     a = sub.add_parser("kiem-anh"); a.add_argument("pgm")
     b = sub.add_parser("chuan-bi"); b.add_argument("pgm"); b.add_argument("ra")
+    t = sub.add_parser("tu-cover"); t.add_argument("zip"); t.add_argument("ra")
     c = sub.add_parser("dac-trung"); c.add_argument("du_lieu"); c.add_argument("ra"); c.add_argument("--workers", type=int, default=4)
     d = sub.add_parser("chay"); d.add_argument("du_lieu"); d.add_argument("dac_trung"); d.add_argument("ra")
     x = ap.parse_args()
@@ -230,6 +295,8 @@ if __name__ == "__main__":
         sys.exit(1 if kiem_anh(x.pgm) else 0)
     elif x.lenh == "chuan-bi":
         chuan_bi(x.pgm, x.ra)
+    elif x.lenh == "tu-cover":
+        sys.exit(1 if tu_cover(x.zip, x.ra) else 0)
     elif x.lenh == "dac-trung":
         dac_trung(x.du_lieu, x.ra, x.workers)
     else:
