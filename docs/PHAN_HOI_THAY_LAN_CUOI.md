@@ -65,7 +65,9 @@ Vì vậy:
   - zip code (pilot 180 ảnh);
   - 4 file chuẩn bị dữ liệu 600 ảnh;
   - notebook `code_c_a_pp_nghi_n_c_u.ipynb` (code Chương 3, khảo sát giấc ngủ);
-  - 5 script làm video hướng dẫn và mô tả dữ liệu, đều cho bản pilot 180 ảnh.
+  - 5 script làm video hướng dẫn và mô tả dữ liệu, đều cho bản pilot 180 ảnh;
+  - đợt gửi sau: `sg.py`, `run_boss_pilot.py`, `metrics.csv` và `predictions.csv` của `mixed_algorithms_payloads_seed44`. Cả 4 file trùng từng byte với file đã có trong zip pilot;
+  - `create_stegaguard_conference_en_revised.py`: script dựng bài pilot 180 ảnh. Script ghi rằng pilot có bootstrap ghép cặp P3–P2 với 2.000 lần lấy mẫu, tính riêng từng seed, nhưng script bootstrap đó không có trong gói. Cách này cũng khác bài 600 cover, nơi ΔAUC được lấy trung bình qua 3 seed với một CI chung. Vì vậy không dùng nó để mô tả cách gộp CI.
 - Các script này khớp với bài ở hai điểm: ảnh được thu nhỏ bằng bicubic (Pillow), và ảnh stego được tạo bằng conseal.
 - Kết quả thường nằm cạnh thư mục `bossbase_pilot_results` trên máy đã chạy, ví dụ `C:\Users\ACER\Downloads\paper\...`. Tìm các thư mục có `thresholds.json` mà `config.json` ghi `manifest_sha256` = `13c01ca9…`.
 
