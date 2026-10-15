@@ -7,8 +7,12 @@ import sys
 from pathlib import Path
 
 from docx_builder import Doc, prepare_template
-from build_manuscript import SECT_PR, TITLE, f3, ci
+from build_manuscript import SECT_PR, f3, ci
 from results_data import MATRIX, RQ3, DETECTORS, PROTOCOLS, ALGORITHMS, low_fpr_summary
+
+# tên bài theo bản nộp của nhóm (Paper_HoanChinh)
+TITLE = ("StegaGuard: A Controlled Robustness Study of Lightweight Image Steganalysis under Algorithm "
+         "and Payload Shift")
 
 
 def build(template_src: Path, out: Path):

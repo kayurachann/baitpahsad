@@ -1,0 +1,290 @@
+TY  - JOUR
+AU  - Filler, T.
+AU  - Judas, J.
+AU  - Fridrich, J.
+TI  - Minimizing additive distortion in steganography using syndrome-trellis codes
+JO  - IEEE Transactions on Information Forensics and Security
+VL  - 6
+IS  - 3
+PY  - 2011
+DO  - 10.1109/TIFS.2011.2134094
+SP  - 920
+EP  - 935
+N1  - StegaGuard reference [1], EndNote RecNum 2
+ER  - 
+
+TY  - CONF
+AU  - Holub, V.
+AU  - Fridrich, J.
+TI  - Designing steganographic distortion using directional filters
+T2  - 2012 IEEE International Workshop on Information Forensics and Security (WIFS)
+PY  - 2012
+PB  - IEEE
+DO  - 10.1109/WIFS.2012.6412655
+SP  - 234
+EP  - 239
+N1  - StegaGuard reference [2], EndNote RecNum 3
+ER  - 
+
+TY  - JOUR
+AU  - Holub, V.
+AU  - Fridrich, J.
+AU  - Denemark, T.
+TI  - Universal distortion function for steganography in an arbitrary domain
+JO  - EURASIP Journal on Information Security
+VL  - 2014
+PY  - 2014
+DO  - 10.1186/1687-417X-2014-1
+SP  - 1
+N1  - StegaGuard reference [3], EndNote RecNum 4
+ER  - 
+
+TY  - CONF
+AU  - Li, B.
+AU  - Wang, M.
+AU  - Huang, J.
+AU  - Li, X.
+TI  - A new cost function for spatial image steganography
+T2  - 2014 IEEE International Conference on Image Processing (ICIP)
+PY  - 2014
+PB  - IEEE
+DO  - 10.1109/ICIP.2014.7025854
+SP  - 4206
+EP  - 4210
+N1  - StegaGuard reference [4], EndNote RecNum 5
+ER  - 
+
+TY  - JOUR
+AU  - Boroumand, M.
+AU  - Chen, M.
+AU  - Fridrich, J.
+TI  - Deep residual network for steganalysis of digital images
+JO  - IEEE Transactions on Information Forensics and Security
+VL  - 14
+IS  - 5
+PY  - 2019
+DO  - 10.1109/TIFS.2018.2871749
+SP  - 1181
+EP  - 1193
+N1  - StegaGuard reference [5], EndNote RecNum 14
+ER  - 
+
+TY  - JOUR
+AU  - Kodovský, J.
+AU  - Fridrich, J.
+AU  - Holub, V.
+TI  - Ensemble classifiers for steganalysis of digital media
+JO  - IEEE Transactions on Information Forensics and Security
+VL  - 7
+IS  - 2
+PY  - 2012
+DO  - 10.1109/TIFS.2011.2175919
+SP  - 432
+EP  - 444
+N1  - StegaGuard reference [6], EndNote RecNum 8
+ER  - 
+
+TY  - CONF
+AU  - Yedroudj, M.
+AU  - Comby, F.
+AU  - Chaumont, M.
+TI  - Yedroudj-Net: An efficient CNN for spatial steganalysis
+T2  - 2018 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)
+PY  - 2018
+PB  - IEEE
+DO  - 10.1109/ICASSP.2018.8461438
+SP  - 2092
+EP  - 2096
+N1  - StegaGuard reference [7], EndNote RecNum 13
+ER  - 
+
+TY  - JOUR
+AU  - Mallet, A.
+AU  - Beneš, M.
+AU  - Cogranne, R.
+TI  - Cover-source mismatch in steganalysis: systematic review
+JO  - EURASIP Journal on Information Security
+VL  - 2024
+PY  - 2024
+DO  - 10.1186/s13635-024-00171-6
+SP  - 26
+N1  - StegaGuard reference [8], EndNote RecNum 22
+ER  - 
+
+TY  - CONF
+AU  - Kodovský, J.
+AU  - Sedighi, V.
+AU  - Fridrich, J.
+TI  - Study of cover source mismatch in steganalysis and ways to mitigate its impact
+T2  - Media Watermarking, Security, and Forensics 2014, Proc. SPIE vol. 9028
+VL  - 9028
+PY  - 2014
+PB  - SPIE
+DO  - 10.1117/12.2039693
+SP  - 90280J
+N1  - StegaGuard reference [9], EndNote RecNum 9
+ER  - 
+
+TY  - CONF
+AU  - Butora, J.
+AU  - Fridrich, J.
+TI  - Detection of diversified stego sources with CNNs
+T2  - IS&T International Symposium on Electronic Imaging: Media Watermarking, Security, and Forensics 2019
+PY  - 2019
+PB  - Society for Imaging Science and Technology
+DO  - 10.2352/ISSN.2470-1173.2019.5.MWSF-534
+SP  - MWSF
+EP  - 534
+N1  - StegaGuard reference [10], EndNote RecNum 20
+ER  - 
+
+TY  - CONF
+AU  - Wang, F.
+AU  - Fu, Z.
+AU  - Zhang, X.
+AU  - Li, Z.
+AU  - He, Z.
+AU  - Wang, M.
+TI  - Pair-wise confidence difference-based pseudo-label selection for universal mismatched steganalysis
+T2  - Proceedings of the 33rd ACM International Conference on Multimedia (MM '25)
+PY  - 2025
+PB  - ACM
+DO  - 10.1145/3746027.3755614
+SP  - 8673
+EP  - 8681
+N1  - StegaGuard reference [11], EndNote RecNum 21
+ER  - 
+
+TY  - JOUR
+AU  - Fridrich, J.
+AU  - Kodovský, J.
+TI  - Rich models for steganalysis of digital images
+JO  - IEEE Transactions on Information Forensics and Security
+VL  - 7
+IS  - 3
+PY  - 2012
+DO  - 10.1109/TIFS.2012.2190402
+SP  - 868
+EP  - 882
+N1  - StegaGuard reference [12], EndNote RecNum 7
+ER  - 
+
+TY  - CONF
+AU  - Pevný, T.
+AU  - Bas, P.
+AU  - Fridrich, J.
+TI  - Steganalysis by subtractive pixel adjacency matrix
+T2  - Proceedings of the 11th ACM Workshop on Multimedia and Security (MM&Sec '09)
+PY  - 2009
+PB  - ACM
+DO  - 10.1145/1597817.1597831
+SP  - 75
+EP  - 84
+N1  - StegaGuard reference [13], EndNote RecNum 6
+ER  - 
+
+TY  - JOUR
+AU  - Yu, L.
+AU  - Li, Y.
+AU  - Weng, S.
+AU  - Tian, H.
+AU  - Liu, J.
+TI  - Adaptive multi-teacher softened relational knowledge distillation framework for payload mismatch in image steganalysis
+JO  - Journal of Visual Communication and Image Representation
+VL  - 95
+PY  - 2023
+DO  - 10.1016/j.jvcir.2023.103900
+SP  - 103900
+N1  - StegaGuard reference [14], EndNote RecNum 23
+ER  - 
+
+TY  - CONF
+AU  - Cogranne, R.
+AU  - Giboulot, Q.
+AU  - Bas, P.
+TI  - The ALASKA steganalysis challenge: A first step towards steganalysis "into the wild"
+T2  - Proceedings of the ACM Workshop on Information Hiding and Multimedia Security (IH&MMSec '19)
+PY  - 2019
+PB  - ACM
+DO  - 10.1145/3335203.3335726
+SP  - 125
+EP  - 137
+N1  - StegaGuard reference [15], EndNote RecNum 24
+ER  - 
+
+TY  - JOUR
+AU  - Cogranne, R.
+AU  - Fridrich, J.
+TI  - Modeling and extending the ensemble classifier for steganalysis of digital images using hypothesis testing theory
+JO  - IEEE Transactions on Information Forensics and Security
+VL  - 10
+IS  - 12
+PY  - 2015
+DO  - 10.1109/TIFS.2015.2470220
+SP  - 2627
+EP  - 2642
+N1  - StegaGuard reference [16], EndNote RecNum 26
+ER  - 
+
+TY  - CONF
+AU  - Butora, J.
+AU  - Bas, P.
+TI  - MODE: Loss function for deep steganalysis at low false positive rate
+T2  - 33rd European Signal Processing Conference (EUSIPCO 2025)
+PY  - 2025
+CY  - Palermo, Italy
+N1  - StegaGuard reference [17], EndNote RecNum 25
+ER  - 
+
+TY  - CHAP
+AU  - Bas, P.
+AU  - Filler, T.
+AU  - Pevný, T.
+TI  - "Break our steganographic system": The ins and outs of organizing BOSS
+T2  - Information Hiding, IH 2011, Lecture Notes in Computer Science, vol. 6958
+VL  - 6958
+PY  - 2011
+PB  - Springer
+CY  - Heidelberg
+DO  - 10.1007/978-3-642-24178-9_5
+SP  - 59
+EP  - 70
+N1  - StegaGuard reference [18], EndNote RecNum 27
+ER  - 
+
+TY  - JOUR
+AU  - Pedregosa, F.
+AU  - Varoquaux, G.
+AU  - Gramfort, A.
+AU  - Michel, V.
+AU  - Thirion, B.
+AU  - Grisel, O.
+AU  - Blondel, M.
+AU  - Prettenhofer, P.
+AU  - Weiss, R.
+AU  - Dubourg, V.
+AU  - Vanderplas, J.
+AU  - Passos, A.
+AU  - Cournapeau, D.
+AU  - Brucher, M.
+AU  - Perrot, M.
+AU  - Duchesnay, E.
+TI  - Scikit-learn: Machine learning in Python
+JO  - Journal of Machine Learning Research
+VL  - 12
+PY  - 2011
+SP  - 2825
+EP  - 2830
+N1  - StegaGuard reference [19], EndNote RecNum 17
+ER  - 
+
+TY  - COMP
+AU  - Beneš, M.
+AU  - Lorch, B.
+TI  - sealwatch: Implementation of modern image steganalysis algorithms
+T2  - Python package
+PY  - 2024
+PB  - University of Innsbruck
+UR  - https://github.com/uibk-uncover/sealwatch
+N1  - StegaGuard reference [20], EndNote RecNum 28
+ER  - 
