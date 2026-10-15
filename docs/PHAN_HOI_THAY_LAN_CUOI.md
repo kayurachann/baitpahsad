@@ -43,9 +43,8 @@ Vì vậy:
 
   Hiện các số này chỉ khớp nhau và khớp `scripts/results_data.py`.
 - **Việc nhóm cần làm:** tìm trên máy thư mục kết quả 600 cover (có `manifest.csv` với SHA-256 `13c01ca9…2799e8c`), code SRM+Ensemble và script phân tích ΔAUC, rồi gửi lại. Có các file đó thì:
-  - gộp các `predictions.csv` (điểm test) thành một file CSV theo cột ghi trong `scripts/verify_stats.py`;
-  - gộp các `thresholds.json` thành `thresholds.csv` (cột detector, protocol, seed, tau_ber = "balanced", tau_low = "low_fpr"), vì `sg.py` không lưu điểm validation;
-  - chạy `python3 scripts/verify_stats.py scores.csv --thresholds thresholds.csv` để tính lại số của Table 4–7 và các ΔAUC/CI;
+  - gộp kết quả bằng `python3 scripts/gop_ket_qua.py <thư mục kết quả> gop --manifest-sha256 13c01ca998193e6925d599e43c6bf478021cac9759ff8a4b15e2a37a32799e8c`. Lệnh này tạo `gop/scores.csv` (điểm test) và `gop/thresholds.csv` (ngưỡng trong `thresholds.json`, vì `sg.py` không lưu điểm validation). Đã thử trên pilot: tính lại khớp `metrics.csv` của `sg.py` ở 54 điều kiện × 5 chỉ số;
+  - chạy `python3 scripts/verify_stats.py gop/scores.csv --thresholds gop/thresholds.csv` để tính lại số của Table 4–7 và các ΔAUC/CI;
   - nếu khớp thì có thể thêm một câu về cách gộp ΔAUC qua 3 seed vào mục 3.5; nếu không khớp thì sửa theo số tính lại.
 
   Không có các file này thì không thể trả lời trung thực mục 1 (SRM+Ensemble), mục 2 (cách gộp CI) và mục 3 (đối chiếu FP) của thầy.
@@ -60,6 +59,21 @@ Vì vậy:
 - **Cách gửi dữ liệu:** phiên Claude này chạy trên máy chủ đám mây nên không vào được máy của nhóm. Có hai cách:
   - nén thư mục kết quả 600 cover và code SRM+Ensemble rồi gửi vào khung chat (hoặc đẩy lên repo);
   - mở Claude ngay trên máy có dữ liệu: ứng dụng Claude Desktop, hoặc lệnh `claude remote-control` chạy trong thư mục đó.
+
+### Các file đã tìm (không có kết quả 600 cover)
+- Phiên Claude này chạy trên máy chủ đám mây, nên không vào được máy của nhóm để tự tìm. Đã xem hết mọi file nhóm gửi vào chat, nhưng không file nào là kết quả chạy 600 cover hay code SRM:
+  - zip code (pilot 180 ảnh);
+  - 4 file chuẩn bị dữ liệu 600 ảnh;
+  - notebook `code_c_a_pp_nghi_n_c_u.ipynb` (code Chương 3, khảo sát giấc ngủ);
+  - 5 script làm video hướng dẫn và mô tả dữ liệu, đều cho bản pilot 180 ảnh.
+- Các script này khớp với bài ở hai điểm: ảnh được thu nhỏ bằng bicubic (Pillow), và ảnh stego được tạo bằng conseal.
+- Kết quả thường nằm cạnh thư mục `bossbase_pilot_results` trên máy đã chạy, ví dụ `C:\Users\ACER\Downloads\paper\...`. Tìm các thư mục có `thresholds.json` mà `config.json` ghi `manifest_sha256` = `13c01ca9…`.
+
+### Báo cáo CheckAI (Turnitin) nhóm gửi
+- `CheckAI.pdf` ngày 14/10 chấm **một bản cũ** của bài (13 trang, có Table 11 và Fig. 4): 36% bị đánh dấu AI, gồm 21 đoạn.
+- Đã đối chiếu tự động từng đoạn bị đánh dấu với bản hiện tại. Gần như không đoạn nào còn nguyên, chỉ còn tên Table 1 (gần giống) và 2 câu na ná ở 4.1 và Conclusion. Vì vậy con số 36% không áp dụng cho file hiện tại.
+- Nhóm nên nộp bản `Paper_HoanChinh_2` lên Turnitin để chấm lại. Nếu còn đoạn bị đánh dấu, gửi báo cáo mới để xem đúng các đoạn đó; tốt nhất là nhóm tự viết lại các đoạn đó bằng lời của mình.
+- Làm theo quy định của trường và hội nghị về việc dùng AI hỗ trợ viết. Springer yêu cầu ghi rõ việc dùng LLM nếu vượt quá mức sửa câu chữ.
 
 ## Thầy yêu cầu – đã làm gì
 

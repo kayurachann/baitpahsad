@@ -4,10 +4,13 @@
    2.000 bộ dữ liệu ngẫu nhiên có nhiều điểm trùng. Cần scikit-learn.
 2. Bootstrap: nếu đưa thư mục kết quả pilot (bossbase_pilot_results), so AUC và CI 95% của từng
    điều kiện với auc, auc_ci_low, auc_ci_high mà sg.py evaluate() ghi trong metrics.csv.
+3. Gộp kết quả: chạy gop_ket_qua.py trên cùng thư mục, rồi verify_stats (ngưỡng lấy từ thresholds.json)
+   tính lại AUC, recall và FPR tại τlow, F1 và BER tại τBER của từng lần chạy, so với metrics.csv.
 
 Cách chạy: python3 kiem_verify_stats.py [thư_mục_bossbase_pilot_results]
 """
 import csv
+import json
 import sys
 from pathlib import Path
 
@@ -72,8 +75,37 @@ def kiem_pilot(goc):
     return lech
 
 
+def kiem_gop(goc):
+    import tempfile
+    import gop_ket_qua as G
+    ten = {"wow": "WOW", "suniward": "S-UNIWARD", "hill": "HILL"}
+    with tempfile.TemporaryDirectory() as ra:
+        if G.gop(goc, ra):
+            return 1
+        m = V.per_run_metrics(V.load(Path(ra) / "scores.csv"), V.load_thresholds(Path(ra) / "thresholds.csv"))
+    nguong = {}
+    for run in Path(goc).glob("*/config.json"):
+        cfg = json.loads(run.read_text(encoding="utf-8"))
+        khoa = (tuple(sorted(cfg["algorithms"])), tuple(sorted(float(p) for p in cfg["payloads"])))
+        nguong[run.parent.name] = (G.ten_detector(cfg["model"]), G.PROTOCOL[khoa], int(cfg["seed"]))
+    n = lech = 0
+    for test in sorted(Path(goc).glob("*_test")):
+        det, p, seed = nguong[test.name[:-5]]
+        for r in csv.DictReader(open(test / "metrics.csv", newline="", encoding="utf-8")):
+            v = m[(det, p, seed, ten[r["algorithm"]], float(r["payload"]))]
+            cap = [(v["auc"], r["auc"]), (v["recall_low"], r["recall_at_validation_low_fpr"]),
+                   (v["fpr_low"], r["actual_test_fpr"]), (v["f1"], r["f1"]), (v["ber"], r["balanced_error"])]
+            n += 1
+            if max(abs(a - float(b)) for a, b in cap) > 1e-12:
+                lech += 1
+                print("lệch:", test.name, r["algorithm"], r["payload"], cap)
+    print(f"gộp kết quả: {n} điều kiện × 5 chỉ số, {lech} lệch so với metrics.csv của sg.py")
+    return lech
+
+
 if __name__ == "__main__":
     loi = kiem_nguong()
     if len(sys.argv) > 1:
         loi += kiem_pilot(sys.argv[1])
+        loi += kiem_gop(sys.argv[1])
     sys.exit(1 if loi else 0)
