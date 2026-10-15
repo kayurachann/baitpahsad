@@ -20,7 +20,7 @@ Vì vậy:
 - **Đã xác nhận được từ code (`code/sg.py`):** cách tạo 76 đặc trưng, StandardScaler, tham số Logistic Regression, cách chọn ngưỡng τ_BER và τ_low, bootstrap (1.000 vòng, seed 2026, CI phân vị 2,5–97,5%), cách chia dữ liệu trước khi nhúng, audit chống rò rỉ, các cột của manifest. Code này dùng chung cho thí nghiệm 600 cover vì manifest của bài có đúng các cột mà `sg.py` tạo ra. Dù vậy nhóm vẫn nên khẳng định lại là đã chạy cùng `sg.py`.
 - **Chưa xác nhận được bằng code hoặc dữ liệu gốc:**
   - cấu hình SRM+Ensemble;
-  - cách gộp ΔAUC qua 3 seed: câu này đang **tô vàng** ở mục 3.5, là chỗ tô vàng duy nhất trong bài;
+  - cách gộp ΔAUC qua 3 seed: bài **không thêm** câu nào về việc này (xem mục 2 bên dưới);
   - số false positives của Table 7 so với điểm dự đoán từng seed;
   - toàn bộ số của Table 4–7 so với dữ liệu gốc.
 
@@ -28,7 +28,7 @@ Vì vậy:
 - **Việc nhóm cần làm:** tìm trên máy thư mục kết quả 600 cover (có `manifest.csv` với SHA-256 `13c01ca9…2799e8c`), code SRM+Ensemble và script phân tích ΔAUC, rồi gửi lại. Có các file đó thì:
   - xuất điểm dự đoán thành một file CSV theo cột ghi trong `scripts/verify_stats.py`;
   - chạy `python3 scripts/verify_stats.py scores.csv` để tính lại toàn bộ số trong bài;
-  - nếu khớp thì bỏ tô vàng câu ΔAUC ở 3.5; nếu không khớp thì sửa theo số tính lại.
+  - nếu khớp thì có thể thêm một câu về cách gộp ΔAUC qua 3 seed vào mục 3.5; nếu không khớp thì sửa theo số tính lại.
 
   Không có các file này thì không thể trả lời trung thực mục 1 (SRM+Ensemble), mục 2 (cách gộp CI) và mục 3 (đối chiếu FP) của thầy.
 
@@ -44,7 +44,7 @@ Thêm vào đoạn 3.2 (không thêm bảng) các thông tin lấy từ `sg.py` 
 
 ### 2. Section 3.5 – bootstrap
 - Thêm: code đánh giá rút **B = 1.000** vòng cho mỗi điều kiện test, bộ sinh số cố định **seed 2026**. Vì bộ sinh được tạo lại cho mỗi điều kiện, mọi điều kiện, protocol và seed dùng **cùng một tập test cover được rút**. CI 95% là khoảng giữa phân vị 2,5% và 97,5% (`sg.py`, hàm `evaluate`).
-- **Tô vàng:** câu "Each ΔAUC replicate is the difference of the two replicate AUCs, averaged over the three seeds." Đây là cách tự nhiên nhất khớp với code, nhưng script tính ΔAUC không có trong gói. Nhóm xác nhận thì bỏ tô vàng.
+- **Không thêm:** cách gộp ΔAUC và CI qua 3 seed. Script tính ΔAUC không có trong gói, và thầy yêu cầu chỉ ghi các bước đã chạy trong code, nên bài giữ nguyên mô tả cũ của nhóm: điểm ước lượng là trung bình của 3 hiệu theo từng seed, CI từ bootstrap ghép cặp theo test cover. Khi tìm được script, có thể thêm một câu như: "Each ΔAUC replicate is the difference of the two replicate AUCs, averaged over the three seeds" (chỉ thêm nếu script làm đúng như vậy).
 - Thêm câu nói rõ CI chỉ phản ánh biến thiên trên 120 test cover cố định, không đại diện cho nguồn ảnh khác.
 - Table 5, Table 6, Fig. 2 và S2: kiểm tự động bằng `scripts/kiem_tra_hoanchinh.py`, khớp `results_data.py`.
 
@@ -76,8 +76,9 @@ Thêm vào đoạn 3.2 (không thêm bảng) các thông tin lấy từ `sg.py` 
 - **Bảng 1–7:** dùng trường SEQ nên đánh số liên tục; tên bảng và câu dẫn đúng vị trí.
 - **Số liệu:** Abstract, Table 4–7, Results và Conclusion khớp nhau và khớp `results_data.py` (kiểm tự động).
 - **Supplementary:** sửa tiêu đề cho trùng tên bài ("Lightweight…"); S1–S3 đầy đủ.
-- **Placeholder:** không còn, ngoài một câu tô vàng ở 3.5.
-- **Số trang:** 12 trang trong LibreOffice. Khi mở bằng Word nên xuất PDF kiểm lại, vì trang 12 đã gần đầy.
+- **Placeholder và tô vàng:** không còn.
+- **Số trang:** 12 trang trong LibreOffice, trang 12 còn khoảng 3 dòng trống. Khi mở bằng Word nên xuất PDF kiểm lại.
+  - Để giữ 12 trang, đã bỏ một câu bị trùng ở 3.2: "Both detectors keep the same settings in every protocol and seed, so the configuration cannot explain differences between protocols." Ý này đã có ở Table 2 và mục 3.3.
 - **Acknowledgement:** thêm trước References đúng câu của thầy: "This research is funded by the University of Economics Ho Chi Minh City, Vietnam (UEH)."
 
 ## Hướng dẫn EndNote (để References không bị đổi lại khi bấm Update)

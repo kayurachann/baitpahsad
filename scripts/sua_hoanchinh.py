@@ -7,8 +7,8 @@ Nội dung sửa (chi tiết ở docs/PHAN_HOI_THAY_LAN_CUOI.md):
     bỏ trích dẫn lặp [5, 7]. Thứ tự xuất hiện lần đầu của các tài liệu không đổi.
   - 3.1: ghi phép nội suy bicubic khi thu nhỏ ảnh (sg.py, prepare).
   - 3.2: cách tạo 76 đặc trưng, chuẩn hóa và tham số logistic regression, lấy từ code/sg.py và các mô hình đã lưu.
-  - 3.5: số vòng bootstrap, seed của bộ sinh, cách lấy khoảng phân vị (sg.py, evaluate); phần gộp ΔAUC qua 3 seed
-    chưa có script nên được tô vàng; nói rõ giới hạn của khoảng tin cậy.
+  - 3.5: số vòng bootstrap, seed của bộ sinh, cách lấy khoảng phân vị (sg.py, evaluate); nói rõ giới hạn của
+    khoảng tin cậy. Cách gộp ΔAUC qua 3 seed không được thêm vì chưa có script phân tích để đối chiếu.
   - 4.5: bỏ câu "never completely silent", viết lại câu 54 dòng / 6.480 lượt chấm.
   - Acknowledgement (UEH) trước References.
   - References: trình bày theo Springer LNCS, đúng thứ tự [1]–[20], metadata đã kiểm chứng; cập nhật luôn bản ghi
@@ -68,19 +68,22 @@ def sua_noi_dung(blks):
     de.chen_sau(p, "regression . ", [(
         "The residuals are the first- and second-order horizontal and vertical pixel differences; each is "
         "summarized by a normalized 17-bin histogram of its values clipped to [−8, 8] plus its mean absolute value "
-        "and standard deviation, giving 4 × 19 = 76 features. A StandardScaler fitted on the training features of "
-        "each run only rescales all splits, and the L2-regularized classifier uses C = 1.0, the lbfgs solver, no "
+        "and standard deviation (4 × 19 = 76 features). A StandardScaler fitted on the training features of each "
+        "run only is applied to all splits, and the L2-regularized classifier uses C = 1.0, the lbfgs solver, no "
         "class weights (training pairs are balanced), max_iter = 2,000 and the run seed as random_state; its "
         "decision function is the score. ",
         False)])
 
+    # câu thừa (đã có ở Table 2 và mục 3.3), bỏ để giữ 12 trang
+    de.thay(p, " Both detectors keep the same settings in every protocol and seed, so the configuration cannot "
+               "explain differences between protocols.", "")
+
     # 3.5: bootstrap
     p = tim(blks, "Each comparison is a paired difference")
     de.chen_sau(p, " images are never resampled on their own.", [
-        (" The evaluation code draws B = 1,000 replicates per test condition from a generator with the fixed seed "
-         "2026, so all conditions, protocols and seeds share the same resampled cover IDs, and takes the 2.5th and "
-         "97.5th percentiles as the 95% interval.", False),
-        (" Each ΔAUC replicate is the difference of the two replicate AUCs, averaged over the three seeds.", True),
+        (" We draw B = 1,000 replicates per test condition with a generator seeded at 2026, so all conditions, "
+         "protocols and seeds share the same resampled cover IDs, and take the 2.5th and 97.5th percentiles as the "
+         "95% interval.", False),
     ])
     p = tim(blks, "Seed standard deviations (at most 0.028")
     de.thay(p, "so the intervals are conditional on this partition.",
