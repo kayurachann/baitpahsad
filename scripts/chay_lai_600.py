@@ -1,0 +1,236 @@
+"""Chạy lại thí nghiệm 600 cover của bài từ 600 ảnh PGM gốc, dùng nguyên code/sg.py của nhóm.
+
+Các bước (mỗi bước một lệnh con, có thể chạy lại từng bước):
+  kiem-anh  <thư_mục_pgm>                  SHA-256 từng ảnh khớp data/stegaguard_600/source_provenance.json
+  chuan-bi  <thư_mục_pgm> <thư_mục_dữ_liệu>  sg.prepare (seed 20260918, 256 × 256, conseal), so manifest với bản của nhóm
+  dac-trung <thư_mục_dữ_liệu> <thư_mục_đặc_trưng> [--workers 4]
+            76 đặc trưng residual (sg.residual_features) và 34.671 đặc trưng SRM (sealwatch) cho 4.200 ảnh;
+            lưu vào .npy, chạy dở thì chạy lại sẽ làm tiếp
+  chay      <thư_mục_dữ_liệu> <thư_mục_đặc_trưng> <thư_mục_kết_quả>
+            9 lần Residual-LR (giống hệt nhánh residual_lr của sg.train/evaluate) và 9 lần SRM+Ensemble
+            (sealwatch FldEnsembleTrainer, L = 50, d_sub = 500). Với SRM ghi hai loại điểm: 'votes'
+            (predict_confidence, tỉ lệ phiếu) và 'proj' (trung bình projection của 50 FLD), mỗi loại một thư mục.
+            Kết quả theo đúng định dạng sg.py: <run>/config.json, thresholds.json; <run>_test/predictions.csv, metrics.csv.
+
+Sau đó: python3 gop_ket_qua.py <thư_mục_kết_quả>/<loại> gop --manifest-sha256 ... và verify_stats.py.
+"""
+import argparse
+import csv
+import hashlib
+import json
+import multiprocessing as mp
+import random
+import sys
+from pathlib import Path
+
+import numpy as np
+
+GOC = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(GOC / "code_nhom"))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import sg  # noqa: E402  code của nhóm, không sửa
+
+DU_LIEU_NHOM = GOC / "data" / "stegaguard_600"
+SEED_CHUAN_BI = 20260918
+PROTOCOL = {"P1": (["wow"], [0.4]), "P2": (["wow", "suniward"], [0.4]), "P3": (["wow", "suniward"], [0.1, 0.4])}
+TEN_RUN = {"P1": "single_wow_04", "P2": "mixed_algorithms_04", "P3": "mixed_algorithms_payloads"}
+SEEDS = (42, 43, 44)
+SRM_DIM = 34671
+
+
+def sha256(p):
+    return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+
+
+# ------------------------------------------------------------------ 1. ảnh gốc
+def kiem_anh(thu_muc):
+    prov = json.loads((DU_LIEU_NHOM / "source_provenance.json").read_text(encoding="utf-8"))
+    sai = thieu = 0
+    for f in prov["files"]:
+        p = Path(thu_muc) / f["filename"]
+        if not p.exists():
+            thieu += 1
+        elif sha256(p) != f["sha256"]:
+            sai += 1
+    print(f"{len(prov['files'])} ảnh trong provenance: thiếu {thieu}, sai SHA-256 {sai}")
+    return thieu + sai
+
+
+# ------------------------------------------------------------------ 2. chuẩn bị dữ liệu
+def chuan_bi(thu_muc_pgm, ra):
+    args = argparse.Namespace(covers=str(thu_muc_pgm), out=str(ra), size=256, limit=0, seed=SEED_CHUAN_BI,
+                              algorithms=["wow", "suniward", "hill"], payloads=[0.1, 0.4])
+    sg.prepare(args)
+    moi = {r["path"]: r for r in sg.read_rows(ra)}
+    cu = {r["path"]: r for r in csv.DictReader(open(DU_LIEU_NHOM / "manifest.csv", newline="", encoding="utf-8"))}
+    khac = [p for p in cu if p not in moi or moi[p]["sha256"] != cu[p]["sha256"]]
+    sha_moi = sha256(Path(ra) / "manifest.csv")
+    print(f"manifest mới {sha_moi[:8]}…{sha_moi[-7:]}; ảnh khác bản của nhóm: {len(khac)}/{len(cu)}")
+    for loai in ("cover", "wow", "suniward", "hill"):
+        n = sum(cu[p]["algorithm"] == loai for p in khac)
+        print(f"  {loai}: {n} ảnh khác")
+    return sha_moi
+
+
+# ------------------------------------------------------------------ 3. đặc trưng
+def _mot_anh(args):
+    goc, i, path = args
+    import khong_torch  # noqa: F401  sealwatch import được mà không cần torch
+    import sealwatch
+    x = sg.pixels(goc, {"path": path})                       # float32, giống sg.score_pairs
+    res = sg.residual_features(x)
+    f = sealwatch.srm.extract(x.astype(np.uint8).astype(np.float64))
+    srm = np.concatenate([np.asarray(v, dtype=np.float64).ravel() for v in f.values()])
+    return i, res, srm
+
+
+def dac_trung(goc, ra, workers=4):
+    ra = Path(ra)
+    ra.mkdir(parents=True, exist_ok=True)
+    rows = sg.read_rows(goc)
+    paths = [r["path"] for r in rows]
+    (ra / "paths.json").write_text(json.dumps(paths), encoding="utf-8")
+    n = len(paths)
+    mo = lambda ten, d: (np.lib.format.open_memmap(ra / ten, mode="r+") if (ra / ten).exists()  # noqa: E731
+                         else np.lib.format.open_memmap(ra / ten, mode="w+", dtype=np.float64, shape=(n, d)))
+    res, srm = mo("residual.npy", 76), mo("srm.npy", SRM_DIM)
+    xong_p = ra / "xong.txt"
+    xong = set(int(x) for x in xong_p.read_text().split()) if xong_p.exists() else set()
+    viec = [(str(goc), i, p) for i, p in enumerate(paths) if i not in xong]
+    print(f"{n} ảnh, còn {len(viec)} ảnh cần trích", flush=True)
+    with mp.get_context("spawn").Pool(workers) as pool, open(xong_p, "a") as log:
+        for k, (i, r, s) in enumerate(pool.imap_unordered(_mot_anh, viec, chunksize=4), 1):
+            if s.size != SRM_DIM:
+                raise ValueError(f"SRM {s.size} chiều ở ảnh {paths[i]}")
+            res[i], srm[i] = r, s
+            if k % 20 == 0 or k == len(viec):
+                res.flush(); srm.flush()
+            log.write(f"{i}\n"); log.flush()
+            if k % 100 == 0:
+                print(f"  {k}/{len(viec)}", flush=True)
+    res.flush(); srm.flush()
+
+
+# ------------------------------------------------------------------ 4. huấn luyện và đánh giá
+class DacTrung:
+    def __init__(self, thu_muc):
+        thu_muc = Path(thu_muc)
+        paths = json.loads((thu_muc / "paths.json").read_text(encoding="utf-8"))
+        self.idx = {p: i for i, p in enumerate(paths)}
+        self.res = np.load(thu_muc / "residual.npy", mmap_mode="r")
+        self.srm = np.load(thu_muc / "srm.npy", mmap_mode="r")
+
+    def lay(self, records, loai):
+        m = self.res if loai == "residual" else self.srm
+        return np.asarray(m[[self.idx[r["path"]] for r in records]])
+
+
+def _chon_cap(goc, algorithms, payloads, seed):
+    """Giống sg.train: một biến thể cho mỗi cover train, random.Random(seed).choice theo thứ tự manifest."""
+    tr = sg.pairs(goc, "train", algorithms, payloads)
+    groups = {}
+    for c, s in tr:
+        groups.setdefault(c["cover_id"], []).append((c, s))
+    rr = random.Random(seed)
+    return [rr.choice(g) for g in groups.values()]
+
+
+def _diem_srm(ens, X):
+    proj = np.mean([bl.predict(X) for bl in ens.base_learners], axis=0)
+    return {"votes": ens.predict_confidence(X), "proj": proj}
+
+
+def _ghi_run(ra, ten, model, algorithms, payloads, seed, sha, th, du_doan, chi_so):
+    run = Path(ra) / ten
+    test = Path(ra) / f"{ten}_test"
+    run.mkdir(parents=True, exist_ok=True)
+    test.mkdir(parents=True, exist_ok=True)
+    (run / "config.json").write_text(json.dumps(dict(model=model, algorithms=algorithms, payloads=payloads,
+                                                     seed=seed, manifest_sha256=sha), indent=2), encoding="utf-8")
+    (run / "thresholds.json").write_text(json.dumps(th, indent=2), encoding="utf-8")
+    for ten_f, rows in (("predictions.csv", du_doan), ("metrics.csv", chi_so)):
+        with open(test / ten_f, "w", newline="", encoding="utf-8") as fh:
+            w = csv.DictWriter(fh, fieldnames=list(rows[0]))
+            w.writeheader()
+            w.writerows(rows)
+
+
+def chay(goc, thu_muc_dt, ra):
+    from sklearn.linear_model import LogisticRegression
+    from sklearn.pipeline import make_pipeline
+    from sklearn.preprocessing import StandardScaler
+    import khong_torch  # noqa: F401
+    from sealwatch.ensemble_classifier.fld_ensemble_trainer import FldEnsembleTrainer
+    import verify_stats as V
+
+    dt = DacTrung(thu_muc_dt)
+    sha = sha256(Path(goc) / "manifest.csv")
+    va_tat_ca = {p: sg.pairs(goc, "val", *PROTOCOL[p]) for p in PROTOCOL}
+    test = {(a, b): sg.pairs(goc, "test", [a], [b]) for a in ("wow", "suniward", "hill") for b in (0.1, 0.4)}
+
+    def danh_gia(score_fn, th):
+        du_doan, chi_so = [], []
+        for (a, b), pp in test.items():
+            recs = [r for pair in pp for r in pair]
+            y = [int(r["label"]) for r in recs]
+            s = np.asarray(score_fn(recs), dtype=float)
+            m = sg.scores_metrics(y, s, th["balanced"])
+            low = sg.scores_metrics(y, s, th["low_fpr"])
+            lo, hi = V.auc_ci(s[0::2], s[1::2], 1000, 2026)
+            chi_so.append(dict(algorithm=a, payload=b, threshold=th["balanced"], **m,
+                               recall_at_validation_low_fpr=low["recall"], actual_test_fpr=low["fpr"],
+                               auc_ci_low=lo, auc_ci_high=hi))
+            du_doan += [dict(cover_id=r["cover_id"], path=r["path"], label=int(r["label"]), test_algorithm=a,
+                             payload=b, score=float(v)) for r, v in zip(recs, s)]
+        return du_doan, chi_so
+
+    def nguong(score_fn, va):
+        flat = [r for pair in va for r in pair]
+        seen, keep = set(), []
+        for i, r in enumerate(flat):
+            if r["path"] not in seen:
+                keep.append(i)
+                seen.add(r["path"])
+        y = np.asarray([int(r["label"]) for r in flat])[keep]
+        s = np.asarray(score_fn(flat), dtype=float)[keep]
+        return sg.thresholds(y, s)
+
+    for p, (algs, pls) in PROTOCOL.items():
+        for seed in SEEDS:
+            ten = f"{TEN_RUN[p]}_seed{seed}"
+            chon = _chon_cap(goc, algs, pls, seed)
+            records = [r for pair in chon for r in pair]
+            # Residual-LR: giống nhánh residual_lr của sg.train
+            model = make_pipeline(StandardScaler(), LogisticRegression(max_iter=2000, random_state=seed))
+            model.fit(dt.lay(records, "residual"), [int(r["label"]) for r in records])
+            fn = lambda recs: model.decision_function(dt.lay(recs, "residual"))  # noqa: E731
+            th = nguong(fn, va_tat_ca[p])
+            _ghi_run(Path(ra) / "residual_lr", ten, "residual_lr", algs, pls, seed, sha, th, *danh_gia(fn, th))
+            # SRM+Ensemble: FLD ensemble của sealwatch, L = 50, d_sub = 500
+            Xc = np.ascontiguousarray(dt.lay([c for c, _ in chon], "srm"))
+            Xs = np.ascontiguousarray(dt.lay([s for _, s in chon], "srm"))
+            ens, _ = FldEnsembleTrainer(Xc, Xs, seed=seed, L=50, d_sub=500, verbose=0).train()
+            for loai in ("votes", "proj"):
+                fn = lambda recs, loai=loai: _diem_srm(ens, dt.lay(recs, "srm"))[loai]  # noqa: E731
+                th = nguong(fn, va_tat_ca[p])
+                _ghi_run(Path(ra) / f"srm_{loai}", ten, f"srm_ensemble_{loai}", algs, pls, seed, sha, th,
+                         *danh_gia(fn, th))
+            print(f"xong {ten}", flush=True)
+
+
+if __name__ == "__main__":
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    sub = ap.add_subparsers(dest="lenh", required=True)
+    a = sub.add_parser("kiem-anh"); a.add_argument("pgm")
+    b = sub.add_parser("chuan-bi"); b.add_argument("pgm"); b.add_argument("ra")
+    c = sub.add_parser("dac-trung"); c.add_argument("du_lieu"); c.add_argument("ra"); c.add_argument("--workers", type=int, default=4)
+    d = sub.add_parser("chay"); d.add_argument("du_lieu"); d.add_argument("dac_trung"); d.add_argument("ra")
+    x = ap.parse_args()
+    if x.lenh == "kiem-anh":
+        sys.exit(1 if kiem_anh(x.pgm) else 0)
+    elif x.lenh == "chuan-bi":
+        chuan_bi(x.pgm, x.ra)
+    elif x.lenh == "dac-trung":
+        dac_trung(x.du_lieu, x.ra, x.workers)
+    else:
+        chay(x.du_lieu, x.dac_trung, x.ra)
