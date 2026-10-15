@@ -1,7 +1,7 @@
 """Tạo phần Word của người B.
 
-  ch3_3_3_3_5_1_3_5_2.docx  mục 3.3, 3.5.1, 3.5.2 (bản hoàn chỉnh để gửi A ráp chương)
-  ch3_bang_3_2_cho_C.docx   số liệu Bảng 3.2 chuyển cho C (mục 3.4)
+  ch3_3_3_3_5_1_3_5_2.docx: mục 3.3, 3.5.1, 3.5.2 (bản hoàn chỉnh để gửi A ráp chương), trang cuối là
+  số liệu Bảng 3.2 chuyển cho C (mục 3.4).
 
 Mọi số của 3.5.2 đọc từ ../bang/bang_3_5_2.csv. Số của tệp chính ở 3.5.1 lấy từ lần chạy thật trong
 notebook của nhóm; các số của tệp Original lấy từ kết quả chạy thử trong file kế hoạch.
@@ -13,7 +13,7 @@ from pathlib import Path
 import pandas as pd
 from docx import Document
 from docx.enum.table import WD_TABLE_ALIGNMENT
-from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_COLOR_INDEX
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK, WD_COLOR_INDEX
 from docx.oxml.ns import qn
 from docx.shared import Cm, Pt, RGBColor
 
@@ -193,11 +193,11 @@ if TO_VANG:
 # ================================================================= 3.3
 tieu_de("3.3. Xây dựng thang đo và bảng hỏi", 2)
 doan("Nghiên cứu dùng dữ liệu thứ cấp nên nhóm không tự thiết kế bảng hỏi. Thang đo được mô tả trong mục này "
-     "là bảng hỏi của tác giả bộ dữ liệu (Abdullah & Rahman, phiên bản 3, Mendeley Data), gồm 15 câu trắc nghiệm "
-     "ký hiệu từ Q1 đến Q15. Ở mỗi câu, người trả lời chọn một phương án trong danh sách có sẵn. Nhóm giữ nguyên "
-     "nội dung câu hỏi và cách trả lời, chỉ chọn ra những câu phù hợp với câu hỏi nghiên cứu và mô tả lại cách "
-     "mã hóa.")
-doan("Trong 15 câu, nhóm dùng 7 câu. Câu Q6 đo chất lượng giấc ngủ và là biến phụ thuộc. Bốn câu Q11, Q12, Q13 "
+     "là bảng hỏi của tác giả bộ dữ liệu (Abdullah & Rahman, phiên bản 3, Mendeley Data), gồm 15 câu, ký hiệu từ "
+     "Q1 đến Q15. Nhóm giữ nguyên nội dung câu hỏi và cách trả lời, chỉ chọn ra những câu phù hợp với câu hỏi "
+     "nghiên cứu và mô tả lại cách mã hóa.")
+doan("Trong 15 câu, nhóm dùng 7 câu. Cả bảy câu đều là câu hỏi đóng: người trả lời chọn một phương án trong danh "
+     "sách có sẵn. Câu Q6 đo chất lượng giấc ngủ và là biến phụ thuộc. Bốn câu Q11, Q12, Q13 "
      "và Q14 đo bốn yếu tố được xem xét: sử dụng thiết bị trước giờ ngủ, tiêu thụ caffeine, hoạt động thể chất và "
      "căng thẳng học tập. Hai câu Q1 (năm học) và Q2 (giới tính) được dùng làm biến kiểm soát. Mỗi câu được chọn "
      "ứng với đúng một biến trong khung nghiên cứu ở mục 3.2. Bảng 3.1 trình bày câu hỏi, các lựa chọn trả lời, "
@@ -216,19 +216,18 @@ bang([
                       "Graduate student)", "study_year"],
 ], [3.1, 1.4, 5.9, 5.6], can_giua_tu=1, can_trai={2, 3}, co_chu={3: 10}, giu_lien=False)
 ghi_nguon("Nguồn: Nhóm nghiên cứu tổng hợp từ bảng hỏi của bộ dữ liệu gốc.")
-doan("Các lựa chọn trả lời được đổi thành số theo thứ tự từ thấp đến cao: từ 1 đến 5 với Q6, Q11, Q12 và Q13; "
-     "từ 1 đến 4 với Q14, vì câu này chỉ có bốn lựa chọn. Với bốn yếu tố, số càng cao nghĩa là việc đó diễn ra "
-     "càng thường xuyên hoặc mức căng thẳng càng cao; riêng với Q6, số càng cao nghĩa là ngủ càng tốt. Mã số có "
-     "sẵn trong các cột có đuôi _ordinal của tệp dữ liệu. ",
-     ("Nhóm đã đối chiếu từng cột mã với cột trả lời gốc bằng bảng chéo và thấy mỗi lựa chọn chỉ ứng với một mã.",
-      "vang"))
+doan("Trong tệp dữ liệu, các lựa chọn trả lời đã được mã hóa thành số theo thứ tự từ thấp đến cao: từ 1 đến 5 với "
+     "Q6, Q11, Q12 và Q13; từ 1 đến 4 với Q14, vì câu này chỉ có bốn lựa chọn. Với bốn yếu tố, số càng cao nghĩa là "
+     "việc đó diễn ra càng thường xuyên hoặc mức căng thẳng càng cao; riêng với Q6, số càng cao nghĩa là ngủ càng "
+     "tốt. Mã số nằm trong các cột có đuôi _ordinal. Khi kiểm tra, mỗi cột này chỉ nhận các giá trị từ 1 đến 5 "
+     "(từ 1 đến 4 với căng thẳng học tập), đúng bằng số lựa chọn của câu tương ứng.")
 doan("Các mã số này chỉ thể hiện thứ tự, không thể hiện khoảng cách. Chẳng hạn, khoảng cách giữa “Không bao giờ” "
      "và “1–2 lần/tuần” không nhất thiết bằng khoảng cách giữa “5–6 lần/tuần” và “Mỗi đêm”; ở Q14 cũng không có "
      "lựa chọn trung gian giữa “Thấp” và “Cao”. Vì vậy, nhóm xem các biến này là thang thứ bậc, không xem là thang "
      "khoảng cách đều. Các phép phân tích chính dùng phương pháp dành cho dữ liệu thứ bậc: hệ số Spearman "
-     "(mục 3.5.3), kiểm định Kruskal–Wallis (mục 3.5.4) và hồi quy logit thứ bậc (mục 3.5.5). Mô hình tuyến tính "
-     "chỉ dùng để so sánh độ lớn giữa các yếu tố ở mục 3.5.5 và 3.5.6; khi đó, việc dùng mã 1–5 như một điểm số "
-     "là giả định đơn giản hóa.")
+     "(mục 3.5.3), kiểm định Kruskal–Wallis (mục 3.5.4) và hồi quy logit thứ bậc (mục 3.5.5). Hồi quy tuyến tính "
+     "chỉ được dùng bổ sung, để so sánh độ lớn liên hệ giữa các yếu tố (mục 3.5.5 và 3.5.6) và kiểm tra độ vững "
+     "(mục 3.5.7); khi đó, việc dùng mã số như một điểm số là giả định đơn giản hóa.")
 doan("Thang đo có ba hạn chế. Thứ nhất, mỗi khái niệm chỉ được đo bằng một câu tự báo cáo. Hệ số Cronbach’s alpha "
      "cần ít nhất hai câu cùng đo một khái niệm, nên nhóm không tính được hệ số này và không đánh giá được độ tin "
      "cậy nội tại của thang đo. Thứ hai, Q11, Q12 và Q13 hỏi về số lần trong tuần chứ không hỏi về thời lượng hay "
@@ -238,7 +237,7 @@ doan("Thang đo có ba hạn chế. Thứ nhất, mỗi khái niệm chỉ đư�
      "xác hoặc do xu hướng chọn câu trả lời được xem là tích cực. Các hạn chế này được nêu lại ở phần Hạn chế.")
 doan("Tám câu còn lại không được dùng làm biến. Ba câu Q3 (khó vào giấc), Q4 (thời lượng ngủ) và Q5 (thức giấc "
      "ban đêm) mô tả chính các biểu hiện của giấc ngủ, tức là gần với nội dung của biến phụ thuộc; nếu đưa chúng "
-     "vào làm yếu tố thì mối liên hệ với chất lượng giấc ngủ sẽ cao một cách hiển nhiên và không trả lời được câu "
+     "vào làm yếu tố thì liên hệ với chất lượng giấc ngủ dễ cao chỉ vì cùng đo giấc ngủ, và không trả lời được câu "
      "hỏi nghiên cứu. Năm câu Q7 (khó tập trung), Q8 (mệt mỏi ban ngày), Q9 (vắng học), Q10 (việc hoàn thành bài "
      "tập) và Q15 (kết quả học tập) mô tả những gì có thể là hệ quả của giấc ngủ kém. Các câu này đứng sau giấc ngủ "
      "trong chuỗi giải thích, nên không phù hợp để làm yếu tố đứng trước chất lượng giấc ngủ.")
@@ -251,8 +250,8 @@ doan("Trước khi phân tích, nhóm kiểm tra dữ liệu ở bốn điểm: 
      "cờ nghi vấn và quan hệ giữa hai tệp dữ liệu. Ba loại cờ là các cột có sẵn trong tệp dữ liệu, đánh dấu những "
      "phiếu trùng mốc thời gian nộp (flag_repeated_timestamp), có đáp án giống hệt (flag_identical_answers) hoặc "
      "gần trùng với phiếu khác (flag_near_duplicate). Để kiểm tra quan hệ giữa hai tệp, mỗi dòng được chuyển thành "
-     "một mã băm MD5 tạo từ 15 cột trả lời gốc; sau đó nhóm tìm mã của từng dòng trong tệp Original trong tập mã "
-     "của tệp chính. Các bước này được chạy bằng pandas và hashlib trên Google Colab. Đây là bước mô tả, không có "
+     "một mã băm MD5 tạo từ 15 cột trả lời gốc; sau đó kiểm tra mã của từng dòng trong tệp Original có xuất hiện "
+     "trong tập mã của tệp chính hay không. Các bước này được chạy bằng pandas và hashlib trên Google Colab. Đây là bước mô tả, không có "
      "kiểm định thống kê. Kết quả được trình bày ở Bảng 3.3.")
 chu_thich("Bảng 3.3. Kết quả kiểm tra chất lượng dữ liệu")
 bang([
@@ -264,13 +263,13 @@ ghi_nguon("Nguồn: Kết quả chạy trên Google Colab (bang_3_5_1.csv).")
 doan(("Cả hai tệp", "vang"), " đều không có ô thiếu và không có dòng trùng hoàn toàn. Trong tệp chính, có 6 dòng "
      "lặp mốc thời gian, 33 dòng có đáp án giống hệt và 204 dòng gần trùng; tính chung, ",
      ("216 dòng", "vang"), " bị gắn ít nhất một cờ. Cờ chỉ đánh dấu dòng đáng nghi, chưa chắc là phiếu sai: hai "
-     "sinh viên vẫn có thể nộp phiếu cùng lúc, hoặc chọn các phương án giống nhau vì mỗi câu chỉ có từ hai đến năm "
-     "lựa chọn. Vì vậy, nhóm giữ nguyên các dòng bị gắn cờ trong phân tích chính và chạy lại mô hình sau khi loại "
+     "sinh viên vẫn có thể nộp phiếu cùng lúc, hoặc chọn các phương án giống nhau vì mỗi câu chỉ có ít lựa chọn. "
+     "Vì vậy, nhóm giữ nguyên các dòng bị gắn cờ trong phân tích chính và chạy lại mô hình sau khi loại "
      "từng nhóm dòng này ở mục 3.5.7 để xem kết luận có thay đổi hay không. Về quan hệ giữa hai tệp, ",
      ("cả 791 trên 791 dòng của tệp Original đều tìm thấy trong tệp chính", "vang"),
-     ", khớp với cột present_in_original (791 dòng được đánh dấu). Tệp chính chỉ có thêm ",
-     ("205", "vang"), " dòng so với tệp Original. Do hai tệp không độc lập với nhau, nhóm không gộp chúng lại, vì gộp "
-     "sẽ đếm trùng 791 quan sát; tệp Original chỉ được dùng để kiểm tra độ vững ở mục 3.5.7.")
+     ", khớp với cột present_in_original (791 dòng được đánh dấu). Tệp chính có thêm ",
+     ("205", "vang"), " dòng so với tệp Original. Hai tệp không độc lập với nhau nên nhóm không gộp chúng lại; nếu "
+     "gộp, 791 quan sát sẽ bị đếm hai lần. Tệp Original chỉ được dùng để kiểm tra độ vững ở mục 3.5.7.")
 doan("Kết luận: dữ liệu không có ô thiếu và không có dòng trùng hoàn toàn. Có ", ("216", "vang"),
      " dòng bị gắn cờ nghi vấn, được giữ lại và kiểm tra ở mục 3.5.7. Tất cả ", ("791", "vang"),
      " dòng của tệp Original đều nằm trong tệp chính nên hai tệp không được gộp chung.")
@@ -317,15 +316,12 @@ doan(f"Một số tỉ lệ cao cần được đọc thận trọng. Chẳng h�
 doan(f"Kết luận: chất lượng giấc ngủ phân bố hai đầu ({pct(SQ, [1, 2])}% tệ, {pct(SQ, [4, 5])}% tốt). Bốn yếu tố "
      "tập trung ở mức cao, ít người ở mức thấp, nên phần so sánh nhóm phải gộp các mức thấp.")
 
-ra = GOC / "ch3_3_3_3_5_1_3_5_2.docx"
-doc.save(ra)
-print("đã ghi", ra)
-
-# ================================================================= Bảng 3.2 chuyển cho C (file riêng)
-doc = moi_doc()
-doan(("Số liệu cho Bảng 3.2 (mục 3.4, người C)", "dam"), thut=False)
-doan("Số liệu dưới đây lấy từ cùng lần chạy bảng tần số của mục 3.5.2 (bang_3_5_2.csv). C chép bảng này vào "
-     "mục 3.4.", thut=False, size=12, italic=True)
+# ================================================================= Bảng 3.2 (đặt ở mục 3.4, chuyển cho C)
+p = doc.add_paragraph()
+p.add_run().add_break(WD_BREAK.PAGE)
+doan(("Số liệu cho Bảng 3.2 (đặt ở mục 3.4)", "dam"), thut=False)
+doan("Số liệu dưới đây lấy từ cùng lần chạy bảng tần số của mục 3.5.2 (bang_3_5_2.csv) và được đặt ở mục 3.4.",
+     thut=False)
 chu_thich(f"Bảng 3.2. Đặc điểm mẫu (n = {N})")
 gt, nh = dem("Giới tính"), dem("Năm học")
 b32 = [["Đặc điểm", "Nhóm", "Số lượng", "Tỉ lệ (%)"]]
@@ -336,9 +332,8 @@ for nhom, k in (("Năm 1", "First year"), ("Năm 2", "Second year"), ("Năm 3", 
     b32.append(["Năm học", nhom, nh[k], so(round(100 * nh[k] / N, 1))])
 bang(b32, [3.5, 3.5, 3.0, 3.0], can_giua_tu=2)
 ghi_nguon("Nguồn: Kết quả chạy trên Google Colab (bang_3_5_2.csv).")
-doan(f"Lưu ý cho C: năm 1 chỉ có {nh['First year']} người nên không so sánh riêng theo năm học.",
-     thut=False, size=12, italic=True)
+doan(f"Năm 1 chỉ có {nh['First year']} người nên không so sánh riêng theo năm học.", thut=False)
 
-ra = GOC / "ch3_bang_3_2_cho_C.docx"
+ra = GOC / "ch3_3_3_3_5_1_3_5_2.docx"
 doc.save(ra)
 print("đã ghi", ra)

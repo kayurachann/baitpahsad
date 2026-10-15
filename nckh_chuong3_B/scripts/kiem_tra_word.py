@@ -1,4 +1,4 @@
-"""Đối chiếu số trong ch3_3_3_3_5_1_3_5_2.docx và ch3_bang_3_2_cho_C.docx với bang_3_5_2.csv, rà quy ước viết.
+"""Đối chiếu số trong ch3_3_3_3_5_1_3_5_2.docx với bang_3_5_2.csv và rà quy ước viết của chương.
 
 Kiểm tra:
   1. Mỗi biến trong bang_3_5_2.csv cộng lại đúng 996 người, tỉ lệ cộng lại khoảng 100%.
@@ -19,7 +19,6 @@ from docx import Document
 GOC = Path(__file__).resolve().parent.parent
 b2 = pd.read_csv(GOC / "bang" / "bang_3_5_2.csv")
 doc = Document(GOC / "ch3_3_3_3_5_1_3_5_2.docx")
-doc_c = Document(GOC / "ch3_bang_3_2_cho_C.docx")
 loi = []
 
 # 1. tổng mỗi biến
@@ -35,14 +34,14 @@ for _, d in b2.groupby("bien", sort=False):
     n = d["so_luong"].tolist()
     for a, b in combinations(range(len(n) + 1), 2):
         hop_le.add(f"{round(100 * sum(n[a:b]) / 996, 1):.1f}".replace(".", ","))
-chu = "\n".join(p.text for d in (doc, doc_c) for p in d.paragraphs)
+chu = "\n".join(p.text for p in doc.paragraphs)
 for x in re.findall(r"(\d+,\d)\s*%", chu):
     if x not in hop_le:
         loi.append(f"tỉ lệ {x}% trong phần chữ không có trong bang_3_5_2.csv")
 
 # 3. các bảng
 bang = {}
-for t in doc.tables + doc_c.tables:
+for t in doc.tables:
     o = [[c.text for c in r.cells] for r in t.rows]
     bang[o[0][0] + "|" + o[0][-1]] = o
 b34 = bang["Biến|Mức 5"]
@@ -68,7 +67,7 @@ if b33[1][1:] != ["996", "0", "0", "6", "33", "204"]:
     loi.append(f"Bảng 3.3, tệp chính: {b33[1][1:]}")
 
 # 4. quy ước viết
-toan_van = chu + "\n" + "\n".join(c.text for t in doc.tables + doc_c.tables for r in t.rows for c in r.cells)
+toan_van = chu + "\n" + "\n".join(c.text for t in doc.tables for r in t.rows for c in r.cells)
 for tu in ("ảnh hưởng", "tác động", "gây ra"):
     if tu in toan_van.lower():
         loi.append(f"còn từ '{tu}'")
@@ -76,11 +75,8 @@ if re.search(r"\[[^\]]*\]", toan_van):
     loi.append("còn chỗ trống [...]")
 
 # 5. bản hoàn chỉnh
-for d in (doc, doc_c):
-    for el in d.element.body.iter():
-        if el.tag.endswith("}highlight"):
-            loi.append("còn chữ tô vàng")
-            break
+if any(el.tag.endswith("}highlight") for el in doc.element.body.iter()):
+    loi.append("còn chữ tô vàng")
 if "Ghi chú cho nhóm" in chu:
     loi.append("còn đoạn Ghi chú cho nhóm")
 

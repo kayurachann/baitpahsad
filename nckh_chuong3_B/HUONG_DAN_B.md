@@ -15,7 +15,7 @@ Theo bảng phân công, B phụ trách **thang đo và kiểm tra dữ liệu**
 
 | File | Dùng để |
 |---|---|
-| `ch3_3_3_3_5_1_3_5_2.docx` | Phần Word của B (3.3, 3.5.1, 3.5.2) và trang Bảng 3.2 chuyển cho C |
+| `ch3_3_3_3_5_1_3_5_2.docx` | File hoàn chỉnh của B: 3.3, 3.5.1, 3.5.2; trang cuối là số liệu Bảng 3.2 chuyển cho C |
 | `B_3_5_1_3_5_2.ipynb` | Notebook Colab đã sửa lỗi; mở trên Colab và chạy từ trên xuống |
 | `bang/bang_3_5_2.csv` | Bảng tần số, đúng số của lần chạy thật trong notebook của nhóm |
 | `hinh/hinh_3_5_2.png` | Hình 3.3, đen trắng |
@@ -49,25 +49,23 @@ Notebook mới đã được chạy thử trọn vẹn trên một bộ dữ li�
 
 Lưu ý: hoạt động thể chất mức 5 là **37,7%** (375/996), không phải 37,6% như số chạy thử trong file kế hoạch.
 
-**Đang tô vàng trong Word.** Đây là số chạy thử của file kế hoạch; chạy lại `B_3_5_1_3_5_2.ipynb` để xác nhận:
+**Lấy từ kết quả chạy thử trong file kế hoạch** (người viết file kế hoạch đã chạy trên đúng hai tệp CSV; với tệp chính, số chạy thử khớp hoàn toàn lần chạy của nhóm). Bản Word hoàn chỉnh đã dùng các số này, không tô vàng. Chạy `B_3_5_1_3_5_2.ipynb` để xác nhận:
 
-| Chỗ tô vàng | Ô notebook in ra số đó |
+| Số trong Word | Ô notebook in ra số đó |
 |---|---|
 | Dòng tệp Original của Bảng 3.3 (791; 0; 0; 2; 33; 183) | 3.5.1 – Ô 1 (bảng `bang`) |
 | "216 dòng" có ít nhất một cờ | 3.5.1 – Ô 1, dòng "Số dòng V2 có ít nhất một cờ" |
 | "205" dòng chênh lệch giữa hai tệp | 3.5.1 – Ô 1, dòng "Số dòng V2 nhiều hơn Original" |
 | "cả 791 trên 791 dòng… tìm thấy" | 3.5.1 – Ô 2 |
 | "Cả hai tệp" không có ô thiếu, dòng trùng | 3.5.1 – Ô 1 (cột `o_thieu`, `dong_trung` của dòng Original) |
-| Câu "mỗi lựa chọn chỉ ứng với một mã" ở 3.3 | Ô 3.3 (bảng chéo); cần in ra `True` cho cả 5 biến |
 
-Số in ra giống thì bỏ tô vàng. Số khác thì sửa trong Word theo số in ra, kể cả câu kết luận. Ô 3.3 cũng in ra các lựa chọn trả lời gốc; nhớ đối chiếu với Bảng 3.1, nhất là cách ghi "1–2 lần/tuần" của Q12 và Q13.
+Số in ra giống thì giữ nguyên. Số khác thì sửa trong Word theo số in ra, kể cả câu kết luận. Ô 3.3 in ra các lựa chọn trả lời gốc; nhớ đối chiếu với Bảng 3.1, nhất là cách ghi "1–2 lần/tuần" của Q12 và Q13.
 
 ## Cách dùng
 1. Mở `B_3_5_1_3_5_2.ipynb` trên Colab (File → Upload notebook). Thư mục `NCKH_giac_ngu` phải có `cleaned_sleep_dataset.csv` và `cleaned_sleep_dataset_original.csv`. Bấm Runtime → Run all.
-2. Đối chiếu số in ra với các chỗ tô vàng ở bảng trên, rồi bỏ tô vàng.
-3. Xóa đoạn "Ghi chú cho nhóm" ở đầu file Word.
-4. Gửi A file Word (phần 3.3, 3.5.1, 3.5.2) cùng tên file `bang_3_5_1.csv`, `bang_3_5_2.csv`, `hinh_3_5_2.png` trên Drive.
-5. Gửi C trang cuối (Bảng 3.2).
+2. Đối chiếu số in ra với bảng ở trên.
+3. Gửi A file Word (phần 3.3, 3.5.1, 3.5.2) cùng tên file `bang_3_5_1.csv`, `bang_3_5_2.csv`, `hinh_3_5_2.png` trên Drive.
+4. Gửi C trang cuối của file Word (số liệu Bảng 3.2); khi ráp chương, A bỏ trang này khỏi phần của B.
 
 ## Lưu ý thêm
 - **Nguồn bộ dữ liệu:** file kế hoạch ghi "Abdullah & Rahman, v3". Khi tìm trên Mendeley Data thấy một bộ có cấu trúc 15 câu giống hệt, là "Student Insomnia and Educational Outcomes Dataset" (người đóng góp Akik Abdullah, DOI 10.17632/5mvrx4v62z). Môi trường làm việc này không mở được trang Mendeley, nên C và E cần tự mở trang để kiểm tác giả, năm và số dòng trước khi ghi trích dẫn.
