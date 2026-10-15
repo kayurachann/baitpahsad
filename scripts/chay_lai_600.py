@@ -8,7 +8,8 @@ Các bước (mỗi bước một lệnh con, có thể chạy lại từng bư�
   dac-trung <thư_mục_dữ_liệu> <thư_mục_đặc_trưng> [--workers 4]
             76 đặc trưng residual (sg.residual_features) và 34.671 đặc trưng SRM (sealwatch) cho 4.200 ảnh;
             lưu vào .npy, chạy dở thì chạy lại sẽ làm tiếp
-  chay      <thư_mục_dữ_liệu> <thư_mục_đặc_trưng> <thư_mục_kết_quả>
+  dac-trung-residual <thư_mục_dữ_liệu> <thư_mục_đặc_trưng>   chỉ 76 đặc trưng residual (vài phút)
+  chay      <thư_mục_dữ_liệu> <thư_mục_đặc_trưng> <thư_mục_kết_quả> [--chi-residual]
             9 lần Residual-LR (giống hệt nhánh residual_lr của sg.train/evaluate) và 9 lần SRM+Ensemble
             (sealwatch FldEnsembleTrainer, L = 50, d_sub = 500). Với SRM ghi hai loại điểm: 'votes'
             (predict_confidence, tỉ lệ phiếu) và 'proj' (trung bình projection của 50 FLD), mỗi loại một thư mục.
@@ -21,11 +22,17 @@ import csv
 import hashlib
 import json
 import multiprocessing as mp
+import os
 import random
 import sys
 from pathlib import Path
 
-import numpy as np
+# Máy chạy thí nghiệm của nhóm (laptop) dùng nhân AVX2 "Haswell" của OpenBLAS. Trên máy có AVX-512, OpenBLAS chọn
+# nhân SkylakeX, cộng dồn theo thứ tự khác; với Residual-LR P1 (đặc trưng gần ngẫu nhiên) lbfgs khi đó dừng ở điểm
+# hơi khác và F1/BER lệch tới 0,012. Đặt Haswell thì P1 khớp Table 4 ở cả 6 ô. Phải đặt trước khi nạp numpy.
+os.environ.setdefault("OPENBLAS_CORETYPE", "Haswell")
+
+import numpy as np  # noqa: E402
 
 GOC = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(GOC / "code_nhom"))
@@ -156,11 +163,14 @@ def _mot_anh(args):
     x = sg.pixels(goc, {"path": path})                       # float32, giống sg.score_pairs
     res = sg.residual_features(x)
     f = sealwatch.srm.extract(x.astype(np.uint8).astype(np.float64))
-    srm = np.concatenate([np.asarray(v, dtype=np.float64).ravel() for v in f.values()])
+    # Ghép theo tên submodel đã sắp xếp: thứ tự của dict sealwatch trả về đổi theo hash seed của tiến trình
+    # (symm.post_process duyệt một set khi gộp các khối SPAM), nên không dùng f.values() trực tiếp.
+    srm = np.concatenate([np.asarray(f[k], dtype=np.float64).ravel() for k in sorted(f)])
     return i, res, srm
 
 
-def dac_trung(goc, ra, workers=4):
+def dac_trung(goc, ra, workers=4, chi_anh_san=False):
+    """chi_anh_san: chỉ trích các ảnh đã ghi xong (dùng trong lúc chuan-bi chưa chạy xong)."""
     ra = Path(ra)
     ra.mkdir(parents=True, exist_ok=True)
     rows = sg.read_rows(goc)
@@ -173,6 +183,13 @@ def dac_trung(goc, ra, workers=4):
     xong_p = ra / "xong.txt"
     xong = set(int(x) for x in xong_p.read_text().split()) if xong_p.exists() else set()
     viec = [(str(goc), i, p) for i, p in enumerate(paths) if i not in xong]
+    # cover và WOW 0.4 trước, rồi các ảnh test: đủ để chạy P1 sớm trong lúc trích nốt phần còn lại
+    uu_tien = {r["path"]: (0 if r["label"] == "0" or (r["algorithm"] == "wow" and r["payload"] == "0.4")
+                           else 1 if r["split"] == "test" else 2) for r in rows}
+    viec.sort(key=lambda v: uu_tien[v[2]])
+    if chi_anh_san:   # ảnh đã ghi xong ít nhất 30 giây (PNG có thể khác byte do bản Pillow, nên không so SHA ở đây)
+        import time
+        viec = [v for v in viec if (Path(goc) / v[2]).exists() and time.time() - (Path(goc) / v[2]).stat().st_mtime > 30]
     print(f"{n} ảnh, còn {len(viec)} ảnh cần trích", flush=True)
     with mp.get_context("spawn").Pool(workers) as pool, open(xong_p, "a") as log:
         for k, (i, r, s) in enumerate(pool.imap_unordered(_mot_anh, viec, chunksize=4), 1):
@@ -187,6 +204,25 @@ def dac_trung(goc, ra, workers=4):
     res.flush(); srm.flush()
 
 
+def _mot_anh_residual(args):
+    goc, i, path = args
+    return i, sg.residual_features(sg.pixels(goc, {"path": path}))
+
+
+def dac_trung_residual(goc, ra, workers=4):
+    """Chỉ 76 đặc trưng residual (vài phút), để chạy Residual-LR kiểm dữ liệu trước khi SRM xong."""
+    ra = Path(ra)
+    ra.mkdir(parents=True, exist_ok=True)
+    paths = [r["path"] for r in sg.read_rows(goc)]
+    (ra / "paths.json").write_text(json.dumps(paths), encoding="utf-8")
+    res = np.zeros((len(paths), 76))
+    with mp.get_context("spawn").Pool(workers) as pool:
+        for i, r in pool.imap_unordered(_mot_anh_residual, [(str(goc), i, p) for i, p in enumerate(paths)], chunksize=16):
+            res[i] = r
+    np.save(ra / "residual.npy", res)
+    print(f"{len(paths)} ảnh, residual {res.shape}", flush=True)
+
+
 # ------------------------------------------------------------------ 4. huấn luyện và đánh giá
 class DacTrung:
     def __init__(self, thu_muc):
@@ -194,7 +230,7 @@ class DacTrung:
         paths = json.loads((thu_muc / "paths.json").read_text(encoding="utf-8"))
         self.idx = {p: i for i, p in enumerate(paths)}
         self.res = np.load(thu_muc / "residual.npy", mmap_mode="r")
-        self.srm = np.load(thu_muc / "srm.npy", mmap_mode="r")
+        self.srm = np.load(thu_muc / "srm.npy", mmap_mode="r") if (thu_muc / "srm.npy").exists() else None
 
     def lay(self, records, loai):
         m = self.res if loai == "residual" else self.srm
@@ -231,7 +267,7 @@ def _ghi_run(ra, ten, model, algorithms, payloads, seed, sha, th, du_doan, chi_s
             w.writerows(rows)
 
 
-def chay(goc, thu_muc_dt, ra):
+def chay(goc, thu_muc_dt, ra, chi_residual=False):
     from sklearn.linear_model import LogisticRegression
     from sklearn.pipeline import make_pipeline
     from sklearn.preprocessing import StandardScaler
@@ -282,6 +318,9 @@ def chay(goc, thu_muc_dt, ra):
             fn = lambda recs: model.decision_function(dt.lay(recs, "residual"))  # noqa: E731
             th = nguong(fn, va_tat_ca[p])
             _ghi_run(Path(ra) / "residual_lr", ten, "residual_lr", algs, pls, seed, sha, th, *danh_gia(fn, th))
+            if chi_residual:
+                print(f"xong {ten} (Residual-LR)", flush=True)
+                continue
             # SRM+Ensemble: FLD ensemble của sealwatch, L = 50, d_sub = 500
             Xc = np.ascontiguousarray(dt.lay([c for c, _ in chon], "srm"))
             Xs = np.ascontiguousarray(dt.lay([s for _, s in chon], "srm"))
@@ -301,7 +340,10 @@ if __name__ == "__main__":
     b = sub.add_parser("chuan-bi"); b.add_argument("pgm"); b.add_argument("ra")
     t = sub.add_parser("tu-cover"); t.add_argument("zip"); t.add_argument("ra")
     c = sub.add_parser("dac-trung"); c.add_argument("du_lieu"); c.add_argument("ra"); c.add_argument("--workers", type=int, default=4)
+    c.add_argument("--chi-anh-san", action="store_true")
+    r = sub.add_parser("dac-trung-residual"); r.add_argument("du_lieu"); r.add_argument("ra"); r.add_argument("--workers", type=int, default=4)
     d = sub.add_parser("chay"); d.add_argument("du_lieu"); d.add_argument("dac_trung"); d.add_argument("ra")
+    d.add_argument("--chi-residual", action="store_true")
     x = ap.parse_args()
     if x.lenh == "kiem-anh":
         sys.exit(1 if kiem_anh(x.pgm) else 0)
@@ -310,6 +352,8 @@ if __name__ == "__main__":
     elif x.lenh == "tu-cover":
         sys.exit(1 if tu_cover(x.zip, x.ra) else 0)
     elif x.lenh == "dac-trung":
-        dac_trung(x.du_lieu, x.ra, x.workers)
+        dac_trung(x.du_lieu, x.ra, x.workers, x.chi_anh_san)
+    elif x.lenh == "dac-trung-residual":
+        dac_trung_residual(x.du_lieu, x.ra, x.workers)
     else:
-        chay(x.du_lieu, x.dac_trung, x.ra)
+        chay(x.du_lieu, x.dac_trung, x.ra, x.chi_residual)
