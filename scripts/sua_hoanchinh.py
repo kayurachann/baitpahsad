@@ -85,7 +85,7 @@ def sua_noi_dung(blks):
     ])
     p = tim(blks, "Seed standard deviations (at most 0.028")
     de.thay(p, "so the intervals are conditional on this partition.",
-            "so the intervals are conditional on this partition: they reflect only the fixed 120 test covers and "
+            "so the intervals are conditional on this partition: they apply only to the fixed 120 test covers and "
             "do not extend to other image sources.")
 
     # 4.5: 54 dòng / 6.480 lượt chấm
@@ -96,8 +96,8 @@ def sua_noi_dung(blks):
                "are repeated measurements, not 6,480 independent samples.",
             "Each detector has 54 evaluation rows (3 protocols × 3 seeds × 6 conditions) and 6,480 stego-score "
             "evaluations, but its nine models all score the same 720 test stego images of 120 source covers, so "
-            "these are repeated measurements, not independent samples, as are the false positives in Table\xa07 on "
-            "the same 120 test covers.")
+            "these are repeated measurements, not independent samples; the false positives in Table\xa07 are also "
+            "repeated evaluations of the same 120 test covers.")
 
 
     # 3 (mở đầu): Fig. 1 không đánh số stage

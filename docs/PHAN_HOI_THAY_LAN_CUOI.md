@@ -31,6 +31,14 @@ Vì vậy:
   - nếu khớp thì có thể thêm một câu về cách gộp ΔAUC qua 3 seed vào mục 3.5; nếu không khớp thì sửa theo số tính lại.
 
   Không có các file này thì không thể trả lời trung thực mục 1 (SRM+Ensemble), mục 2 (cách gộp CI) và mục 3 (đối chiếu FP) của thầy.
+- **Với SRM+Ensemble, khi tìm được code hoặc log, cần xác nhận:**
+  - (a) 106 submodel, 34.671 chiều;
+  - (b) L = 50 và d_sub = 500 được cố định, không tự tối ưu;
+  - (c) thư viện huấn luyện FLD ensemble;
+  - (d) điểm nào của ensemble được dùng cho ROC và ngưỡng (tổng hay trung bình projection, hay số phiếu).
+
+  Nếu (d) khác cách hiểu "score" ở 3.2 thì thêm nửa câu cho rõ.
+- **Câu cuối mục 3.5** ("…so all tables can be recomputed from the saved files") chỉ đúng khi nhóm còn giữ `predictions.csv`, `thresholds.json` và `manifest.csv` của bản 600 cover cho cả hai detector. Nếu không còn thì bỏ vế này trước khi nộp.
 
 ## Thầy yêu cầu – đã làm gì
 
@@ -48,7 +56,7 @@ Thêm vào đoạn 3.2 (không thêm bảng) các thông tin lấy từ `sg.py` 
 ### 2. Section 3.5 – bootstrap
 - Thêm (câu cuối đoạn đầu 3.5): code đánh giá rút **B = 1.000** vòng cho mỗi điều kiện test, bộ sinh số cố định **seed 2026**. Vì bộ sinh được tạo lại cho mỗi điều kiện, mọi điều kiện, protocol và seed dùng **cùng một tập test cover được rút**. CI 95% là khoảng giữa phân vị 2,5% và 97,5% (`sg.py`, hàm `evaluate`).
 - **Không thêm:** cách gộp ΔAUC và CI qua 3 seed. Script tính ΔAUC không có trong gói, và thầy yêu cầu chỉ ghi các bước đã chạy trong code, nên bài giữ nguyên mô tả cũ của nhóm: điểm ước lượng là trung bình của 3 hiệu theo từng seed, CI từ bootstrap ghép cặp theo test cover. Khi tìm được script, có thể thêm một câu như: "Each ΔAUC replicate is the difference of the two replicate AUCs, averaged over the three seeds" (chỉ thêm nếu script làm đúng như vậy).
-- Thêm câu nói rõ CI chỉ phản ánh 120 test cover cố định, không mở rộng sang nguồn ảnh khác ("they reflect only the fixed 120 test covers and do not extend to other image sources").
+- Thêm câu nói rõ CI chỉ phản ánh 120 test cover cố định, không mở rộng sang nguồn ảnh khác ("they apply only to the fixed 120 test covers and do not extend to other image sources").
 - Sửa câu lưu trữ cho đúng code: mỗi lần chạy lưu điểm test từng ảnh và ngưỡng chọn trên validation (code không lưu điểm validation).
 - Table 5, Table 6, Fig. 2 và S2: kiểm tự động bằng `scripts/kiem_tra_hoanchinh.py`, khớp `results_data.py`.
 
@@ -120,4 +128,14 @@ References trong file đã đúng, nhưng EndNote sinh lại References từ **t
 - Không làm theo hai đề xuất:
   - Đổi "Acknowledgement" thành "Acknowledgments": giữ đúng chữ thầy đưa.
   - Sửa mã băm manifest "13c01ca9…2799e8c": không có file manifest 600 cover để kiểm, nên giữ nguyên như nhóm ghi.
-- `scripts/verify_stats.py`: mặc định đổi thành B = 1000 cho khớp `sg.py`. Khi có điểm 600 cover, chạy lại để kiểm CI của ΔAUC.
+- **`scripts/verify_stats.py`** (script tính lại số liệu từ điểm từng ảnh) đã sửa cho khớp `sg.py`:
+  - B = 1000;
+  - mỗi lần bootstrap dùng một bộ sinh mới `default_rng(2026)`;
+  - cover lấy theo thứ tự manifest;
+  - τ_BER tính giống hệt `sg.py`, kể cả khi có điểm trùng.
+
+  Đã kiểm bằng `python3 scripts/kiem_verify_stats.py <thư mục bossbase_pilot_results>`:
+  - AUC và CI 95% khớp `metrics.csv` của `sg.py` ở cả 54/54 điều kiện pilot (sai khác < 1e-12);
+  - τ_BER và τ_low khớp `sg.py` trên 2.000 bộ dữ liệu thử.
+
+  Khi có điểm 600 cover, chạy `verify_stats.py` để kiểm lại toàn bộ Table 4–7 và CI của ΔAUC. Riêng cách gộp CI qua 3 seed là lựa chọn của script (lấy trung bình ΔAUC của từng replicate), chưa có trong code nhóm.

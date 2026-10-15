@@ -11,16 +11,22 @@ Input: one CSV with one row per scored image and run, columns
     score      detector output, higher = more likely stego
 
 Validation rows hold the cover and stego scores used to set thresholds; test rows hold the 120 test
-covers and their stego variants in all six conditions.
+covers and their stego variants in all six conditions. As in sg.py, validation rows of a run should hold
+each validation cover once and only the stego variants of that protocol's training pool. Keep the test
+rows in manifest order (the order of sg.py's predictions.csv): the bootstrap indexes covers in that order.
 
 Usage:
     python3 verify_stats.py scores.csv [--B 1000] [--boot-seed 2026] [--out report.json]
     python3 verify_stats.py --selftest
 
 The script prints each recomputed value next to the value reported in the manuscript
-(results_data.py) so that mismatches are visible. Threshold rules follow Sect. 3.4 of the
-manuscript; if the original experiment code used a different rule (e.g. '<' instead of '<=' or
-a different tie convention), adjust ``tau_low`` / ``tau_ber`` and say so in the paper.
+(results_data.py) so that mismatches are visible. Threshold and bootstrap rules follow sg.py:
+tau_low is just above the second-highest validation cover score, tau_ber minimises the balanced
+error (ties: highest threshold, as argmin over sklearn's descending roc_curve thresholds), and every
+bootstrap starts a fresh np.random.default_rng(2026) so all conditions and runs draw the same cover
+indices. sg.py only bootstraps the AUC of single conditions; how the paper's ΔAUC intervals were
+aggregated over seeds is not in the code package. ``paired_bootstrap`` averages each replicate's ΔAUC
+over the three seeds; if the original analysis did otherwise, change it and the text of Sect. 3.5.
 """
 import argparse
 import csv
@@ -53,13 +59,14 @@ def tau_low(val_cover_scores, target=0.01):
 
 
 def tau_ber(val_cover, val_stego):
-    """Threshold minimising the balanced error rate on validation (ties: smallest threshold)."""
+    """Threshold minimising the balanced error rate on validation, computed exactly as sg.py does:
+    err = .5 * (fpr + 1 - tpr) over the descending score thresholds, first minimum (np.argmin)."""
     c, st = np.asarray(val_cover, float), np.asarray(val_stego, float)
-    best, best_t = 2.0, None
-    for t in np.unique(np.concatenate([c, st])):
-        ber = 0.5 * ((c >= t).mean() + (st < t).mean())
-        if ber < best - 1e-12:
-            best, best_t = ber, t
+    best, best_t = None, None
+    for t in np.unique(np.concatenate([c, st]))[::-1]:
+        err = .5 * (np.float64((c >= t).sum()) / len(c) + 1 - np.float64((st >= t).sum()) / len(st))
+        if best is None or err < best:
+            best, best_t = err, t
     return best_t
 
 
@@ -74,7 +81,8 @@ def f1_ber(cover, stego, t):
 
 # ---------------------------------------------------------------------- data access
 def load(path):
-    runs = defaultdict(lambda: {"val_cover": {}, "val_stego": [], "test_cover": {}, "test_stego": defaultdict(dict)})
+    runs = defaultdict(lambda: {"val_cover": {}, "val_stego": [], "test_cover": {}, "test_stego": defaultdict(dict),
+                                "test_order": []})
     with open(path, newline="") as fh:
         for row in csv.DictReader(fh):
             key = (row["detector"], row["protocol"], int(row["seed"]))
@@ -85,6 +93,8 @@ def load(path):
                 else:
                     run["val_stego"].append(sc)
             elif row["algorithm"] == "cover":
+                if cid not in run["test_cover"]:
+                    run["test_order"].append(cid)   # manifest order, used for bootstrap indices
                 run["test_cover"][cid] = sc
             else:
                 run["test_stego"][(row["algorithm"], float(row["payload"]))][cid] = sc
@@ -107,6 +117,13 @@ def check_structure(runs):
     return problems
 
 
+def auc_ci(cover, stego, B, boot_seed=2026):
+    """Percentile 95% CI of one condition's AUC, resampling cover-stego pairs as sg.py evaluate() does."""
+    rng = np.random.default_rng(boot_seed)
+    reps = [auc(cover[ix], stego[ix]) for ix in (rng.integers(0, len(cover), len(cover)) for _ in range(B))]
+    return float(np.quantile(reps, .025)), float(np.quantile(reps, .975))
+
+
 def vectors(run, cond, ids):
     return (np.array([run["test_cover"][i] for i in ids]),
             np.array([run["test_stego"][cond][i] for i in ids]))
@@ -116,7 +133,7 @@ def vectors(run, cond, ids):
 def per_run_metrics(runs):
     out = {}
     for (det, p, seed), run in sorted(runs.items()):
-        ids = sorted(run["test_cover"])
+        ids = run["test_order"]
         t_low = tau_low(list(run["val_cover"].values()))
         t_ber = tau_ber(list(run["val_cover"].values()), run["val_stego"])
         cover = np.array([run["test_cover"][i] for i in ids])
@@ -158,14 +175,16 @@ def comparisons():
     return out
 
 
-def paired_bootstrap(runs, det, ref, shf, B, rng):
+def paired_bootstrap(runs, det, ref, shf, B, boot_seed):
     """Seed-averaged ΔAUC = AUC(shifted) − AUC(reference) with a cover-level paired bootstrap.
 
     The resampling unit is the source test cover; one draw of cover IDs is shared by both
     conditions and by all seeds, so every cover keeps its cover score and its paired stego scores.
+    A fresh generator per comparison gives every comparison the same draws, as sg.py does per condition.
     """
+    rng = np.random.default_rng(boot_seed)
     seeds = sorted({k[2] for k in runs if k[:2] == (det, ref[0])})
-    ids = sorted(runs[(det, ref[0], seeds[0])]["test_cover"])
+    ids = runs[(det, ref[0], seeds[0])]["test_order"]
     data = []
     for sd in seeds:
         ra, rb = runs[(det, ref[0], sd)], runs[(det, shf[0], sd)]
@@ -210,10 +229,9 @@ def run(path, B, boot_seed, out_path):
               f" BER {v['ber']:.3f}, F1 {v['f1']:.3f}, recall {v['recall_low']:.3f}, FPR {v['fpr_low']:.3f},"
               f" FP/seed {v['fp_per_seed']}{flag}")
         report["matrix"]["|".join(map(str, key))] = v
-    rng = np.random.default_rng(boot_seed)
     print(f"\nPaired bootstrap, B = {B}, resampling unit = source test cover, shared across seeds:")
     for rq, det, ref, shf in comparisons():
-        res = paired_bootstrap(runs, det, ref, shf, B, rng)
+        res = paired_bootstrap(runs, det, ref, shf, B, boot_seed)
         d_rep, ci_rep = reported_delta(rq, det, ref, shf)
         print(f"  {rq} {det} {ref}->{shf}: Δ {res['delta']:+.3f} CI [{res['ci'][0]:+.3f}, {res['ci'][1]:+.3f}]"
               f"  (reported {d_rep:+.3f} [{ci_rep[0]:+.3f}, {ci_rep[1]:+.3f}]); seed SD of Δ {res['seed_sd_of_delta']:.3f}")
