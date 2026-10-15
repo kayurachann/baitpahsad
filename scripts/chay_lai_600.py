@@ -92,11 +92,23 @@ def tu_cover(thu_muc_zip, ra):
                     raise ValueError(f"đường dẫn lạ trong zip: {ten}")
             zf.extractall(ra)
     print(f"đã giải nén {len(zips)} file zip")
+    import shutil
+    if not (ra / "manifest.csv").exists():          # zip "phẳng" chỉ có <cover_id>.png: dùng manifest của nhóm
+        shutil.copy(DU_LIEU_NHOM / "manifest.csv", ra / "manifest.csv")
     sha_man = sha256(ra / "manifest.csv")
     if sha_man != sha256(DU_LIEU_NHOM / "manifest.csv"):
         raise ValueError("manifest.csv trong zip khác bản data/stegaguard_600/manifest.csv")
     rows = sg.read_rows(ra)
     covers = {r["cover_id"]: r for r in rows if r["label"] == "0"}
+    for p in list(ra.rglob("*.png")):               # <cover_id>.png -> images/<cover_id>/cover.png
+        if p.stem in covers:
+            dich = ra / covers[p.stem]["path"]
+            dich.parent.mkdir(parents=True, exist_ok=True)
+            if not dich.exists():
+                shutil.move(str(p), str(dich))
+    thieu_cover = [r["path"] for r in covers.values() if not (ra / r["path"]).exists()]
+    if thieu_cover:
+        raise ValueError(f"thiếu {len(thieu_cover)} cover, ví dụ {thieu_cover[:3]}")
     sai_cover = [r["path"] for r in covers.values() if sha256(ra / r["path"]) != r["sha256"]]
     print(f"{len(covers)} cover, sai SHA-256: {len(sai_cover)}")
     if sai_cover:
