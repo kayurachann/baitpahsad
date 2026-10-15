@@ -17,6 +17,22 @@ Bài báo thì báo cáo thí nghiệm **600 cover (360/120/120) với cả Resi
 2. kết quả và điểm dự đoán của các lần chạy 600 cover;
 3. script tính ΔAUC ghép cặp và CI cho Table 5, Table 6, Fig. 2 và Bảng S2.
 
+**Cập nhật: nhóm đã gửi 4 file chuẩn bị dữ liệu của bộ 600 cover** (`manifest.csv`, `preparation.json`, `audit.json`, `source_provenance.json`, nay lưu ở `data/stegaguard_600/`). Đã kiểm bằng `python3 scripts/kiem_du_lieu_600.py`, đạt 16/16 mục:
+- SHA-256 của `manifest.csv` đúng `13c01ca9…2799e8c` như bài ghi, và khớp `preparation.json`;
+- seed 20260918; ảnh thu về 256 × 256 trước khi nhúng; 600 cover, 4.200 ảnh PNG; 360/120/120 cover và 2.160/720/720 stego theo split; audit PASS, không cover nào rò sang split khác;
+- tái lập được 3 bước:
+  - việc chọn 600/10.000 ảnh BOSSbase: `random.Random(20260918).sample(...)` ra đúng 600/600 file;
+  - việc chia split của `sg.py prepare`: 600/600 cover;
+  - seed nhúng: 3.600/3.600;
+- ảnh stego tạo bằng **mô phỏng nhúng của thư viện conseal** (không chứa thông điệp thật). Bài đã thêm chi tiết này vào 3.1 ("using the conseal embedding simulator"). Câu bicubic cũng được viết gọn lại để bài vẫn 12 trang.
+
+Như vậy phần **dữ liệu** của bài đã được xác nhận đầy đủ, và `sg.py` chính là code đã dùng cho bộ 600 cover. Phần **kết quả** thì vẫn chưa có file. Để làm nốt các chỗ còn thiếu, nhóm cần gửi:
+- thư mục kết quả của 18 lần chạy (2 detector × 3 protocol × 3 seed). Mỗi lần chạy gồm `config.json`, `thresholds.json`, và thư mục `*_test` có `predictions.csv`, `metrics.csv`, `evaluation.json`;
+- code hoặc log chạy SRM+Ensemble;
+- kết quả `pip freeze` của máy đã chạy SRM, để biết phiên bản sealwatch.
+
+Trang cuối và DOI của [17] không nằm trong dữ liệu của nhóm; cần tra IEEE Xplore khi kỷ yếu EUSIPCO 2025 được đăng.
+
 Vì vậy:
 - **Đã xác nhận được từ code (`code/sg.py`):** cách tạo 76 đặc trưng, StandardScaler, tham số Logistic Regression, cách chọn ngưỡng τ_BER và τ_low, bootstrap (1.000 vòng, seed 2026, CI phân vị 2,5–97,5%), cách chia dữ liệu trước khi nhúng, audit chống rò rỉ, các cột của manifest. Code này dùng chung cho thí nghiệm 600 cover vì manifest của bài có đúng các cột mà `sg.py` tạo ra. Dù vậy nhóm vẫn nên khẳng định lại là đã chạy cùng `sg.py`.
 - **Chưa xác nhận được bằng code hoặc dữ liệu gốc:**
@@ -55,7 +71,7 @@ Thêm vào đoạn 3.2 (không thêm bảng) các thông tin lấy từ `sg.py` 
   - random_state = seed của lần chạy, nhưng lbfgs không dùng tới nên việc fit là tất định.
   - Vì vậy đã sửa ô "Seed-dependent parts" của Residual-LR trong Table 2 thành "variant sampling (P2, P3)".
   - Câu ở 3.3 sửa thành "Seeds 42-44 control the variant draws and the random parts of SRM+Ensemble fitting." 
-- **Mục 3.1:** thêm "bicubic interpolation", là cách thu nhỏ ảnh trong `prepare`.
+- **Mục 3.1:** ghi rõ ảnh được thu nhỏ bằng bicubic ("bicubically downsampled", đúng như `prepare` trong `sg.py`), và ảnh stego được tạo bằng mô phỏng nhúng của conseal (`preparation.json`).
 - **SRM+Ensemble:** giữ nguyên câu cũ (106 submodel, 34,671 đặc trưng, L = 50, d_sub = 500). Mọi tài liệu của nhóm ghi giống nhau nhưng **chưa có code để đối chiếu** (xem phần ⚠️).
 
 ### 2. Section 3.5 – bootstrap
@@ -158,7 +174,7 @@ EndNote sinh lại References từ **thư viện trên máy bạn** và từ **s
   - đoạn 1 của Introduction;
   - đoạn cuối 2.3;
   - câu mở đầu mục 3 (Fig. 1);
-  - đoạn 3.1;
+  - hai đoạn của 3.1;
   - đoạn 3.2 và ô "Seed-dependent parts" của Table 2;
   - câu Seeds ở 3.3;
   - hai đoạn của 3.5;
@@ -167,7 +183,7 @@ EndNote sinh lại References từ **thư viện trên máy bạn** và từ **s
 - Workflow rà soát 4 hướng (khớp code, checklist thầy, trích dẫn, văn phong). Các lỗi đã sửa đều ghi ở các mục trên.
 - Không làm theo hai đề xuất:
   - Đổi "Acknowledgement" thành "Acknowledgments": giữ đúng chữ thầy đưa.
-  - Sửa mã băm manifest "13c01ca9…2799e8c": không có file manifest 600 cover để kiểm, nên giữ nguyên như nhóm ghi.
+  - Sửa mã băm manifest "13c01ca9…2799e8c": giữ nguyên. Nay đã kiểm với `manifest.csv` nhóm gửi: mã đầy đủ là `13c01ca9…a32799e8c`, nên cách viết tắt trong bài đúng.
 - **`scripts/verify_stats.py`** (script tính lại số liệu từ điểm từng ảnh) đã sửa cho khớp `sg.py`:
   - B = 1000;
   - mỗi lần bootstrap dùng một bộ sinh mới `default_rng(2026)`;

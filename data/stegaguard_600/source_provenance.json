@@ -1,0 +1,4212 @@
+{
+  "source_url": "https://dde.binghamton.edu/download/ImageDB/BOSSbase_1.01.zip",
+  "archive_bytes": 1671626159,
+  "archive_etag": "\"4aabc4fc20ffd11:0\"",
+  "total_pgm_members": 10000,
+  "sample_count": 600,
+  "random_seed": 20260918,
+  "selection": "uniform random without replacement among PGM members",
+  "file_checks": "ZIP CRC32, uncompressed size, SHA-256",
+  "files": [
+    {
+      "source_member": "BOSSbase_1.01/1031.pgm",
+      "filename": "1031.pgm",
+      "sha256": "f948819097675c5c7c23bb44e371266b3e28e20469e1f1fd443265cd42148069",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b16e4878"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1074.pgm",
+      "filename": "1074.pgm",
+      "sha256": "15388cb5c8081b730eb345ebf03f35945e54dc50053115d93faa8a785f0f832d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "285a9abc"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1121.pgm",
+      "filename": "1121.pgm",
+      "sha256": "83c76cd657ed5612ef6d0dbc2ab6da76f0a25539c8cf059c05a090209a1784f9",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "5fbff7ba"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1142.pgm",
+      "filename": "1142.pgm",
+      "sha256": "2fb93236b94ed11c1b358bab08c9a8bf090af4a2c86e1724cb0dba3d0d84a660",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "4e837aae"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1147.pgm",
+      "filename": "1147.pgm",
+      "sha256": "22a656924e12726d0bb337b9b4d0f2ec3f4efaa1165ada470d292245b9d01df0",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "a894dbd1"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1176.pgm",
+      "filename": "1176.pgm",
+      "sha256": "51fcc6ae7957c6cc74d214a5586499bb8aef328b482b6f34ef107a31b32a73a4",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "c5ebb832"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1183.pgm",
+      "filename": "1183.pgm",
+      "sha256": "23a7fc1ae106c23965ec28d0a71cdc16c904c48619c8434711a5b37722b11dd4",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "7b615212"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1223.pgm",
+      "filename": "1223.pgm",
+      "sha256": "16336b23077e18e95ae882b19b5b49c8cc73bcafa59132c859219a2f76996835",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "0a967f64"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1224.pgm",
+      "filename": "1224.pgm",
+      "sha256": "a4fd1364b53f3cc8f71dd0700755c5bb3a8b7c012cfedc4b355839b816c4cabc",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "db00f6e2"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1231.pgm",
+      "filename": "1231.pgm",
+      "sha256": "9e7c73f8db40c4d36655e815a6604cbc1cb54ea98527822dca789c00c71415e6",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "93efdd0c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1239.pgm",
+      "filename": "1239.pgm",
+      "sha256": "520f786f1814fcaaacf259c452089f221ffeaf12de2285bfb61ce23c56eaa144",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "f5b747c6"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1250.pgm",
+      "filename": "1250.pgm",
+      "sha256": "3d20bc69613e026d6f1e130cec8abc40213d3c84abea23434480a8ef722dd289",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "df6b413f"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1258.pgm",
+      "filename": "1258.pgm",
+      "sha256": "8dc68d30d6eb3a6e31a043c8bb793d374f50002c7928da6994a519924148bb56",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "170b718b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1266.pgm",
+      "filename": "1266.pgm",
+      "sha256": "8ea93fc0c34aa73933d88f895d78b28412cd12b04b9337d8b8bd3f89b3f192fd",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "f634bce7"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1304.pgm",
+      "filename": "1304.pgm",
+      "sha256": "17433667eda7b5abe01cc9dd87e39c75b51979736a614760e3a5678e5c7ed447",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "ea93960f"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1314.pgm",
+      "filename": "1314.pgm",
+      "sha256": "d722d032a9ca6818ab79f34137f00f092d9043c7946d448af8e05fb0bdd74056",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "35afad5f"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1318.pgm",
+      "filename": "1318.pgm",
+      "sha256": "315e190b0fe5e2514ab9cff76967e8f38eb905fb8f13e60a9323ab13f4c43f7e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "34d4f9e7"
+    },
+    {
+      "source_member": "BOSSbase_1.01/138.pgm",
+      "filename": "138.pgm",
+      "sha256": "f24b9a369540f0d4e6090fe903a097e657601839c718dcb6c5331094d878d539",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "677b9155"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1393.pgm",
+      "filename": "1393.pgm",
+      "sha256": "0a3fbf59e796e3b35e4ba0249c25a7e2ac80947ca9f7b9304673933e1cf2c648",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "ebb02807"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1400.pgm",
+      "filename": "1400.pgm",
+      "sha256": "be3ada6fac982f175e32a7a2efc670420ac8094c1b19dc9bf610e86a775c687d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "d67e06b9"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1405.pgm",
+      "filename": "1405.pgm",
+      "sha256": "799c31d9d03fdb76d9e98f9fcea0e0b0cdd55f68b699259b54cb0c32708175c1",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "2d8a2aa4"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1406.pgm",
+      "filename": "1406.pgm",
+      "sha256": "c4b194c82b76d91ff34dfd3f60100efdc563ec85c02989767202fb2e05df3bd2",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "d2b0421f"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1423.pgm",
+      "filename": "1423.pgm",
+      "sha256": "881b7a73bae890ebef869ae60f0600591d540e04c4e0244c3b9c712aa0ca9e36",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "0570f54f"
+    },
+    {
+      "source_member": "BOSSbase_1.01/145.pgm",
+      "filename": "145.pgm",
+      "sha256": "13e8d4a1669d67a08a20b610a21b81ec3cd33c69fe25c2a4b05efca0e6d782e9",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "eb06f91d"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1452.pgm",
+      "filename": "1452.pgm",
+      "sha256": "5ea953f2ea87eb0dc53d3a0ffe7eabff01d3b15f571f71d6a02e0834e50800af",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "470019ad"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1453.pgm",
+      "filename": "1453.pgm",
+      "sha256": "e16421f384e2394807a2076fb1f37e122ea40427042ab1a9a4c2645d7f574c29",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "1cdca836"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1458.pgm",
+      "filename": "1458.pgm",
+      "sha256": "a1684c2d4a27f198c4cec9455ee60d8042b6768145e64344007d445c6da93544",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "5f367409"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1459.pgm",
+      "filename": "1459.pgm",
+      "sha256": "3a2eff5be729fd7a48218db0a7e42a5bc4caf20aea9ab95006dd56f5ba7eec03",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "12bd9224"
+    },
+    {
+      "source_member": "BOSSbase_1.01/149.pgm",
+      "filename": "149.pgm",
+      "sha256": "88dc2e1b20597a72fff884aba1df5c411b9a32f8b634b3460d94f7cb5fa06153",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "2594691a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1533.pgm",
+      "filename": "1533.pgm",
+      "sha256": "e784a813f0fdf129f1148eaa6f04970ae691f8d650a586cff2529244047595a2",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "8e56d43d"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1552.pgm",
+      "filename": "1552.pgm",
+      "sha256": "9526b93a3d47c0715576fb45deb1fc2974c9c57383503f6dcf7e236fc13d6d02",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "85cde2c5"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1565.pgm",
+      "filename": "1565.pgm",
+      "sha256": "b3dde4a0395750ce9920bad7c2a71da18c94e977bf8abd350bacf5e2034933fc",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "77754d71"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1581.pgm",
+      "filename": "1581.pgm",
+      "sha256": "941df4b22fdcb5e0a02600bda1212c5d1d66473a766f85c3be563050577b7dca",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "e8ee35d3"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1599.pgm",
+      "filename": "1599.pgm",
+      "sha256": "39465c22bd351b8b1f99acf316a32481e1360d79811a76465df03e472d25c7a5",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "bd0d1905"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1616.pgm",
+      "filename": "1616.pgm",
+      "sha256": "d12b11f62c80c29e623de7b3e129fc0bedf22c85c873df1956c6bbf423c2f1ac",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "6877db8a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/166.pgm",
+      "filename": "166.pgm",
+      "sha256": "51c5744fbe9c8b1d1f55fd2d3843b44fb061ca4b76081ca7e03d18df59e124f1",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "d79f4317"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1660.pgm",
+      "filename": "1660.pgm",
+      "sha256": "21d9681ff8a4db44e2d88cc4c8f278bc84bf488087c20eb3bb54188c383975c8",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "7ccf52df"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1683.pgm",
+      "filename": "1683.pgm",
+      "sha256": "7d9627c2916ea2d20b891b2329d6b3c9d8ae1b3690274cc742769b64cbb42990",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "0d069874"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1741.pgm",
+      "filename": "1741.pgm",
+      "sha256": "bfdfd7d20e177cc66561aee8f7fbe5c56803e1b21557fd013fd21f29c705504d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "4f2af8b2"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1780.pgm",
+      "filename": "1780.pgm",
+      "sha256": "43aa189bd3d392f1a6de8bdd14fa84725a9f34b9f980198ca882a4779d293ee8",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "e8278c8d"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1796.pgm",
+      "filename": "1796.pgm",
+      "sha256": "07b2b8e832aa7f9ed5995a6860bce9cb408d0dff8df0b34cb31990382f24a51f",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "d811fdd8"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1803.pgm",
+      "filename": "1803.pgm",
+      "sha256": "034c5571f813ef00b84d6f1ebd972344d7156f26d6ef5a40c5efcae14ad3d1a7",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "3f429ffc"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1819.pgm",
+      "filename": "1819.pgm",
+      "sha256": "2b468c7946917bfb0d43f70b0a09f5f32020e5f0e38359c35a7313c454fa0e0f",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "962ab384"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1829.pgm",
+      "filename": "1829.pgm",
+      "sha256": "1611e24322c83d668671edf8f7d734eb18b9e98515912f4cc4c817b9b8635af8",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "a3d49527"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1854.pgm",
+      "filename": "1854.pgm",
+      "sha256": "cb687b5f0a7988959e296825f838b29a0063b93120f16d5531620ce844a40765",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "0db88dc4"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1859.pgm",
+      "filename": "1859.pgm",
+      "sha256": "a97fb55349a866b1dc8206bfe6e6d9eda792833209f5abf54e4d2b3509ed4d49",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "328a8710"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1862.pgm",
+      "filename": "1862.pgm",
+      "sha256": "c861b9e249b3113b7403340eb710f8ef6e6830b1485fadb80d055cebd36cf987",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "7be3e6b1"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1876.pgm",
+      "filename": "1876.pgm",
+      "sha256": "6138c9349e1f7d704fbc7e7e2ce3ae52f57edfab150afda9c402ccf624b52db8",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "a62c4d5b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1886.pgm",
+      "filename": "1886.pgm",
+      "sha256": "d8b64ec8eae3f19edff097fa2e7c208c2825f68a4aa35633ccc6ade16ec9c1c8",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "37cf4107"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1905.pgm",
+      "filename": "1905.pgm",
+      "sha256": "92450887e16b770f855568457a85e22c127ba92886f5a1ac2359176466535775",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "0fe61efd"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1908.pgm",
+      "filename": "1908.pgm",
+      "sha256": "a82ad7fb9cfb8058609c3b0966a73f8d04d674b18abfbe4402abe73e2d2a0f24",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "c685b8b6"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1934.pgm",
+      "filename": "1934.pgm",
+      "sha256": "dced124fdd65872eb720c847c88d55e12ba47b8022d7e65fd3fe192ddd97d7e5",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "12fd541b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1937.pgm",
+      "filename": "1937.pgm",
+      "sha256": "f02ea8ef40b6f99cae09bcc1b667842a710e0dcc7175505f860c88920d58aa36",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "5d300563"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1954.pgm",
+      "filename": "1954.pgm",
+      "sha256": "853b20978b3860eab5ba7cf9b2651889fc9ff6abb2f9fcd790c63c208dbafd63",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "0e45a006"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1955.pgm",
+      "filename": "1955.pgm",
+      "sha256": "c97072d4f3972194a9e2c38cd2b908914537789d844847992e2c29ceb8d909fe",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "aed8b10b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1971.pgm",
+      "filename": "1971.pgm",
+      "sha256": "0b38560bfe8bac913734d0abca4e2180ed97caef88f542b66d8e1f08b9eb9429",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "0b02d757"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1978.pgm",
+      "filename": "1978.pgm",
+      "sha256": "f91872d1baa7189c1b2c6a515b0740a18c87249e8ed610e82f7cb4baf8b6d18a",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "9dcbf892"
+    },
+    {
+      "source_member": "BOSSbase_1.01/198.pgm",
+      "filename": "198.pgm",
+      "sha256": "5a9b50e2e63e665d14ee48afa66b6d8870b6f2f7e75b136b2715610d8ac37e78",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "deea6378"
+    },
+    {
+      "source_member": "BOSSbase_1.01/1995.pgm",
+      "filename": "1995.pgm",
+      "sha256": "c32da0a5b376e02bde2698b422c21222b655c9c18a9a79d7c0f48a2424b2dab8",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "fe9a2288"
+    },
+    {
+      "source_member": "BOSSbase_1.01/200.pgm",
+      "filename": "200.pgm",
+      "sha256": "a7bf0b7045d0b6fd000ae6a289933ba46ec58aa637d06e6d941031af486768ed",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "cc5eb338"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2023.pgm",
+      "filename": "2023.pgm",
+      "sha256": "0c9b7a63565c2953da734f763905faf0242b2837f34f9de3c4e2249aee0bbacd",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b6300f32"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2036.pgm",
+      "filename": "2036.pgm",
+      "sha256": "443ad3d2f64e40e1b9a71190c4c799d005e9e9f862c790f375329aef0ffc8d89",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "6423e847"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2048.pgm",
+      "filename": "2048.pgm",
+      "sha256": "ed4d890f019408ad642fa52bd3aa86000d2052185d340584ecb5de7cda9c2331",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "6b4bc71f"
+    },
+    {
+      "source_member": "BOSSbase_1.01/205.pgm",
+      "filename": "205.pgm",
+      "sha256": "99d68dbfc2b0c57283b4ddd97ab0a56a384efdcff616dbaea1f493c00b99a011",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "25367d4d"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2050.pgm",
+      "filename": "2050.pgm",
+      "sha256": "1f585264b5abc85d2970278e2810a1962946998a50200cd8ee4e9ddd3a701579",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "7fe9ec34"
+    },
+    {
+      "source_member": "BOSSbase_1.01/211.pgm",
+      "filename": "211.pgm",
+      "sha256": "049d934b7984c5c41001205fd643ceb1456a1261b27d95ef455fc872f2b8b185",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "11231883"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2135.pgm",
+      "filename": "2135.pgm",
+      "sha256": "c27bd3fc299db661bf44b549eced371491ca8269b7e0205c81289a53d5ef3c0a",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "2a954d24"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2168.pgm",
+      "filename": "2168.pgm",
+      "sha256": "213d76a4a79581e465fe1efee00868cc7025cfcd305ff11dbd04a57aec8a7f10",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "592e6217"
+    },
+    {
+      "source_member": "BOSSbase_1.01/217.pgm",
+      "filename": "217.pgm",
+      "sha256": "26a47a582bf882120a3258093b8bdc1ad898199cdeb6d4ea6ec964b959aafeab",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "bc3d99c2"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2179.pgm",
+      "filename": "2179.pgm",
+      "sha256": "c5e5e79ac5ba2b7ced4e500f1ac2b60005dd570ac0f24d17d38ebc08a4578c63",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "a2aca2f2"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2188.pgm",
+      "filename": "2188.pgm",
+      "sha256": "91907b7d0b28f67cc39e495a8fc9e3940fad1bb63f30fb10b85036daa6f5c22f",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "49495afd"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2223.pgm",
+      "filename": "2223.pgm",
+      "sha256": "c059e7b38ad4a7d3a80bbde7070d9d91bd3626abfe3f708781d3f17470d81e85",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "6ea2e309"
+    },
+    {
+      "source_member": "BOSSbase_1.01/223.pgm",
+      "filename": "223.pgm",
+      "sha256": "2c00158c142badbaa8ce63c8fd13811c23e0a7491648f5414f55bf9fe23f4d9d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "6a566fc9"
+    },
+    {
+      "source_member": "BOSSbase_1.01/230.pgm",
+      "filename": "230.pgm",
+      "sha256": "b9eb2bf3909c3b18a480d336444a9dc36c26834d857d153da9f837bf5fd3237e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "3c959dbd"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2310.pgm",
+      "filename": "2310.pgm",
+      "sha256": "610bc3cef7d1f52c1191950b4d0be7f98f11c74e27f9ddcf98a600ebbff826dc",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "12092f6b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2364.pgm",
+      "filename": "2364.pgm",
+      "sha256": "81f3713107ebdf7b53a627fd3090850d852a54be9dffef52bb67078ff471295e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "ba51f42c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2397.pgm",
+      "filename": "2397.pgm",
+      "sha256": "ed79f59e1bfe8adb3d783c5167c163051bceaa4a081589d2df9bb9e40206fb75",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "9e59f6b2"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2439.pgm",
+      "filename": "2439.pgm",
+      "sha256": "4a7f7e5e11bd0f5504e88f81ece5c3c4684fbc7183036486d07152c11d65743b",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "a50490e1"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2440.pgm",
+      "filename": "2440.pgm",
+      "sha256": "1d78860b753debdfdcb18e8b8df172180e228b0452b9ef0aba9c807085013a7e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "d603f2cd"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2443.pgm",
+      "filename": "2443.pgm",
+      "sha256": "386651a784fb625aaaab0eda25728d5243845136b69206ad47588dce3cdf1c8f",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "2210c7bf"
+    },
+    {
+      "source_member": "BOSSbase_1.01/246.pgm",
+      "filename": "246.pgm",
+      "sha256": "dbbd873acba4daaba4c08737a24fa0e590b24945c82ccf9563f53fbd54586311",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "6b7949da"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2488.pgm",
+      "filename": "2488.pgm",
+      "sha256": "eade95f06040c4179b2a040739b4a7e9e5213b449d48ce67724c995c6a163fdf",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "892c5327"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2499.pgm",
+      "filename": "2499.pgm",
+      "sha256": "0b87e558ff54c59e11a3e247f9c965ffaf997c378f3dd108dc0cb1a49fe2958b",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "8fce6253"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2501.pgm",
+      "filename": "2501.pgm",
+      "sha256": "0b06214e868496133eace76f4ef191a5bf8b64f0b467bb52562d3c96f2af8925",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "9ee7d8a4"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2524.pgm",
+      "filename": "2524.pgm",
+      "sha256": "9c44b83985a4a1d08111b18ba3d74dbd73dce02ec807ea5a372dd7900c457dee",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "ae5fa984"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2557.pgm",
+      "filename": "2557.pgm",
+      "sha256": "e240c29a5ff10fa1b23454eeed3cf14689738c7d9b3072dbbb215be059d640e8",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "7f93ee41"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2574.pgm",
+      "filename": "2574.pgm",
+      "sha256": "380c65b0ebc81efd2371c2978dbf8258b8d915c11c6ac4f6f3dcd2e67104edf0",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "48b9957a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2576.pgm",
+      "filename": "2576.pgm",
+      "sha256": "01678615c908d0a81a16eb2c026952d5d85b783acaf9d1f1a3babe0e80f342f9",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "cac93550"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2584.pgm",
+      "filename": "2584.pgm",
+      "sha256": "a67fde87de2fe892b8636d948635ab7cf5d3a61fe584d3f6368bfd66a9cb6fc9",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "a97e9918"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2585.pgm",
+      "filename": "2585.pgm",
+      "sha256": "dd0bea562359577bde02ac2961545882ca055b6dd2f25bc910114f3d89baf11e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "32bc8a30"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2590.pgm",
+      "filename": "2590.pgm",
+      "sha256": "b571db3f927aad83f255cefbe4ab0baac451eef022b88eba907737745dae8629",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "ce0c52c8"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2611.pgm",
+      "filename": "2611.pgm",
+      "sha256": "b53f49892feeec4094baebd299c1c5d4637664e266463f9e4e4b62139cf9962d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "c0b951d3"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2613.pgm",
+      "filename": "2613.pgm",
+      "sha256": "5f6ae5dbf5ea3bb0130909af7abffd2c9dc3e10d945fda2f58acf2a19a82cf20",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "a91a084e"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2632.pgm",
+      "filename": "2632.pgm",
+      "sha256": "4ee50ec4bcb3eadf899ca63fe8e78269baf8d3984dc4591b96f278a4d520ab39",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "7034d1de"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2644.pgm",
+      "filename": "2644.pgm",
+      "sha256": "05611cf43e884f97973ba77d991fbf821b1c1f454058f2df6e6ce344e2cf21c6",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "27743671"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2656.pgm",
+      "filename": "2656.pgm",
+      "sha256": "86eb42f236068fad04448d5eac71b5bf6752d974bc6e743f4dde111981228e23",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "737f078a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2668.pgm",
+      "filename": "2668.pgm",
+      "sha256": "2618c7cfc40bb1428065702fa11109f91386c4ceca61ba80e205e843c7cbd53d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "cb88ea77"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2669.pgm",
+      "filename": "2669.pgm",
+      "sha256": "aad0a8e5d26246f4cdca324b6fc991d1357621e21d18ca6020d577756ff8f3dd",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "d4863229"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2677.pgm",
+      "filename": "2677.pgm",
+      "sha256": "6b65681a12e7550a84723e521c0a78d0c93f735ef8157669127b55a999dfb0b5",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "727d41a5"
+    },
+    {
+      "source_member": "BOSSbase_1.01/269.pgm",
+      "filename": "269.pgm",
+      "sha256": "efbc0ec5ea2d7cf9d8e672341ddba4b1ac22488a2cd1649e3252b6f6b1f4b6c0",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "c0f0b7ab"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2690.pgm",
+      "filename": "2690.pgm",
+      "sha256": "19e5fa50cc941e4e244a9fb2c34b6c38e79c18f2f9a5e4893305b742571500ad",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "1aa1c74d"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2691.pgm",
+      "filename": "2691.pgm",
+      "sha256": "a04b71e5ae39a772ab9d1a9983354235126caa2e0f9150133c169426f502d1a1",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "0015bf90"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2712.pgm",
+      "filename": "2712.pgm",
+      "sha256": "2e07133a3dd52a13593ea34afcf075d590bceb1a51e326df40d2faf1fceedcab",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "520cc09a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2722.pgm",
+      "filename": "2722.pgm",
+      "sha256": "3d549db45672446121a3ba568a58b47072dfa519c90c153144e4ceea308b26fd",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "c237029d"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2759.pgm",
+      "filename": "2759.pgm",
+      "sha256": "8275f203ead47ce6740e85b9c1dded07cdd0b4c7a33c677592b1583db03a5380",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b74d5278"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2775.pgm",
+      "filename": "2775.pgm",
+      "sha256": "7b484c9a65eecad867acdda0f7a57f722f47c79648bfae04d167c2ad869f995d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "5a02be64"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2829.pgm",
+      "filename": "2829.pgm",
+      "sha256": "ead75a65920ae1cbeab107c6d2c9c811a4485c53f246c864f35b7d683c57d97d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "6ed71834"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2833.pgm",
+      "filename": "2833.pgm",
+      "sha256": "4a0c68a9a4a93b19d9168d7d21f2e1ba58b6e7cdd0ab6c75ab67d8c38946f988",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "529ba918"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2839.pgm",
+      "filename": "2839.pgm",
+      "sha256": "c3c6c2f12b9c24699fa61a11d62f467676626b06194477f0cd7f5f0c04ea6295",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "6057e73c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2840.pgm",
+      "filename": "2840.pgm",
+      "sha256": "bef57bc01b809df0587ba32ba395e900afa8b7a4ba7596cee8c3071a13f99d59",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "12508581"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2855.pgm",
+      "filename": "2855.pgm",
+      "sha256": "fb9bb1ddf0e53f69f5383fb7a9f18ffa5c8ff8b4444db90125c355ac73b0ca6b",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "711d856c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2881.pgm",
+      "filename": "2881.pgm",
+      "sha256": "cb0905999e373c33de0ee1872a728930d157626d9b3493ad70df2cff5ae8aa71",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "f47bf083"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2901.pgm",
+      "filename": "2901.pgm",
+      "sha256": "032c6320ef86994cf518a415e4f25379f00885861a015efc8984b139471b7afd",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "06104881"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2905.pgm",
+      "filename": "2905.pgm",
+      "sha256": "98c4242fac982f63ffe501cedf426c4c7a74d94c216ac83a81e03e39375f67a0",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "aa3122a4"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2929.pgm",
+      "filename": "2929.pgm",
+      "sha256": "5fbd35cdcb43263a2b949b5a49ddd2195e5ecb776ecc90d2cd3c3aac4b1e5aaf",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "4146a4e6"
+    },
+    {
+      "source_member": "BOSSbase_1.01/294.pgm",
+      "filename": "294.pgm",
+      "sha256": "7c0d83247c785d8ace0578c19b277954bf6e125cf245abcfc4cae08d19a3755a",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "61c2c4db"
+    },
+    {
+      "source_member": "BOSSbase_1.01/2978.pgm",
+      "filename": "2978.pgm",
+      "sha256": "4d4d63f60d41237b9568488aa1ef18ab5691bf8f14d43d786d6a077ed09c3fa6",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b6a90e44"
+    },
+    {
+      "source_member": "BOSSbase_1.01/300.pgm",
+      "filename": "300.pgm",
+      "sha256": "2effe43d66f9709d634d6378e3fa898f8c3455025164b47197028ab65894f0e4",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "6a3e1981"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3007.pgm",
+      "filename": "3007.pgm",
+      "sha256": "f8d5f63dc4319fc8888911cd7b42441b45032bf454464ece87e69ca684454f83",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "892f7008"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3022.pgm",
+      "filename": "3022.pgm",
+      "sha256": "4e353487b92a058f45c0e47ea37a6970d237793468915e3ff05967ea40f7a7b0",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "5d048e1e"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3045.pgm",
+      "filename": "3045.pgm",
+      "sha256": "acc43c57602a6c1e64bf1856478e6592bdb53f9a2e57c61375f0ee396fe90c39",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "087de89e"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3046.pgm",
+      "filename": "3046.pgm",
+      "sha256": "60427ffb87ae213b92841409de56686d00e440a7d1e2a5ccfa8d57684030d2fe",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "7b6a3ccd"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3049.pgm",
+      "filename": "3049.pgm",
+      "sha256": "b73a39b4bae98090cd7ee5d68bd0d5e5f37e7c8986bd37704c59b49c81508c86",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "5394d378"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3082.pgm",
+      "filename": "3082.pgm",
+      "sha256": "c7b011e85296dce3908f4203bb6aeb1d30cd9731c728b7fae2bf4315abe9db57",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "c3ec7d29"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3091.pgm",
+      "filename": "3091.pgm",
+      "sha256": "81d93660d3e8cfe4c799ff0c6c875c4498af762f1ff43fae89bd59def4426844",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "418acd55"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3096.pgm",
+      "filename": "3096.pgm",
+      "sha256": "d667eda9ec92ee2ae0023923b9901baef305f93747a50f35d530ee889ef2805a",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "500bcb18"
+    },
+    {
+      "source_member": "BOSSbase_1.01/312.pgm",
+      "filename": "312.pgm",
+      "sha256": "bb7aa513e12194580734b6dfcb5779c3a6e09138d62565875c812b2f3321224a",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "4186e122"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3142.pgm",
+      "filename": "3142.pgm",
+      "sha256": "9499593512124adf49e1f25ff0a07b169dd18f6a4e8cb5ee5aad15b49073d24d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "4a86bf61"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3183.pgm",
+      "filename": "3183.pgm",
+      "sha256": "d4f6b99c0328130e6ada342340e7db9dd1d899d3ce10e0d12c2c71c9ea00bef0",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "80651ce3"
+    },
+    {
+      "source_member": "BOSSbase_1.01/32.pgm",
+      "filename": "32.pgm",
+      "sha256": "a6f1a5bce994c66bf1fbf8c43e6b63f0520379e477cb302265b9a92cd58fe8d8",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "0ae89355"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3220.pgm",
+      "filename": "3220.pgm",
+      "sha256": "55e59ca7e5b0abe998f02fad947eefe480b165272c9348935a7937b6fe133794",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "219c147e"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3245.pgm",
+      "filename": "3245.pgm",
+      "sha256": "767d216e6b0dbfc00ea1fa1c19a6dc9f3232439d8320a2eac74654a36315d1b5",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b864212a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3247.pgm",
+      "filename": "3247.pgm",
+      "sha256": "5d3b8a35bcefae9f3ecd8f32f697d853284f585d536f7b7c7bb114e1412fcd04",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "564a0b22"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3249.pgm",
+      "filename": "3249.pgm",
+      "sha256": "4ffcb7a6e888f438079dfd0cad7a2ad672c09c975d82cdfadbb81cb1647f0da3",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "ecbf525e"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3267.pgm",
+      "filename": "3267.pgm",
+      "sha256": "355526463b2393bac10f219526862eddf29d8e55a2c0b941bdf71eef79f977a7",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "d32f40f4"
+    },
+    {
+      "source_member": "BOSSbase_1.01/327.pgm",
+      "filename": "327.pgm",
+      "sha256": "bdc711904140df3351fe7f2da155835367c79367922380c6db07387162d5780e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "ce8a5504"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3296.pgm",
+      "filename": "3296.pgm",
+      "sha256": "e59956c53dc0562f346c9bea88bd396b0ccc2b0fd25def2d7a0c6f57c2197972",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "2afa1f82"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3307.pgm",
+      "filename": "3307.pgm",
+      "sha256": "6df9713790ae1048cb1cc8ea44aaf3224334384ca0c373b33e02d3b695f8e792",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "5f2e4fa3"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3308.pgm",
+      "filename": "3308.pgm",
+      "sha256": "8c7fece46be71372da1f8274bfb90efda5eeafbd8d9297ab6d5bf51dded46daf",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "6baa4191"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3339.pgm",
+      "filename": "3339.pgm",
+      "sha256": "c7f7e5c3f5c2509914c9efb28097216f96a66dc9a4139342d6c7dfab3d6bef84",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "d343d361"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3350.pgm",
+      "filename": "3350.pgm",
+      "sha256": "4bbf19422a5f4ff2f9022f71831d8d8713375be4aeb1416b9170b266a7b91c96",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "f4bb3589"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3351.pgm",
+      "filename": "3351.pgm",
+      "sha256": "33d96265ea13c033de101193112dd92abdb78a2af327578af3a9aa9fb9ababb0",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "a064cf68"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3358.pgm",
+      "filename": "3358.pgm",
+      "sha256": "d2a39cadbbf1b1ced7f70cc83de7ab47f6793a0588fcc0c5f1ba01b446896c69",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "61697d80"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3367.pgm",
+      "filename": "3367.pgm",
+      "sha256": "73822f9947838f58a29af98c9a49f434817b1cac7930cdfcdd435a201909b61b",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "30195678"
+    },
+    {
+      "source_member": "BOSSbase_1.01/338.pgm",
+      "filename": "338.pgm",
+      "sha256": "109268da7bf8462afc74648c444be82239eb0004a6184353d16b525479d317c2",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "57e38aaf"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3396.pgm",
+      "filename": "3396.pgm",
+      "sha256": "fa5a488c2c5a780fbb944740533a3c0f5ade5d178e03c2c20cab5818c0bf7612",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "d4fc2708"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3399.pgm",
+      "filename": "3399.pgm",
+      "sha256": "51aa97128b489da92850ebeede9fa856d9c4a36dd4d1471463d38ffe14f5b19e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "48313ca0"
+    },
+    {
+      "source_member": "BOSSbase_1.01/34.pgm",
+      "filename": "34.pgm",
+      "sha256": "f334e45371899467a7cd2ae5d89f6c2419cc7371e4dca61854a887f9f81417ba",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "1848931d"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3405.pgm",
+      "filename": "3405.pgm",
+      "sha256": "3c1e3c0ff7734f530190ab825113f78e16426bde3bcb43b603599cac2e00a490",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "f95af74b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3413.pgm",
+      "filename": "3413.pgm",
+      "sha256": "176b387d0c11843fb38d66084594c8f777c4e3a0aca11decce2aa8824d4ac1e8",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "9f04b478"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3423.pgm",
+      "filename": "3423.pgm",
+      "sha256": "a05b927d2b7a137928076880dedf7b9f9062a7c40eebb054241c1532463dbc92",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "ba610d7c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3429.pgm",
+      "filename": "3429.pgm",
+      "sha256": "43dbb6f57cdc2a9e69b5df8dbc4f3fd90e774542dd365ec0debb108331d2dd19",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "eb4e098f"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3455.pgm",
+      "filename": "3455.pgm",
+      "sha256": "385fdf1a37eb68ad34846f11102c82cc67510c7cd59a5539c948455f13e88c44",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b12a8379"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3458.pgm",
+      "filename": "3458.pgm",
+      "sha256": "2ab695d35fc8175c8908feb137ace2e5e65835e57c75a4116af39efd7a7fe62a",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "30709ae2"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3467.pgm",
+      "filename": "3467.pgm",
+      "sha256": "7da18447d55d747ad217c1701f881a9e0c23e2248c5f1c539c2ee17d2b6a35d8",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "5febff2f"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3471.pgm",
+      "filename": "3471.pgm",
+      "sha256": "ae5b87d1abc42a37f58ea303abd65a48b5c189619cde5c935d63df67fc0a429f",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "1b2af016"
+    },
+    {
+      "source_member": "BOSSbase_1.01/353.pgm",
+      "filename": "353.pgm",
+      "sha256": "4d5f9e5d5c8d5239b96ae7baf0b332dbe660e9b5e30950785ee33b7e2b6b8ad7",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "6df26f6d"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3536.pgm",
+      "filename": "3536.pgm",
+      "sha256": "a10c22bbb8185a3ef24289c7a6a4df558247927470f4957b8f95083f5920d1a6",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "dcec35ac"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3546.pgm",
+      "filename": "3546.pgm",
+      "sha256": "64aaa1047790d23d14064382ddc1ea75024d8cbbbc909f109674d54367055832",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "837cd10a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/355.pgm",
+      "filename": "355.pgm",
+      "sha256": "d0d51c9f0c33c284e61c3304b11ca011f7bc8e7025fa44310b49dde9f5d64b59",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "97be8e29"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3564.pgm",
+      "filename": "3564.pgm",
+      "sha256": "3f919186ec664b52ac13c6c79e59b95964a95ef12c54788239cf38562080b426",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "56e2c688"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3568.pgm",
+      "filename": "3568.pgm",
+      "sha256": "9386e519018756438c9ac1cffcaf82bd760ebc4ecca779c064945657ab449a7c",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "ca6a9d17"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3618.pgm",
+      "filename": "3618.pgm",
+      "sha256": "f5c6345792705f3d1469369e3a8653343acc7cc0ada32ddef711859870f2895e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "9027fa34"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3627.pgm",
+      "filename": "3627.pgm",
+      "sha256": "5829a0e07b07861af0a16235cbd0075a658e5c43f07e305f9cc848d86c972617",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "39a0f59e"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3636.pgm",
+      "filename": "3636.pgm",
+      "sha256": "4ac72f0bfedaaf3267ee49094a9cca153a90ab241fb978889bc9abffe6c1ac98",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "0b8d20e5"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3671.pgm",
+      "filename": "3671.pgm",
+      "sha256": "06c3ba321eff59e0e7732e09ef817154814a65e25b2d616f409c5756d941f0fb",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "6ee26968"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3685.pgm",
+      "filename": "3685.pgm",
+      "sha256": "7029f3084080fc0ea70b3e1b6d29e5c4fe292e378673b6b410d2cfd940f9200e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "dca716de"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3694.pgm",
+      "filename": "3694.pgm",
+      "sha256": "eea710dad0670af89ff890e51eedad671a94ad64ba65d8adbed6f36d333218cb",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b41db08a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3696.pgm",
+      "filename": "3696.pgm",
+      "sha256": "d624469c2cd5560552a72997a55e75adf256926894a331183e116e57ad7cf155",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "2b1b9e81"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3698.pgm",
+      "filename": "3698.pgm",
+      "sha256": "3ee916058bc80646c92d9267294a9ea87c1f0d67a5f655ad02d86f05f548fe9d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "7fa9be87"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3733.pgm",
+      "filename": "3733.pgm",
+      "sha256": "6ff5b51ad8a7f4aa858285cd09e07d6c713a1302219dadaf59dd610336694ec7",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "d7ab9471"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3748.pgm",
+      "filename": "3748.pgm",
+      "sha256": "d4889171dbfdcf770379a665c98248a75818a987f4abdcfca2b223d18a1a33aa",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "7229441b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3765.pgm",
+      "filename": "3765.pgm",
+      "sha256": "7b79fedd33e0963c23b935f027be29ac11fe6821040330d9d0246435f32f8039",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "5fa6daa5"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3769.pgm",
+      "filename": "3769.pgm",
+      "sha256": "6210df586609b16ae04e05d138980a72bc527a5f2a3e8ab80a6417a628cee5b5",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "205bfda9"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3772.pgm",
+      "filename": "3772.pgm",
+      "sha256": "e421d0b86d7a92f5bf065b1bb99d5b00a74ab83b87a8329f0667ffbf7397e2d3",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "eeed13f2"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3782.pgm",
+      "filename": "3782.pgm",
+      "sha256": "017b7401233df3050fad96cdeb4f8b14db75f8c30856bda72cff2c88b8cf4066",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "cb3bc532"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3804.pgm",
+      "filename": "3804.pgm",
+      "sha256": "f02abd2cbe8ea624ac812ed0e4e6a4f985f65670104ef78454651f11f2ed716f",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "41fa899b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3805.pgm",
+      "filename": "3805.pgm",
+      "sha256": "403a6efae783902f6ffca2b1505c9751c32e77e46cd604d96dbe09f7ec63bc52",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "7fe2f3b2"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3822.pgm",
+      "filename": "3822.pgm",
+      "sha256": "e4a17a9c44ddcaa8491ff93d2dd46bf9071a18f94eef5b37dd66dc50df0b4f38",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "a646befd"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3834.pgm",
+      "filename": "3834.pgm",
+      "sha256": "98d0cd06682524dbf64564940c5800dbf20ebaf38d3a36c54962a1b87d2f04e7",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "ec7d0279"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3856.pgm",
+      "filename": "3856.pgm",
+      "sha256": "5cbb6f48bd21677a56dd7b07d0a0732e5c56c90a331b52aa3f59bf9d3c3aa98f",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "07962f15"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3883.pgm",
+      "filename": "3883.pgm",
+      "sha256": "21896a885cdda477eb4c2eaebd85a191a144cfa3c3efa52704a25a78500924d3",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "7921418a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3887.pgm",
+      "filename": "3887.pgm",
+      "sha256": "1cdc839a3e20d210d9574ed8a055b863e355057893251702d6e3d242a933a664",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b4552a76"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3896.pgm",
+      "filename": "3896.pgm",
+      "sha256": "a39c1d764fb432b49c96ed2684fb655189add61377a20d6bb1c09586e800505b",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "a3548282"
+    },
+    {
+      "source_member": "BOSSbase_1.01/390.pgm",
+      "filename": "390.pgm",
+      "sha256": "11c6c39aafeac933d7d0bbd9b7f20a5085185ecbc42b6b80d4475971c15e226a",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "157eb2d1"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3943.pgm",
+      "filename": "3943.pgm",
+      "sha256": "24202539dc4213f485ea42220d08de38d894e17ae10e544695b2f7f1a4ba39c0",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "dfcb964a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3961.pgm",
+      "filename": "3961.pgm",
+      "sha256": "8f998da50f9bd89be5457f3c2cfcf3e9974fd0bd4d05f6a5026c1855c47b27f7",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b6aa412a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3964.pgm",
+      "filename": "3964.pgm",
+      "sha256": "e342b3dea9ad0ee80fce9943298176c0d61e92ae4ece20b2578bb039c011b95a",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "97387740"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3972.pgm",
+      "filename": "3972.pgm",
+      "sha256": "80655b7917916969f66f8e1f1d75d2cf2fe13a2e03305d87cc9f17ab0cd1d1d6",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "07eea1cb"
+    },
+    {
+      "source_member": "BOSSbase_1.01/3990.pgm",
+      "filename": "3990.pgm",
+      "sha256": "d249c530515e720ab591716b0523cc854e52925560785be440c44247e16fccd6",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "7fc06ec4"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4017.pgm",
+      "filename": "4017.pgm",
+      "sha256": "b0967ad4747498ec383dbd91fa738eb0c6f8a04dfc61278cddb051eb9f0a7188",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "5cbdbe1c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4025.pgm",
+      "filename": "4025.pgm",
+      "sha256": "610601cb1745b609cd386025a2f71dc70cd986a695af5f0c2751fac197e58701",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "c79182a9"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4032.pgm",
+      "filename": "4032.pgm",
+      "sha256": "265fb67bd93fef1e420e2b292f68c5c132c1530a40e7a0ce5c743a891a35a486",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "fec31af3"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4033.pgm",
+      "filename": "4033.pgm",
+      "sha256": "d6b6c13752e933ad338ef36be9f34df1aaeceef767ddf24a5b7482466c1ba99d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "0e36e309"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4054.pgm",
+      "filename": "4054.pgm",
+      "sha256": "edc6cce80c493d85fa53c497569a87bd7bf1f122d89ccc72ed7501e6894a0678",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "de4f3914"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4088.pgm",
+      "filename": "4088.pgm",
+      "sha256": "7c96de7400e36a434bc3d9d8c31efc04e17847a83d7663a3ba2e2ee14d2f22db",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "733b1cba"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4109.pgm",
+      "filename": "4109.pgm",
+      "sha256": "3bf3b2cd997dc35c5f8f50bd349816de6061f8735dc86ffe81c96a79638bf955",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "d9bd3f17"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4111.pgm",
+      "filename": "4111.pgm",
+      "sha256": "68a661b379922076fa74b96e3ce8ce987b4586dc3aaadccdbb013bfbe87350a5",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "fc4139b0"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4120.pgm",
+      "filename": "4120.pgm",
+      "sha256": "782c724bd79c496b4cf0bf91dd6f37fa645956f9006f714ae92b10588a55bde0",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "bde4e1c5"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4176.pgm",
+      "filename": "4176.pgm",
+      "sha256": "6e48a3baa868d5271212486ce037f894a6acf3f35b1c4a71fb65753e14a8588f",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "a3b8ca69"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4189.pgm",
+      "filename": "4189.pgm",
+      "sha256": "988b6e1f6b2ad960e3185ef29908ab375034476c618bdc5527a5c365fcfb98fc",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "560e57ff"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4191.pgm",
+      "filename": "4191.pgm",
+      "sha256": "59cf1cfe92aa074b4d1385203174a23a46a2ca1fad49b1585d8d347f2d40b75f",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "06637eaf"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4193.pgm",
+      "filename": "4193.pgm",
+      "sha256": "0c4d1009c5f142e61e60e2467c2c3953111a6c695ce4de7fffd8133a166a309f",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "fbc99865"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4200.pgm",
+      "filename": "4200.pgm",
+      "sha256": "1cc646fee2c81eff8a78ea67b91061dd47e5f878807131b84f5931473d294ad7",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "d7bac065"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4207.pgm",
+      "filename": "4207.pgm",
+      "sha256": "346fed55281ffa9aab23afd30f34748d2a53a9a86e3d2fe3d879cf624ab46151",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "d2162a0d"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4226.pgm",
+      "filename": "4226.pgm",
+      "sha256": "3717ca14710d71480dba7abd70b6550daf10db35214c204cb72624bdf74e5db7",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "423bb629"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4228.pgm",
+      "filename": "4228.pgm",
+      "sha256": "e3dcc1e4624e92e9008b3f813d014ef60ff10960e3f778dc983db41708368eb7",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "c6cda86f"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4242.pgm",
+      "filename": "4242.pgm",
+      "sha256": "01b907963bc4e6de0399733b9ca7738ce993c79f0b8a4ecf26356374c9b83354",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "20676662"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4246.pgm",
+      "filename": "4246.pgm",
+      "sha256": "92c6d2ea86e712a3c239d7599c7175cd7113cecf97eafd42eb4bb60cbe601837",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "46b517de"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4253.pgm",
+      "filename": "4253.pgm",
+      "sha256": "9f9ff5e2026958fb99aa165d4d0200e252bc9cd8fb84605efcd4405c408c7b17",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "d041ba35"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4263.pgm",
+      "filename": "4263.pgm",
+      "sha256": "16b718b242fcaa12a397091771405dac59fae8e27bbb26d8964d07f84428481c",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "48afb60e"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4288.pgm",
+      "filename": "4288.pgm",
+      "sha256": "6f50de47913336427a4d74fe401664dd332937c821aec1790d6298a629ee3ab7",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "9365d862"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4292.pgm",
+      "filename": "4292.pgm",
+      "sha256": "93dc0bacd068326f23b5774cea7516a5f1cbd60821b4ad0e582db63f7d1cf807",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "dd887302"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4301.pgm",
+      "filename": "4301.pgm",
+      "sha256": "4163821b3cf21cc9812317d2aa3cf8aada2c7481d7a06c642003a1631002bedb",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "5e3929df"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4306.pgm",
+      "filename": "4306.pgm",
+      "sha256": "09428ad12e3df69682a4db403cf435f5fc522843e914a7b30efca44e0006bff6",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "72ea57a4"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4309.pgm",
+      "filename": "4309.pgm",
+      "sha256": "b599f40331e46143dddf77e187f19f153fafd9b2abbb67003abe19bd6089f302",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "d681d357"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4311.pgm",
+      "filename": "4311.pgm",
+      "sha256": "97e62e34a1b9e7827f650cb2c419bd960025281b335d68974508b6598c3c5296",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "7a20b027"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4323.pgm",
+      "filename": "4323.pgm",
+      "sha256": "5591f51c66c276f8f7e18cfcd870b2296b2dc9459a39afd2467bc3f676f54367",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "7e7668db"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4329.pgm",
+      "filename": "4329.pgm",
+      "sha256": "59241b2276f4a5f12b369f1695265ebafb33448df9e49936b65a19fc8c15107f",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "ef7554c1"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4332.pgm",
+      "filename": "4332.pgm",
+      "sha256": "0b9e71dfcd0fb09335204f6d8790c1131d32e4a2789d4658b282d3e639935913",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "67c56d75"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4357.pgm",
+      "filename": "4357.pgm",
+      "sha256": "6e3f275b4a5b270a2087deb18824bc86ce97cd427881787d2bf3f0752a135e1a",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "44d3a113"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4380.pgm",
+      "filename": "4380.pgm",
+      "sha256": "43d695bad0f7f6e4ee9e9e9d1ae4e17230effb9aea760fd29eb99146aa7bca5f",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "bfa2a37c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/443.pgm",
+      "filename": "443.pgm",
+      "sha256": "49c8fabe74347b6bda9e2cb940a4066d97628bb5076c405d9ded66c1139e7df5",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "85ec1f83"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4433.pgm",
+      "filename": "4433.pgm",
+      "sha256": "42ccff629fdecadacfa8508498c8c4a7511a5ec52689e49f9243c5025eec05dc",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "0da15a49"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4450.pgm",
+      "filename": "4450.pgm",
+      "sha256": "253efe955bada1fb3f6f02481beb001207235c9353d8df740391a90f7ebd75a5",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "32f66f47"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4453.pgm",
+      "filename": "4453.pgm",
+      "sha256": "889baf80b719097e29129f46f63c7e001b40267649367306f1abbbb15573a9a9",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "5cc4434c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4468.pgm",
+      "filename": "4468.pgm",
+      "sha256": "c3ffd4f6989d8bf2931822bec07888ace3ced7c7b9c723e9c957cade3b555782",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b0f61cdf"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4479.pgm",
+      "filename": "4479.pgm",
+      "sha256": "d784b7b8006c5445daed375a1e0f1e886d0d1f6b6de45ee96170c9c4977365db",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "ba6b6b1a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4489.pgm",
+      "filename": "4489.pgm",
+      "sha256": "aca2e3b4a0ab97d9c78cfd77343fc453c1d85431d78c17ce2c6e8ae5cc4cadfe",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "46f9742e"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4508.pgm",
+      "filename": "4508.pgm",
+      "sha256": "c92a4fd42a8a11569c5cb3acee258f1efb19e81115d6e3792b38c6f023bd3216",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "a7f5a0f0"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4524.pgm",
+      "filename": "4524.pgm",
+      "sha256": "a3b72616c7ae6985eb1ff1b3364314eb97dbe8a3c13e94297179943c90a59176",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "8c3034d7"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4533.pgm",
+      "filename": "4533.pgm",
+      "sha256": "479085c98d90f87aa80c77ab5a2c32dafd1e0597bd81b88d22c8b91963acc900",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "fb6a6564"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4535.pgm",
+      "filename": "4535.pgm",
+      "sha256": "e3b17dd945ae8a5a2a285ad627f44a79e6666ca40e09798f4566add4d1e938f7",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "3abb7484"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4551.pgm",
+      "filename": "4551.pgm",
+      "sha256": "b06811584cc3698aa3af4c4bf10a5799802f7e01ff9f6c2f20c265047f4c05c2",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "4253e6d4"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4561.pgm",
+      "filename": "4561.pgm",
+      "sha256": "095c4e7a226fbce58a6b22f3d7574bd443d4342fab71adf7878f3ea1cedebd2d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "960f13ad"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4563.pgm",
+      "filename": "4563.pgm",
+      "sha256": "d5fcc1bff67237f066d81afcee36b0ba48ff93219e62fb8be20c2c8a8adabdf7",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "c3e81ab3"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4571.pgm",
+      "filename": "4571.pgm",
+      "sha256": "688bd02758b3b3bbfb27dfb950a523ea4f45ea1709a2e8d2b971fbc2e8e52f22",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "a5da5346"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4579.pgm",
+      "filename": "4579.pgm",
+      "sha256": "0fc98989fd19cabc74df1fee171c3bd1f9d930415346ab20f9b5708a2b6ae15c",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "3ea45750"
+    },
+    {
+      "source_member": "BOSSbase_1.01/458.pgm",
+      "filename": "458.pgm",
+      "sha256": "2413ddbd89d17ac28acce5c22a270b53fef819927603a18c1d26268b32bc7e69",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b603704d"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4587.pgm",
+      "filename": "4587.pgm",
+      "sha256": "11f6deeb5e010aee2d8c16ae39d57b9ee976adffdf9340723be20f3d3ec92fca",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "446e6a7a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4602.pgm",
+      "filename": "4602.pgm",
+      "sha256": "e515f0d0908bf1a714c583bde97e11e8c083fb2418419f61ca29cfc0d26df70d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "f16ac2e2"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4607.pgm",
+      "filename": "4607.pgm",
+      "sha256": "3e11863074eb9d386c62b1d74f28489a4236fd4de5b85ed9d52ba2f78a750d15",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "1f0d18f4"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4612.pgm",
+      "filename": "4612.pgm",
+      "sha256": "93a2be9c957c4326c221634f0e72693713e535596bbb64d9de079a3acce79731",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "142169f8"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4616.pgm",
+      "filename": "4616.pgm",
+      "sha256": "512c46e89ac2c589009893a07aa4c516198fcb03fe15cacd8521594cedc8d537",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "68ad00a1"
+    },
+    {
+      "source_member": "BOSSbase_1.01/466.pgm",
+      "filename": "466.pgm",
+      "sha256": "a250ae4a77322777e11feb5e9e32475e5957b87e722fceb6049c97cd9cecb5ea",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "2d32e4dd"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4719.pgm",
+      "filename": "4719.pgm",
+      "sha256": "bbcf7e76b8170344eae7b266196bd6fde2559989dafd9d6319f6ab8f2a3f2cd4",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "5dd86a2d"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4721.pgm",
+      "filename": "4721.pgm",
+      "sha256": "ef8ed5fb734f4fb255d71d36a05d17f9ecd71c0cb9f9b35c6109f65acc1eddfe",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "2a46d36e"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4726.pgm",
+      "filename": "4726.pgm",
+      "sha256": "8dcc336838c1629b3bbd85cdfffffb829f9c695daee8e7f31e333f2b43635866",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "bf707fa8"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4737.pgm",
+      "filename": "4737.pgm",
+      "sha256": "e08bbf3f0e932336110dfeb70a3c348affe4ea9aeb9b834b0e018a714ed3666b",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "dcda6a18"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4747.pgm",
+      "filename": "4747.pgm",
+      "sha256": "d9f76d6a9d165e6c238e49377a5b193bc6ec09f73f955dd6e7e88e08504e4ad7",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "0d383755"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4755.pgm",
+      "filename": "4755.pgm",
+      "sha256": "8f9d2b9cd259d17a051facffb3cfa485216e6dfea8973b9afa673e4485419034",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "cf05c24e"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4762.pgm",
+      "filename": "4762.pgm",
+      "sha256": "842b84330b591a1bd6121cc9c49a1398e7480ebc80a2c97d085463e50e29c377",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "c969f35b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4766.pgm",
+      "filename": "4766.pgm",
+      "sha256": "72040a104f0b83949f1efc468b57f0b9b9b2e0a41d26daee7eecea6a803ebd40",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "a1e008ba"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4783.pgm",
+      "filename": "4783.pgm",
+      "sha256": "148bc539ad699ee90d77c02addd4c799489976f46935346f8ca3b4978454a84b",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "a65ff4ac"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4784.pgm",
+      "filename": "4784.pgm",
+      "sha256": "8eeca91914c03af1c215f6e64e94d94be86724faad572fffca11f66b21f33257",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "45d8fd6d"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4787.pgm",
+      "filename": "4787.pgm",
+      "sha256": "bcacf74f660fd30646ba550432132f3cfb47cdd91610a060d951509e4c50d283",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "f8707444"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4854.pgm",
+      "filename": "4854.pgm",
+      "sha256": "7922a645cff9737cb91999986f8da09a9e24364a75b94d610453b7fb907690cc",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "da21b81b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4862.pgm",
+      "filename": "4862.pgm",
+      "sha256": "d4610cdbea6894ead0d4d51e8b965208ed8793fda0b163835213c49260670e6b",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "9f27e6ad"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4881.pgm",
+      "filename": "4881.pgm",
+      "sha256": "64ee6af12ad20862e504b5b3226f6f4b4a3c4fff63f90c1cc964ab9be9b65bc3",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "44c0e23c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4893.pgm",
+      "filename": "4893.pgm",
+      "sha256": "6685af000f496357e4c1510ece25ffae6a1fb9eb96308fbf217909cf98827805",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "050f5e5f"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4908.pgm",
+      "filename": "4908.pgm",
+      "sha256": "5baad7d2906e5694a65ee7f838e2a0231441a28c7607f798799b84808013b7be",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "6469f540"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4915.pgm",
+      "filename": "4915.pgm",
+      "sha256": "3d61d6c942660bf5792b69b617ff3476cd3f01e2a117dc70ea0b48ad2fdfc907",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "dd28bf71"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4928.pgm",
+      "filename": "4928.pgm",
+      "sha256": "1f28443f5681059c5d98f55a0e5342db103f525898b877211c19d2746087a305",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "83edaaa9"
+    },
+    {
+      "source_member": "BOSSbase_1.01/4978.pgm",
+      "filename": "4978.pgm",
+      "sha256": "dc17a75ec37eb8a4751a00e5d0b69a711b57c79fc635cf9ac1d34588f9b487d2",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "216a5b9a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5019.pgm",
+      "filename": "5019.pgm",
+      "sha256": "7cc6b0745e76dd841c994ce737348f4d8e3fe0916cb472c658a0f6a075803e4b",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "8b9ab141"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5032.pgm",
+      "filename": "5032.pgm",
+      "sha256": "e6ed5dc17a8847b9f6e320e5f08582fba162568c0baa39533af13d0f8ed68d2d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "69318a93"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5045.pgm",
+      "filename": "5045.pgm",
+      "sha256": "b6dbe283fc98dd69e86dc2bc493bd2dea8a26cc0b35010876172104d48b2d6fd",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "01f04c2c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5058.pgm",
+      "filename": "5058.pgm",
+      "sha256": "df6a357b82fd7f20ef53fbcf908e4127d7c7c99d84fe847c685b23115a937cc7",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "dc3addf6"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5059.pgm",
+      "filename": "5059.pgm",
+      "sha256": "0742275be82b0a52c6ae781127538692f0727c8d028911ee22cdc44bba7f56dc",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "0a1bff68"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5067.pgm",
+      "filename": "5067.pgm",
+      "sha256": "8b08266d367d93db5993f750ab78a1cf9b9e441748773c92b45740e2d7dea577",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "4d36c2cb"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5074.pgm",
+      "filename": "5074.pgm",
+      "sha256": "346e52ce3aeee71bd2c08b62a06164c072b19f1e38dd9ac7850b1621f5157b6f",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "521d015b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5088.pgm",
+      "filename": "5088.pgm",
+      "sha256": "d58c813c99e5f061b64448c2ba441398019d6bb77429ae59cb9acf599c35275d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "12c2ae1e"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5090.pgm",
+      "filename": "5090.pgm",
+      "sha256": "0ec13917a11430b7617aa29f54e423dbc39883ef0d805880ea56aae138159e0d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "fb4917c5"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5093.pgm",
+      "filename": "5093.pgm",
+      "sha256": "436537fd8597264bd1289edff8b9e125f068d8b8d386e1514a5ecc6ad222b922",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "6ade64ed"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5096.pgm",
+      "filename": "5096.pgm",
+      "sha256": "78b27bdbd3c74ad98679668879ebb94e24b2e17f12ed924736504e590622f3e1",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "e90a31b7"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5099.pgm",
+      "filename": "5099.pgm",
+      "sha256": "694233343e3531b0b1ee562fd5b236c7525d72908516ef633b3aeff38491e900",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "f679084f"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5100.pgm",
+      "filename": "5100.pgm",
+      "sha256": "596d53b1f65662d64bd27c17423f2505b306f9ac6ba14ff0899d4a1eaa907fcd",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "01cff0de"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5136.pgm",
+      "filename": "5136.pgm",
+      "sha256": "5512faa57ba78b3580949efe2f23611a8f3cf5ca5d4dd588f201223a292af28b",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "434cc23c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5142.pgm",
+      "filename": "5142.pgm",
+      "sha256": "5dd653db95d98720c4c0062893b62b1ab7cd8be5d4a69a09a71a128f0c27f877",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "79ac0769"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5238.pgm",
+      "filename": "5238.pgm",
+      "sha256": "b73ed6700f260c35dabbe4ce9efbd4dfe9fff781adbf7fac9594cbc88e715f6e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "f50e2983"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5244.pgm",
+      "filename": "5244.pgm",
+      "sha256": "d671a9048f11d4df48f1b07d18d4fb07c8bb1075a57ee8c01b1c8c76cf313e65",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "f9b93801"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5249.pgm",
+      "filename": "5249.pgm",
+      "sha256": "e34d39cb0f7685fe0bc77b169e48462d5ca08947cfb9b8baaf82f6ee932ca484",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "38ae16a4"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5255.pgm",
+      "filename": "5255.pgm",
+      "sha256": "7835ec6fba08cfeb83c257433650d6d1e259485ec7fa30a216c0f3a0db3e31aa",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "a8806887"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5266.pgm",
+      "filename": "5266.pgm",
+      "sha256": "7dd58a9b7ca1a6593a1b88727c233421e6b21af9c5852d36b2f6495de1f8fe98",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "5e92e955"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5277.pgm",
+      "filename": "5277.pgm",
+      "sha256": "2f30b5f00ad615c00f09fd425ba570981cbe230db8e4a4597b9af5363bea147a",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "3c34a882"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5287.pgm",
+      "filename": "5287.pgm",
+      "sha256": "c79ae29fb4b2a12776103828c7baaefaaf120f94a6d906c087a2afa6413b4a87",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "04815bdd"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5320.pgm",
+      "filename": "5320.pgm",
+      "sha256": "e33421d96c2abbd1480a0ff84da2383923951c8c419733c05508c21583869651",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "bb4f330b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5321.pgm",
+      "filename": "5321.pgm",
+      "sha256": "ca27734ff38c7a29978a5d304220b2b7e758ab7933caf6ebac162abc4bc05d6e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b0bdcac7"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5328.pgm",
+      "filename": "5328.pgm",
+      "sha256": "76baefa604cf600e5a38a98528df502e74f790a688444f16f66985feeea2adc2",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "ec1c0a7f"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5330.pgm",
+      "filename": "5330.pgm",
+      "sha256": "74806d846647789daf969d60946920ece66598b29e39618652eee32fac74a0d8",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b3241929"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5350.pgm",
+      "filename": "5350.pgm",
+      "sha256": "1597d10241b83ada3f457cfcd7eb2e330b0e2b4d53de80a8a2eec9e1b51bc8ab",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "8084b83d"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5380.pgm",
+      "filename": "5380.pgm",
+      "sha256": "df2dc54897c2237819f778cc939999d9c2465542259ea31c62f322add0514ea8",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "1b9f9ba5"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5386.pgm",
+      "filename": "5386.pgm",
+      "sha256": "e919fc6ee2344859fc0c0c716c0d95d4b595789e665cf04b829dcdd026d6ce06",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "3facc26d"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5388.pgm",
+      "filename": "5388.pgm",
+      "sha256": "5da9e3472764883cd1315d30186feda85e0845003049844c3f4a47c0d6142f9a",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b85045e2"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5392.pgm",
+      "filename": "5392.pgm",
+      "sha256": "84c4361835135ceb29f00eacc05ae5bdedcd191b0173bd44d281f7268e6244dd",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "cb1821c4"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5397.pgm",
+      "filename": "5397.pgm",
+      "sha256": "2aa1a935f744f3e8f1a43985e50fb6318d40ce11ea5e70009d2b2e24354a989c",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b90ca4ce"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5464.pgm",
+      "filename": "5464.pgm",
+      "sha256": "a4308bb6c8d29aea57a2587abb7edc0f853aacc30be198c10f7c62cdc4aebf72",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "aa7c459c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5529.pgm",
+      "filename": "5529.pgm",
+      "sha256": "5415590314bc852e59b3a22fa206b54b48983dd46f335e5f2e3d1750ee171268",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "83777b19"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5540.pgm",
+      "filename": "5540.pgm",
+      "sha256": "c9be45f062256f30007104e6d8524b44c6db51ebae89bd7f4d775c1f195cda96",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "053504e0"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5559.pgm",
+      "filename": "5559.pgm",
+      "sha256": "217e1a5d5d37aa23692a84a40896d1cfd328cd14cc7f81d3d95847b975e9258d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "73bd3bf4"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5574.pgm",
+      "filename": "5574.pgm",
+      "sha256": "83f9133fbc889faed03653bac0b37a5b02603b1120a057ccb49ca6fb88f8a3cf",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "4670a0f6"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5609.pgm",
+      "filename": "5609.pgm",
+      "sha256": "3f80b1132519910dd31ded82ee4d5c3dca6844995d4a70ce6916d14db83fd808",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "3c5d789a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5619.pgm",
+      "filename": "5619.pgm",
+      "sha256": "d3c2864e2a3b05a68fbed43f413d7b8ba2c0818e890fa526f06eb0a495b64358",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "d7af465b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/564.pgm",
+      "filename": "564.pgm",
+      "sha256": "d9ff7525221811af57b1f50de0343a7a08b07f15fc2f739cc7dad112ed1d4c2e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "37ec4dbc"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5648.pgm",
+      "filename": "5648.pgm",
+      "sha256": "e78ea30aeaeee913e8af7ec67c78aa3ab71e843d254faadfd976e5183505ae44",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "f5b84289"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5666.pgm",
+      "filename": "5666.pgm",
+      "sha256": "8f4acc42b8ff0324144ee53167cb8250c3963a84761bf44a1670c49d10f7ec77",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "6a1f72d8"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5672.pgm",
+      "filename": "5672.pgm",
+      "sha256": "5aaac85c36539ba43dedabda3d33c83dac352a6069a684f983041b85797b8a05",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "e1e2ad65"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5681.pgm",
+      "filename": "5681.pgm",
+      "sha256": "165567322ce21e54a5786cc243ad930d90fc3804a13adf1f631b76ebc17d840b",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "5cacf3b4"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5689.pgm",
+      "filename": "5689.pgm",
+      "sha256": "7fe61fc0583df5cc75b830ad71270fead1d8fd6916cbdb0b40a748759a1fa78f",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "565e1860"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5695.pgm",
+      "filename": "5695.pgm",
+      "sha256": "d0825bc05a3efeb689a7e1aed1b2f5c3ad20301cc8a570238c11256cc514d23b",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "c0c98f60"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5710.pgm",
+      "filename": "5710.pgm",
+      "sha256": "c09d0971036d99ea344a4927eb49d549e2cc5198e22635ec8e100ce4c6f5133e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "6e547675"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5740.pgm",
+      "filename": "5740.pgm",
+      "sha256": "9501a645a96843d3a4d1d5e3617c71af9ddaa91144dfa6aab26f23e420c830e8",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "6bc65558"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5766.pgm",
+      "filename": "5766.pgm",
+      "sha256": "c56f757356df5abe38fdce26a47fade8af796d62299f56de2c0be63eb2163380",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "4423990c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5784.pgm",
+      "filename": "5784.pgm",
+      "sha256": "44ca812daca887c9c7fcfaabfd241b7f40d602ad3aa3ecd14f997541f3de62fd",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b5fe3b24"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5785.pgm",
+      "filename": "5785.pgm",
+      "sha256": "b230ba81f99afcd9e08fb5768568d0d700e2db8d2ee24b99dbf146d9c2348ac1",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "dbc9677c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5795.pgm",
+      "filename": "5795.pgm",
+      "sha256": "31d6d143bf5858b53b98ed0e0789de03b49d4eaab1a9207756d9a27980d11203",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "43befef8"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5796.pgm",
+      "filename": "5796.pgm",
+      "sha256": "ddcfcde6109c3fb286e7e13b875e23f5a09345419d4659115df93a510cc77448",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "8fdfd906"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5798.pgm",
+      "filename": "5798.pgm",
+      "sha256": "7ec0c93ebf5d003a63d9a50a3a5d5a6ad6a5d11acfb57b40fe4acd59e1dd0450",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "99602377"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5802.pgm",
+      "filename": "5802.pgm",
+      "sha256": "c827e76f9ccbc7225917902cdbf822acf2025665d0637e324d5f8b6bf3ddde86",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "c63a081a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5858.pgm",
+      "filename": "5858.pgm",
+      "sha256": "f0b8c4e82cb231b426796e576052002eda24af23a0d4ca2ee84782e540024e7b",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "3b1b2bda"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5882.pgm",
+      "filename": "5882.pgm",
+      "sha256": "4714e3ee8f9d743cf604b1cf08597ab848fbbb8d18b9a0e9926ce97fac7f4c1c",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "de88fcfc"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5958.pgm",
+      "filename": "5958.pgm",
+      "sha256": "6128d7cbf084155545af96f2db84cd5cf2047abb9ce3392daa270baace454713",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b378afd8"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5976.pgm",
+      "filename": "5976.pgm",
+      "sha256": "758121175f92eb10b9a0aba18537190aa63ba823da368ae748395f72cad7d2d0",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b855866d"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5996.pgm",
+      "filename": "5996.pgm",
+      "sha256": "1d54240fe90115c5cc374716eabe20b00c7abe0ed1ebcfdd96573bc24965913e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "2690278b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/5999.pgm",
+      "filename": "5999.pgm",
+      "sha256": "2b941816f379075863ff14e335e6096717a3484dea10ec08c593a5baf719a608",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "7066ea5e"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6005.pgm",
+      "filename": "6005.pgm",
+      "sha256": "6ed33149cc340358a2d29197a61cf6cd8351086ed41e212c0fe3548e26e5319d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "3cbc136c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6023.pgm",
+      "filename": "6023.pgm",
+      "sha256": "57b632cd7359654f3e9cf1ed91d0e39c564db08c61a036b7ab5542fa86673cd4",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "c7219ecf"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6030.pgm",
+      "filename": "6030.pgm",
+      "sha256": "5231892d698c8cedaf6204cef55c5574e6c071fb8157d77af57394185e595e54",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "98b89b49"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6044.pgm",
+      "filename": "6044.pgm",
+      "sha256": "bc5fb270e6feb89463e47651e5c4f3a05bb30e941f3a2945185d52603550f233",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "153ad39b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6068.pgm",
+      "filename": "6068.pgm",
+      "sha256": "fa0b578822df21dc2f31610ab70761afc947b01d32e81164b4cae6c964a1f902",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "6249b5f0"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6087.pgm",
+      "filename": "6087.pgm",
+      "sha256": "3e5a4ab0d4f52c08e01b5031dd0470cf2a5a3ccfd760f23e652b0dd7adafb97d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "9195b08f"
+    },
+    {
+      "source_member": "BOSSbase_1.01/61.pgm",
+      "filename": "61.pgm",
+      "sha256": "49b80947a6dd75c058e175271460d8d782d3592c1b10ae431bac57f334d970ea",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "63bfeadb"
+    },
+    {
+      "source_member": "BOSSbase_1.01/611.pgm",
+      "filename": "611.pgm",
+      "sha256": "56b1def224a2db8f19ed8bb1444ec30a442fe3f552685c636fcb99d30e09a504",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "0f0d5fad"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6120.pgm",
+      "filename": "6120.pgm",
+      "sha256": "a77957b42d63da005a2700b74635fab19782a91512d475463a95ce354c508fbf",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "39f4984e"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6128.pgm",
+      "filename": "6128.pgm",
+      "sha256": "90c9868c7b3dbb1f6ae8d873c3aa43da4714fb83ae77f6866afb6375b681b5ed",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "5e367934"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6142.pgm",
+      "filename": "6142.pgm",
+      "sha256": "344e376bcfeb0424d7789fd4e7623d0418d3e6077bea41bd5a4a1276c1a74f53",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "d36ca2e0"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6146.pgm",
+      "filename": "6146.pgm",
+      "sha256": "cb882e348c9eb0938972ad3f8caa54b63ebb2521b7dd86d07e2c88ea0c986f36",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "feb243b1"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6159.pgm",
+      "filename": "6159.pgm",
+      "sha256": "1ab7c7a3565724b76225e667cc480a74991bc2e771ce20c1001be1de40744f50",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "deb41f16"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6175.pgm",
+      "filename": "6175.pgm",
+      "sha256": "e3112ef64bb36b2a228ae43eb82f4bd0ee01f7bff444e704b2478b5c8310be78",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "2e55a59f"
+    },
+    {
+      "source_member": "BOSSbase_1.01/619.pgm",
+      "filename": "619.pgm",
+      "sha256": "d771b05db66b7f5a28e7632517bbc864aafaaae793a452a29f0a214fbbbace9a",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "3c775e17"
+    },
+    {
+      "source_member": "BOSSbase_1.01/62.pgm",
+      "filename": "62.pgm",
+      "sha256": "9ced1487beb8c3b6c6342da4c9ea57668a01a7657dc4381ed255a79e1a6924a5",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "f9d1ea12"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6200.pgm",
+      "filename": "6200.pgm",
+      "sha256": "c635a4e210c80d5f8f0487b20b6876157a7f3b8489466e9fedaf194e11e6472b",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "f8f8e696"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6212.pgm",
+      "filename": "6212.pgm",
+      "sha256": "d821a2e57786fe3eb5d257a0a1c52ec52e23afc1985bba5207899f6e91647ce2",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "c20d3297"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6218.pgm",
+      "filename": "6218.pgm",
+      "sha256": "1a36bfa2e9cb014c1cc353d5c7a6c33e5149fcadf15ca3b49ee196625b272cd0",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "fa147875"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6236.pgm",
+      "filename": "6236.pgm",
+      "sha256": "f18c4940380609727c0d48159f98fe3ecf419521caa466e3eb40e184f5e21a7a",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "09580e4b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6248.pgm",
+      "filename": "6248.pgm",
+      "sha256": "f3a0df50c2c4e8403cb205cdacaa4dd40ac40ebf39c7b0c390c106b365ab5396",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "57da9c4b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6252.pgm",
+      "filename": "6252.pgm",
+      "sha256": "6e026a4ed8fbebd0a36adebc5a96e0027cdff3d133d9d2a7a4ed873c69c58756",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "d334bf68"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6279.pgm",
+      "filename": "6279.pgm",
+      "sha256": "ba96bd3b7fd7e5f6f6b87545a26209482d50c0cb2e033dcfa85283b6086aa9ba",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "157fe350"
+    },
+    {
+      "source_member": "BOSSbase_1.01/628.pgm",
+      "filename": "628.pgm",
+      "sha256": "f78e3aee1a524764dc706458e273662228aeb5b361f713ae8dd9c8aa84f04947",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "d6bc7959"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6318.pgm",
+      "filename": "6318.pgm",
+      "sha256": "c9f5a8311d5f41b90d26cdaae2f8b9ad931286dba6915ecef8900b74687710fa",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "9740e04b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6320.pgm",
+      "filename": "6320.pgm",
+      "sha256": "cbf60e2a186f656beee992cea123f9b2237fd3567c4e8bd0c8add179720a6b84",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "364b02b5"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6326.pgm",
+      "filename": "6326.pgm",
+      "sha256": "4da6e8e00d86bb211d05ddc1261dda5915aba69f95b10fb4d946c27639462465",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "df46e032"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6356.pgm",
+      "filename": "6356.pgm",
+      "sha256": "2b872b1c56b6607aa772316703757e2607bf2fadbc782561a10f9630e45893e5",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "3b118474"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6357.pgm",
+      "filename": "6357.pgm",
+      "sha256": "428f55c4b42e759a35a90f96d500bfdd989a9c56022bc5883db9ddc8c233ace6",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "889d0c08"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6358.pgm",
+      "filename": "6358.pgm",
+      "sha256": "3117a11c15000455b6c78be86013496245d050cc879f05bbe24df2ce918944d0",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "ca630481"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6361.pgm",
+      "filename": "6361.pgm",
+      "sha256": "69c32ea6b01af5cc15423206d7e0de4268dd701287bfeb00034c05a6f55f29d1",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "ae67104a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6367.pgm",
+      "filename": "6367.pgm",
+      "sha256": "2439d6410c3131cd01d9d86d6d1a3472816c5ecd01d24da1ab42108f7f8af020",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "fcd652f3"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6376.pgm",
+      "filename": "6376.pgm",
+      "sha256": "0bc288827f8db8d66d8eb2cc3f95ebb590b975a29095d6d6cc59b69647e0399e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "3ce7bdae"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6396.pgm",
+      "filename": "6396.pgm",
+      "sha256": "fcbb375b191ff1786d27518365ab1e8cdebde201b23acf862e4b80472bbcd80e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "5f6b55c4"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6397.pgm",
+      "filename": "6397.pgm",
+      "sha256": "633548e66ded60dd0f351c61d1220e3975f30c7a5ab2cbc5ebc884e5a2ef8de2",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "bcc91dfa"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6403.pgm",
+      "filename": "6403.pgm",
+      "sha256": "286e882fd27b37b6c84e87bc543b02206e81df3af61e7da6b4a97d1e97c5671c",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "08f662b7"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6407.pgm",
+      "filename": "6407.pgm",
+      "sha256": "0b745d6b3f0878759d7da04d4d60f0da69ca363402ee6377d08b7df2b4779fff",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "4559462f"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6439.pgm",
+      "filename": "6439.pgm",
+      "sha256": "f85a4e9a66539224431e866592b86bd72b912105f848832830bf5cbc7cf6e758",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "32f35d73"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6446.pgm",
+      "filename": "6446.pgm",
+      "sha256": "50f11856e6a0f24493b6270bf2417de1b930498425bd979f3a455c023670d7ef",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "3ca76fc7"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6453.pgm",
+      "filename": "6453.pgm",
+      "sha256": "ce418c49da94690bdb9d96b7d259b7ec66402e063219807c8a8fda4a3a39aa57",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "962131e7"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6454.pgm",
+      "filename": "6454.pgm",
+      "sha256": "518d8addc643f378d75a4a26eafe52a67a84a01f43ee8241ef055f89a5e499be",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "2eb8a4fd"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6485.pgm",
+      "filename": "6485.pgm",
+      "sha256": "d8156cb8dccac9ec91e8065c80952c84b7be77ad1ead161d0e8cba381b3bee99",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "5fdabb0a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6508.pgm",
+      "filename": "6508.pgm",
+      "sha256": "4d4dade443da781ec20272dad9aa1e85f4fb0e344dfc4ca0783120d3f699e15c",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "536e4c8a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6519.pgm",
+      "filename": "6519.pgm",
+      "sha256": "aadddcccacc19c0e867d42fad932f2edce9c346e7271e69f77018c1772cc6779",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "4d0dc23d"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6524.pgm",
+      "filename": "6524.pgm",
+      "sha256": "dab8a8dfb31ab80562107e6c771a8b76b6f5f15476ddf2a63b4a541662724a70",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "9e994d9f"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6529.pgm",
+      "filename": "6529.pgm",
+      "sha256": "274308ef3e8a829022ffa9676751aaa6018ea11f7ff6b2888c1e15489ca2b9dc",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "ceda5c9b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6531.pgm",
+      "filename": "6531.pgm",
+      "sha256": "8ef792e103486b0b2135b31a912d62473a151d846b3d013a5316922b13fbeee3",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "d2ce85a4"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6534.pgm",
+      "filename": "6534.pgm",
+      "sha256": "fe4d05a31ac1f0da891f647f39a78bfc358d060f53bc189bb0b05bf78b37d821",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "2f63a562"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6541.pgm",
+      "filename": "6541.pgm",
+      "sha256": "26c05ca16256d6fee0dcff48572bea61b320f6aa29ea34336e660b2cf246ee46",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "04854143"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6571.pgm",
+      "filename": "6571.pgm",
+      "sha256": "27285ea4962e727f7cd1707116d553c3dd484d704d2cdf4ac852f9192838d4cc",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "3e3c62da"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6578.pgm",
+      "filename": "6578.pgm",
+      "sha256": "8efc2cc560e96e3716c2e50eeae10a96c38144f3e2147cbd54fd5bb35863e07a",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "82fde5d5"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6628.pgm",
+      "filename": "6628.pgm",
+      "sha256": "e62bc33aaa529993cbfbc99a551015519b9afc44c9ec1117b45a24339cc4b4bf",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b6e0ae81"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6634.pgm",
+      "filename": "6634.pgm",
+      "sha256": "607b107feb33df87437a9b440e041995bc60f0230948ed0634368e9d097f5011",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "e433a23d"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6662.pgm",
+      "filename": "6662.pgm",
+      "sha256": "2a2e497776bc215243bbf54806ac2e6a16ab5608f8878b0f53a83733d92ec6f1",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "5845e77a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6676.pgm",
+      "filename": "6676.pgm",
+      "sha256": "423b1771c687c55f8114a5a1c4284653839a27ffcfcfaf3b783a47df69ebac9d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "bddedfd0"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6684.pgm",
+      "filename": "6684.pgm",
+      "sha256": "f7a2dc6d930bc8d178046705a1eb403ebd5bac927a6d1b8177e65b761f400886",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "60650eec"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6698.pgm",
+      "filename": "6698.pgm",
+      "sha256": "c308ba4531c24753d06c7108b444b75a76e0b1a75d8dbdee0f9f2972cb3e1bf6",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "0cfea223"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6699.pgm",
+      "filename": "6699.pgm",
+      "sha256": "214253e0962ee285268b46736fe0eaf9718ca06d2a5590f063d634eab8aeea2d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "eab34ee6"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6701.pgm",
+      "filename": "6701.pgm",
+      "sha256": "c27477ac5e68d2b86af976a4b5426a1c7ddee4472d460bac8fc17218312c7790",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "46a872fe"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6710.pgm",
+      "filename": "6710.pgm",
+      "sha256": "d11e3af7e7a2fa4e6155406b9297e32bf5322d90ff2949935acb9e51d2b09a02",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "744723d5"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6737.pgm",
+      "filename": "6737.pgm",
+      "sha256": "4c76899836577007cd5d44fc6c241f8a6b4aa4ade81cbe46e3101515026782f2",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "0b06ac90"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6739.pgm",
+      "filename": "6739.pgm",
+      "sha256": "f4e8aed9885020dd61fadf0ff5c654853d6329341c2c7caeb5049b2336eee6f7",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "c378c22b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6802.pgm",
+      "filename": "6802.pgm",
+      "sha256": "423fd790bd02ab70571e347a7098884ddf31e2d4e8fa8be5a94c5cfe577f5b5e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "7bb4976d"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6817.pgm",
+      "filename": "6817.pgm",
+      "sha256": "bd2ba6b32581ee821843c3f918881a82bb27bdd1eaf250996d76a6ec18d06bc5",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "32554ff5"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6836.pgm",
+      "filename": "6836.pgm",
+      "sha256": "b716213df420acd60fdcfa6e1955fd1654570e65c6cf93ce82f6b526465ee7ca",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b931c85d"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6853.pgm",
+      "filename": "6853.pgm",
+      "sha256": "faa3d9d1e3ed841f428af099bb30bbc5b3bcb780e79266e16e18f3a63f0bbc03",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "6ee8df9a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6881.pgm",
+      "filename": "6881.pgm",
+      "sha256": "d9de49dba06f4bc28f249bfdb1325f3dcc70ffc49dec2ed6e72e1aaf453aa847",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "f3bb994b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6885.pgm",
+      "filename": "6885.pgm",
+      "sha256": "713f9a0f5ed663cc2f2bb5da866064ea5983d69d35d1c10ab21a2aaa54f1df63",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "cd71ef1c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6905.pgm",
+      "filename": "6905.pgm",
+      "sha256": "7872c4367fca170fa6b1ef5f2744dd431cd237898cf4bde65dd5e61e9b5f1beb",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "f4dcbdba"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6909.pgm",
+      "filename": "6909.pgm",
+      "sha256": "4d78aa4a6f292ceff0d96a38012fe84d5b3b9235b27315390ac02560df9e08c1",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "3afdc8e1"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6944.pgm",
+      "filename": "6944.pgm",
+      "sha256": "f6c186e76299fae8bffa4fad6b7478cfa79bcc94639363ea4cff85ce7a7e0453",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "51b7aef8"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6961.pgm",
+      "filename": "6961.pgm",
+      "sha256": "327ba1cf0bd618f2e7283a5e2eafe129dda9b640933466d7348693b2f4ca98b2",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "c3cd230a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6969.pgm",
+      "filename": "6969.pgm",
+      "sha256": "4089ae5f4d01d4542ab780a5fe5d173a3460b2ad5daf17fc57781dc6d94422b7",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b923c6d1"
+    },
+    {
+      "source_member": "BOSSbase_1.01/6979.pgm",
+      "filename": "6979.pgm",
+      "sha256": "488e0f5098eab9ba41425712f0e78229ad79a9aedb4c124d78f0bc41e45a3224",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "f3201ec3"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7003.pgm",
+      "filename": "7003.pgm",
+      "sha256": "01685e01f647242fdd02239a2b843dc5f9b48827a8098086f2821861403e7677",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "eb8f6056"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7023.pgm",
+      "filename": "7023.pgm",
+      "sha256": "1be85676c8f2c683d757354dea05f09b4b5bed28fd5795b0fbe4ff25c0cec5dd",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "cf64101c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/704.pgm",
+      "filename": "704.pgm",
+      "sha256": "9271c93c74d6f6ff8cb6e15c1e2e055345668e886202b02a8cb0b9f57af4cdaf",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "ef34b5cd"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7065.pgm",
+      "filename": "7065.pgm",
+      "sha256": "58b3fa73a13c047731fe394ea7292801b89e689313764e748f864c9ac93ba92d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "253835e0"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7088.pgm",
+      "filename": "7088.pgm",
+      "sha256": "85481096bebb1ae841b0b2af0f4c957cb598725e7da85f6137977c29d31234f5",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "f9526b81"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7100.pgm",
+      "filename": "7100.pgm",
+      "sha256": "052496153395fc5fa41367238909e2b16c65cce859d6f407090e2f61457e0cea",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "ebd48e7c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7101.pgm",
+      "filename": "7101.pgm",
+      "sha256": "b5d8a8822474aacb8013691d050e58214003a085112de1e99e262f6cd84251c7",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "a68d1b17"
+    },
+    {
+      "source_member": "BOSSbase_1.01/713.pgm",
+      "filename": "713.pgm",
+      "sha256": "3a5c0120ee920029f6452f28218e18e7b16c797d4ece5791755d982ffb866c81",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "bb454d26"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7135.pgm",
+      "filename": "7135.pgm",
+      "sha256": "5ddd6c6ba1003f9e2a78ec65451800775df0ec263d3f7dc05f0dd4554706917b",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "1f558f5d"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7146.pgm",
+      "filename": "7146.pgm",
+      "sha256": "1cdc41b6dcdd707935a5fbac28d39d9b9fa21cb7241ea7443527698a29bc0167",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "c747a8f9"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7158.pgm",
+      "filename": "7158.pgm",
+      "sha256": "67e7d1ba9cab0fc0e61542ed54b19638deddbd7a22003255d2c65c64ddbee24f",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "f0a36cc9"
+    },
+    {
+      "source_member": "BOSSbase_1.01/717.pgm",
+      "filename": "717.pgm",
+      "sha256": "1740a81d8824c986243a7ad039dc9fbf9b6fca3997b55e54f26c6225c9c153da",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "8fa313a5"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7172.pgm",
+      "filename": "7172.pgm",
+      "sha256": "af231c04f0b15b4455258ca23ce269e6d502ecc8a3516a0618ce228c72abb7fb",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "18620435"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7175.pgm",
+      "filename": "7175.pgm",
+      "sha256": "da778c45b457c23422be2c07cadd579e6aa549b648878154d42a78c8f53a919a",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "6716f333"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7195.pgm",
+      "filename": "7195.pgm",
+      "sha256": "3cd35f2452fe239d292fd24476630335fb807b07fbe9908a2b761d66b37749b0",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "98cb4d23"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7213.pgm",
+      "filename": "7213.pgm",
+      "sha256": "9639e006f63a95601714e8929b49865362fd991b3f8a5405524d0feac8a1702f",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "4d47a175"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7216.pgm",
+      "filename": "7216.pgm",
+      "sha256": "7ac394f1b98e60943836ce74613cc5ff8471cfbd9ad92153fa967c9b3be23d95",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "21c7ab2b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7217.pgm",
+      "filename": "7217.pgm",
+      "sha256": "2704b27fe271296f8841390662b66b9d4cb8ec98f5d1f4e8901da6536bfcc0cb",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "af965608"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7231.pgm",
+      "filename": "7231.pgm",
+      "sha256": "038181c8861ff66471b769f4f7951d9fa632257884ec44bac8a22fcb1a539744",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "2662103c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7265.pgm",
+      "filename": "7265.pgm",
+      "sha256": "25ba35896f87089a681963750ab5b026ad45312c861aa316d689e73284d4ffaf",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "9b61d930"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7293.pgm",
+      "filename": "7293.pgm",
+      "sha256": "f16481f419c04a34b7deefd33e5e7019f320520834bd71a21a3ed8020ddc06d6",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "62018095"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7301.pgm",
+      "filename": "7301.pgm",
+      "sha256": "0c3b6855189b97efe680bc916be9d46aeeaa6f53caf58e77396d41457e2e9048",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b149b41d"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7343.pgm",
+      "filename": "7343.pgm",
+      "sha256": "ce9da06229374d6395cde9bd24cb224eb07c9f7248c070ead80ea01f46fd4ecd",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "3521fc7f"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7352.pgm",
+      "filename": "7352.pgm",
+      "sha256": "9346e50e2da06de9b959b59431709634ac70129038b56966de4e6a426cb66d03",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "0b4d8ec0"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7356.pgm",
+      "filename": "7356.pgm",
+      "sha256": "9e1ebfa4949378b0942633980e6a1ea4618730cc953d97e5aa159820b22dedcb",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "04694c44"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7376.pgm",
+      "filename": "7376.pgm",
+      "sha256": "1be4d940bbc21468c704f0425f5bb7c1234d534c4084c8daba6d11fef1591269",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "a8f34bcb"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7377.pgm",
+      "filename": "7377.pgm",
+      "sha256": "d35bd70b8328a54b13c9dc782a4b3a5e217203d51a1002661af58c65db60b394",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "a0c5adac"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7379.pgm",
+      "filename": "7379.pgm",
+      "sha256": "ea260dff06c6a346600b43bdcc3838d7712b8c1a9b9015035cb5c8414d695a81",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "87f9c419"
+    },
+    {
+      "source_member": "BOSSbase_1.01/738.pgm",
+      "filename": "738.pgm",
+      "sha256": "77e1f7e72ff05d3a4a0917def880ed071d04a5db6cfe77ad5d3495841abbb391",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "969f94f5"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7384.pgm",
+      "filename": "7384.pgm",
+      "sha256": "8bcd59c6b728525b48fc21e05c710a1455e57179f59dd6cd472ccb701fa6e187",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "64b2497f"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7391.pgm",
+      "filename": "7391.pgm",
+      "sha256": "3ffd592dafa07c75a4c5e35cef6c331850236723b278d11e57fd8a93aea560a1",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "119667c9"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7397.pgm",
+      "filename": "7397.pgm",
+      "sha256": "7aeeb546e9b46b0cb9c1b6d1707a89239cd1581e7766589d367e785d2b49346a",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "06c71b92"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7419.pgm",
+      "filename": "7419.pgm",
+      "sha256": "17f521618e967f0abcac594f91ecfca97118293952363e266ea311a3ef285d4e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "afa3a9ef"
+    },
+    {
+      "source_member": "BOSSbase_1.01/742.pgm",
+      "filename": "742.pgm",
+      "sha256": "97dd62b0be55c0382dced7ad7deca71fedbfa914352d777682fe9dcc518caae7",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "de51c52c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7437.pgm",
+      "filename": "7437.pgm",
+      "sha256": "caf7790d5c442ed9ceb05a46fb62ab9971b34d7193437c92e4755c4a4274db74",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "9074bd33"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7443.pgm",
+      "filename": "7443.pgm",
+      "sha256": "5e95cbdfffbac8780dd03086541f894b40e02d16b9a8a215415308978e2166be",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "d2d8fa16"
+    },
+    {
+      "source_member": "BOSSbase_1.01/745.pgm",
+      "filename": "745.pgm",
+      "sha256": "7a7b1a20304b7cdaefbbdc2a4efdedae39d9fd121b09762f5764fcaad874c16e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "24734fc1"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7456.pgm",
+      "filename": "7456.pgm",
+      "sha256": "7f9b9304f3c52cea363c3a4cb3470c0b6d33db04ddd54a7b3adcda00a3f9d8e9",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "48f62f38"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7507.pgm",
+      "filename": "7507.pgm",
+      "sha256": "e7865c31715168a4f210f5c440cce6b12fd76f7b545012f6b887cc9b756dae5f",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "9d18c975"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7510.pgm",
+      "filename": "7510.pgm",
+      "sha256": "40279aa0ef4f9416e2484e6e0168b79adb7be0a38ee1558210ecc82146a25735",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "8f5b2ffd"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7517.pgm",
+      "filename": "7517.pgm",
+      "sha256": "c2ac4d5a33b2db16b52fef9be645e17fca7fb766624a635786cd9ed3f8a64de8",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "6a63cd67"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7531.pgm",
+      "filename": "7531.pgm",
+      "sha256": "6fdb566387402aea263f07b19c68e3b7076e687e92f54d4205d67846b83099ed",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "2dbff711"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7544.pgm",
+      "filename": "7544.pgm",
+      "sha256": "2510923f3de302c0188e05e009baadf6809b97d79bbf7da34f45da1bc229923d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "9972a337"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7563.pgm",
+      "filename": "7563.pgm",
+      "sha256": "2206fe2fe346532b1b31eef7d15bfdb3455b2414ea84d5ffc4d382be2575192c",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "91c34131"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7573.pgm",
+      "filename": "7573.pgm",
+      "sha256": "c30495bccfb9794daf011ef0bf04d8b0e37a09a3408ca45a7022343418c0b2ad",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "d6d15b6c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7585.pgm",
+      "filename": "7585.pgm",
+      "sha256": "fb70bcc8cf391952c7bd5d15114ff22bb2b29896cd30f55aa14c6be4e51812d6",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "88f72beb"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7595.pgm",
+      "filename": "7595.pgm",
+      "sha256": "2da84d73930d0e67b28d8ce8e8e6ded9782ebf36b50babfd23106e87f58cfef8",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b99fefe2"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7603.pgm",
+      "filename": "7603.pgm",
+      "sha256": "90c05196a7dc787532175e2ab661de7bc3e06943ad2a5626d4fd1d2aba52d2e4",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "e525bc63"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7607.pgm",
+      "filename": "7607.pgm",
+      "sha256": "3df235550e027973835111f887f90133568ba7e51ee088297e53e5d4afbf829e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "cd58ef93"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7622.pgm",
+      "filename": "7622.pgm",
+      "sha256": "00313b1d8602142af28eed08465415dfe48c59a4dbea24b99d90e0c380c7a8ba",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "db4cdd47"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7624.pgm",
+      "filename": "7624.pgm",
+      "sha256": "bdcaf24a2ec16faae3f310c9ff0dfd390b95bf0c25f4444bfcd4e79b27b09ecc",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "5fa74b9c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/763.pgm",
+      "filename": "763.pgm",
+      "sha256": "1c9fb8cef8fe25086d5033fd7bed9366526f6d9fc5e862eed9bb6b5e6802729e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b8a095b5"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7630.pgm",
+      "filename": "7630.pgm",
+      "sha256": "d480712e7e442a04f11cbfd47a818d6ccdff3295d7f5be76e2ed1e874b98482b",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "bab514fc"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7669.pgm",
+      "filename": "7669.pgm",
+      "sha256": "a851639523434e3ec312d8388b88bc54cc871d72d73c3bf1649d48848286c15e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "3193078b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7684.pgm",
+      "filename": "7684.pgm",
+      "sha256": "76dbec0ff4f2ba226177895e9f091ac91648afe088b03a7f80b7a8d9887a77cf",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "73cd686a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7687.pgm",
+      "filename": "7687.pgm",
+      "sha256": "261b581cdd4f3d0c396079ee56ec9d4f0722f19ee7496fa9740e81aa67d9603d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "02fd1f8d"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7692.pgm",
+      "filename": "7692.pgm",
+      "sha256": "77ddf46e872f299eabe3a5f75701fa1de1d72d946242fbbda3c3a6f198ffdd65",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "603d92df"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7698.pgm",
+      "filename": "7698.pgm",
+      "sha256": "360eabc8395eaa9b14ca41195b941c02d49422c61c72cce4377432af29ba94d6",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "90ba37be"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7700.pgm",
+      "filename": "7700.pgm",
+      "sha256": "ba72e493888b43a7e6c71e82085766179aa4e9e5809236ecb2120343f5163973",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "152988ac"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7708.pgm",
+      "filename": "7708.pgm",
+      "sha256": "8ffb11b5811457701ea2b33123d385fa23341b58b7edb4cf9e992636d6f8f843",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "9f4f4dc0"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7718.pgm",
+      "filename": "7718.pgm",
+      "sha256": "02eb0fa440265a0465d5ce8f26cffaff391c05d085bb8688a594793822effe0f",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "0ab80b0e"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7728.pgm",
+      "filename": "7728.pgm",
+      "sha256": "7f5645547699d703bcf82317c150aa66f88b9843ac94457c6877dd94b4414e2a",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "34a84692"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7736.pgm",
+      "filename": "7736.pgm",
+      "sha256": "87c6c17bfe3a80de8887d96ebe9332dd42c821e7bed16101cf73e40abd482a5d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "e07f5486"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7739.pgm",
+      "filename": "7739.pgm",
+      "sha256": "f669dfece287973235b07f16f9a89330322c3e89df7fe4b1e7ccf4c640157706",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "aaa5b63a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7762.pgm",
+      "filename": "7762.pgm",
+      "sha256": "b850dcf9243f98f96d61b7ed2846b7fbd88eb47d7695b307da848fba08307f2b",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b2b3f4c5"
+    },
+    {
+      "source_member": "BOSSbase_1.01/777.pgm",
+      "filename": "777.pgm",
+      "sha256": "e5b20ee62ecaf2e471a4142dc3cf262b2952a6cf4378be5e1fdb61be877f9d62",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b46bea0c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7782.pgm",
+      "filename": "7782.pgm",
+      "sha256": "309ba5b316b71dc423bc2ba174c7aadc78d34061976c3b4ced15f2b465529b01",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "c545dfa0"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7836.pgm",
+      "filename": "7836.pgm",
+      "sha256": "ded5d6d1c20be1edafda6bebbfb2a2ceeca36cfff619945a91e5648bf1f29e57",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "7502b6e5"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7843.pgm",
+      "filename": "7843.pgm",
+      "sha256": "0dd706d93553aaad776704bc9eeb56d925a03686f5f21db3cfc12eb012f4fc60",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "43292e27"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7850.pgm",
+      "filename": "7850.pgm",
+      "sha256": "d555a44987962072d1899ace743f29116f6173c249d87a3f4cd9d5cb20a32cf7",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "963e8706"
+    },
+    {
+      "source_member": "BOSSbase_1.01/786.pgm",
+      "filename": "786.pgm",
+      "sha256": "46d339b5feb2dbffa06a800f043dbac93bdf9a5e17732cde1a05db60a357d7eb",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "39cb7360"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7870.pgm",
+      "filename": "7870.pgm",
+      "sha256": "731a31a930f42dba9df73452163b09c5c13c564d32f08a0f60dff4b29d17015f",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "a8a532e6"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7875.pgm",
+      "filename": "7875.pgm",
+      "sha256": "1d9c0beaf5097ce49a482f5915f0383e2663e817dffe74073ef519fab011db4c",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "e2deb55a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7887.pgm",
+      "filename": "7887.pgm",
+      "sha256": "3a790038594b3ce4f15755d5d1308e411531e7de54355004f86c6b09d86c52c5",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "8bbeec2f"
+    },
+    {
+      "source_member": "BOSSbase_1.01/790.pgm",
+      "filename": "790.pgm",
+      "sha256": "ca4a0922cd255f08356d19e7c0b5fa209c935aa50c92d0314e36988b72fba2a4",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "3437240a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7912.pgm",
+      "filename": "7912.pgm",
+      "sha256": "765c495015a6dde0f256ac117dd26495c11561dbd0ad418c3d5b810d75e7fb5e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b8bdf7df"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7925.pgm",
+      "filename": "7925.pgm",
+      "sha256": "7d1a3da0507a865616673136736a434cba437dc89a2ed282e8c1c90c0de79cb7",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "bf552e9d"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7942.pgm",
+      "filename": "7942.pgm",
+      "sha256": "fc4308b7933d4260ca3ffdfae009fd49a3ea60ef9e8ebba6a9b87b0901a19d10",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "d9bc5e90"
+    },
+    {
+      "source_member": "BOSSbase_1.01/7967.pgm",
+      "filename": "7967.pgm",
+      "sha256": "35ca66249a3a4023ae64dce9583f1df615a2071ccd1bb91f54ca80892ea1c0d7",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b8ead23e"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8017.pgm",
+      "filename": "8017.pgm",
+      "sha256": "5f18573e50ca6cea1385f0dd477e0973c51996a11679bcfa8e9a1d1828ff5e99",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "7fc05db8"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8042.pgm",
+      "filename": "8042.pgm",
+      "sha256": "e8b0eb65b2f7698eab2ce029cb74da9e4b340f7563c9e53edf48076bb507701e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "ee7bc214"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8052.pgm",
+      "filename": "8052.pgm",
+      "sha256": "7864dd118fd37f9edcd4703916227e8950c27dfd3c40532fbc65ca641eae145f",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "fd6ae478"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8071.pgm",
+      "filename": "8071.pgm",
+      "sha256": "abb10eda6dc9cd9e35ba8b644e9d06eb906542df7451438f1e0b25c3e2f15f9e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b713073b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8155.pgm",
+      "filename": "8155.pgm",
+      "sha256": "274c92ab8e6a22aded29fd22796599292994876daf1090993d9bfdcb4c35dbff",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "2018e0e4"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8176.pgm",
+      "filename": "8176.pgm",
+      "sha256": "339105de033a60abf3aa0888e77af12c279d1bece111afb733fe44d7bef989a2",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "54735429"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8188.pgm",
+      "filename": "8188.pgm",
+      "sha256": "c31f6bc4d45bce03036dfbfffb2229ce6c136da7defbf8fb033f0101257f568e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "3e4a1b04"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8196.pgm",
+      "filename": "8196.pgm",
+      "sha256": "9fb757c099b1477260806939c5d83c00ad32e53996f87f28a6c0a6e0d739ed17",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "16466350"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8214.pgm",
+      "filename": "8214.pgm",
+      "sha256": "fb347d8f9e2816e250bbdb87d9f1891a0cec6ea26b1a969a2ff4cc782689473e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b9b29bb2"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8215.pgm",
+      "filename": "8215.pgm",
+      "sha256": "1613f528e30474a761a9e07cd11d33d73d8f3ea6bbf22941b70caa1ad28a2549",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "10f7b4cb"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8220.pgm",
+      "filename": "8220.pgm",
+      "sha256": "d3a3b37fa7ebdf850c76c17bbda99c8c6f0f7485c262a9287d8dfd567c03c214",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "d489082c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8222.pgm",
+      "filename": "8222.pgm",
+      "sha256": "b089aeaf481cdda7d30ea75ca863afa3ebde438c51a729743acd4978ff985abb",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "94051266"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8223.pgm",
+      "filename": "8223.pgm",
+      "sha256": "23e8d59fbef068942eaa010c8a3af993504b3e41cb9770e7686fc994a40b637c",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "e8f19022"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8290.pgm",
+      "filename": "8290.pgm",
+      "sha256": "c1eea4bb05e9fe7dfcb0bd09b21c494c59f0c48022022e9235e10915f14f1474",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "c0a1cf0c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8292.pgm",
+      "filename": "8292.pgm",
+      "sha256": "114b436fdabdbbafb0c94408c4d2afcd15f17562a2f705f6fbc062d1ad31af86",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "6da54e20"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8331.pgm",
+      "filename": "8331.pgm",
+      "sha256": "57a9a52ae674f24e6495e6916903252c08556c365fb3a431515f57ca1765c36c",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "2213d32b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8332.pgm",
+      "filename": "8332.pgm",
+      "sha256": "8649f31db53adb0eb92f299ba56f90a8a769da1e01691ac572136420f66c55e7",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "c601e6e3"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8341.pgm",
+      "filename": "8341.pgm",
+      "sha256": "98ba63ee12b99d6c26447725069d4b1c686c7ae289cd32f4b208a0b632b9a2e5",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b536add9"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8380.pgm",
+      "filename": "8380.pgm",
+      "sha256": "dd60ea5eec528d0a1ecd607d17211d86eb9a8d370954bde1a51de6c78325e56f",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "0cc8cf1b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8384.pgm",
+      "filename": "8384.pgm",
+      "sha256": "039caad74b5ec9de54afede8117ac889b4e07d95051422f9da157e2efe0f5f17",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "093f6c93"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8397.pgm",
+      "filename": "8397.pgm",
+      "sha256": "4593a2cb0fa9302656cea0c537ae18e1a80736a5eae728bd4bf3e4a192ee4976",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "f844d200"
+    },
+    {
+      "source_member": "BOSSbase_1.01/84.pgm",
+      "filename": "84.pgm",
+      "sha256": "6d4f82f20deb21521b0066bbd42195520ecbc1cd2ae4e57dc83b7720c02de2c9",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "476b3418"
+    },
+    {
+      "source_member": "BOSSbase_1.01/843.pgm",
+      "filename": "843.pgm",
+      "sha256": "35128ec1602acdcf03aac9c58765f32edb958afe417cea1af45553196b25cd16",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "0f4f236b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8430.pgm",
+      "filename": "8430.pgm",
+      "sha256": "39e483aedde375147f9f463c53fb487f31e181588fa13554fd81c5075f25ae92",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "f366857b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8462.pgm",
+      "filename": "8462.pgm",
+      "sha256": "52535eddd30863994b7d937437b64c4150b7f85ff4b3900d5ed3e3ef0729ea50",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "ac0c10ab"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8463.pgm",
+      "filename": "8463.pgm",
+      "sha256": "fe4229f8d3d7f0ff73bb2e356bcdfd68267946a7c22d74208428aa9c02c6e4b7",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "eaf222c9"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8464.pgm",
+      "filename": "8464.pgm",
+      "sha256": "0c5b762a9044eaa23920b9c5f9c61997898df94bb433d3062258e14887817704",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "733a1a33"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8465.pgm",
+      "filename": "8465.pgm",
+      "sha256": "227b154ad882304e7adbbf46c20192d293beb22e3c3279a82e282e1739f8ca26",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "c414d04b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8489.pgm",
+      "filename": "8489.pgm",
+      "sha256": "c92fcdaadf0c0bbd87806cecc3da5069a278f95a886cb74c73036098745db9e7",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "a4e57bb2"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8508.pgm",
+      "filename": "8508.pgm",
+      "sha256": "268a3ca207d1466467f6c98206406e8fe3596b9432cee12682eb27fc569721a8",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "edb63ee7"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8514.pgm",
+      "filename": "8514.pgm",
+      "sha256": "b467c60858a48d91c33fd928900e6503040c17ac2d2ae6a76f573f6378b9151f",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "bcbad9af"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8520.pgm",
+      "filename": "8520.pgm",
+      "sha256": "c7fcf54071f7a90488e1b7b902fde70586cd742b785ed92408f031bc80ef4de2",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "ab943fe3"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8538.pgm",
+      "filename": "8538.pgm",
+      "sha256": "4704e4bbf51384ffab05654a8c942fb7d9f20ba30a158e2acbf4af8da949deae",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "f846513d"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8542.pgm",
+      "filename": "8542.pgm",
+      "sha256": "76d84d469aa161f9acfd1290e36b34bdc1e947a729c0b1e4700f7f588087e1e5",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "52ec2497"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8602.pgm",
+      "filename": "8602.pgm",
+      "sha256": "f0aab2fea0e0574a7e5fe132781b3dd7a0e25658691a20fb18a9cdeed87bfe35",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "434218bc"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8603.pgm",
+      "filename": "8603.pgm",
+      "sha256": "8d232a3a1a829f733b91ed8ebb60d89d64b85a8df294b7930fef377d2fc76b53",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "a7152142"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8618.pgm",
+      "filename": "8618.pgm",
+      "sha256": "e52c4fbecfb08c16866ceef095002365e87114a90aa82605fe3d72bff386633a",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "f2cd1c2e"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8642.pgm",
+      "filename": "8642.pgm",
+      "sha256": "8fb008fc61114d3a9bb7dc9dc6e28fab6658e7b302d469951ddfe9486a2090d2",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "bd1d496e"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8643.pgm",
+      "filename": "8643.pgm",
+      "sha256": "a4d48c59896b072c8a752675ff61318c62e09511a8300198c8c11684d0e632a2",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "bbc9767b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8653.pgm",
+      "filename": "8653.pgm",
+      "sha256": "a392e9faed6457dbe618818a392d8e24b1c0f7ce07a64d3c3e40529923dc0579",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "fd5ab75f"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8706.pgm",
+      "filename": "8706.pgm",
+      "sha256": "35dfa7e4355abc0aa52756190a944b40616b721730e30ed4f87fe205e9eaa269",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "d7b78cfa"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8720.pgm",
+      "filename": "8720.pgm",
+      "sha256": "a77af420b5efa3feb4118363f012e431d874e76bf33cd51ab3a4349ebd342cc4",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "ed7e9bc1"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8756.pgm",
+      "filename": "8756.pgm",
+      "sha256": "bcd561ac0f48c9719bda2514a13f35e7cb3b23fad6eb20b67e12afc1a3353095",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "358eb3fc"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8761.pgm",
+      "filename": "8761.pgm",
+      "sha256": "69c51e4ae7f78570d4ca17430979f13d249492c4c94e1081ef674054c85b1210",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "a2debbfc"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8773.pgm",
+      "filename": "8773.pgm",
+      "sha256": "a78977301d16759942d5342aa206445f74ec2bbf5e1f6d66fef37edd1913dba5",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "62d21ce7"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8782.pgm",
+      "filename": "8782.pgm",
+      "sha256": "a5799f4bf5ccefd86effa13eeb9333c8f93f43dabb96e5305c0bcdfef293679b",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "5cf45c9c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8797.pgm",
+      "filename": "8797.pgm",
+      "sha256": "c2bdd7bbad93b789caf67150be2b48fc94c935f7b768f12aace2b74447a361fd",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "e23ce648"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8827.pgm",
+      "filename": "8827.pgm",
+      "sha256": "d7b070aa287c3b824a55a313f595e851f1a91ecbbc12506da0631af9328a0f15",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "41da14cf"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8842.pgm",
+      "filename": "8842.pgm",
+      "sha256": "9c188d82b6cef640dcc4e77307c690b73a757368ae1839616e8c399755995d8b",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "db250c36"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8849.pgm",
+      "filename": "8849.pgm",
+      "sha256": "5b7ccb13f111b32a5c4afeda09f487c90728ca2bb7dddcfe095dbbf119e0d7aa",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "a9cb5c38"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8851.pgm",
+      "filename": "8851.pgm",
+      "sha256": "b84531050fe1757a9089fd721767ada3996c04aca657b6e38e4bd9fe00fc626d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "30a28a30"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8884.pgm",
+      "filename": "8884.pgm",
+      "sha256": "519044966e690853b984d2cb1f051cbdb98e8101cc786c7c9ee158df7c2c22a5",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "9a421c3a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8891.pgm",
+      "filename": "8891.pgm",
+      "sha256": "7b5d8931dcefbadc539e1343c3343e2b35e22a20d2f92c74682b271b71f24aaf",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "027d13c4"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8928.pgm",
+      "filename": "8928.pgm",
+      "sha256": "9e870f7b9d835b14f638831f7918bb1bc5b76e5bc5cdb774903996aaef9a9eb8",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b04976fa"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8933.pgm",
+      "filename": "8933.pgm",
+      "sha256": "8d1977115a04da35fd23b136bc3bd0f17956fc3908693eb0ce6a946c2dea64d6",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "ed9dfed8"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8952.pgm",
+      "filename": "8952.pgm",
+      "sha256": "69496ebac25e340b1978993d7b7cc7457d4fce1e6cf46403e0c95a50223e15be",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "6a040330"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8953.pgm",
+      "filename": "8953.pgm",
+      "sha256": "78632022d475eba00a0bee8db8e53a2990b9ef35841ad9e61c8bce9b53452b34",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "2a4e04cf"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8955.pgm",
+      "filename": "8955.pgm",
+      "sha256": "d60435c86b3832bd56a0618fdee1550848387fdefbcbb10a77f7e2e0447fd031",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "e879f6a6"
+    },
+    {
+      "source_member": "BOSSbase_1.01/8976.pgm",
+      "filename": "8976.pgm",
+      "sha256": "efc8ee1221f9f8de3be26fd94431a28c7f39cb5f4fe97454708db1a4690d8479",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "dc32985e"
+    },
+    {
+      "source_member": "BOSSbase_1.01/900.pgm",
+      "filename": "900.pgm",
+      "sha256": "4133f72f5c95d9ed5d8e2051dfeea255f16b89fd595a9cddfa4795dd05d47690",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "3326255b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9022.pgm",
+      "filename": "9022.pgm",
+      "sha256": "73598729e534288cadd82868f6b22f163903718aea0fad342934efe957c38657",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "4ca2513b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9026.pgm",
+      "filename": "9026.pgm",
+      "sha256": "23f32801726b70b25b8ccf57e04caaedb9895fd1605163d0ab52bd36aaa5dac7",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "f71cd782"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9044.pgm",
+      "filename": "9044.pgm",
+      "sha256": "28dc70e1dc0a1d1011eefb609a2fba2b91300bb3b2745511ab44e98b3d39c876",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "6fc326f4"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9052.pgm",
+      "filename": "9052.pgm",
+      "sha256": "105290838afc3d69a0795795ca26bab7ae23399eea65be339af78a27531339c7",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "d3d54914"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9066.pgm",
+      "filename": "9066.pgm",
+      "sha256": "a8b2f43bfb01bdd9cbf5f90303d0de032a6898055015cf2f0e18e70c22921771",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "99a447b3"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9074.pgm",
+      "filename": "9074.pgm",
+      "sha256": "add8aaab05d2bcac046eb31d9a51495cfb0039b52a8bc13759bcdff09bc9913d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "f83e0246"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9083.pgm",
+      "filename": "9083.pgm",
+      "sha256": "ce98c7f56de3ec4092a406b5d41f7d02a788f336187b26a9289f96cd91ee5b83",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "994751c1"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9091.pgm",
+      "filename": "9091.pgm",
+      "sha256": "6762aff6b111a1bcb611cd542e23d73dd0498957b3139eb6e6b514e98a329585",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "05e15f56"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9102.pgm",
+      "filename": "9102.pgm",
+      "sha256": "62eac2dc48792a1973a9cbb8377aced729e1c914b71612555b0d1e49817d41b9",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "79afc0b9"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9158.pgm",
+      "filename": "9158.pgm",
+      "sha256": "c7e7789f0881f4b5fbefb812d091973e072542cea83e63310f28e23314d48e51",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "58ff501c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9168.pgm",
+      "filename": "9168.pgm",
+      "sha256": "0183feb779138124276f7a252d7b514105de3189ccb994020fdf93c5b72097b5",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "82124903"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9186.pgm",
+      "filename": "9186.pgm",
+      "sha256": "ac945a1aba6730195571fbe54fe0efaab20f17eec89e6b27cd31c04f7845d0dd",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "b60197fa"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9191.pgm",
+      "filename": "9191.pgm",
+      "sha256": "85049f3aaaeed548919661ae7382abd85e504c3a7cf7881e63876fcacdf0d31b",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "890583f1"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9192.pgm",
+      "filename": "9192.pgm",
+      "sha256": "c8b035143fad1bb43bb5b4b68b92abd9364f39b47c5ef4a35c444888d7732a3f",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "21f6d39c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9198.pgm",
+      "filename": "9198.pgm",
+      "sha256": "5c6a370bfa625f40b3d17cdf0aafb16b97ce8517205594df1e111714bb936c73",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "9860dbde"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9213.pgm",
+      "filename": "9213.pgm",
+      "sha256": "c0b73e8a08dd759b177977fa814794c224efab56093f3b79e038f7c3b6860e72",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "5057ffc0"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9231.pgm",
+      "filename": "9231.pgm",
+      "sha256": "a40ced010aecaf5a1c30200c2d398bcb686a63ba45542b1f7a95441a6ec85aa8",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "5bb97ba3"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9251.pgm",
+      "filename": "9251.pgm",
+      "sha256": "47ba43db1437311b02ba6537dd4de1d69f9d4aa3c5356179cc4305a3f8b4e862",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "d4a56e2d"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9281.pgm",
+      "filename": "9281.pgm",
+      "sha256": "3cd9e426fa3fd1dc5a441f46f367451fc44eb786906a6e82877b70bc18c7cf2e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "1528aeb6"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9290.pgm",
+      "filename": "9290.pgm",
+      "sha256": "5f650acd918a6ba0be4b035a3e394060868fa0d4e652f68a19266f839802397e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "d5e6ba0f"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9334.pgm",
+      "filename": "9334.pgm",
+      "sha256": "9478689c8e971356c37fa20481906afa6a0387f0f1e3934864734b0a422f80ca",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "c1dcd8ec"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9346.pgm",
+      "filename": "9346.pgm",
+      "sha256": "55847684584ee8cab01e61e59088da8a173045e83d065766f23a37fee9e9ee14",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "3de28fc2"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9347.pgm",
+      "filename": "9347.pgm",
+      "sha256": "f930eb1e05569ab7d6cdc407c7dc6cf602473ad8bbc12ba04b060dd35b34ae28",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "876b3172"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9357.pgm",
+      "filename": "9357.pgm",
+      "sha256": "0a82c682443304f7acbeeca35e4328d7b79ead4070920321855dadc566ea8a55",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "1eec9105"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9363.pgm",
+      "filename": "9363.pgm",
+      "sha256": "90f8b3cb0939bfd3c5a3afdb3bc4534756d1b60d1c20fb99771067799158d9d7",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "6b1267e5"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9367.pgm",
+      "filename": "9367.pgm",
+      "sha256": "ec35a8d1343468538445196ed6b311b660159cc51a3a83ed45787b92b18bcc24",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "35fce5b5"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9368.pgm",
+      "filename": "9368.pgm",
+      "sha256": "10add57967dcc3389621242c388acbaaec938a086a6197409c06083c77796380",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "8b305462"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9374.pgm",
+      "filename": "9374.pgm",
+      "sha256": "3ed1be73543c6c1129ac518ece91ac938e126e2e846f0b3110681bf47dfbb3b6",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "959d60cb"
+    },
+    {
+      "source_member": "BOSSbase_1.01/939.pgm",
+      "filename": "939.pgm",
+      "sha256": "1572d08e3304f7fc925ef8da1179ccff7045250f224d3594b19ecd5062dbe361",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "fcd61ca2"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9419.pgm",
+      "filename": "9419.pgm",
+      "sha256": "75594978aaae38b252d5dc69900a1db15a971a2640d65ff68149437a8c8b901f",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "4cf82a5b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9444.pgm",
+      "filename": "9444.pgm",
+      "sha256": "2af703cf94ec81acac663a08f1ef26800046d00be33eecf3cc410913466e1218",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "3d50fb47"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9448.pgm",
+      "filename": "9448.pgm",
+      "sha256": "51daa3767644b474407e973e1092282025cdaaae5d9f386fcea781adee1b48e5",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "baa11eda"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9455.pgm",
+      "filename": "9455.pgm",
+      "sha256": "3d1e14abbc00faee6b5fbd5cda59db59b2012b27ba94970b827c79a4961f3f4b",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "4ba87878"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9467.pgm",
+      "filename": "9467.pgm",
+      "sha256": "48cda90de8a7e863eb02015b496de882a665e9533110500e0b15be865e77920f",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "ad197699"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9507.pgm",
+      "filename": "9507.pgm",
+      "sha256": "9ae9574ea33a0b5acf13747d711f292cd5c7614e0b6242653691b62993cdc899",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "df0c00f8"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9561.pgm",
+      "filename": "9561.pgm",
+      "sha256": "1fb89cf79b06b3d548a1e45c432431d879f1b3b1e45d8a10ca13108c25c6d84d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "7a2125ba"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9566.pgm",
+      "filename": "9566.pgm",
+      "sha256": "a2b07390a53bc49fc230468804037d7115070ef4c5c90080679824caef4fd216",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "5cb83b78"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9601.pgm",
+      "filename": "9601.pgm",
+      "sha256": "7a3b16792c281c542d8a85f4f52309d0ca338e2eadee50d2b4ef24ee9cce7e96",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "1f93279f"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9618.pgm",
+      "filename": "9618.pgm",
+      "sha256": "bcf724e26050a9726b5888fe2bbc8dbe6b2b35113b58d8cdac82bd2f9af6ff95",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "ddc410b7"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9633.pgm",
+      "filename": "9633.pgm",
+      "sha256": "09eba5ab0cda3e378cf26ff07f79171b4dd6078e87705045b8cbc6148a52b305",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "4d06889d"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9635.pgm",
+      "filename": "9635.pgm",
+      "sha256": "52e76b6c4c11a3ec4c84e281e402e11681370fdb9c6aee1e45ccfd0494b632f5",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "eea1afc4"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9689.pgm",
+      "filename": "9689.pgm",
+      "sha256": "1a43c7e005b225a30dc4a7d3f22be36f7617c7b2b4967d22f0b3683898bdf8e9",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "bb33c072"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9696.pgm",
+      "filename": "9696.pgm",
+      "sha256": "c8daebf45505e7c9cbe570be70648b7655eed49019f06f316667c0a5402d94be",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "4983cbed"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9697.pgm",
+      "filename": "9697.pgm",
+      "sha256": "93c14a7ad05993379a44155c90aa8ddcb446f05b8867041541ea4d0a7cddbbb9",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "12576797"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9725.pgm",
+      "filename": "9725.pgm",
+      "sha256": "1bfe517679b7debf954b7f27d0eb37634f49d9e231ef3ed7d7c949051af095cd",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "da42ec23"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9771.pgm",
+      "filename": "9771.pgm",
+      "sha256": "2684c04110132f8a1aa08016cef188042311944b08660c333bfcb28c8030fb10",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "7f4c606a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9790.pgm",
+      "filename": "9790.pgm",
+      "sha256": "6a934db010abf159235efc74183beb81b5ccf4f3e09b7e864bf23da90870e988",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "50a47681"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9812.pgm",
+      "filename": "9812.pgm",
+      "sha256": "9db5d33880ff8655d10b84812dd15a04ea7157b4534b710d195ef0631985831e",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "7f088f7a"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9827.pgm",
+      "filename": "9827.pgm",
+      "sha256": "11a8d9d51b307adf6d77fd1356e6e29b5f1549e24e69308a307665f27ea747b0",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "346dd328"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9841.pgm",
+      "filename": "9841.pgm",
+      "sha256": "55006a24fc2af95b463413d792e39acb4beef81ba0e3f108e294fa51445211eb",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "17a494c9"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9847.pgm",
+      "filename": "9847.pgm",
+      "sha256": "5ab0c3367a8909f658ef02e9203c3a04d7cec86c558f8cc1186dcdc0828ce09d",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "67ebc515"
+    },
+    {
+      "source_member": "BOSSbase_1.01/987.pgm",
+      "filename": "987.pgm",
+      "sha256": "b55cf69bba175aace661a5f18a12c842c76539dde2baa184d51b5d69a7e7aa35",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "292c490c"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9882.pgm",
+      "filename": "9882.pgm",
+      "sha256": "606ce5f90dadf3dd8b2e2f2ca96758449ea3d80af7bb7451b5016c0e18097231",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "f012d79d"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9891.pgm",
+      "filename": "9891.pgm",
+      "sha256": "a55b845f1cd866634bdf94883c60e54a89565293303d57cf4b96d40bd041d5ea",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "8eb43557"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9909.pgm",
+      "filename": "9909.pgm",
+      "sha256": "28491db9643d93d0f51b9a5a4e32ce9a8dbfe82f47d79ac1f5e5605a4718b53c",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "024b4bca"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9936.pgm",
+      "filename": "9936.pgm",
+      "sha256": "63f529e1152d64158e8b3eb1e1f96fe582d5ac20ac778c34d73251d817b9a8ea",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "14c1b955"
+    },
+    {
+      "source_member": "BOSSbase_1.01/994.pgm",
+      "filename": "994.pgm",
+      "sha256": "aae9827212ad7f6bf3d68e196fb20015a4dab6f67534923a556fd5531b9517ae",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "958ca02d"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9944.pgm",
+      "filename": "9944.pgm",
+      "sha256": "87f9be9ac556f63507ee8eda580bf9ebda37891202aa31ebe3061ec5be0426ac",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "44c107af"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9946.pgm",
+      "filename": "9946.pgm",
+      "sha256": "c9dbe1d516f17c29ab1604f0c5dab4387506c7cb87e1fe48922c7fe5f97d8523",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "8802f54b"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9966.pgm",
+      "filename": "9966.pgm",
+      "sha256": "3f36fbf27de15f6566d5f926e64df3e9695f81dc65dc680a1fa3f01088a6a812",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "ef1722da"
+    },
+    {
+      "source_member": "BOSSbase_1.01/9967.pgm",
+      "filename": "9967.pgm",
+      "sha256": "dad1982641e875dbf062043b9ca98059eb1d7347bed6f965a10f39ebf2e8e693",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "eda9a866"
+    },
+    {
+      "source_member": "BOSSbase_1.01/998.pgm",
+      "filename": "998.pgm",
+      "sha256": "eb0fe88ce00e8be4589e4f4682840e7b84558e50193f075e9967378b2261d61c",
+      "uncompressed_bytes": 262159,
+      "zip_crc32": "8fb8b225"
+    }
+  ]
+}

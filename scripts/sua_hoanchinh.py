@@ -61,7 +61,11 @@ def sua_noi_dung(blks):
     # 3.1: nội suy khi thu nhỏ ảnh
     p = tim(blks, "BOSSbase 1.01 contains 10,000 grayscale images")
     de.thay(p, "downsampled each to 256 × 256 before embedding",
-            "downsampled each to 256 × 256 with bicubic interpolation before embedding")
+            "bicubically downsampled each to 256 × 256 before embedding")
+    # 3.1: ảnh stego tạo bằng mô phỏng nhúng của conseal (preparation.json của bộ 600 cover)
+    p = tim(blks, "Leakage is prevented by the order of operations")
+    de.thay(p, " at 0.1 and 0.4 bpp, giving six variants per cover",
+            " at 0.1 and 0.4 bpp using the conseal embedding simulator, giving six variants per cover")
 
     # 3.2: 76 đặc trưng, chuẩn hóa, tham số LR
     p = tim(blks, "Both detectors output a score")

@@ -1,0 +1,17 @@
+{
+  "seed": 20260918,
+  "size_before_embedding": 256,
+  "unique_covers": 600,
+  "split": "60/20/20",
+  "algorithms": [
+    "wow",
+    "suniward",
+    "hill"
+  ],
+  "payloads": [
+    0.1,
+    0.4
+  ],
+  "simulator": "conseal; ideal embedding simulation, no recoverable message",
+  "manifest_sha256": "13c01ca998193e6925d599e43c6bf478021cac9759ff8a4b15e2a37a32799e8c"
+}

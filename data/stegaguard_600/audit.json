@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "unique_covers": 600,
+  "images": 4200,
+  "covers_by_split": {
+    "train": 360,
+    "val": 120,
+    "test": 120
+  }
+}
