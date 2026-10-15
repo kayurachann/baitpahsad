@@ -1,8 +1,9 @@
 """Audit the dataset manifest for source-cover leakage and count consistency (Sect. 3.1).
 
-Manifest CSV columns: cover_id, split, algorithm, payload, embedding_seed, sha256[, path]
+Manifest CSV columns (as written by code/sg.py prepare): cover_id, split, path, label, algorithm, payload,
+embedding_seed, sha256, source_sha256, source_name
   split      train | val | test
-  algorithm  cover | WOW | S-UNIWARD | HILL
+  algorithm  cover | wow | suniward | hill
   payload    0 for covers, 0.1 or 0.4 for stego
 
 Usage: python3 audit_manifest.py manifest.csv [--check-files ROOT]
@@ -20,7 +21,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 EXPECTED_SPLIT = {"train": 360, "val": 120, "test": 120}
-VARIANTS = {("cover", 0.0)} | {(a, p) for a in ("WOW", "S-UNIWARD", "HILL") for p in (0.1, 0.4)}
+VARIANTS = {("cover", 0.0)} | {(a, p) for a in ("wow", "suniward", "hill") for p in (0.1, 0.4)}
 
 
 def sha256(path):
