@@ -34,7 +34,7 @@ Như vậy phần **dữ liệu** của bài đã được xác nhận đầy đ
 Trang cuối và DOI của [17] không nằm trong dữ liệu của nhóm; cần tra IEEE Xplore khi kỷ yếu EUSIPCO 2025 được đăng.
 
 Vì vậy:
-- **Đã xác nhận được từ code (`code/sg.py`):** cách tạo 76 đặc trưng, StandardScaler, tham số Logistic Regression, cách chọn ngưỡng τ_BER và τ_low, bootstrap (1.000 vòng, seed 2026, CI phân vị 2,5–97,5%), cách chia dữ liệu trước khi nhúng, audit chống rò rỉ, các cột của manifest. Code này dùng chung cho thí nghiệm 600 cover vì manifest của bài có đúng các cột mà `sg.py` tạo ra. Dù vậy nhóm vẫn nên khẳng định lại là đã chạy cùng `sg.py`.
+- **Đã xác nhận được từ code (`code/sg.py`):** cách tạo 76 đặc trưng, StandardScaler, tham số Logistic Regression, cách chọn ngưỡng τ_BER và τ_low, bootstrap CI của AUC từng điều kiện (1.000 vòng, seed 2026, phân vị 2,5–97,5%), cách chia dữ liệu trước khi nhúng, audit chống rò rỉ, các cột của manifest. Code này dùng chung cho thí nghiệm 600 cover vì manifest của bài có đúng các cột mà `sg.py` tạo ra. Dù vậy nhóm vẫn nên khẳng định lại là đã chạy cùng `sg.py`.
 - **Chưa xác nhận được bằng code hoặc dữ liệu gốc:**
   - cấu hình SRM+Ensemble;
   - cách gộp ΔAUC qua 3 seed: bài **không thêm** câu nào về việc này (xem mục 2 bên dưới);
@@ -67,6 +67,8 @@ Vì vậy:
   - notebook `code_c_a_pp_nghi_n_c_u.ipynb` (code Chương 3, khảo sát giấc ngủ);
   - 5 script làm video hướng dẫn và mô tả dữ liệu, đều cho bản pilot 180 ảnh;
   - đợt gửi sau: `sg.py`, `run_boss_pilot.py`, `metrics.csv` và `predictions.csv` của `mixed_algorithms_payloads_seed44`. Cả 4 file trùng từng byte với file đã có trong zip pilot;
+  - `fetch_bossbase_subset.py`: script tải và chọn ảnh BOSSbase. Script dùng `random.Random(seed).sample(...)` trên danh sách PGM sắp theo tên, đúng cách mà `kiem_du_lieu_600.py` đã tái lập ra 600/600 ảnh. Câu "We drew 600 of them (6%) with the fixed seed 20260918" trong bài vì vậy có code xác nhận;
+  - `build_conference_report.py`: script dựng báo cáo pilot bằng tiếng Việt, có hàm bootstrap ΔAUC 2.000 vòng (xem mục 2);
   - `create_stegaguard_conference_en_revised.py`: script dựng bài pilot 180 ảnh. Script ghi rằng pilot có bootstrap ghép cặp P3–P2 với 2.000 lần lấy mẫu, tính riêng từng seed, nhưng script bootstrap đó không có trong gói. Cách này cũng khác bài 600 cover, nơi ΔAUC được lấy trung bình qua 3 seed với một CI chung. Vì vậy không dùng nó để mô tả cách gộp CI.
 - Các script này khớp với bài ở hai điểm: ảnh được thu nhỏ bằng bicubic (Pillow), và ảnh stego được tạo bằng conseal.
 - Kết quả thường nằm cạnh thư mục `bossbase_pilot_results` trên máy đã chạy, ví dụ `C:\Users\ACER\Downloads\paper\...`. Tìm các thư mục có `thresholds.json` mà `config.json` ghi `manifest_sha256` = `13c01ca9…`.
@@ -91,7 +93,13 @@ Thêm vào đoạn 3.2 (không thêm bảng) các thông tin lấy từ `sg.py` 
 - **SRM+Ensemble:** giữ nguyên câu cũ (106 submodel, 34,671 đặc trưng, L = 50, d_sub = 500). Mọi tài liệu của nhóm ghi giống nhau nhưng **chưa có code để đối chiếu** (xem phần ⚠️).
 
 ### 2. Section 3.5 – bootstrap
-- Thêm (câu cuối đoạn đầu 3.5): code đánh giá rút **B = 1.000** vòng cho mỗi điều kiện test, bộ sinh số cố định **seed 2026**. Vì bộ sinh được tạo lại cho mỗi điều kiện, mọi điều kiện, protocol và seed dùng **cùng một tập test cover được rút**. CI 95% là khoảng giữa phân vị 2,5% và 97,5% (`sg.py`, hàm `evaluate`).
+- Thêm câu cuối đoạn đầu 3.5: "The 2.5th and 97.5th percentiles of the replicate differences give the 95% interval." Cả `sg.py` và hàm ΔAUC của nhóm đều lấy CI theo phân vị.
+- **Số vòng bootstrap của CI ΔAUC: chưa ghi vào bài, vì có hai nguồn ghi khác nhau.**
+  - `sg.py evaluate` dùng B = 1.000, seed 2026, nhưng đó là CI của **AUC từng điều kiện** (lưu trong `metrics.csv`), không phải CI của ΔAUC.
+  - Hàm ΔAUC duy nhất của nhóm (`paired_auc_confidence` trong `build_conference_report.py`, bản pilot) dùng **2.000 vòng**, seed 2026+seed, tính riêng từng seed.
+  - Table 5, Table 6 và Fig. 2 của bản 600 cover cho một CI chung qua 3 seed, nên đã dùng một script khác mà nhóm chưa gửi.
+  - Bản trước có câu "B = 1,000 … seed 2026" lấy từ `sg.py`. Câu này đã được **bỏ** để không ghi sai số vòng cho CI của ΔAUC.
+  - **Việc nhóm cần làm:** mở script đã tạo Table 5/6 rồi báo lại số vòng (B), seed và cách gộp qua 3 seed. Khi đó chỉ cần thêm một câu, ví dụ "We use B = 2,000 replicates …", đúng như script.
 - **Không thêm:** cách gộp ΔAUC và CI qua 3 seed. Script tính ΔAUC không có trong gói, và thầy yêu cầu chỉ ghi các bước đã chạy trong code, nên bài giữ nguyên mô tả cũ của nhóm: điểm ước lượng là trung bình của 3 hiệu theo từng seed, CI từ bootstrap ghép cặp theo test cover. Khi tìm được script, có thể thêm một câu như: "Each ΔAUC replicate is the difference of the two replicate AUCs, averaged over the three seeds" (chỉ thêm nếu script làm đúng như vậy).
 - Thêm câu nói rõ CI chỉ phản ánh biến thiên khi lấy mẫu lại 120 test cover cố định, không mở rộng sang nguồn ảnh khác ("they account only for test-cover sampling and do not extend to other image sources").
 - Sửa câu lưu trữ cho đúng code: mỗi lần chạy lưu điểm test từng ảnh và ngưỡng chọn trên validation (code không lưu điểm validation).
@@ -163,7 +171,7 @@ Thêm vào đoạn 3.2 (không thêm bảng) các thông tin lấy từ `sg.py` 
   - câu SRM/CNN ở Introduction;
   - câu dẫn Fig. 1;
   - hai câu mới ở 3.2: tách câu nối bằng dấu chấm phẩy;
-  - câu bootstrap ở 3.5 ("We resample the 120 test covers B = 1,000 times …");
+  - câu bootstrap ở 3.5 (nay chỉ còn câu về phân vị, xem mục 2);
   - câu giới hạn CI và câu lưu trữ ở 3.5;
   - câu τ_low ở 4.5;
   - câu 54 rows / 6.480 ở 4.5 (tách làm ba câu ngắn).
@@ -201,7 +209,7 @@ EndNote sinh lại References từ **thư viện trên máy bạn** và từ **s
   - Đổi "Acknowledgement" thành "Acknowledgments": giữ đúng chữ thầy đưa.
   - Sửa mã băm manifest "13c01ca9…2799e8c": giữ nguyên. Nay đã kiểm với `manifest.csv` nhóm gửi: mã đầy đủ là `13c01ca9…a32799e8c`, nên cách viết tắt trong bài đúng.
 - **`scripts/verify_stats.py`** (script tính lại số liệu từ điểm từng ảnh) đã sửa cho khớp `sg.py`:
-  - B = 1000;
+  - B mặc định = 1000, giống `sg.py`. Khi kiểm Table 5/6, đặt `--B` bằng số vòng nhóm đã dùng, ví dụ 2000;
   - mỗi lần bootstrap dùng một bộ sinh mới `default_rng(2026)`;
   - cover lấy theo thứ tự manifest;
   - τ_BER tính giống hệt `sg.py`, kể cả khi có điểm trùng;

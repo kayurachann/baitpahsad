@@ -85,8 +85,10 @@ def sua_noi_dung(blks):
     # 3.5: bootstrap
     p = tim(blks, "Each comparison is a paired difference")
     de.chen_sau(p, " images are never resampled on their own.", [
-        (" We resample the 120 test covers B = 1,000 times with seed 2026, so every condition and run uses the "
-         "same resampled cover IDs. The 2.5th and 97.5th percentiles give the 95% interval.", False),
+        # Chỉ ghi cách lấy CI theo phân vị (có trong cả sg.py và hàm ΔAUC của nhóm). Không ghi B và seed:
+        # sg.py dùng B = 1.000, seed 2026 cho CI AUC từng điều kiện, còn hàm ΔAUC pilot của nhóm
+        # (build_conference_report.py) dùng 2.000 vòng, seed 2026+seed. Script ΔAUC của bản 600 cover chưa có.
+        (" The 2.5th and 97.5th percentiles of the replicate differences give the 95% interval.", False),
     ])
     p = tim(blks, "Seed standard deviations (at most 0.028")
     de.thay(p, "so the intervals are conditional on this partition.",
