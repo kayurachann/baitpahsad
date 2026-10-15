@@ -52,8 +52,8 @@ def sua_noi_dung(blks):
     p = tim(blks, "Image steganography hides a message")
     de.thay(p, ". Steganalysis detectors either train a classifier on statistics of noise residuals, such as SPAM "
                "or the Spatial Rich Model (SRM) ",
-            ". Steganalysis detectors either feed statistics of noise residuals, such as Spatial Rich Model (SRM) "
-            "features, to a classifier such as an ensemble of linear discriminants, or train a convolutional neural "
+            ". Steganalysis detectors either feed noise-residual statistics, such as Spatial Rich Model (SRM) "
+            "features, to a classifier like the Fisher linear discriminant ensemble, or train a convolutional neural "
             "network (CNN) such as SRNet or Yedroudj-Net ")
     de.thay(p, ", or train a convolutional neural network (CNN) such as Yedroudj-Net or SRNet ", "")
     de.xoa_truong(p, 2)  # trích dẫn lặp [5, 7]
@@ -66,12 +66,11 @@ def sua_noi_dung(blks):
     # 3.2: 76 đặc trưng, chuẩn hóa, tham số LR
     p = tim(blks, "Both detectors output a score")
     de.chen_sau(p, "regression . ", [(
-        "The residuals are the first- and second-order horizontal and vertical pixel differences; each is "
-        "summarized by a normalized 17-bin histogram of its values clipped to [−8, 8] plus its mean absolute value "
-        "and standard deviation (4 × 19 = 76 features). A StandardScaler fitted on the training features of each "
-        "run only is applied to all splits, and the L2-regularized classifier uses C = 1.0, the lbfgs solver, no "
-        "class weights (training pairs are balanced), max_iter = 2,000 and the run seed as random_state; its "
-        "decision function is the score. ",
+        "The residuals are the first- and second-order horizontal and vertical pixel differences; each gives a "
+        "normalized 17-bin histogram of its values clipped to [−8, 8] plus the mean absolute value and standard "
+        "deviation of the unclipped residual (4 × 19 = 76 features). A StandardScaler fitted only on each run's "
+        "training features standardizes all splits; the classifier uses L2 regularization with C = 1.0, the "
+        "deterministic lbfgs solver, no class weights and max_iter = 2000, and its decision function is the score. ",
         False)])
 
     # câu thừa (đã có ở Table 2 và mục 3.3), bỏ để giữ 12 trang
@@ -81,14 +80,13 @@ def sua_noi_dung(blks):
     # 3.5: bootstrap
     p = tim(blks, "Each comparison is a paired difference")
     de.chen_sau(p, " images are never resampled on their own.", [
-        (" We draw B = 1,000 replicates per test condition with a generator seeded at 2026, so all conditions, "
-         "protocols and seeds share the same resampled cover IDs, and take the 2.5th and 97.5th percentiles as the "
-         "95% interval.", False),
+        (" The evaluation code resamples the 120 test covers B = 1,000 times with seed 2026, so every condition "
+         "and run uses the same resampled cover IDs; the 2.5th and 97.5th percentiles give the 95% interval.", False),
     ])
     p = tim(blks, "Seed standard deviations (at most 0.028")
     de.thay(p, "so the intervals are conditional on this partition.",
-            "so the intervals are conditional on this partition: they describe variation over the fixed 120 test "
-            "covers only and do not represent other image sources.")
+            "so the intervals are conditional on this partition: they reflect only the fixed 120 test covers and "
+            "do not extend to other image sources.")
 
     # 4.5: 54 dòng / 6.480 lượt chấm
     p = tim(blks, "Even the best cell")
@@ -98,8 +96,59 @@ def sua_noi_dung(blks):
                "are repeated measurements, not 6,480 independent samples.",
             "Each detector has 54 evaluation rows (3 protocols × 3 seeds × 6 conditions) and 6,480 stego-score "
             "evaluations, but its nine models all score the same 720 test stego images of 120 source covers, so "
-            "these are repeated measurements, not independent samples; the false positives in Table 7 are likewise "
-            "repeated evaluations of the same 120 test covers.")
+            "these are repeated measurements, not independent samples, as are the false positives in Table\xa07 on "
+            "the same 120 test covers.")
+
+
+    # 3 (mở đầu): Fig. 1 không đánh số stage
+    p = tim(blks, "Fig.\xa01 summarizes the pipeline")
+    de.thay(p, " summarizes the pipeline. Stages 1-3 build a leakage-controlled dataset, stages 4-5 train the two "
+               "detectors in parallel under protocols P1-P3, and stages 6-7 evaluate every trained model on one fixed "
+               "set of test covers.",
+            " summarizes the pipeline: the left column builds a leakage-controlled dataset, the two middle lanes "
+            "train the detectors in parallel under protocols P1-P3, and the right side evaluates every trained model "
+            "on one fixed set of test covers.")
+
+    # Table 2 và 3.3: với Residual-LR (lbfgs, tất định) seed chỉ điều khiển việc rút biến thể
+    t2 = next(b for b in blks if b.tag == W + "tbl" and de.van_ban(next(b.iter(W + "p"))) == "Setting")
+    hang = [r for r in t2.iter(W + "tr") if de.van_ban(next(r.iter(W + "p"))) == "Seed-dependent parts"][0]
+    o_lr = list(hang.iter(W + "tc"))[1]
+    de.thay(next(o_lr.iter(W + "p")), "; random parts of model fitting", "")
+    p = tim(blks, "The protocols in Table")
+    de.thay(p, "Seeds 42, 43 and 44 control the variant draws and the random parts of model fitting.",
+            "Seeds 42-44 control the variant draws and the random parts of SRM+Ensemble fitting.")
+
+    # 3.5: điểm lưu theo code (điểm test và ngưỡng validation)
+    p = tim(blks, "Seed standard deviations (at most 0.028")
+    de.thay(p, "Every run stores its per-image prediction scores,",
+            "Every run stores its per-image test scores and validation thresholds,")
+
+    # 4.5: ba lần chạy Residual-LR P1 chắc chắn trùng nhau; câu về τlow
+    p = tim(blks, "Table\xa07 reports the operating point")
+    de.thay(p, "if its three runs are identical, as its zero seed spread suggests, that is 5/120 per run",
+            "its three runs are identical (P1 has no variant sampling and the lbfgs fit is deterministic), so that is "
+            "5/120 per run")
+    de.thay(p, "A likely reason is that a 1% target on 120 covers places ", "A likely reason is that ")
+    de.thay(p, " among the one or two highest validation scores, an extreme order statistic that varies strongly "
+               "between samples. The least strict threshold allowed, just above the second-highest score, is exceeded "
+               "by an exchangeable test cover with probability 2/121 ≈ 1.7%.",
+            " rests on the second-highest of only 120 validation cover scores, an extreme order statistic that varies "
+            "strongly between samples; an exchangeable test cover exceeds it with probability 2/121 ≈ 1.7%.")
+
+
+    # 2.3: [10] chỉ đỡ vế "algorithm shift … large CNN training sets"
+    p = tim(blks, "Detector papers evaluate the matched condition")
+    de.thay(p, "shift studies mostly concern the cover source or use large CNN training sets ",
+            "shift studies mostly concern the cover source or, for algorithm shift, use large CNN training sets ")
+    de.thay(p, "while also reporting the FPR", "while reporting the FPR")
+
+    # Table 7: mean recall của SRM+Ensemble P2 tính từ số đếm nguyên (150/2,160 = 0.0694), không từ số đã làm tròn
+    t7 = next(b for b in blks if b.tag == W + "tbl" and de.van_ban(next(b.iter(W + "p"))) == "Detector"
+              and "Test false positives" in " ".join(de.van_ban(x) for x in b.iter(W + "p")))
+    hang = [r for r in t7.iter(W + "tr") if [de.van_ban(x) for x in r.iter(W + "p")][1:3] == ["P2", "11/360"]]
+    assert len(hang) == 1
+    o = list(hang[0].iter(W + "tc"))[4]
+    de.thay(next(o.iter(W + "p")), "0.070", "0.069")
 
     # Acknowledgement trước References
     tieu_de = tim(blks, "References")
@@ -152,17 +201,19 @@ def sua_tai_lieu(root):
         if ind is not None:
             ind.set(W + "left", "341")
             ind.set(W + "hanging", "341")
+        # không ngắt dòng giữa "pp."/"p."/"vol." và số (như "pp.~" của LNCS)
+        nb = lambda x: re.sub(r"\b(pp|p|vol)\. ", "\\1.\xa0", x)  # noqa: E731
         if ref.get("url") and lien_ket is not None:
-            de._dat(t, ref["lncs_truoc_url"])
+            de._dat(t, nb(ref["lncs_truoc_url"]))
             p.append(r)
             for tt in lien_ket.iter(W + "t"):
                 de._dat(tt, ref["url"])
             p.append(lien_ket)
             r2 = copy.deepcopy(nhan)
-            de._dat(r2.find(W + "t"), ref["lncs_sau_url"])
+            de._dat(r2.find(W + "t"), nb(ref["lncs_sau_url"]))
             p.append(r2)
         else:
-            de._dat(t, ref["lncs"])
+            de._dat(t, nb(ref["lncs"]))
             p.append(r)
 
 

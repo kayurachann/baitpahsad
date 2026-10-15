@@ -102,6 +102,13 @@ def fpr_to_fp_total(fpr_mean, n_runs=3, n_covers=N_TEST_COVERS):
     return hits[0]
 
 
+def recall_to_tp_total(recall):
+    """Integer k with round(k/360, 3) == recall; must be unique."""
+    ks = [k for k in range(361) if round(k / 360, 3) == recall]
+    assert len(ks) == 1, (recall, ks)
+    return ks[0]
+
+
 def low_fpr_summary():
     """Per (detector, protocol): FP total over 3 seeds, observed FPR, mean/min/max recall over 6 conditions."""
     rows = []
@@ -112,11 +119,12 @@ def low_fpr_summary():
             assert len(fprs) == 1, "test FPR must not depend on the stego condition"
             fpr = fprs.pop()
             recalls = [Decimal(str(c[4])) for c in cells]
+            # each recall is (true positives over 3 seeds)/360, so recover the integer count before averaging
+            tp = [recall_to_tp_total(float(r)) for r in recalls]
             rows.append({
                 "detector": det, "protocol": p, "fpr": fpr,
                 "fp_total": fpr_to_fp_total(fpr),
-                # exact decimal mean of the reported 3-decimal recalls, rounded half-even
-                "recall_mean": float((sum(recalls) / len(recalls)).quantize(Decimal("0.001"), ROUND_HALF_EVEN)),
+                "recall_mean": float((Decimal(sum(tp)) / (360 * len(tp))).quantize(Decimal("0.001"), ROUND_HALF_EVEN)),
                 "recall_min": float(min(recalls)), "recall_max": float(max(recalls)),
             })
     return rows

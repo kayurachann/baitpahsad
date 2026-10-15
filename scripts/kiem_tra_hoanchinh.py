@@ -120,7 +120,7 @@ def main(path):
     bib = [t for t in doan if re.match(r"^\d+\.\t", t)]
     kiem(len(bib) == len(REFS), f"References có {len(bib)} mục, cần {len(REFS)}")
     for t, r in zip(bib, REFS):
-        kiem(t == f"{r['n']}.\t{r['lncs']}", f"References [{r['n']}] lệch danh mục")
+        kiem(t.replace("\xa0", " ") == f"{r['n']}.\t{r['lncs']}", f"References [{r['n']}] lệch danh mục")
 
     # Trường EndNote và thứ tự đánh số
     xml = zipfile.ZipFile(path).read("word/document.xml").decode("utf-8")

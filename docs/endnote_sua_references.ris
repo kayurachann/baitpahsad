@@ -133,8 +133,8 @@ T2  - IS&T International Symposium on Electronic Imaging: Media Watermarking, Se
 PY  - 2019
 PB  - Society for Imaging Science and Technology
 DO  - 10.2352/ISSN.2470-1173.2019.5.MWSF-534
-SP  - MWSF
-EP  - 534
+SP  - 534-1
+EP  - 534-11
 N1  - StegaGuard reference [10], EndNote RecNum 20
 ER  - 
 
@@ -233,6 +233,7 @@ TI  - MODE: Loss function for deep steganalysis at low false positive rate
 T2  - 33rd European Signal Processing Conference (EUSIPCO 2025)
 PY  - 2025
 CY  - Palermo, Italy
+UR  - https://hal.science/hal-05101274
 N1  - StegaGuard reference [17], EndNote RecNum 25
 ER  - 
 
@@ -288,3 +289,4 @@ PB  - University of Innsbruck
 UR  - https://github.com/uibk-uncover/sealwatch
 N1  - StegaGuard reference [20], EndNote RecNum 28
 ER  - 
+

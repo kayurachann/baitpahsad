@@ -68,10 +68,10 @@ REFS = [
     dict(n=10, recnum="20", typ="CONF", authors=["Butora, J.", "Fridrich, J."],
          title="Detection of diversified stego sources with CNNs",
          container="IS&T International Symposium on Electronic Imaging: Media Watermarking, Security, and "
-                   "Forensics 2019", pages="MWSF-534", year="2019", publisher="Society for Imaging Science and Technology",
+                   "Forensics 2019", pages="534-1–534-11", year="2019", publisher="Society for Imaging Science and Technology",
          doi="10.2352/ISSN.2470-1173.2019.5.MWSF-534",
-         lncs="Butora, J., Fridrich, J.: Detection of diversified stego sources with CNNs. In: IS&T Electronic "
-              "Imaging, Media Watermarking, Security, and Forensics 2019, paper MWSF-534 (2019). "
+         lncs="Butora, J., Fridrich, J.: Detection of diversified stego sources with CNNs. In: Electronic Imaging, "
+              "Media Watermarking, Security, and Forensics 2019, pp. 534-1–534-11. IS&T (2019). "
               "https://doi.org/10.2352/ISSN.2470-1173.2019.5.MWSF-534"),
     dict(n=11, recnum="21", typ="CONF",
          authors=["Wang, F.", "Fu, Z.", "Zhang, X.", "Li, Z.", "He, Z.", "Wang, M."],
@@ -79,8 +79,8 @@ REFS = [
          container="Proceedings of the 33rd ACM International Conference on Multimedia (MM '25)",
          pages="8673-8681", year="2025", publisher="ACM", doi="10.1145/3746027.3755614",
          lncs="Wang, F., Fu, Z., Zhang, X., Li, Z., He, Z., Wang, M.: Pair-wise confidence difference-based "
-              "pseudo-label selection for universal mismatched steganalysis. In: Proc. 33rd ACM International "
-              "Conference on Multimedia (MM ’25), pp. 8673–8681. ACM (2025). "
+              "pseudo-label selection for universal mismatched steganalysis. In: 33rd ACM International "
+              "Conference on Multimedia (MM 2025), pp. 8673–8681. ACM (2025). "
               "https://doi.org/10.1145/3746027.3755614"),
     dict(n=12, recnum="7", typ="JOUR", authors=["Fridrich, J.", "Kodovský, J."],
          title="Rich models for steganalysis of digital images",
@@ -92,8 +92,8 @@ REFS = [
          title="Steganalysis by subtractive pixel adjacency matrix",
          container="Proceedings of the 11th ACM Workshop on Multimedia and Security (MM&Sec '09)",
          pages="75-84", year="2009", publisher="ACM", doi="10.1145/1597817.1597831",
-         lncs="Pevný, T., Bas, P., Fridrich, J.: Steganalysis by subtractive pixel adjacency matrix. In: Proc. 11th"
-              " ACM Workshop on Multimedia and Security (MM&Sec ’09), pp. 75–84. ACM (2009). "
+         lncs="Pevný, T., Bas, P., Fridrich, J.: Steganalysis by subtractive pixel adjacency matrix. In: 11th"
+              " ACM Workshop on Multimedia and Security (MM&Sec 2009), pp. 75–84. ACM (2009). "
               "https://doi.org/10.1145/1597817.1597831"),
     dict(n=14, recnum="23", typ="JOUR", authors=["Yu, L.", "Li, Y.", "Weng, S.", "Tian, H.", "Liu, J."],
          title="Adaptive multi-teacher softened relational knowledge distillation framework for payload mismatch "
@@ -108,8 +108,8 @@ REFS = [
          container="Proceedings of the ACM Workshop on Information Hiding and Multimedia Security (IH&MMSec '19)",
          pages="125-137", year="2019", publisher="ACM", doi="10.1145/3335203.3335726",
          lncs="Cogranne, R., Giboulot, Q., Bas, P.: The ALASKA steganalysis challenge: A first step towards "
-              "steganalysis “into the wild”. In: Proc. ACM Workshop on Information Hiding and Multimedia Security "
-              "(IH&MMSec ’19), pp. 125–137. ACM (2019). https://doi.org/10.1145/3335203.3335726"),
+              "steganalysis “into the wild”. In: ACM Workshop on Information Hiding and Multimedia Security "
+              "(IH&MMSec 2019), pp. 125–137. ACM (2019). https://doi.org/10.1145/3335203.3335726"),
     dict(n=16, recnum="26", typ="JOUR", authors=["Cogranne, R.", "Fridrich, J."],
          title="Modeling and extending the ensemble classifier for steganalysis of digital images using hypothesis "
                "testing theory",
@@ -121,9 +121,10 @@ REFS = [
     dict(n=17, recnum="25", typ="CONF", authors=["Butora, J.", "Bas, P."],
          title="MODE: Loss function for deep steganalysis at low false positive rate",
          container="33rd European Signal Processing Conference (EUSIPCO 2025)", year="2025",
-         place="Palermo, Italy",
+         place="Palermo, Italy", url="https://hal.science/hal-05101274",
          lncs="Butora, J., Bas, P.: MODE: Loss function for deep steganalysis at low false positive rate. In: "
-              "33rd European Signal Processing Conference (EUSIPCO 2025), Palermo, Italy (2025)"),
+              "33rd European Signal Processing Conference (EUSIPCO 2025), Palermo, Italy (2025). "
+              "https://hal.science/hal-05101274"),
     dict(n=18, recnum="27", typ="CHAP", authors=["Bas, P.", "Filler, T.", "Pevný, T."],
          title="\"Break our steganographic system\": The ins and outs of organizing BOSS",
          container="Information Hiding, IH 2011, Lecture Notes in Computer Science, vol. 6958", volume="6958",
@@ -169,7 +170,8 @@ def ris(refs=REFS):
             if r.get(k):
                 out.append(f"{tag}  - {r[k]}")
         if r.get("pages"):
-            sp, _, ep = r["pages"].partition("-")
+            # trang dạng "534-1–534-11" tách ở gạch nối dài
+            sp, _, ep = r["pages"].partition("–" if "–" in r["pages"] else "-")
             out.append(f"SP  - {sp}")
             if ep:
                 out.append(f"EP  - {ep}")

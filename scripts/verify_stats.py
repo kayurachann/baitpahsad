@@ -14,7 +14,7 @@ Validation rows hold the cover and stego scores used to set thresholds; test row
 covers and their stego variants in all six conditions.
 
 Usage:
-    python3 verify_stats.py scores.csv [--B 2000] [--boot-seed 2026] [--out report.json]
+    python3 verify_stats.py scores.csv [--B 1000] [--boot-seed 2026] [--out report.json]
     python3 verify_stats.py --selftest
 
 The script prints each recomputed value next to the value reported in the manuscript
@@ -251,7 +251,7 @@ def selftest(path="selftest_scores.csv"):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("scores", nargs="?")
-    ap.add_argument("--B", type=int, default=2000, help="bootstrap replicates")
+    ap.add_argument("--B", type=int, default=1000, help="bootstrap replicates (sg.py evaluate uses 1000)")
     ap.add_argument("--boot-seed", type=int, default=2026)
     ap.add_argument("--out", default=None, help="optional JSON report")
     ap.add_argument("--selftest", action="store_true")
