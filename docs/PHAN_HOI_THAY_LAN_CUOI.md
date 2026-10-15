@@ -1,7 +1,8 @@
 # Sửa bài StegaGuard theo góp ý cuối của thầy
 
 **File nộp:** `manuscript/Paper_HoanChinh_2.docm`.
-- Sửa trực tiếp trên `Paper_HoanChinh_1.docm` của nhóm: giữ nguyên cấu trúc, style, lề, cỡ chữ thân bài, các bảng và trường EndNote.
+- Sửa trực tiếp trên `Paper_HoanChinh_1.docm` của nhóm: giữ nguyên cấu trúc, lề, cỡ chữ thân bài, các bảng và trường EndNote.
+- Chỉ đổi style "EndNote Bibliography" của References: chữ 10 → 9 pt, giãn dòng 11 pt, thụt lề 341 twip, canh trái. Đây là đúng style `referenceitem` có sẵn trong template LNCS của file (9 pt, line 220), không phải giảm chữ để ép trang.
 - Bản PDF xuất kiểm tra (LibreOffice) dài **12 trang**, kể cả References.
 - Supplementary: `supplementary/StegaGuard_supplementary.docx` (3 trang, Bảng S1–S3).
 
@@ -26,8 +27,9 @@ Vì vậy:
 
   Hiện các số này chỉ khớp nhau và khớp `scripts/results_data.py`.
 - **Việc nhóm cần làm:** tìm trên máy thư mục kết quả 600 cover (có `manifest.csv` với SHA-256 `13c01ca9…2799e8c`), code SRM+Ensemble và script phân tích ΔAUC, rồi gửi lại. Có các file đó thì:
-  - xuất điểm dự đoán thành một file CSV theo cột ghi trong `scripts/verify_stats.py`;
-  - chạy `python3 scripts/verify_stats.py scores.csv` để tính lại toàn bộ số trong bài;
+  - gộp các `predictions.csv` (điểm test) thành một file CSV theo cột ghi trong `scripts/verify_stats.py`;
+  - gộp các `thresholds.json` thành `thresholds.csv` (cột detector, protocol, seed, tau_ber = "balanced", tau_low = "low_fpr"), vì `sg.py` không lưu điểm validation;
+  - chạy `python3 scripts/verify_stats.py scores.csv --thresholds thresholds.csv` để tính lại số của Table 4–7 và các ΔAUC/CI;
   - nếu khớp thì có thể thêm một câu về cách gộp ΔAUC qua 3 seed vào mục 3.5; nếu không khớp thì sửa theo số tính lại.
 
   Không có các file này thì không thể trả lời trung thực mục 1 (SRM+Ensemble), mục 2 (cách gộp CI) và mục 3 (đối chiếu FP) của thầy.
@@ -56,9 +58,9 @@ Thêm vào đoạn 3.2 (không thêm bảng) các thông tin lấy từ `sg.py` 
 ### 2. Section 3.5 – bootstrap
 - Thêm (câu cuối đoạn đầu 3.5): code đánh giá rút **B = 1.000** vòng cho mỗi điều kiện test, bộ sinh số cố định **seed 2026**. Vì bộ sinh được tạo lại cho mỗi điều kiện, mọi điều kiện, protocol và seed dùng **cùng một tập test cover được rút**. CI 95% là khoảng giữa phân vị 2,5% và 97,5% (`sg.py`, hàm `evaluate`).
 - **Không thêm:** cách gộp ΔAUC và CI qua 3 seed. Script tính ΔAUC không có trong gói, và thầy yêu cầu chỉ ghi các bước đã chạy trong code, nên bài giữ nguyên mô tả cũ của nhóm: điểm ước lượng là trung bình của 3 hiệu theo từng seed, CI từ bootstrap ghép cặp theo test cover. Khi tìm được script, có thể thêm một câu như: "Each ΔAUC replicate is the difference of the two replicate AUCs, averaged over the three seeds" (chỉ thêm nếu script làm đúng như vậy).
-- Thêm câu nói rõ CI chỉ phản ánh 120 test cover cố định, không mở rộng sang nguồn ảnh khác ("they apply only to the fixed 120 test covers and do not extend to other image sources").
+- Thêm câu nói rõ CI chỉ phản ánh biến thiên khi lấy mẫu lại 120 test cover cố định, không mở rộng sang nguồn ảnh khác ("they capture only test-cover sampling variation and do not extend to other image sources").
 - Sửa câu lưu trữ cho đúng code: mỗi lần chạy lưu điểm test từng ảnh và ngưỡng chọn trên validation (code không lưu điểm validation).
-- Table 5, Table 6, Fig. 2 và S2: kiểm tự động bằng `scripts/kiem_tra_hoanchinh.py`, khớp `results_data.py`.
+- Table 5 và Table 6: kiểm tự động bằng `scripts/kiem_tra_hoanchinh.py`, khớp `results_data.py`. Fig. 2 và Bảng S2 không được script này đọc, nhưng được vẽ và sinh từ chính `results_data.py` (`make_figures.py`, `build_supplementary.py`).
 
 ### 3. Section 4.5 – low FPR
 - Bỏ câu "in none of them were recall and FPR both zero, so the detectors were never completely silent".
@@ -68,23 +70,29 @@ Thêm vào đoạn 3.2 (không thêm bảng) các thông tin lấy từ `sg.py` 
   - Mỗi recall trong S1 là (số stego bắt được qua 3 seed)/360. Sáu ô của P2 ứng với 14, 56, 9, 35, 10 và 26 ảnh, tổng 150/2.160 = 0,0694, làm tròn là 0,069.
   - Số 0.070 cũ do lấy trung bình 6 giá trị đã làm tròn (0,0695). Các ô khác của Table 7 không đổi.
 - **Residual-LR P1:** code cho thấy ba lần chạy giống hệt nhau (P1 không rút biến thể, lbfgs tất định). Vì vậy câu ở 4.5 khẳng định chắc 5/120 FP mỗi lần chạy, thay vì viết "nếu".
-- Câu giải thích τ_low viết lại cho khớp code: ngưỡng nằm ngay trên điểm validation cover cao thứ hai trong 120 điểm. Xác suất một test cover hoán đổi được vượt ngưỡng là 2/121 ≈ 1,7%.
-- Code xác nhận: τ_low là giá trị ngay trên điểm validation cover cao thứ hai (cho phép tối đa 1 FP trên 120 cover), đúng như Eq. (1) và câu "just above the second-highest score".
+- Câu giải thích τ_low viết lại cho khớp code: "τlow rests on the second-highest of only 120 validation cover scores …; an exchangeable test cover exceeds it with probability 2/121 ≈ 1.7%". Hàm `thresholds()` của `sg.py` đặt τ_low ngay trên điểm validation cover cao thứ hai (`np.nextafter`), tức là ngưỡng nhỏ nhất thỏa Eq. (1), cho phép tối đa 1 FP trên 120 cover.
 - Giữ nguyên kết luận "did not demonstrate reliable operation at FPR ≤ 1%".
 - **Chưa làm được:** đối chiếu FP với điểm dự đoán từng seed, vì cần kết quả 600 cover.
 
 ### 4. References
 - **Thứ tự [1]–[20] giữ nguyên.** Đã kiểm bằng script: thứ tự xuất hiện lần đầu của 20 tài liệu trong bài không đổi.
-- **Metadata:** từng tài liệu được kiểm qua nguồn chính thức hoặc chỉ mục (IEEE Xplore, ACM DL, SpringerOpen/Springer, SPIE, ScienceDirect, PyPI, dblp, OpenAlex, HAL). Kết quả: 18/20 khớp mọi trường.
+- **Metadata:** đối chiếu với bản ghi của nhà xuất bản hoặc chỉ mục (IEEE Xplore, ACM DL, SpringerOpen, SPIE, ScienceDirect, JMLR, PyPI, dblp, OpenAlex, HAL). Kết quả: 19/20 khớp, riêng [17] chỉ khớp một phần.
+  - **Lưu ý trung thực:** mạng của phiên làm việc chặn mở trực tiếp IEEE Xplore, ACM DL, Crossref, doi.org và dblp. Vì vậy phần lớn thông tin lấy qua đoạn trích của các trang đó trong kết quả tìm kiếm; chỉ PyPI được mở trực tiếp.
+  - Vài trường chỉ có nguồn phụ: DOI của [2] (ResearchGate và bài trích dẫn), số trang của [7] (tóm tắt tìm kiếm), [4] (OpenAlex).
+  - Trước khi nộp, một bạn nên bấm thử từng DOI để chắc chắn.
   - Đã sửa [5] và [6]: năm và viết hoa tên tạp chí.
   - Đã sửa [8], [10], [11], [14], [15], [16], [17], [18]: tách đúng tên tác giả, bổ sung nơi đăng, tập, số, trang, DOI.
+  - [9]: ghi số bài SPIE "p. 90280J" thay cho "pp. 204–215" (số bài chính thức của Proc. SPIE 9028).
+  - Mọi mục có DOI ([1]–[16], [18]) đều được thêm DOI.
 - **[17] MODE (EUSIPCO 2025):** xác nhận tác giả, tên, hội nghị (Palermo, 8–12/9/2025) và trang bắt đầu 810.
   - Đã thêm đường dẫn bản HAL đã kiểm: https://hal.science/hal-05101274.
   - Chưa có trang kết thúc và DOI trên IEEE Xplore nên không ghi, để tránh đoán. Khi IEEE Xplore đăng kỷ yếu thì bổ sung.
 - **[10]:** ghi trang 534-1–534-11 và nhà xuất bản IS&T thay cho "paper MWSF-534", để thống nhất với các mục kỷ yếu khác.
 - **[11], [13], [15]:** bỏ "Proc." và năm dạng ’25. Ghi giống các mục IEEE, ví dụ "In: 33rd ACM International Conference on Multimedia (MM 2025)".
 - Sau "pp.", "p." và "vol." dùng khoảng trắng không ngắt, như LNCS, để số trang không bị tách xuống dòng. EndNote Update sẽ đổi lại khoảng trắng thường; khi đó chỉ ảnh hưởng chỗ ngắt dòng.
-- **[20] sealwatch:** trích như phần mềm: Beneš, M., Lorch, B. (Đại học Innsbruck, 2024), tên theo PyPI "Implementation of modern image steganalysis algorithms", URL GitHub, ngày truy cập.
+- **[20] sealwatch:** trích như phần mềm: Beneš, M., Lorch, B. (Đại học Innsbruck, 2024), tên theo PyPI "Implementation of modern image steganalysis algorithms", URL GitHub (xác nhận qua mục Source trên PyPI).
+  - Không ghi "last accessed …", vì chưa mở được trang GitHub để xác nhận ngày.
+  - Nếu hội nghị yêu cầu ngày truy cập: một bạn mở https://github.com/uibk-uncover/sealwatch rồi thêm ", last accessed YYYY/MM/DD" (ngày mở thật) sau URL.
   - Gói code không ghi phiên bản sealwatch đã dùng. Nếu biết (ví dụ 2024.12) thì thêm ", version 2024.12" sau "Python package".
 - **Trình bày theo Springer LNCS:**
   - nhãn "1." thay "[1]";
@@ -93,12 +101,15 @@ Thêm vào đoạn 3.2 (không thêm bảng) các thông tin lấy từ `sg.py` 
 - **Trích dẫn trong bài:**
   - Câu mở đầu "…such as SPAM or the Spatial Rich Model (SRM) [5-7]" trỏ nhầm sang SRNet, Ensemble và Yedroudj-Net. Đã viết lại câu cho đúng ba tài liệu này (SRM features + Fisher linear discriminant ensemble [6], SRNet [5], Yedroudj-Net [7]) và bỏ trích dẫn lặp "[5, 7]". Số thứ tự không đổi.
   - Mục 2.3: [10] chỉ nói về algorithm shift với tập train CNN lớn. Câu sửa thành "…or, for algorithm shift, use large CNN training sets [10]" để trích dẫn đỡ đúng vế của nó.
-- **EndNote:** bản ghi nhúng trong 42 trường trích dẫn đã được cập nhật theo metadata mới. File `docs/endnote_sua_references.ris` có 20 bản ghi đã sửa. Xem các bước ở cuối file này.
+- **EndNote:**
+  - Bản ghi nhúng trong 42 trường trích dẫn đã được cập nhật theo metadata mới, tên kỷ yếu ghi giống hệt References đang in.
+  - File `docs/endnote_sua_references.ris` có cả 20 bản ghi đã sửa.
+  - **Đã tắt Instant Formatting của EndNote trong file**, để khi mở bằng máy có EndNote, References không tự sinh lại theo style IEEE và thư viện cũ. Xem các bước ở cuối file này.
 
 ### 5. Rà soát cuối
 - **Hình 1, 2:** file của nhóm đang ở khoảng 220 dpi do Word nén. Đã thay bằng bản gốc 600 dpi, cùng tỉ lệ khung.
 - **Bảng 1–7:** dùng trường SEQ nên đánh số liên tục; tên bảng và câu dẫn đúng vị trí.
-- **Số liệu:** Abstract, Table 4–7, Results và Conclusion khớp nhau và khớp `results_data.py` (kiểm tự động).
+- **Số liệu:** Table 4–7, các số chính của Abstract và số RQ1 ở Conclusion được kiểm tự động, khớp `results_data.py`. Các số khác trong Results được dò tay.
 - **Supplementary:** sửa tiêu đề cho trùng tên bài ("Lightweight…"); S1–S3 đầy đủ.
 - **Placeholder và tô vàng:** không còn.
 - **Hình 1:** hình không đánh số stage, nên câu dẫn "Stages 1-3 … stages 4-5 … stages 6-7" được sửa thành mô tả theo vị trí trong hình (left column, two middle lanes, right side).
@@ -110,20 +121,29 @@ Thêm vào đoạn 3.2 (không thêm bảng) các thông tin lấy từ `sg.py` 
 
 ## Hướng dẫn EndNote (để References không bị đổi lại khi bấm Update)
 
-References trong file đã đúng, nhưng EndNote sinh lại References từ **thư viện trên máy bạn**. Nếu thư viện còn bản ghi sai mà bấm *Update Citations and Bibliography* thì chữ sai sẽ quay lại. Làm theo thứ tự:
+**Cách an toàn nhất: nộp file như hiện tại, không bấm Update.** References trong file đã là bản cuối. Instant Formatting đã được tắt trong file. Nếu tab EndNote trong Word vẫn hiện Instant Formatting đang bật thì chọn *Turn Instant Formatting Off* trước khi sửa gì.
 
-1. **Sửa thư viện EndNote.** Mở thư viện có các RecNum dưới đây. Sửa từng bản ghi theo `docs/endnote_sua_references.ris`: mỗi bản ghi có dòng `N1` ghi số thứ tự trong bài và RecNum. Mỗi tác giả một dòng, dạng "Họ, Tên viết tắt".
-   - Các bản ghi cần sửa nhiều: RecNum 22 [8], 20 [10], 21 [11], 23 [14], 24 [15], 26 [16], 25 [17], 27 [18], 28 [20].
-   - Các bản ghi chỉ sửa năm hoặc viết hoa: 14 [5], 8 [6], 7 [12], 17 [19].
+EndNote sinh lại References từ **thư viện trên máy bạn** và từ **style đang chọn trong file**. File vẫn ghi style IEEE (của nhóm cũ). Nếu bấm *Update Citations and Bibliography* khi chưa sửa thư viện và chưa đổi style, References sẽ quay về dạng IEEE "[1] T. Filler, …" với dữ liệu cũ. Nếu vẫn muốn dùng EndNote, làm đúng thứ tự:
+
+1. **Sửa thư viện EndNote.** Sửa **cả 20 bản ghi** theo `docs/endnote_sua_references.ris`. Mỗi bản ghi có dòng `N1` ghi số thứ tự trong bài và RecNum (RecNum 2, 3, 4, 5, 14, 8, 13, 22, 9, 20, 21, 7, 6, 23, 24, 26, 25, 27, 17, 28 ứng với [1]–[20]). Mỗi tác giả một dòng, dạng "Họ, Tên viết tắt".
    - Không xóa bản ghi cũ rồi nhập bản mới, vì như vậy đổi RecNum và EndNote sẽ không khớp trích dẫn trong file.
-2. **Chọn output style:** Edit → Output Styles → chọn "Springer Lecture Notes Computer Sci" (hoặc tên tương tự trong Style Finder).
-3. **Định dạng References:** Word → EndNote → Configure Bibliography → Layout, chọn cỡ chữ 9.
-4. **Update Citations and Bibliography.** Thứ tự [1]–[20] không đổi vì đánh số theo thứ tự trích dẫn. Sau khi update, so References với file này.
+2. **Đổi style trong Word:** tab EndNote → ô *Style* → *Select Another Style…* → chọn style Springer LNCS (tên trong EndNote thường có chữ "Lecture Notes"). Nếu không có thì tải từ trang Output Styles của EndNote. Đổi trong menu của chương trình EndNote (Edit → Output Styles) không đổi style của file Word.
+3. **Định dạng References:** tab EndNote → *Configure Bibliography* → *Layout*, chọn cỡ chữ 9, hanging indent 0,6 cm.
+4. **Update Citations and Bibliography.** Thứ tự [1]–[20] không đổi vì đánh số theo thứ tự trích dẫn. Sau khi update, so từng dòng References với bản PDF kèm theo. Chỗ nào khác (ví dụ cách ghi "LNCS, vol." ở [18] hay "Proc. SPIE" ở [9], phụ thuộc style) thì sửa tay hoặc quay lại file gốc.
 5. **Giữ độ nét của hình:** trước khi lưu trong Word, vào File → Options → Advanced → Image Size and Quality, tick "Do not compress images in file".
 
 ## Kiểm tra đã chạy
 - `python3 scripts/kiem_tra_hoanchinh.py manuscript/Paper_HoanChinh_2.docm`: khớp số Table 4–7, Abstract, Conclusion; 42 trích dẫn trỏ đúng tài liệu; thứ tự tài liệu không đổi; có Acknowledgement; References đúng danh mục.
-- So văn bản cũ và mới bằng diff: chỉ đổi các đoạn ở 3.1, 3.2, 3.5, 4.5, câu mở đầu, Acknowledgement và References.
+- So văn bản cũ và mới bằng diff. Chỉ đổi các chỗ sau (để nhóm biết khi chạy kiểm tra đạo văn):
+  - đoạn 1 của Introduction;
+  - đoạn cuối 2.3;
+  - câu mở đầu mục 3 (Fig. 1);
+  - đoạn 3.1;
+  - đoạn 3.2 và ô "Seed-dependent parts" của Table 2;
+  - câu Seeds ở 3.3;
+  - hai đoạn của 3.5;
+  - hai đoạn của 4.5 và một ô của Table 7;
+  - Acknowledgement và References.
 - Workflow rà soát 4 hướng (khớp code, checklist thầy, trích dẫn, văn phong). Các lỗi đã sửa đều ghi ở các mục trên.
 - Không làm theo hai đề xuất:
   - Đổi "Acknowledgement" thành "Acknowledgments": giữ đúng chữ thầy đưa.
@@ -132,7 +152,8 @@ References trong file đã đúng, nhưng EndNote sinh lại References từ **t
   - B = 1000;
   - mỗi lần bootstrap dùng một bộ sinh mới `default_rng(2026)`;
   - cover lấy theo thứ tự manifest;
-  - τ_BER tính giống hệt `sg.py`, kể cả khi có điểm trùng.
+  - τ_BER tính giống hệt `sg.py`, kể cả khi có điểm trùng;
+  - đọc được ngưỡng có sẵn từ `thresholds.json` (tùy chọn `--thresholds`), vì `sg.py` không lưu điểm validation.
 
   Đã kiểm bằng `python3 scripts/kiem_verify_stats.py <thư mục bossbase_pilot_results>`:
   - AUC và CI 95% khớp `metrics.csv` của `sg.py` ở cả 54/54 điều kiện pilot (sai khác < 1e-12);

@@ -15,8 +15,12 @@ covers and their stego variants in all six conditions. As in sg.py, validation r
 each validation cover once and only the stego variants of that protocol's training pool. Keep the test
 rows in manifest order (the order of sg.py's predictions.csv): the bootstrap indexes covers in that order.
 
+sg.py does not save validation scores, only each run's thresholds.json. For such runs leave out the
+validation rows and pass --thresholds, a CSV with columns detector, protocol, seed, tau_ber, tau_low
+(tau_ber = "balanced" and tau_low = "low_fpr" of that run's thresholds.json).
+
 Usage:
-    python3 verify_stats.py scores.csv [--B 1000] [--boot-seed 2026] [--out report.json]
+    python3 verify_stats.py scores.csv [--thresholds thresholds.csv] [--B 1000] [--boot-seed 2026] [--out report.json]
     python3 verify_stats.py --selftest
 
 The script prints each recomputed value next to the value reported in the manuscript
@@ -101,13 +105,22 @@ def load(path):
     return runs
 
 
-def check_structure(runs):
+def load_thresholds(path):
+    """thresholds.csv -> {(detector, protocol, seed): (tau_ber, tau_low)}"""
+    with open(path, newline="") as fh:
+        return {(r["detector"], r["protocol"], int(r["seed"])): (float(r["tau_ber"]), float(r["tau_low"]))
+                for r in csv.DictReader(fh)}
+
+
+def check_structure(runs, thr=None):
     problems = []
     for key, run in runs.items():
         ids = set(run["test_cover"])
         if len(ids) != R.N_TEST_COVERS:
             problems.append(f"{key}: {len(ids)} test covers")
-        if len(run["val_cover"]) != R.N_VAL_COVERS:
+        if not run["val_cover"] and thr and key in thr:
+            pass                                    # thresholds taken from the run's thresholds.json
+        elif len(run["val_cover"]) != R.N_VAL_COVERS:
             problems.append(f"{key}: {len(run['val_cover'])} validation covers")
         if ids & set(run["val_cover"]):
             problems.append(f"{key}: validation/test cover_id overlap")
@@ -130,12 +143,15 @@ def vectors(run, cond, ids):
 
 
 # ---------------------------------------------------------------------- per-run metrics
-def per_run_metrics(runs):
+def per_run_metrics(runs, thr=None):
     out = {}
     for (det, p, seed), run in sorted(runs.items()):
         ids = run["test_order"]
-        t_low = tau_low(list(run["val_cover"].values()))
-        t_ber = tau_ber(list(run["val_cover"].values()), run["val_stego"])
+        if run["val_cover"]:
+            t_low = tau_low(list(run["val_cover"].values()))
+            t_ber = tau_ber(list(run["val_cover"].values()), run["val_stego"])
+        else:
+            t_ber, t_low = thr[(det, p, seed)]
         cover = np.array([run["test_cover"][i] for i in ids])
         fp = int((cover >= t_low).sum())
         for cond in CONDITIONS:
@@ -213,13 +229,14 @@ def reported_delta(rq, det, ref, shf):
 
 
 # ---------------------------------------------------------------------- main
-def run(path, B, boot_seed, out_path):
+def run(path, B, boot_seed, out_path, thr_path=None):
     runs = load(path)
-    problems = check_structure(runs)
+    thr = load_thresholds(thr_path) if thr_path else None
+    problems = check_structure(runs, thr)
     print("structure check:", "OK" if not problems else f"{len(problems)} problems")
     for pr in problems[:20]:
         print("  ", pr)
-    summary = summarise(per_run_metrics(runs))
+    summary = summarise(per_run_metrics(runs, thr))
     report = {"matrix": {}, "comparisons": []}
     print("\nAUC (recomputed vs reported), test FP per seed at tau_low:")
     for key, v in summary.items():
@@ -272,11 +289,12 @@ if __name__ == "__main__":
     ap.add_argument("--B", type=int, default=1000, help="bootstrap replicates (sg.py evaluate uses 1000)")
     ap.add_argument("--boot-seed", type=int, default=2026)
     ap.add_argument("--out", default=None, help="optional JSON report")
+    ap.add_argument("--thresholds", default=None, help="CSV of per-run tau_ber/tau_low from thresholds.json")
     ap.add_argument("--selftest", action="store_true")
     a = ap.parse_args()
     if a.selftest:
         selftest()
     elif a.scores:
-        run(a.scores, a.B, a.boot_seed, a.out)
+        run(a.scores, a.B, a.boot_seed, a.out, a.thresholds)
     else:
         ap.error("give a score CSV or --selftest")

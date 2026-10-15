@@ -15,7 +15,7 @@ REFS = [
               "https://doi.org/10.1109/TIFS.2011.2134094"),
     dict(n=2, recnum="3", typ="CONF", authors=["Holub, V.", "Fridrich, J."],
          title="Designing steganographic distortion using directional filters",
-         container="2012 IEEE International Workshop on Information Forensics and Security (WIFS)",
+         container="IEEE International Workshop on Information Forensics and Security (WIFS 2012)",
          pages="234-239", year="2012", publisher="IEEE", doi="10.1109/WIFS.2012.6412655",
          lncs="Holub, V., Fridrich, J.: Designing steganographic distortion using directional filters. In: IEEE "
               "International Workshop on Information Forensics and Security (WIFS 2012), pp. 234–239. IEEE (2012). "
@@ -28,7 +28,7 @@ REFS = [
               "arbitrary domain. EURASIP J. Inf. Secur. 2014, 1 (2014). https://doi.org/10.1186/1687-417X-2014-1"),
     dict(n=4, recnum="5", typ="CONF", authors=["Li, B.", "Wang, M.", "Huang, J.", "Li, X."],
          title="A new cost function for spatial image steganography",
-         container="2014 IEEE International Conference on Image Processing (ICIP)", pages="4206-4210",
+         container="IEEE International Conference on Image Processing (ICIP 2014)", pages="4206-4210",
          year="2014", publisher="IEEE", doi="10.1109/ICIP.2014.7025854",
          lncs="Li, B., Wang, M., Huang, J., Li, X.: A new cost function for spatial image steganography. In: IEEE "
               "International Conference on Image Processing (ICIP 2014), pp. 4206–4210. IEEE (2014). "
@@ -47,7 +47,7 @@ REFS = [
               "Trans. Inf. Forensics Secur. 7(2), 432–444 (2012). https://doi.org/10.1109/TIFS.2011.2175919"),
     dict(n=7, recnum="13", typ="CONF", authors=["Yedroudj, M.", "Comby, F.", "Chaumont, M."],
          title="Yedroudj-Net: An efficient CNN for spatial steganalysis",
-         container="2018 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)",
+         container="IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP 2018)",
          pages="2092-2096", year="2018", publisher="IEEE", doi="10.1109/ICASSP.2018.8461438",
          lncs="Yedroudj, M., Comby, F., Chaumont, M.: Yedroudj-Net: An efficient CNN for spatial steganalysis. In: "
               "IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP 2018), pp. "
@@ -67,8 +67,8 @@ REFS = [
               "p. 90280J. SPIE (2014). https://doi.org/10.1117/12.2039693"),
     dict(n=10, recnum="20", typ="CONF", authors=["Butora, J.", "Fridrich, J."],
          title="Detection of diversified stego sources with CNNs",
-         container="IS&T International Symposium on Electronic Imaging: Media Watermarking, Security, and "
-                   "Forensics 2019", pages="534-1–534-11", year="2019", publisher="Society for Imaging Science and Technology",
+         container="Electronic Imaging, Media Watermarking, Security, and Forensics 2019", pages="534-1–534-11",
+         year="2019", publisher="IS&T",
          doi="10.2352/ISSN.2470-1173.2019.5.MWSF-534",
          lncs="Butora, J., Fridrich, J.: Detection of diversified stego sources with CNNs. In: Electronic Imaging, "
               "Media Watermarking, Security, and Forensics 2019, pp. 534-1–534-11. IS&T (2019). "
@@ -76,7 +76,7 @@ REFS = [
     dict(n=11, recnum="21", typ="CONF",
          authors=["Wang, F.", "Fu, Z.", "Zhang, X.", "Li, Z.", "He, Z.", "Wang, M."],
          title="Pair-wise confidence difference-based pseudo-label selection for universal mismatched steganalysis",
-         container="Proceedings of the 33rd ACM International Conference on Multimedia (MM '25)",
+         container="33rd ACM International Conference on Multimedia (MM 2025)",
          pages="8673-8681", year="2025", publisher="ACM", doi="10.1145/3746027.3755614",
          lncs="Wang, F., Fu, Z., Zhang, X., Li, Z., He, Z., Wang, M.: Pair-wise confidence difference-based "
               "pseudo-label selection for universal mismatched steganalysis. In: 33rd ACM International "
@@ -90,7 +90,7 @@ REFS = [
               "Forensics Secur. 7(3), 868–882 (2012). https://doi.org/10.1109/TIFS.2012.2190402"),
     dict(n=13, recnum="6", typ="CONF", authors=["Pevný, T.", "Bas, P.", "Fridrich, J."],
          title="Steganalysis by subtractive pixel adjacency matrix",
-         container="Proceedings of the 11th ACM Workshop on Multimedia and Security (MM&Sec '09)",
+         container="11th ACM Workshop on Multimedia and Security (MM&Sec 2009)",
          pages="75-84", year="2009", publisher="ACM", doi="10.1145/1597817.1597831",
          lncs="Pevný, T., Bas, P., Fridrich, J.: Steganalysis by subtractive pixel adjacency matrix. In: 11th"
               " ACM Workshop on Multimedia and Security (MM&Sec 2009), pp. 75–84. ACM (2009). "
@@ -105,7 +105,7 @@ REFS = [
               "95, 103900 (2023). https://doi.org/10.1016/j.jvcir.2023.103900"),
     dict(n=15, recnum="24", typ="CONF", authors=["Cogranne, R.", "Giboulot, Q.", "Bas, P."],
          title="The ALASKA steganalysis challenge: A first step towards steganalysis \"into the wild\"",
-         container="Proceedings of the ACM Workshop on Information Hiding and Multimedia Security (IH&MMSec '19)",
+         container="ACM Workshop on Information Hiding and Multimedia Security (IH&MMSec 2019)",
          pages="125-137", year="2019", publisher="ACM", doi="10.1145/3335203.3335726",
          lncs="Cogranne, R., Giboulot, Q., Bas, P.: The ALASKA steganalysis challenge: A first step towards "
               "steganalysis “into the wild”. In: ACM Workshop on Information Hiding and Multimedia Security "
@@ -145,10 +145,10 @@ REFS = [
          year="2024", publisher="University of Innsbruck", url="https://github.com/uibk-uncover/sealwatch",
          lncs_truoc_url="Beneš, M., Lorch, B.: sealwatch: Implementation of modern image steganalysis algorithms. "
                         "Python package, University of Innsbruck (2024). ",
-         lncs_sau_url=", last accessed 2026/10/15",
+         # không ghi ngày truy cập: trang GitHub chưa mở được để xác nhận (URL kiểm qua project_urls của PyPI)
+         lncs_sau_url="",
          lncs="Beneš, M., Lorch, B.: sealwatch: Implementation of modern image steganalysis algorithms. Python "
-              "package, University of Innsbruck (2024). https://github.com/uibk-uncover/sealwatch, last accessed "
-              "2026/10/15"),
+              "package, University of Innsbruck (2024). https://github.com/uibk-uncover/sealwatch"),
 ]
 
 # kiểu tài liệu EndNote (tên, mã) theo loại

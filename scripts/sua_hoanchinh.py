@@ -85,8 +85,8 @@ def sua_noi_dung(blks):
     ])
     p = tim(blks, "Seed standard deviations (at most 0.028")
     de.thay(p, "so the intervals are conditional on this partition.",
-            "so the intervals are conditional on this partition: they apply only to the fixed 120 test covers and "
-            "do not extend to other image sources.")
+            "so the intervals are conditional on this partition: they capture only test-cover sampling variation "
+            "and do not extend to other image sources.")
 
     # 4.5: 54 dòng / 6.480 lượt chấm
     p = tim(blks, "Even the best cell")
@@ -209,9 +209,10 @@ def sua_tai_lieu(root):
             for tt in lien_ket.iter(W + "t"):
                 de._dat(tt, ref["url"])
             p.append(lien_ket)
-            r2 = copy.deepcopy(nhan)
-            de._dat(r2.find(W + "t"), nb(ref["lncs_sau_url"]))
-            p.append(r2)
+            if ref["lncs_sau_url"]:
+                r2 = copy.deepcopy(nhan)
+                de._dat(r2.find(W + "t"), nb(ref["lncs_sau_url"]))
+                p.append(r2)
         else:
             de._dat(t, nb(ref["lncs"]))
             p.append(r)
@@ -332,6 +333,21 @@ def sua_style_tai_lieu(styles_xml):
     return etree.tostring(st, xml_declaration=True, encoding="UTF-8", standalone=True)
 
 
+def sua_cai_dat_endnote(data):
+    """settings.xml: tắt Instant Formatting của EndNote để References đã sửa không bị sinh lại tự động
+    theo style IEEE và thư viện cũ khi mở file; cỡ chữ và thụt lề của EN.Layout theo style referenceitem."""
+    s = data.decode("utf-8")
+    cu = ["&lt;Enabled&gt;1&lt;/Enabled&gt;", "&lt;FontSize&gt;10&lt;/FontSize&gt;",
+          "&lt;HangingIndent&gt;720&lt;/HangingIndent&gt;"]
+    moi = ["&lt;Enabled&gt;0&lt;/Enabled&gt;", "&lt;FontSize&gt;9&lt;/FontSize&gt;",
+           "&lt;HangingIndent&gt;341&lt;/HangingIndent&gt;"]
+    for a, b in zip(cu, moi):
+        if s.count(a) != 1:
+            raise ValueError(f"settings.xml: không thấy đúng một {a}")
+        s = s.replace(a, b)
+    return s.encode("utf-8")
+
+
 def main(vao, ra):
     zin = zipfile.ZipFile(vao)
     root = etree.fromstring(zin.read("word/document.xml"))
@@ -346,6 +362,8 @@ def main(vao, ra):
                 data = xml
             elif item.filename == "word/styles.xml":
                 data = sua_style_tai_lieu(zin.read(item.filename))
+            elif item.filename == "word/settings.xml":
+                data = sua_cai_dat_endnote(zin.read(item.filename))
             elif item.filename in HINH:
                 data = HINH[item.filename].read_bytes()
             else:

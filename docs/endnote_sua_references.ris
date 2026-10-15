@@ -17,7 +17,7 @@ TY  - CONF
 AU  - Holub, V.
 AU  - Fridrich, J.
 TI  - Designing steganographic distortion using directional filters
-T2  - 2012 IEEE International Workshop on Information Forensics and Security (WIFS)
+T2  - IEEE International Workshop on Information Forensics and Security (WIFS 2012)
 PY  - 2012
 PB  - IEEE
 DO  - 10.1109/WIFS.2012.6412655
@@ -45,7 +45,7 @@ AU  - Wang, M.
 AU  - Huang, J.
 AU  - Li, X.
 TI  - A new cost function for spatial image steganography
-T2  - 2014 IEEE International Conference on Image Processing (ICIP)
+T2  - IEEE International Conference on Image Processing (ICIP 2014)
 PY  - 2014
 PB  - IEEE
 DO  - 10.1109/ICIP.2014.7025854
@@ -89,7 +89,7 @@ AU  - Yedroudj, M.
 AU  - Comby, F.
 AU  - Chaumont, M.
 TI  - Yedroudj-Net: An efficient CNN for spatial steganalysis
-T2  - 2018 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)
+T2  - IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP 2018)
 PY  - 2018
 PB  - IEEE
 DO  - 10.1109/ICASSP.2018.8461438
@@ -129,9 +129,9 @@ TY  - CONF
 AU  - Butora, J.
 AU  - Fridrich, J.
 TI  - Detection of diversified stego sources with CNNs
-T2  - IS&T International Symposium on Electronic Imaging: Media Watermarking, Security, and Forensics 2019
+T2  - Electronic Imaging, Media Watermarking, Security, and Forensics 2019
 PY  - 2019
-PB  - Society for Imaging Science and Technology
+PB  - IS&T
 DO  - 10.2352/ISSN.2470-1173.2019.5.MWSF-534
 SP  - 534-1
 EP  - 534-11
@@ -146,7 +146,7 @@ AU  - Li, Z.
 AU  - He, Z.
 AU  - Wang, M.
 TI  - Pair-wise confidence difference-based pseudo-label selection for universal mismatched steganalysis
-T2  - Proceedings of the 33rd ACM International Conference on Multimedia (MM '25)
+T2  - 33rd ACM International Conference on Multimedia (MM 2025)
 PY  - 2025
 PB  - ACM
 DO  - 10.1145/3746027.3755614
@@ -174,7 +174,7 @@ AU  - Pevný, T.
 AU  - Bas, P.
 AU  - Fridrich, J.
 TI  - Steganalysis by subtractive pixel adjacency matrix
-T2  - Proceedings of the 11th ACM Workshop on Multimedia and Security (MM&Sec '09)
+T2  - 11th ACM Workshop on Multimedia and Security (MM&Sec 2009)
 PY  - 2009
 PB  - ACM
 DO  - 10.1145/1597817.1597831
@@ -203,7 +203,7 @@ AU  - Cogranne, R.
 AU  - Giboulot, Q.
 AU  - Bas, P.
 TI  - The ALASKA steganalysis challenge: A first step towards steganalysis "into the wild"
-T2  - Proceedings of the ACM Workshop on Information Hiding and Multimedia Security (IH&MMSec '19)
+T2  - ACM Workshop on Information Hiding and Multimedia Security (IH&MMSec 2019)
 PY  - 2019
 PB  - ACM
 DO  - 10.1145/3335203.3335726
