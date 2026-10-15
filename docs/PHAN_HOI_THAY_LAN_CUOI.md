@@ -40,7 +40,10 @@ Vì vậy:
   - (d) điểm nào của ensemble được dùng cho ROC và ngưỡng (tổng hay trung bình projection, hay số phiếu).
 
   Nếu (d) khác cách hiểu "score" ở 3.2 thì thêm nửa câu cho rõ.
-- **Câu cuối mục 3.5** ("…so all tables can be recomputed from the saved files") chỉ đúng khi nhóm còn giữ `predictions.csv`, `thresholds.json` và `manifest.csv` của bản 600 cover cho cả hai detector. Nếu không còn thì bỏ vế này trước khi nộp.
+- **Câu cuối mục 3.5** ("All tables can be recomputed from these files.") chỉ đúng khi nhóm còn giữ `predictions.csv`, `thresholds.json` và `manifest.csv` của bản 600 cover cho cả hai detector. Nếu không còn thì bỏ câu này trước khi nộp.
+- **Cách gửi dữ liệu:** phiên Claude này chạy trên máy chủ đám mây nên không vào được máy của nhóm. Có hai cách:
+  - nén thư mục kết quả 600 cover và code SRM+Ensemble rồi gửi vào khung chat (hoặc đẩy lên repo);
+  - mở Claude ngay trên máy có dữ liệu: ứng dụng Claude Desktop, hoặc lệnh `claude remote-control` chạy trong thư mục đó.
 
 ## Thầy yêu cầu – đã làm gì
 
@@ -58,7 +61,7 @@ Thêm vào đoạn 3.2 (không thêm bảng) các thông tin lấy từ `sg.py` 
 ### 2. Section 3.5 – bootstrap
 - Thêm (câu cuối đoạn đầu 3.5): code đánh giá rút **B = 1.000** vòng cho mỗi điều kiện test, bộ sinh số cố định **seed 2026**. Vì bộ sinh được tạo lại cho mỗi điều kiện, mọi điều kiện, protocol và seed dùng **cùng một tập test cover được rút**. CI 95% là khoảng giữa phân vị 2,5% và 97,5% (`sg.py`, hàm `evaluate`).
 - **Không thêm:** cách gộp ΔAUC và CI qua 3 seed. Script tính ΔAUC không có trong gói, và thầy yêu cầu chỉ ghi các bước đã chạy trong code, nên bài giữ nguyên mô tả cũ của nhóm: điểm ước lượng là trung bình của 3 hiệu theo từng seed, CI từ bootstrap ghép cặp theo test cover. Khi tìm được script, có thể thêm một câu như: "Each ΔAUC replicate is the difference of the two replicate AUCs, averaged over the three seeds" (chỉ thêm nếu script làm đúng như vậy).
-- Thêm câu nói rõ CI chỉ phản ánh biến thiên khi lấy mẫu lại 120 test cover cố định, không mở rộng sang nguồn ảnh khác ("they capture only test-cover sampling variation and do not extend to other image sources").
+- Thêm câu nói rõ CI chỉ phản ánh biến thiên khi lấy mẫu lại 120 test cover cố định, không mở rộng sang nguồn ảnh khác ("they account only for test-cover sampling and do not extend to other image sources").
 - Sửa câu lưu trữ cho đúng code: mỗi lần chạy lưu điểm test từng ảnh và ngưỡng chọn trên validation (code không lưu điểm validation).
 - Table 5 và Table 6: kiểm tự động bằng `scripts/kiem_tra_hoanchinh.py`, khớp `results_data.py`. Fig. 2 và Bảng S2 không được script này đọc, nhưng được vẽ và sinh từ chính `results_data.py` (`make_figures.py`, `build_supplementary.py`).
 
@@ -70,7 +73,7 @@ Thêm vào đoạn 3.2 (không thêm bảng) các thông tin lấy từ `sg.py` 
   - Mỗi recall trong S1 là (số stego bắt được qua 3 seed)/360. Sáu ô của P2 ứng với 14, 56, 9, 35, 10 và 26 ảnh, tổng 150/2.160 = 0,0694, làm tròn là 0,069.
   - Số 0.070 cũ do lấy trung bình 6 giá trị đã làm tròn (0,0695). Các ô khác của Table 7 không đổi.
 - **Residual-LR P1:** code cho thấy ba lần chạy giống hệt nhau (P1 không rút biến thể, lbfgs tất định). Vì vậy câu ở 4.5 khẳng định chắc 5/120 FP mỗi lần chạy, thay vì viết "nếu".
-- Câu giải thích τ_low viết lại cho khớp code: "τlow rests on the second-highest of only 120 validation cover scores …; an exchangeable test cover exceeds it with probability 2/121 ≈ 1.7%". Hàm `thresholds()` của `sg.py` đặt τ_low ngay trên điểm validation cover cao thứ hai (`np.nextafter`), tức là ngưỡng nhỏ nhất thỏa Eq. (1), cho phép tối đa 1 FP trên 120 cover.
+- Câu giải thích τ_low viết lại cho khớp code: "τlow rests on the second-highest of only 120 validation cover scores … An exchangeable test cover exceeds this threshold with probability 2/121 ≈ 1.7%". Hàm `thresholds()` của `sg.py` đặt τ_low ngay trên điểm validation cover cao thứ hai (`np.nextafter`), tức là ngưỡng nhỏ nhất thỏa Eq. (1), cho phép tối đa 1 FP trên 120 cover.
 - Giữ nguyên kết luận "did not demonstrate reliable operation at FPR ≤ 1%".
 - **Chưa làm được:** đối chiếu FP với điểm dự đoán từng seed, vì cần kết quả 600 cover.
 
@@ -118,6 +121,23 @@ Thêm vào đoạn 3.2 (không thêm bảng) các thông tin lấy từ `sg.py` 
   - Bỏ thêm chữ "also" ở 2.3.
   - Viết "Seeds 42-44" thay "Seeds 42, 43 and 44" ở 3.3.
 - **Acknowledgement:** thêm trước References đúng câu của thầy: "This research is funded by the University of Economics Ho Chi Minh City, Vietnam (UEH)."
+
+### Văn phong (tránh văn kiểu AI)
+- Chỉ viết lại các câu đã thêm hoặc sửa trong lần này. Văn bản gốc của nhóm giữ nguyên, nên kết quả kiểm tra đạo văn trước đó vẫn dùng được.
+- Cách làm:
+  - hai người viết độc lập đề xuất bản viết lại;
+  - người phản biện chọn bản giữ đúng ý và số liệu (đối chiếu `sg.py`, `results_data.py`), không dài hơn câu cũ, không thêm khẳng định mới.
+- Đã viết lại:
+  - câu SRM/CNN ở Introduction;
+  - câu dẫn Fig. 1;
+  - hai câu mới ở 3.2: tách câu nối bằng dấu chấm phẩy;
+  - câu bootstrap ở 3.5 ("We resample the 120 test covers B = 1,000 times …");
+  - câu giới hạn CI và câu lưu trữ ở 3.5;
+  - câu τ_low ở 4.5;
+  - câu 54 rows / 6.480 ở 4.5 (tách làm ba câu ngắn).
+- Giữ nguyên vì bản mới không tốt hơn: vế [10] ở 2.3, câu Seeds ở 3.3, câu 5/120 ở 4.5.
+- Các câu mới không còn chuỗi mệnh đề nối bằng dấu chấm phẩy. Các dấu chấm phẩy còn lại trong bài là của nhóm.
+- Lưu ý: các công cụ dò AI không chính xác, nên không ai đảm bảo được một điểm số cụ thể. Lần sửa này chỉ làm cho các câu mới tự nhiên và giống giọng phần nhóm tự viết.
 
 ## Hướng dẫn EndNote (để References không bị đổi lại khi bấm Update)
 

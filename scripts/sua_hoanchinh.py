@@ -52,8 +52,8 @@ def sua_noi_dung(blks):
     p = tim(blks, "Image steganography hides a message")
     de.thay(p, ". Steganalysis detectors either train a classifier on statistics of noise residuals, such as SPAM "
                "or the Spatial Rich Model (SRM) ",
-            ". Steganalysis detectors either feed noise-residual statistics, such as Spatial Rich Model (SRM) "
-            "features, to a classifier like the Fisher linear discriminant ensemble, or train a convolutional neural "
+            ". Steganalysis detectors either train a classifier such as the Fisher linear discriminant ensemble on "
+            "noise-residual statistics like Spatial Rich Model (SRM) features, or train a convolutional neural "
             "network (CNN) such as SRNet or Yedroudj-Net ")
     de.thay(p, ", or train a convolutional neural network (CNN) such as Yedroudj-Net or SRNet ", "")
     de.xoa_truong(p, 2)  # trích dẫn lặp [5, 7]
@@ -66,11 +66,11 @@ def sua_noi_dung(blks):
     # 3.2: 76 đặc trưng, chuẩn hóa, tham số LR
     p = tim(blks, "Both detectors output a score")
     de.chen_sau(p, "regression . ", [(
-        "The residuals are the first- and second-order horizontal and vertical pixel differences; each gives a "
+        "The residuals are the first- and second-order horizontal and vertical pixel differences. Each gives a "
         "normalized 17-bin histogram of its values clipped to [−8, 8] plus the mean absolute value and standard "
         "deviation of the unclipped residual (4 × 19 = 76 features). A StandardScaler fitted only on each run's "
-        "training features standardizes all splits; the classifier uses L2 regularization with C = 1.0, the "
-        "deterministic lbfgs solver, no class weights and max_iter = 2000, and its decision function is the score. ",
+        "training features standardizes all splits. The classifier uses L2 regularization with C = 1.0, the "
+        "deterministic lbfgs solver, no class weights and max_iter = 2000. Its decision function is the score. ",
         False)])
 
     # câu thừa (đã có ở Table 2 và mục 3.3), bỏ để giữ 12 trang
@@ -80,13 +80,13 @@ def sua_noi_dung(blks):
     # 3.5: bootstrap
     p = tim(blks, "Each comparison is a paired difference")
     de.chen_sau(p, " images are never resampled on their own.", [
-        (" The evaluation code resamples the 120 test covers B = 1,000 times with seed 2026, so every condition "
-         "and run uses the same resampled cover IDs; the 2.5th and 97.5th percentiles give the 95% interval.", False),
+        (" We resample the 120 test covers B = 1,000 times with seed 2026, so every condition and run uses the "
+         "same resampled cover IDs. The 2.5th and 97.5th percentiles give the 95% interval.", False),
     ])
     p = tim(blks, "Seed standard deviations (at most 0.028")
     de.thay(p, "so the intervals are conditional on this partition.",
-            "so the intervals are conditional on this partition: they capture only test-cover sampling variation "
-            "and do not extend to other image sources.")
+            "so the intervals are conditional on this partition: they account only for test-cover sampling and do "
+            "not extend to other image sources.")
 
     # 4.5: 54 dòng / 6.480 lượt chấm
     p = tim(blks, "Even the best cell")
@@ -95,8 +95,8 @@ def sua_noi_dung(blks):
                "scores per detector, but these come from 720 distinct test stego images of 120 source covers and "
                "are repeated measurements, not 6,480 independent samples.",
             "Each detector has 54 evaluation rows (3 protocols × 3 seeds × 6 conditions) and 6,480 stego-score "
-            "evaluations, but its nine models all score the same 720 test stego images of 120 source covers, so "
-            "these are repeated measurements, not independent samples; the false positives in Table\xa07 are also "
+            "evaluations, but its nine models all score the same 720 test stego images of 120 source covers. These "
+            "scores are repeated measurements, not independent samples. The false positives in Table\xa07 are also "
             "repeated evaluations of the same 120 test covers.")
 
 
@@ -105,8 +105,8 @@ def sua_noi_dung(blks):
     de.thay(p, " summarizes the pipeline. Stages 1-3 build a leakage-controlled dataset, stages 4-5 train the two "
                "detectors in parallel under protocols P1-P3, and stages 6-7 evaluate every trained model on one fixed "
                "set of test covers.",
-            " summarizes the pipeline: the left column builds a leakage-controlled dataset, the two middle lanes "
-            "train the detectors in parallel under protocols P1-P3, and the right side evaluates every trained model "
+            " shows the pipeline. The left column builds a leakage-controlled dataset, and the two middle lanes "
+            "train both detectors in parallel under protocols P1-P3. The right side evaluates every trained model "
             "on one fixed set of test covers.")
 
     # Table 2 và 3.3: với Residual-LR (lbfgs, tất định) seed chỉ điều khiển việc rút biến thể
@@ -120,8 +120,10 @@ def sua_noi_dung(blks):
 
     # 3.5: điểm lưu theo code (điểm test và ngưỡng validation)
     p = tim(blks, "Seed standard deviations (at most 0.028")
-    de.thay(p, "Every run stores its per-image prediction scores,",
-            "Every run stores its per-image test scores and validation thresholds,")
+    de.thay(p, "Every run stores its per-image prediction scores, and the manifest stores the embedding seed and "
+               "SHA-256 hash of every image, so all tables can be recomputed from the saved files.",
+            "Each run saves its per-image test scores and validation thresholds, and the manifest records the "
+            "embedding seed and SHA-256 hash of every image. All tables can be recomputed from these files.")
 
     # 4.5: ba lần chạy Residual-LR P1 chắc chắn trùng nhau; câu về τlow
     p = tim(blks, "Table\xa07 reports the operating point")
@@ -133,7 +135,8 @@ def sua_noi_dung(blks):
                "between samples. The least strict threshold allowed, just above the second-highest score, is exceeded "
                "by an exchangeable test cover with probability 2/121 ≈ 1.7%.",
             " rests on the second-highest of only 120 validation cover scores, an extreme order statistic that varies "
-            "strongly between samples; an exchangeable test cover exceeds it with probability 2/121 ≈ 1.7%.")
+            "strongly between samples. An exchangeable test cover exceeds this threshold with probability "
+            "2/121 ≈ 1.7%.")
 
 
     # 2.3: [10] chỉ đỡ vế "algorithm shift … large CNN training sets"
