@@ -2,7 +2,8 @@
 
 Kiểm tra:
   1. Mỗi biến trong bang_3_5_2.csv cộng lại đúng 996 người, tỉ lệ cộng lại khoảng 100%.
-  2. Mọi tỉ lệ "x,y%" trong phần chữ là tỉ lệ của một mức hoặc của một dải mức liền nhau trong CSV.
+  2. Mọi tỉ lệ "x,y%" trong phần chữ là tỉ lệ của một mức, của một dải mức liền nhau, hoặc tổng các tỉ lệ
+     đã làm tròn của một biến trong CSV.
   3. Mọi ô số của Bảng 3.2 và 3.4 khớp CSV; dòng tệp chính của Bảng 3.3 khớp lần chạy thật trong notebook.
   4. Không có "ảnh hưởng", "tác động", "gây ra", không còn chỗ trống "[...]".
   5. Bản hoàn chỉnh: không còn chữ tô vàng và đoạn "Ghi chú cho nhóm".
@@ -34,6 +35,8 @@ for _, d in b2.groupby("bien", sort=False):
     n = d["so_luong"].tolist()
     for a, b in combinations(range(len(n) + 1), 2):
         hop_le.add(f"{round(100 * sum(n[a:b]) / 996, 1):.1f}".replace(".", ","))
+    # tổng các tỉ lệ đã làm tròn của một dòng (nêu trong ghi chú về làm tròn của Bảng 3.4)
+    hop_le.add(f"{round(d['ty_le_pct'].sum(), 1):.1f}".replace(".", ","))
 chu = "\n".join(p.text for p in doc.paragraphs)
 for x in re.findall(r"(\d+,\d)\s*%", chu):
     if x not in hop_le:
