@@ -19,6 +19,6 @@ Chạy lại ngày 15/10/2026 từ 600 ảnh PGM gốc của BOSSbase 1.01, bằ
   | SRM+Ensemble | 7, 3, 8 | 7, 2, 2 | 5, 1, 2 |
 
 - **ΔAUC:** cả 22 ước lượng điểm khớp bài.
-  - Cách gộp CI trong bản trước là rút một lần cover cho cả ba seed và lấy trung bình ΔAUC theo replicate. Các cách khác lệch 0,013–0,021.
+  - Cách gộp CI trong bản trước là rút một lần cover cho cả ba seed và lấy trung bình ΔAUC theo replicate. Lấy CI riêng từng seed rồi gộp thì lệch trung bình 0,013–0,021 (SRM+Ensemble) và 0,004–0,007 (Residual-LR).
   - Không khôi phục được B và dòng số ngẫu nhiên của script ΔAUC gốc (script đã mất). Vì vậy bài dùng CI tính lại ở đây; các cận đổi tối đa 0,003.
   - Riêng khoảng Residual-LR P3 WOW thành [−0,046; 0,000] (cận trên +0,0003), tức chạm 0.

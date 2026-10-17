@@ -14,7 +14,7 @@ Nhóm gửi 600 ảnh PGM gốc của BOSSbase (`covers.zip`, 5 phần). Mình c
 **Dữ liệu**
 - 600/600 ảnh PGM khớp SHA-256 trong `source_provenance.json`.
 - `sg.prepare` (seed 20260918, 256 × 256) cho manifest khớp bản của nhóm ở mọi cột: thứ tự 4.200 dòng, cover_id (là hash điểm ảnh), split, seed nhúng, nguồn.
-- Chỉ cột SHA-256 của file PNG khác, vì bản Pillow/zlib dùng để nén PNG khác. Điểm ảnh thì trùng. Kiểm thêm bằng bộ pilot: tạo lại 180 ảnh pilot rồi chấm bằng chính `model.joblib` của nhóm, điểm trùng tuyệt đối với `predictions.csv` của nhóm ở cả 1.944 ảnh test.
+- Chỉ cột SHA-256 của file PNG khác, vì bản Pillow/zlib dùng để nén PNG khác. Điểm ảnh thì trùng. Kiểm thêm bằng bộ pilot: tạo lại 180 ảnh pilot rồi chấm bằng chính `model.joblib` của nhóm, điểm trùng tuyệt đối với `predictions.csv` của nhóm ở cả 3.888 dòng (9 lần chạy × 432 dòng, trên 252 ảnh test).
 
 **Kết quả: khớp 216/216 giá trị của Table 4 và Bảng S1** (2 detector × 18 ô × AUC, SD, F1, BER, recall, FPR). Để khớp hoàn toàn cần ba chi tiết của máy và code gốc:
 1. **Nhân tính toán của OpenBLAS.** Laptop của nhóm không có AVX-512 nên OpenBLAS dùng nhân Haswell. Trên máy có AVX-512, Residual-LR P1 (đặc trưng gần như ngẫu nhiên) dừng lbfgs ở điểm hơi khác, F1/BER lệch tới 0,012. Đặt `OPENBLAS_CORETYPE=Haswell` thì khớp hết.
@@ -25,7 +25,7 @@ Nhóm gửi 600 ảnh PGM gốc của BOSSbase (`covers.zip`, 5 phần). Mình c
 
 **ΔAUC và CI (Table 5, Table 6, Fig. 2, Bảng S2)**
 - Cả 22 ước lượng điểm ΔAUC khớp bài.
-- **Cách gộp qua 3 seed** của bản trước đã xác định được: mỗi replicate rút một lần 120 test cover, dùng chung cho cả 3 seed; ΔAUC của replicate là trung bình 3 seed. Cách này cho CI lệch bài trung bình 0,002, trong khi lấy CI riêng từng seed rồi gộp thì lệch 0,013–0,021.
+- **Cách gộp qua 3 seed** của bản trước đã xác định được: mỗi replicate rút một lần 120 test cover, dùng chung cho cả 3 seed; ΔAUC của replicate là trung bình 3 seed. Cách này cho CI lệch bài trung bình khoảng 0,002 (đúng mức sai số Monte Carlo), trong khi lấy CI riêng từng seed rồi gộp thì lệch trung bình 0,013–0,021 với SRM+Ensemble và 0,004–0,007 với Residual-LR.
 - **B và dòng số ngẫu nhiên của script gốc thì không khôi phục được.** Đã thử B = 1.000–10.000, nhiều seed và hai loại bộ sinh, không bộ nào cho ra đúng từng chữ số. Script gốc không còn.
 - Vì vậy mọi CI được **tính lại** từ điểm của lần chạy lại bằng `scripts/tinh_lai_ci.py`: B = 10.000, `numpy.random.default_rng(2026)` (seed bootstrap của `sg.py`), phân vị 2,5 và 97,5. Script này cho kết quả giống `verify_stats.paired_bootstrap` (đã kiểm). Bài ghi đúng thủ tục này ở 3.5.
 - Các cận CI đổi tối đa 0,003 và mọi kết luận giữ nguyên, trừ một chỗ: khoảng của **Residual-LR P3 WOW** trước là [−0.046, −0.001], nay là [−0.046, 0.000] (cận trên +0,0003), tức chạm 0. Câu "all 18 intervals lie below zero" vì vậy sửa thành "17 of the 18 intervals lie below zero; the Residual-LR interval for P3 WOW reaches zero". Table 6 ghi 2/3 cho dòng này.
