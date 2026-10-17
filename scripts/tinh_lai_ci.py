@@ -18,6 +18,7 @@ from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import results_data as R  # noqa: E402
 import verify_stats as V  # noqa: E402
 
 
@@ -65,11 +66,11 @@ def main():
             if lech > 1e-12:
                 sys.exit(1)
         r = paired_bootstrap_nhanh(runs, det, ref, shf, a.B, a.boot_seed)
-        d_bai, (lo_bai, hi_bai) = V.reported_delta(rq, det, ref, shf)
+        d_bai, (lo_bai, hi_bai) = R.ban_truoc(rq, det, ref, shf)   # bản trước: script ΔAUC gốc
         kq.append(dict(rq=rq, detector=det, reference=list(ref), shifted=list(shf), delta=r["delta"], ci=r["ci"],
                        per_seed_delta=r["per_seed_delta"], paper=[d_bai, lo_bai, hi_bai]))
         print(f"{rq} {det:13s} {ref[0]} {ref[1]} {ref[2]} -> {shf[0]} {shf[1]} {shf[2]}: {r['delta']:+.3f} "
-              f"[{r['ci'][0]:+.3f}, {r['ci'][1]:+.3f}]   bài {d_bai:+.3f} [{lo_bai:+.3f}, {hi_bai:+.3f}]")
+              f"[{r['ci'][0]:+.3f}, {r['ci'][1]:+.3f}]   bản trước {d_bai:+.3f} [{lo_bai:+.3f}, {hi_bai:+.3f}]")
     if a.out:
         Path(a.out).write_text(json.dumps(dict(B=a.B, boot_seed=a.boot_seed, comparisons=kq), indent=1), encoding="utf-8")
 

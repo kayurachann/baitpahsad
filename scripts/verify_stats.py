@@ -28,9 +28,10 @@ The script prints each recomputed value next to the value reported in the manusc
 tau_low is just above the second-highest validation cover score, tau_ber minimises the balanced
 error (ties: highest threshold, as argmin over sklearn's descending roc_curve thresholds), and every
 bootstrap starts a fresh np.random.default_rng(2026) so all conditions and runs draw the same cover
-indices. sg.py only bootstraps the AUC of single conditions; how the paper's ΔAUC intervals were
-aggregated over seeds is not in the code package. ``paired_bootstrap`` averages each replicate's ΔAUC
-over the three seeds; if the original analysis did otherwise, change it and the text of Sect. 3.5.
+indices. sg.py only bootstraps the AUC of single conditions. ``paired_bootstrap`` implements the ΔAUC
+interval of Sect. 3.5: one draw of test cover IDs is shared by both conditions and the three seeds, and the
+replicate ΔAUC is the mean of the three per-seed ΔAUCs. The paper's intervals were computed this way with
+B = 10,000 and default_rng(2026) (scripts/tinh_lai_ci.py, same algorithm, vectorised).
 """
 import argparse
 import csv

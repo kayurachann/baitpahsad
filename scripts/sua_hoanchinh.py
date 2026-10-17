@@ -7,8 +7,12 @@ Nội dung sửa (chi tiết ở docs/PHAN_HOI_THAY_LAN_CUOI.md):
     bỏ trích dẫn lặp [5, 7]. Thứ tự xuất hiện lần đầu của các tài liệu không đổi.
   - 3.1: ghi phép nội suy bicubic khi thu nhỏ ảnh (sg.py, prepare).
   - 3.2: cách tạo 76 đặc trưng, chuẩn hóa và tham số logistic regression, lấy từ code/sg.py và các mô hình đã lưu.
-  - 3.5: số vòng bootstrap, seed của bộ sinh, cách lấy khoảng phân vị (sg.py, evaluate); nói rõ giới hạn của
-    khoảng tin cậy. Cách gộp ΔAUC qua 3 seed không được thêm vì chưa có script phân tích để đối chiếu.
+  - 3.5: cách gộp ΔAUC qua 3 seed (rút chung một lần cho cả 3 seed, ΔAUC của replicate = trung bình 3 seed),
+    B = 10.000, default_rng(2026), phân vị 2,5/97,5, đúng thủ tục của scripts/tinh_lai_ci.py (script ΔAUC gốc không
+    còn); nói rõ giới hạn của khoảng tin cậy.
+  - Kết quả chạy lại 600 cover (scripts/chay_lai_600.py, tinh_lai_ci.py): CI mới ở Abstract, mục 4, Kết luận,
+    Table 5-6 và Fig. 2; câu 17/18 khoảng dưới 0; trung bình ΔAUC của Table 6 tính từ số chưa làm tròn; câu về
+    điểm SRM ở 3.2; chú thích Table 7; [20] ghi sealwatch 2025.9.
   - 4.5: bỏ câu "never completely silent", viết lại câu 54 dòng / 6.480 lượt chấm.
   - Acknowledgement (UEH) trước References.
   - References: trình bày theo Springer LNCS, đúng thứ tự [1]–[20], metadata đã kiểm chứng; cập nhật luôn bản ghi
@@ -27,11 +31,11 @@ from lxml import etree
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import docm_edit as de  # noqa: E402
 from refs_hoanchinh import ENDNOTE_TYPE, REFS  # noqa: E402
-from results_data import RQ1, RQ2, RQ3  # noqa: E402
+from results_data import RQ1, RQ1_TRUOC, RQ2, RQ2_TRUOC, RQ3, RQ3_MEAN  # noqa: E402
 
 # CI của RQ1/RQ2 trong bản trước (script ΔAUC gốc), để tìm đúng chỗ cần thay
-RQ1_CU = {"Residual-LR": (-0.007, 0.056), "SRM+Ensemble": (-0.093, -0.046)}
-RQ2_CU = {"Residual-LR": (-0.020, 0.007), "SRM+Ensemble": (-0.050, 0.005)}
+RQ1_CU = {d: v[3] for d, v in RQ1_TRUOC.items()}
+RQ2_CU = {d: v[3] for d, v in RQ2_TRUOC.items()}
 
 
 def so(x):
@@ -97,7 +101,7 @@ def sua_noi_dung(blks):
     p = tim(blks, "Each comparison is a paired difference")
     de.chen_sau(p, " images are never resampled on their own.", [
         # Script ΔAUC gốc của nhóm không còn. Chạy lại cho thấy CI trong bài theo cách gộp này (rút chung một lần
-        # cho cả 3 seed, ΔAUC của replicate = trung bình 3 seed; các cách khác lệch 0,013-0,021), nhưng không khôi
+        # cho cả 3 seed, ΔAUC của replicate = trung bình 3 seed; lấy CI riêng từng seed thì lệch nhiều hơn hẳn), nhưng không khôi
         # phục được B và dòng số ngẫu nhiên. Mọi CI được tính lại bằng scripts/tinh_lai_ci.py (B = 10.000,
         # default_rng(2026)) từ điểm của lần chạy lại, nên bài ghi đúng thủ tục đã chạy.
         (" One draw serves all three seeds, and the replicate ΔAUC is the mean of the three per-seed differences. "
@@ -157,7 +161,7 @@ def sua_noi_dung(blks):
                "by an exchangeable test cover with probability 2/121 ≈ 1.7%.",
             " rests on the second-highest of only 120 validation cover scores, an extreme order statistic that varies "
             "strongly between samples. An exchangeable test cover exceeds this threshold with probability "
-            "2/121 ≈ 1.7%.")
+            "2/121 ≈ 1.7%, or less when scores are tied.")
 
 
     # 2.3: [10] chỉ đỡ vế "algorithm shift … large CNN training sets"
@@ -182,6 +186,8 @@ def sua_noi_dung(blks):
     cu1, moi1 = ci(*RQ1_CU["SRM+Ensemble"]), ci(*RQ1["SRM+Ensemble"][3])
     cu2, moi2 = ci(*RQ2_CU["SRM+Ensemble"]), ci(*RQ2["SRM+Ensemble"][3])
     p = tim(blks, "Abstract.")
+    de.thay(p, "in all 18 comparisons (ΔAUC −0.022 to −0.183).",
+            "in all 18 comparisons (ΔAUC −0.022 to −0.183; 17 of 18 intervals below zero).")
     de.thay(p, f"95% CI {cu1}", f"95% CI {moi1}")
     de.thay(p, f"95% CI {cu2}", f"95% CI {moi2}")
     de.thay(tim(blks, "Under P1, SRM+Ensemble falls from 0.714"), f"+0.024 {ci(*RQ1_CU['Residual-LR'])}",
@@ -190,7 +196,9 @@ def sua_noi_dung(blks):
     p = tim(blks, "P3 adds 0.1 bpp WOW and S-UNIWARD variants")
     de.thay(p, f"95% CI {cu2}", f"95% CI {moi2}")
     de.thay(p, f"−0.005 {ci(*RQ2_CU['Residual-LR'])}", f"−0.005 {ci(*RQ2['Residual-LR'][3])}")
-    de.thay(tim(blks, "With the source-cover split fixed before embedding"), f"95% CI {cu1}", f"95% CI {moi1}")
+    p = tim(blks, "With the source-cover split fixed before embedding")
+    de.thay(p, f"95% CI {cu1}", f"95% CI {moi1}")
+    de.thay(p, "For RQ3, all 18 comparisons showed lower AUC", "For RQ3, all 18 point estimates showed lower AUC")
     # Fig. 2: khoảng Residual-LR P3 WOW giờ chạm 0 (cận trên +0,0003)
     assert RQ3[("Residual-LR", "P3", "WOW")][2] >= 0 and sum(v[2] < 0 for v in RQ3.values()) == 17
     p = tim(blks, "Fig.\xa02 shows ΔAUC between 0.1 and 0.4 bpp")
@@ -215,7 +223,8 @@ def sua_noi_dung(blks):
         chu = [de.van_ban(next(c.iter(W + "p"))) for c in o]
         det = chu[0] or det
         his = [RQ3[(det, chu[1], a)][2] for a in ("WOW", "S-UNIWARD", "HILL")]
-        for i, moi in ((5, so(max(his))), (6, f"{sum(h < 0 for h in his)}/3")):
+        # cột 4: trung bình ΔAUC từ số chưa làm tròn (bản trước lấy trung bình số đã làm tròn: SRM P1 −0.151)
+        for i, moi in ((4, so(RQ3_MEAN[(det, chu[1])])), (5, so(max(his))), (6, f"{sum(h < 0 for h in his)}/3")):
             if chu[i] != moi:
                 de.thay(next(o[i].iter(W + "p")), chu[i], moi)
     # 3.2: điểm của SRM+Ensemble (predict_confidence của sealwatch)

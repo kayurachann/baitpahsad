@@ -79,7 +79,7 @@ def main(path):
         p = row[1]
         auc01 = [R.MATRIX[(det, p, a, 0.1)][0] for a in R.ALGORITHMS]
         ds = [R.RQ3[(det, p, a)] for a in R.ALGORITHMS]
-        mean = float((sum(Decimal(str(d[0])) for d in ds) / 3).quantize(Decimal("0.001"), ROUND_HALF_EVEN))
+        mean = R.RQ3_MEAN[(det, p)]   # trung bình của ΔAUC chưa làm tròn
         mong = [f"{min(auc01):.3f}-{max(auc01):.3f}", f"{f3(min(d[0] for d in ds))} to {f3(max(d[0] for d in ds))}",
                 f3(mean), f3(max(d[2] for d in ds)), f"{sum(d[2] < 0 for d in ds)}/3"]
         kiem(row[2:7] == mong, f"Table 6 {det} {p}: {row[2:7]} ≠ {mong}")
@@ -120,6 +120,7 @@ def main(path):
                        ("Under P1, SRM+Ensemble falls", "+0.024 [{}, {}]".format(*map(sd, R.RQ1["Residual-LR"][3])))):
         kiem(s in next(t for t in doan if t.startswith(bat_dau)), f"{bat_dau}: thiếu {s}")
     n_duoi_0 = sum(v[2] < 0 for v in R.RQ3.values())
+    kiem(f"{n_duoi_0} of 18 intervals below zero" in abs_ or n_duoi_0 == 18, "Abstract: số khoảng RQ3 dưới 0 lệch dữ liệu")
     kiem(f"{n_duoi_0} of the 18 intervals lie below zero" in toan or (n_duoi_0 == 18 and "all 18 intervals" in toan),
          "câu về số khoảng RQ3 nằm dưới 0 lệch dữ liệu")
 

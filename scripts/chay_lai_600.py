@@ -2,7 +2,8 @@
 
 Các bước (mỗi bước một lệnh con, có thể chạy lại từng bước):
   kiem-anh  <thư_mục_pgm>                  SHA-256 từng ảnh khớp data/stegaguard_600/source_provenance.json
-  chuan-bi  <thư_mục_pgm> <thư_mục_dữ_liệu>  sg.prepare (seed 20260918, 256 × 256, conseal), so manifest với bản của nhóm
+  chuan-bi  <thư_mục_pgm> <thư_mục_dữ_liệu>  sg.prepare (seed 20260918, 256 × 256, conseal), so manifest với bản của nhóm;
+            <thư_mục_pgm> phải chứa đúng 600 ảnh của source_provenance.json (kiểm bằng kiem-anh)
   tu-cover  <thư_mục_zip> <thư_mục_dữ_liệu>  thay cho 2 bước trên khi chỉ có 600 cover (code_nhom/gom_cover_600.py):
             kiểm SHA-256 cover, tạo lại 3.600 stego bằng conseal với embedding_seed của manifest, so SHA-256
   dac-trung <thư_mục_dữ_liệu> <thư_mục_đặc_trưng> [--workers 4]
@@ -12,7 +13,8 @@ Các bước (mỗi bước một lệnh con, có thể chạy lại từng bư�
   chay      <thư_mục_dữ_liệu> <thư_mục_đặc_trưng> <thư_mục_kết_quả> [--chi-residual]
             9 lần Residual-LR (giống hệt nhánh residual_lr của sg.train/evaluate) và 9 lần SRM+Ensemble
             (sealwatch FldEnsembleTrainer, L = 50, d_sub = 500, seed của lần chạy; cột SRM theo
-            srm_thu_tu_nhom.txt; biến thể train rút theo thứ tự cover_id; điểm = predict_confidence, tỉ lệ phiếu).
+            srm_thu_tu_nhom.txt; biến thể train rút theo thứ tự cover_id; điểm = predict_confidence, trung bình phiếu ±1
+            của 50 FLD).
             Kết quả theo đúng định dạng sg.py: <run>/config.json, thresholds.json; <run>_test/predictions.csv, metrics.csv.
 
 Sau đó: python3 gop_ket_qua.py <thư_mục_kết_quả>/<loại> gop --manifest-sha256 ... và verify_stats.py.
@@ -70,14 +72,17 @@ def chuan_bi(thu_muc_pgm, ra):
     args = argparse.Namespace(covers=str(thu_muc_pgm), out=str(ra), size=256, limit=0, seed=SEED_CHUAN_BI,
                               algorithms=["wow", "suniward", "hill"], payloads=[0.1, 0.4])
     sg.prepare(args)
-    moi = {r["path"]: r for r in sg.read_rows(ra)}
-    cu = {r["path"]: r for r in csv.DictReader(open(DU_LIEU_NHOM / "manifest.csv", newline="", encoding="utf-8"))}
-    khac = [p for p in cu if p not in moi or moi[p]["sha256"] != cu[p]["sha256"]]
+    moi = sg.read_rows(ra)
+    cu = list(csv.DictReader(open(DU_LIEU_NHOM / "manifest.csv", newline="", encoding="utf-8")))
+    # cột sha256 là hash của file PNG, đổi theo bản Pillow/zlib nén PNG; điểm ảnh thì nằm trong cover_id
+    # (hash điểm ảnh của cover) và trong kết quả huấn luyện. So mọi cột khác theo đúng thứ tự dòng.
+    cot = [c for c in cu[0] if c != "sha256"]
+    lech = sum(any(str(a[c]) != str(b[c]) for c in cot) for a, b in zip(moi, cu)) + abs(len(moi) - len(cu))
+    khac_png = sum(a["sha256"] != b["sha256"] for a, b in zip(moi, cu))
     sha_moi = sha256(Path(ra) / "manifest.csv")
-    print(f"manifest mới {sha_moi[:8]}…{sha_moi[-7:]}; ảnh khác bản của nhóm: {len(khac)}/{len(cu)}")
-    for loai in ("cover", "wow", "suniward", "hill"):
-        n = sum(cu[p]["algorithm"] == loai for p in khac)
-        print(f"  {loai}: {n} ảnh khác")
+    print(f"manifest mới {sha_moi[:8]}…{sha_moi[-7:]} ({len(moi)} dòng, nhóm {len(cu)} dòng)")
+    print(f"  dòng lệch ở các cột {', '.join(cot)}: {lech}")
+    print(f"  file PNG khác byte (chỉ do bộ nén PNG): {khac_png}")
     return sha_moi
 
 
@@ -338,9 +343,10 @@ def chay(goc, thu_muc_dt, ra, chi_residual=False):
             if chi_residual:
                 print(f"xong {ten} (Residual-LR)", flush=True)
                 continue
-            # SRM+Ensemble: FLD ensemble của sealwatch (L = 50, d_sub = 500, seed = seed của lần chạy), điểm = tỉ lệ
-            # phiếu (predict_confidence). Script SRM của nhóm duyệt các cover train theo cover_id (sg.py theo thứ tự
-            # manifest) khi rút một biến thể bằng random.Random(seed).choice, và đưa cặp vào FLD theo thứ tự đó.
+            # SRM+Ensemble: FLD ensemble của sealwatch (L = 50, d_sub = 500, seed = seed của lần chạy), điểm =
+            # trung bình phiếu ±1 của 50 FLD (predict_confidence). Script SRM của nhóm duyệt các cover train theo
+            # cover_id (sg.py theo thứ tự manifest) khi rút một biến thể bằng random.Random(seed).choice, và đưa cặp
+            # vào FLD theo thứ tự đó.
             # Cách này cho ra đúng 36/36 giá trị SRM+Ensemble của mỗi protocol trong Table 4/S1.
             chon_srm = _chon_cap(goc, algs, pls, seed, theo_cover_id=True)
             Xc = np.ascontiguousarray(dt.lay([c for c, _ in chon_srm], "srm"))

@@ -97,6 +97,58 @@ RQ3 = {
 }
 
 
+# Mean of the three RQ3 deltas per detector and protocol, from the unrounded deltas (Table 6).
+RQ3_MEAN = {
+    ("Residual-LR", "P1"): -0.051,
+    ("Residual-LR", "P2"): -0.042,
+    ("Residual-LR", "P3"): -0.037,
+    ("SRM+Ensemble", "P1"): -0.150,
+    ("SRM+Ensemble", "P2"): -0.155,
+    ("SRM+Ensemble", "P3"): -0.135,
+}
+
+# Intervals of the previous manuscript version (original ΔAUC script, B unknown), kept for comparison only.
+RQ1_TRUOC = {
+    "Residual-LR": (0.546, 0.57, 0.024, (-0.007, 0.056)),
+    "SRM+Ensemble": (0.714, 0.645, -0.07, (-0.093, -0.046)),
+}
+RQ2_TRUOC = {
+    "Residual-LR": (0.551, 0.546, -0.005, (-0.02, 0.007)),
+    "SRM+Ensemble": (0.653, 0.632, -0.022, (-0.05, 0.005)),
+}
+RQ3_TRUOC = {
+    ('Residual-LR', 'P1', 'WOW'): (-0.036, -0.063, -0.008),
+    ('Residual-LR', 'P1', 'S-UNIWARD'): (-0.06, -0.096, -0.029),
+    ('Residual-LR', 'P1', 'HILL'): (-0.056, -0.093, -0.02),
+    ('Residual-LR', 'P2', 'WOW'): (-0.034, -0.058, -0.012),
+    ('Residual-LR', 'P2', 'S-UNIWARD'): (-0.045, -0.07, -0.022),
+    ('Residual-LR', 'P2', 'HILL'): (-0.046, -0.072, -0.02),
+    ('Residual-LR', 'P3', 'WOW'): (-0.022, -0.046, -0.001),
+    ('Residual-LR', 'P3', 'S-UNIWARD'): (-0.054, -0.078, -0.03),
+    ('Residual-LR', 'P3', 'HILL'): (-0.035, -0.064, -0.006),
+    ('SRM+Ensemble', 'P1', 'WOW'): (-0.175, -0.206, -0.144),
+    ('SRM+Ensemble', 'P1', 'S-UNIWARD'): (-0.157, -0.186, -0.127),
+    ('SRM+Ensemble', 'P1', 'HILL'): (-0.12, -0.149, -0.092),
+    ('SRM+Ensemble', 'P2', 'WOW'): (-0.163, -0.193, -0.134),
+    ('SRM+Ensemble', 'P2', 'S-UNIWARD'): (-0.183, -0.211, -0.155),
+    ('SRM+Ensemble', 'P2', 'HILL'): (-0.119, -0.15, -0.088),
+    ('SRM+Ensemble', 'P3', 'WOW'): (-0.14, -0.168, -0.111),
+    ('SRM+Ensemble', 'P3', 'S-UNIWARD'): (-0.149, -0.177, -0.122),
+    ('SRM+Ensemble', 'P3', 'HILL'): (-0.115, -0.145, -0.089),
+}
+
+
+def ban_truoc(rq, det, ref, shf):
+    """(delta, (lo, hi)) of the previous manuscript version, for comparisons with the original analysis."""
+    if rq == "RQ1":
+        _, _, d, ci = RQ1_TRUOC[det]
+        return d, ci
+    if rq == "RQ2":
+        _, _, d, ci = RQ2_TRUOC[det]
+        return d, ci
+    d, lo, hi = RQ3_TRUOC[(det, ref[0], ref[1])]
+    return d, (lo, hi)
+
 # Test false positives at tau_low of each run (seeds 42, 43, 44; out of 120 test covers), counted from the
 # per-image test scores of the rerun.
 FP_PER_SEED = {

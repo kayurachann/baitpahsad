@@ -3,7 +3,8 @@
 In ra:
 - Table 4: AUC trung bình, SD, F1, BER, recall và FPR tại τlow của từng ô; số ô lệch quá 0.0015 (sai số làm tròn);
 - Table 7: số false positive của từng seed tại τlow;
-- Table 5/6 và S2: ΔAUC và CI 95% theo nhiều cách bootstrap, để xem cách nào cho ra đúng CI trong bài:
+- Table 5/6 và S2: ΔAUC và CI 95% theo nhiều cách bootstrap, để xem cách nào cho ra đúng CI của bản trước
+  (results_data.RQ*_TRUOC, tính bằng script ΔAUC gốc đã mất):
     A1000 / A2000  thay replicate ΔAUC lấy trung bình qua 3 seed, rng(2026) mới cho mỗi so sánh, thứ tự manifest;
     S2000_meanCI   từng seed riêng như paired_auc_confidence của nhóm (B = 2000, rng(2026 + seed), cover
                    sắp theo ID), rồi lấy trung bình cận dưới/cận trên của 3 seed;
@@ -106,14 +107,14 @@ def main():
     for rq, det, ref, shf in V.comparisons():
         if not any(k[:2] == (det, ref[0]) for k in runs) or not any(k[:2] == (det, shf[0]) for k in runs):
             continue
-        d_bai, (lo_bai, hi_bai) = V.reported_delta(rq, det, ref, shf)
+        d_bai, (lo_bai, hi_bai) = R.ban_truoc(rq, det, ref, shf)   # CI của bản trước (script ΔAUC gốc)
         cc = cac_cach_ci(runs, det, ref, shf)
-        p(f"- {rq} {det} {ref}->{shf}: bài {d_bai:+.3f} [{lo_bai:+.3f}, {hi_bai:+.3f}]")
+        p(f"- {rq} {det} {ref}->{shf}: bản trước {d_bai:+.3f} [{lo_bai:+.3f}, {hi_bai:+.3f}]")
         for ten, (d, lo, hi) in cc.items():
             sai = max(abs(round(d, 3) - d_bai), abs(round(lo, 3) - lo_bai), abs(round(hi, 3) - hi_bai))
             tong.setdefault((det, ten), []).append(sai)
             p(f"    {ten:13s} {d:+.3f} [{lo:+.3f}, {hi:+.3f}]  lệch lớn nhất {sai:.3f}")
-    p("\n### Tóm tắt: lệch lớn nhất / trung bình của mỗi cách (so với CI trong bài)\n")
+    p("\n### Tóm tắt: lệch lớn nhất / trung bình của mỗi cách (so với CI của bản trước)\n")
     for (det, ten), v in sorted(tong.items()):
         p(f"- {det:13s} {ten:13s}: lớn nhất {max(v):.3f}, trung bình {np.mean(v):.4f}, khớp ≤0.001 ở {sum(x <= 0.0011 for x in v)}/{len(v)}")
     txt = "\n".join(dong)

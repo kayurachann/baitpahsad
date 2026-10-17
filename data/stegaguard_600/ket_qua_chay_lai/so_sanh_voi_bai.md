@@ -50,140 +50,140 @@
 
 ## Table 5/6, S2: ΔAUC và CI theo từng cách bootstrap
 
-- RQ1 Residual-LR ('P1', 'WOW', 0.4)->('P1', 'HILL', 0.4): bài +0.024 [-0.007, +0.056]
+- RQ1 Residual-LR ('P1', 'WOW', 0.4)->('P1', 'HILL', 0.4): bản trước +0.024 [-0.007, +0.056]
     A1000         +0.024 [-0.007, +0.058]  lệch lớn nhất 0.002
     A2000         +0.024 [-0.006, +0.058]  lệch lớn nhất 0.002
     S2000_meanCI  +0.024 [-0.007, +0.056]  lệch lớn nhất 0.000
     S2000_pooled  +0.024 [-0.007, +0.056]  lệch lớn nhất 0.000
     S1000_meanCI  +0.024 [-0.007, +0.058]  lệch lớn nhất 0.002
-- RQ2 Residual-LR ('P2', 'HILL', 0.4)->('P3', 'HILL', 0.4): bài -0.005 [-0.020, +0.007]
+- RQ2 Residual-LR ('P2', 'HILL', 0.4)->('P3', 'HILL', 0.4): bản trước -0.005 [-0.020, +0.007]
     A1000         -0.005 [-0.018, +0.008]  lệch lớn nhất 0.002
     A2000         -0.005 [-0.018, +0.008]  lệch lớn nhất 0.002
     S2000_meanCI  -0.005 [-0.027, +0.016]  lệch lớn nhất 0.009
     S2000_pooled  -0.005 [-0.035, +0.030]  lệch lớn nhất 0.023
     S1000_meanCI  -0.005 [-0.026, +0.016]  lệch lớn nhất 0.009
-- RQ3 Residual-LR ('P1', 'WOW', 0.4)->('P1', 'WOW', 0.1): bài -0.036 [-0.063, -0.008]
+- RQ3 Residual-LR ('P1', 'WOW', 0.4)->('P1', 'WOW', 0.1): bản trước -0.036 [-0.063, -0.008]
     A1000         -0.036 [-0.065, -0.008]  lệch lớn nhất 0.002
     A2000         -0.036 [-0.065, -0.008]  lệch lớn nhất 0.002
     S2000_meanCI  -0.036 [-0.064, -0.008]  lệch lớn nhất 0.001
     S2000_pooled  -0.036 [-0.064, -0.008]  lệch lớn nhất 0.001
     S1000_meanCI  -0.036 [-0.065, -0.008]  lệch lớn nhất 0.002
-- RQ3 Residual-LR ('P1', 'S-UNIWARD', 0.4)->('P1', 'S-UNIWARD', 0.1): bài -0.060 [-0.096, -0.029]
+- RQ3 Residual-LR ('P1', 'S-UNIWARD', 0.4)->('P1', 'S-UNIWARD', 0.1): bản trước -0.060 [-0.096, -0.029]
     A1000         -0.060 [-0.094, -0.028]  lệch lớn nhất 0.002
     A2000         -0.060 [-0.094, -0.029]  lệch lớn nhất 0.002
     S2000_meanCI  -0.060 [-0.093, -0.030]  lệch lớn nhất 0.003
     S2000_pooled  -0.060 [-0.094, -0.030]  lệch lớn nhất 0.002
     S1000_meanCI  -0.060 [-0.094, -0.028]  lệch lớn nhất 0.002
-- RQ3 Residual-LR ('P1', 'HILL', 0.4)->('P1', 'HILL', 0.1): bài -0.056 [-0.093, -0.020]
+- RQ3 Residual-LR ('P1', 'HILL', 0.4)->('P1', 'HILL', 0.1): bản trước -0.056 [-0.093, -0.020]
     A1000         -0.056 [-0.094, -0.020]  lệch lớn nhất 0.001
     A2000         -0.056 [-0.094, -0.023]  lệch lớn nhất 0.003
     S2000_meanCI  -0.056 [-0.096, -0.021]  lệch lớn nhất 0.003
     S2000_pooled  -0.056 [-0.096, -0.021]  lệch lớn nhất 0.003
     S1000_meanCI  -0.056 [-0.094, -0.020]  lệch lớn nhất 0.001
-- RQ3 Residual-LR ('P2', 'WOW', 0.4)->('P2', 'WOW', 0.1): bài -0.034 [-0.058, -0.012]
+- RQ3 Residual-LR ('P2', 'WOW', 0.4)->('P2', 'WOW', 0.1): bản trước -0.034 [-0.058, -0.012]
     A1000         -0.034 [-0.058, -0.010]  lệch lớn nhất 0.002
     A2000         -0.034 [-0.058, -0.011]  lệch lớn nhất 0.001
     S2000_meanCI  -0.034 [-0.060, -0.009]  lệch lớn nhất 0.003
     S2000_pooled  -0.034 [-0.061, -0.008]  lệch lớn nhất 0.004
     S1000_meanCI  -0.034 [-0.060, -0.009]  lệch lớn nhất 0.003
-- RQ3 Residual-LR ('P2', 'S-UNIWARD', 0.4)->('P2', 'S-UNIWARD', 0.1): bài -0.045 [-0.070, -0.022]
+- RQ3 Residual-LR ('P2', 'S-UNIWARD', 0.4)->('P2', 'S-UNIWARD', 0.1): bản trước -0.045 [-0.070, -0.022]
     A1000         -0.045 [-0.071, -0.022]  lệch lớn nhất 0.001
     A2000         -0.045 [-0.070, -0.023]  lệch lớn nhất 0.001
     S2000_meanCI  -0.045 [-0.072, -0.020]  lệch lớn nhất 0.002
     S2000_pooled  -0.045 [-0.072, -0.020]  lệch lớn nhất 0.002
     S1000_meanCI  -0.045 [-0.073, -0.020]  lệch lớn nhất 0.003
-- RQ3 Residual-LR ('P2', 'HILL', 0.4)->('P2', 'HILL', 0.1): bài -0.046 [-0.072, -0.020]
+- RQ3 Residual-LR ('P2', 'HILL', 0.4)->('P2', 'HILL', 0.1): bản trước -0.046 [-0.072, -0.020]
     A1000         -0.046 [-0.075, -0.020]  lệch lớn nhất 0.003
     A2000         -0.046 [-0.074, -0.021]  lệch lớn nhất 0.002
     S2000_meanCI  -0.046 [-0.076, -0.019]  lệch lớn nhất 0.004
     S2000_pooled  -0.046 [-0.077, -0.018]  lệch lớn nhất 0.005
     S1000_meanCI  -0.046 [-0.077, -0.018]  lệch lớn nhất 0.005
-- RQ3 Residual-LR ('P3', 'WOW', 0.4)->('P3', 'WOW', 0.1): bài -0.022 [-0.046, -0.001]
+- RQ3 Residual-LR ('P3', 'WOW', 0.4)->('P3', 'WOW', 0.1): bản trước -0.022 [-0.046, -0.001]
     A1000         -0.022 [-0.044, +0.001]  lệch lớn nhất 0.002
     A2000         -0.022 [-0.046, +0.000]  lệch lớn nhất 0.001
     S2000_meanCI  -0.022 [-0.050, +0.004]  lệch lớn nhất 0.005
     S2000_pooled  -0.022 [-0.050, +0.005]  lệch lớn nhất 0.006
     S1000_meanCI  -0.022 [-0.050, +0.004]  lệch lớn nhất 0.005
-- RQ3 Residual-LR ('P3', 'S-UNIWARD', 0.4)->('P3', 'S-UNIWARD', 0.1): bài -0.054 [-0.078, -0.030]
+- RQ3 Residual-LR ('P3', 'S-UNIWARD', 0.4)->('P3', 'S-UNIWARD', 0.1): bản trước -0.054 [-0.078, -0.030]
     A1000         -0.054 [-0.079, -0.031]  lệch lớn nhất 0.001
     A2000         -0.054 [-0.079, -0.032]  lệch lớn nhất 0.002
     S2000_meanCI  -0.054 [-0.084, -0.026]  lệch lớn nhất 0.006
     S2000_pooled  -0.054 [-0.095, -0.022]  lệch lớn nhất 0.017
     S1000_meanCI  -0.054 [-0.085, -0.026]  lệch lớn nhất 0.007
-- RQ3 Residual-LR ('P3', 'HILL', 0.4)->('P3', 'HILL', 0.1): bài -0.035 [-0.064, -0.006]
+- RQ3 Residual-LR ('P3', 'HILL', 0.4)->('P3', 'HILL', 0.1): bản trước -0.035 [-0.064, -0.006]
     A1000         -0.035 [-0.068, -0.006]  lệch lớn nhất 0.004
     A2000         -0.035 [-0.065, -0.007]  lệch lớn nhất 0.001
     S2000_meanCI  -0.035 [-0.069, -0.004]  lệch lớn nhất 0.005
     S2000_pooled  -0.035 [-0.072, -0.003]  lệch lớn nhất 0.008
     S1000_meanCI  -0.035 [-0.071, -0.003]  lệch lớn nhất 0.007
-- RQ1 SRM+Ensemble ('P1', 'WOW', 0.4)->('P1', 'HILL', 0.4): bài -0.070 [-0.093, -0.046]
+- RQ1 SRM+Ensemble ('P1', 'WOW', 0.4)->('P1', 'HILL', 0.4): bản trước -0.070 [-0.093, -0.046]
     A1000         -0.070 [-0.094, -0.045]  lệch lớn nhất 0.001
     A2000         -0.070 [-0.094, -0.044]  lệch lớn nhất 0.002
     S2000_meanCI  -0.070 [-0.105, -0.032]  lệch lớn nhất 0.014
     S2000_pooled  -0.070 [-0.111, -0.022]  lệch lớn nhất 0.024
     S1000_meanCI  -0.070 [-0.105, -0.034]  lệch lớn nhất 0.012
-- RQ2 SRM+Ensemble ('P2', 'HILL', 0.4)->('P3', 'HILL', 0.4): bài -0.022 [-0.050, +0.005]
+- RQ2 SRM+Ensemble ('P2', 'HILL', 0.4)->('P3', 'HILL', 0.4): bản trước -0.022 [-0.050, +0.005]
     A1000         -0.022 [-0.049, +0.004]  lệch lớn nhất 0.001
     A2000         -0.022 [-0.049, +0.005]  lệch lớn nhất 0.001
     S2000_meanCI  -0.022 [-0.069, +0.027]  lệch lớn nhất 0.022
     S2000_pooled  -0.022 [-0.072, +0.029]  lệch lớn nhất 0.024
     S1000_meanCI  -0.022 [-0.070, +0.025]  lệch lớn nhất 0.020
-- RQ3 SRM+Ensemble ('P1', 'WOW', 0.4)->('P1', 'WOW', 0.1): bài -0.175 [-0.206, -0.144]
+- RQ3 SRM+Ensemble ('P1', 'WOW', 0.4)->('P1', 'WOW', 0.1): bản trước -0.175 [-0.206, -0.144]
     A1000         -0.175 [-0.208, -0.142]  lệch lớn nhất 0.002
     A2000         -0.175 [-0.208, -0.143]  lệch lớn nhất 0.002
     S2000_meanCI  -0.175 [-0.218, -0.135]  lệch lớn nhất 0.012
     S2000_pooled  -0.175 [-0.229, -0.116]  lệch lớn nhất 0.028
     S1000_meanCI  -0.175 [-0.217, -0.135]  lệch lớn nhất 0.011
-- RQ3 SRM+Ensemble ('P1', 'S-UNIWARD', 0.4)->('P1', 'S-UNIWARD', 0.1): bài -0.157 [-0.186, -0.127]
+- RQ3 SRM+Ensemble ('P1', 'S-UNIWARD', 0.4)->('P1', 'S-UNIWARD', 0.1): bản trước -0.157 [-0.186, -0.127]
     A1000         -0.157 [-0.191, -0.129]  lệch lớn nhất 0.005
     A2000         -0.157 [-0.189, -0.128]  lệch lớn nhất 0.003
     S2000_meanCI  -0.157 [-0.198, -0.117]  lệch lớn nhất 0.012
     S2000_pooled  -0.157 [-0.211, -0.109]  lệch lớn nhất 0.025
     S1000_meanCI  -0.157 [-0.201, -0.118]  lệch lớn nhất 0.015
-- RQ3 SRM+Ensemble ('P1', 'HILL', 0.4)->('P1', 'HILL', 0.1): bài -0.120 [-0.149, -0.092]
+- RQ3 SRM+Ensemble ('P1', 'HILL', 0.4)->('P1', 'HILL', 0.1): bản trước -0.120 [-0.149, -0.092]
     A1000         -0.120 [-0.149, -0.092]  lệch lớn nhất 0.000
     A2000         -0.120 [-0.149, -0.092]  lệch lớn nhất 0.000
     S2000_meanCI  -0.120 [-0.160, -0.084]  lệch lớn nhất 0.011
     S2000_pooled  -0.120 [-0.163, -0.081]  lệch lớn nhất 0.014
     S1000_meanCI  -0.120 [-0.160, -0.083]  lệch lớn nhất 0.011
-- RQ3 SRM+Ensemble ('P2', 'WOW', 0.4)->('P2', 'WOW', 0.1): bài -0.163 [-0.193, -0.134]
+- RQ3 SRM+Ensemble ('P2', 'WOW', 0.4)->('P2', 'WOW', 0.1): bản trước -0.163 [-0.193, -0.134]
     A1000         -0.163 [-0.193, -0.136]  lệch lớn nhất 0.002
     A2000         -0.163 [-0.193, -0.136]  lệch lớn nhất 0.002
     S2000_meanCI  -0.163 [-0.202, -0.127]  lệch lớn nhất 0.009
     S2000_pooled  -0.163 [-0.203, -0.125]  lệch lớn nhất 0.010
     S1000_meanCI  -0.163 [-0.202, -0.127]  lệch lớn nhất 0.009
-- RQ3 SRM+Ensemble ('P2', 'S-UNIWARD', 0.4)->('P2', 'S-UNIWARD', 0.1): bài -0.183 [-0.211, -0.155]
+- RQ3 SRM+Ensemble ('P2', 'S-UNIWARD', 0.4)->('P2', 'S-UNIWARD', 0.1): bản trước -0.183 [-0.211, -0.155]
     A1000         -0.183 [-0.211, -0.154]  lệch lớn nhất 0.001
     A2000         -0.183 [-0.211, -0.154]  lệch lớn nhất 0.001
     S2000_meanCI  -0.183 [-0.223, -0.146]  lệch lớn nhất 0.012
     S2000_pooled  -0.183 [-0.224, -0.141]  lệch lớn nhất 0.014
     S1000_meanCI  -0.183 [-0.223, -0.144]  lệch lớn nhất 0.012
-- RQ3 SRM+Ensemble ('P2', 'HILL', 0.4)->('P2', 'HILL', 0.1): bài -0.119 [-0.150, -0.088]
+- RQ3 SRM+Ensemble ('P2', 'HILL', 0.4)->('P2', 'HILL', 0.1): bản trước -0.119 [-0.150, -0.088]
     A1000         -0.119 [-0.150, -0.088]  lệch lớn nhất 0.000
     A2000         -0.119 [-0.150, -0.089]  lệch lớn nhất 0.001
     S2000_meanCI  -0.119 [-0.159, -0.081]  lệch lớn nhất 0.009
     S2000_pooled  -0.119 [-0.173, -0.068]  lệch lớn nhất 0.023
     S1000_meanCI  -0.119 [-0.158, -0.081]  lệch lớn nhất 0.008
-- RQ3 SRM+Ensemble ('P3', 'WOW', 0.4)->('P3', 'WOW', 0.1): bài -0.140 [-0.168, -0.111]
+- RQ3 SRM+Ensemble ('P3', 'WOW', 0.4)->('P3', 'WOW', 0.1): bản trước -0.140 [-0.168, -0.111]
     A1000         -0.140 [-0.172, -0.112]  lệch lớn nhất 0.004
     A2000         -0.140 [-0.171, -0.112]  lệch lớn nhất 0.003
     S2000_meanCI  -0.140 [-0.181, -0.101]  lệch lớn nhất 0.013
     S2000_pooled  -0.140 [-0.193, -0.084]  lệch lớn nhất 0.027
     S1000_meanCI  -0.140 [-0.183, -0.101]  lệch lớn nhất 0.015
-- RQ3 SRM+Ensemble ('P3', 'S-UNIWARD', 0.4)->('P3', 'S-UNIWARD', 0.1): bài -0.149 [-0.177, -0.122]
+- RQ3 SRM+Ensemble ('P3', 'S-UNIWARD', 0.4)->('P3', 'S-UNIWARD', 0.1): bản trước -0.149 [-0.177, -0.122]
     A1000         -0.149 [-0.180, -0.121]  lệch lớn nhất 0.003
     A2000         -0.149 [-0.180, -0.119]  lệch lớn nhất 0.003
     S2000_meanCI  -0.149 [-0.191, -0.109]  lệch lớn nhất 0.014
     S2000_pooled  -0.149 [-0.204, -0.101]  lệch lớn nhất 0.027
     S1000_meanCI  -0.149 [-0.192, -0.110]  lệch lớn nhất 0.015
-- RQ3 SRM+Ensemble ('P3', 'HILL', 0.4)->('P3', 'HILL', 0.1): bài -0.115 [-0.145, -0.089]
+- RQ3 SRM+Ensemble ('P3', 'HILL', 0.4)->('P3', 'HILL', 0.1): bản trước -0.115 [-0.145, -0.089]
     A1000         -0.115 [-0.144, -0.088]  lệch lớn nhất 0.001
     A2000         -0.115 [-0.143, -0.088]  lệch lớn nhất 0.002
     S2000_meanCI  -0.115 [-0.156, -0.075]  lệch lớn nhất 0.014
     S2000_pooled  -0.115 [-0.157, -0.075]  lệch lớn nhất 0.014
     S1000_meanCI  -0.115 [-0.157, -0.075]  lệch lớn nhất 0.014
 
-### Tóm tắt: lệch lớn nhất / trung bình của mỗi cách (so với CI trong bài)
+### Tóm tắt: lệch lớn nhất / trung bình của mỗi cách (so với CI của bản trước)
 
 - Residual-LR   A1000        : lớn nhất 0.004, trung bình 0.0020, khớp ≤0.001 ở 3/11
 - Residual-LR   A2000        : lớn nhất 0.003, trung bình 0.0017, khớp ≤0.001 ở 4/11

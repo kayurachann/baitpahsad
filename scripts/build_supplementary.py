@@ -45,8 +45,8 @@ def build(template_src: Path, out: Path):
            rows, group_rules=(18,), sub_rules=tuple(k for k in range(6, 36, 6) if k != 18))
     d.p("Residual-LR shows a seed SD of 0.000 under P1, consistent with P1 involving no variant sampling and a "
         "deterministic fit. The FPR column is constant within each detector and protocol because the 120 test "
-        "covers are scored identically in all six stego conditions. Table S3 lists the false positives behind "
-        "each rate per run.", style="p1a")
+        "covers are scored identically in all six stego conditions. Table S3 gives the per-run false-positive "
+        "counts behind these rates.", style="p1a")
 
     rows = []
     for det in DETECTORS:
@@ -71,14 +71,14 @@ def build(template_src: Path, out: Path):
         assert sum(fp) == r["fp_total"], (r["detector"], r["protocol"])
         rows.append([r["detector"] if r["protocol"] == "P1" else "", r["protocol"], *map(str, fp),
                      f"{sum(fp)}/360", f"{r['fpr']:.3f}"])
-    d.para(d.runs("**Table S3.** Test false positives at τ_{low} per run (out of 120 test covers), counted from the "
-                  "per-image test scores of each run. The observed test FPR is the total over 3 × 120 cover "
+    d.para(d.runs("**Table S3.** Test false positives at τ_{low} in each run (of 120 test covers), counted from the "
+                  "per-image test scores. The test FPR is the total divided by the 3 × 120 = 360 cover "
                   "evaluations."), "tablecaption", '<w:jc w:val="both"/>')
     _table(d, [1400, 400, 900, 900, 900, 1200, 1218],
            [["Detector", "P", "Seed 42", "Seed 43", "Seed 44", "Total", "Test FPR"]], rows, group_rules=(3,))
-    d.para(d.runs("**Software.** All values in Tables S1-S3 and in the manuscript were reproduced from the 600 "
-                  "source images with Python 3.13, NumPy 2.5.3 (OpenBLAS, Haswell kernel), SciPy 1.18.1, "
-                  "scikit-learn 1.9.1, conseal 2025.11 and sealwatch 2025.9."), "p1a")
+    d.para(d.runs("**Software.** All experimental results in the manuscript and in Tables S1-S3 were computed from "
+                  "the 600 source images with Python 3.13, NumPy 2.5.3 (OpenBLAS, Haswell kernel), SciPy 1.18.1, "
+                  "scikit-learn 1.9.1, Pillow 12.3.0, conseal 2025.11 and sealwatch 2025.9."), "p1a")
     d.save(out, SECT_PR)
     shutil.rmtree(work)
     return d
