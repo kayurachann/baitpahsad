@@ -1,0 +1,38 @@
+{
+  "ngay_chay_lai": "2026-10-15",
+  "phan_mem": {
+    "python": "3.13.16",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "conseal": "2025.11",
+    "sealwatch": "2025.9",
+    "pillow": "12.3.0"
+  },
+  "OPENBLAS_CORETYPE": "Haswell",
+  "ghi_chu_openblas": "Máy chạy lại có AVX-512 (OpenBLAS chọn nhân SkylakeX). Với nhân đó, Residual-LR P1 lệch F1/BER tới 0,012; đặt Haswell (AVX2, như laptop của nhóm) thì mọi giá trị khớp.",
+  "manifest_sha256_nhom": "13c01ca998193e6925d599e43c6bf478021cac9759ff8a4b15e2a37a32799e8c",
+  "manifest_sha256_tao_lai": "d3c3c8b85c28c85a… (chỉ khác cột sha256 của file PNG)",
+  "ghi_chu_png": "PNG tạo lại khác byte với bản của nhóm (bản Pillow/zlib nén khác), nhưng điểm ảnh trùng: cover_id là hash điểm ảnh và khớp 600/600; mọi cột khác của manifest khớp 4200/4200; bộ pilot tạo lại cho điểm Residual-LR trùng tuyệt đối với predictions.csv của nhóm.",
+  "cau_hinh_srm": {
+    "dac_trung": "sealwatch.srm.extract, 106 submodel, 34.671 chiều, ghép theo scripts/srm_thu_tu_nhom.txt",
+    "chon_cap_train": "random.Random(seed).choice cho từng cover train, duyệt theo cover_id tăng dần; cặp vào FLD theo thứ tự đó",
+    "bo_phan_loai": "sealwatch FldEnsembleTrainer(Xc, Xs, seed=seed, L=50, d_sub=500)",
+    "diem": "EnsembleClassifier.predict_confidence (trung bình phiếu ±1 của 50 FLD)"
+  },
+  "ci_deltaauc": {
+    "script": "scripts/tinh_lai_ci.py (giống verify_stats.paired_bootstrap)",
+    "B": 10000,
+    "bo_sinh": "numpy.random.default_rng(2026)",
+    "cach_gop": "mỗi replicate rút 120 test cover có hoàn lại, dùng chung cho hai điều kiện và ba seed; ΔAUC của replicate = trung bình ΔAUC ba seed; phân vị 2,5 và 97,5"
+  },
+  "lenh": [
+    "python scripts/chay_lai_600.py kiem-anh <thư_mục_pgm>",
+    "python scripts/chay_lai_600.py chuan-bi <thư_mục_pgm> <data600>",
+    "python scripts/chay_lai_600.py dac-trung <data600> <feat600> --workers 4",
+    "python scripts/chay_lai_600.py chay <data600> <feat600> <kq>",
+    "python scripts/gop_ket_qua.py <kq>/residual_lr <gop_lr>; python scripts/gop_ket_qua.py <kq>/srm_ensemble <gop_srm>; nối hai scores.csv và hai thresholds.csv",
+    "python scripts/tinh_lai_ci.py scores.csv --B 10000 --boot-seed 2026 --kiem --out ci_deltaauc_B10000.json",
+    "python scripts/verify_stats.py scores.csv --thresholds thresholds.csv --B 10000 --boot-seed 2026 --out verify_report.json"
+  ]
+}

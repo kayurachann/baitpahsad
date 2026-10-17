@@ -1,10 +1,14 @@
-"""Reported results of the StegaGuard 600-cover experiment.
+"""Results of the StegaGuard 600-cover experiment.
 
 Single source of truth for every number that appears in the manuscript tables,
-figures and supplementary material. Values are transcribed from the previous
-manuscript version (seed means over seeds 42, 43, 44); they must be regenerated
-from the stored per-image prediction scores with ``verify_stats.py`` before
-submission.
+figures and supplementary material (seed means over seeds 42, 43, 44).
+
+MATRIX was rerun from the 600 BOSSbase covers with scripts/chay_lai_600.py and matches every value
+(36 cells x 6 metrics) of the manuscript. RQ1-RQ3 hold the point estimates of the manuscript (the rerun
+gives the same values) with 95% intervals recomputed from the rerun scores by scripts/tinh_lai_ci.py:
+paired bootstrap over the 120 test covers, one draw of cover IDs shared by both conditions and the three
+seeds, replicate delta = mean of the three per-seed deltas, B = 10,000, np.random.default_rng(2026),
+2.5th/97.5th percentiles. FP_PER_SEED holds the test false positives at tau_low of each run (of 120).
 """
 
 from decimal import Decimal, ROUND_HALF_EVEN
@@ -62,36 +66,47 @@ MATRIX = {
 # Paired comparisons as reported (delta computed from unrounded AUCs; 95% paired bootstrap CI).
 # RQ1: HILL 0.4 minus WOW 0.4 under P1.
 RQ1 = {
-    "Residual-LR": (0.546, 0.570, +0.024, (-0.007, +0.056)),
-    "SRM+Ensemble": (0.714, 0.645, -0.070, (-0.093, -0.046)),
+    "Residual-LR": (0.546, 0.570, +0.024, (-0.008, +0.057)),
+    "SRM+Ensemble": (0.714, 0.645, -0.070, (-0.095, -0.044)),
 }
 # RQ2: P3 minus P2 on HILL 0.4.
 RQ2 = {
-    "Residual-LR": (0.551, 0.546, -0.005, (-0.020, +0.007)),
-    "SRM+Ensemble": (0.653, 0.632, -0.022, (-0.050, +0.005)),
+    "Residual-LR": (0.551, 0.546, -0.005, (-0.019, +0.008)),
+    "SRM+Ensemble": (0.653, 0.632, -0.022, (-0.049, +0.006)),
 }
 # RQ3: AUC at 0.1 bpp minus AUC at 0.4 bpp, (detector, protocol, algorithm) -> (delta, lo, hi).
 RQ3 = {
-    ("Residual-LR", "P1", "WOW"): (-0.036, -0.063, -0.008),
-    ("Residual-LR", "P1", "S-UNIWARD"): (-0.060, -0.096, -0.029),
-    ("Residual-LR", "P1", "HILL"): (-0.056, -0.093, -0.020),
-    ("Residual-LR", "P2", "WOW"): (-0.034, -0.058, -0.012),
+    ("Residual-LR", "P1", "WOW"): (-0.036, -0.064, -0.007),
+    ("Residual-LR", "P1", "S-UNIWARD"): (-0.060, -0.093, -0.029),
+    ("Residual-LR", "P1", "HILL"): (-0.056, -0.095, -0.021),
+    ("Residual-LR", "P2", "WOW"): (-0.034, -0.058, -0.011),
     ("Residual-LR", "P2", "S-UNIWARD"): (-0.045, -0.070, -0.022),
-    ("Residual-LR", "P2", "HILL"): (-0.046, -0.072, -0.020),
-    ("Residual-LR", "P3", "WOW"): (-0.022, -0.046, -0.001),
-    ("Residual-LR", "P3", "S-UNIWARD"): (-0.054, -0.078, -0.030),
-    ("Residual-LR", "P3", "HILL"): (-0.035, -0.064, -0.006),
-    ("SRM+Ensemble", "P1", "WOW"): (-0.175, -0.206, -0.144),
-    ("SRM+Ensemble", "P1", "S-UNIWARD"): (-0.157, -0.186, -0.127),
-    ("SRM+Ensemble", "P1", "HILL"): (-0.120, -0.149, -0.092),
+    ("Residual-LR", "P2", "HILL"): (-0.046, -0.074, -0.020),
+    ("Residual-LR", "P3", "WOW"): (-0.022, -0.046, +0.000),
+    ("Residual-LR", "P3", "S-UNIWARD"): (-0.054, -0.079, -0.031),
+    ("Residual-LR", "P3", "HILL"): (-0.035, -0.065, -0.006),
+    ("SRM+Ensemble", "P1", "WOW"): (-0.175, -0.207, -0.143),
+    ("SRM+Ensemble", "P1", "S-UNIWARD"): (-0.157, -0.188, -0.127),
+    ("SRM+Ensemble", "P1", "HILL"): (-0.120, -0.149, -0.091),
     ("SRM+Ensemble", "P2", "WOW"): (-0.163, -0.193, -0.134),
-    ("SRM+Ensemble", "P2", "S-UNIWARD"): (-0.183, -0.211, -0.155),
-    ("SRM+Ensemble", "P2", "HILL"): (-0.119, -0.150, -0.088),
-    ("SRM+Ensemble", "P3", "WOW"): (-0.140, -0.168, -0.111),
-    ("SRM+Ensemble", "P3", "S-UNIWARD"): (-0.149, -0.177, -0.122),
-    ("SRM+Ensemble", "P3", "HILL"): (-0.115, -0.145, -0.089),
+    ("SRM+Ensemble", "P2", "S-UNIWARD"): (-0.183, -0.212, -0.154),
+    ("SRM+Ensemble", "P2", "HILL"): (-0.119, -0.149, -0.088),
+    ("SRM+Ensemble", "P3", "WOW"): (-0.140, -0.170, -0.111),
+    ("SRM+Ensemble", "P3", "S-UNIWARD"): (-0.149, -0.178, -0.120),
+    ("SRM+Ensemble", "P3", "HILL"): (-0.115, -0.144, -0.087),
 }
 
+
+# Test false positives at tau_low of each run (seeds 42, 43, 44; out of 120 test covers), counted from the
+# per-image test scores of the rerun.
+FP_PER_SEED = {
+    ("Residual-LR", "P1"): (5, 5, 5),
+    ("Residual-LR", "P2"): (4, 6, 5),
+    ("Residual-LR", "P3"): (6, 7, 6),
+    ("SRM+Ensemble", "P1"): (7, 3, 8),
+    ("SRM+Ensemble", "P2"): (7, 2, 2),
+    ("SRM+Ensemble", "P3"): (5, 1, 2),
+}
 
 def fpr_to_fp_total(fpr_mean, n_runs=3, n_covers=N_TEST_COVERS):
     """Smallest integer false-positive total over ``n_runs`` runs whose mean FPR rounds to ``fpr_mean``."""

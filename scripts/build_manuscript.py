@@ -45,6 +45,8 @@ KEYWORDS = ("**Keywords:** Image Steganalysis, Robustness Evaluation, Algorithm 
 
 
 def f3(x, sign=False):
+    if round(x, 3) == 0:
+        return "0.000"   # không viết +0.000 / −0.000
     s = f"{x:+.3f}" if sign else f"{x:.3f}"
     return s.replace("-", "−")
 

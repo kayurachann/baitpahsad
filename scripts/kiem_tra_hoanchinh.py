@@ -105,13 +105,23 @@ def main(path):
 
     # Abstract và Conclusion: các số chính
     abs_ = next(t for t in doan if t.startswith("Abstract."))
-    for s in ["0.714", "0.645", "−0.070", "[−0.093, −0.046]", "−0.022", "[−0.050, +0.005]", "18 comparisons",
+    sd = lambda x: ("+" if x > 0 else "") + f3(x)  # noqa: E731
+    ci1 = "[{}, {}]".format(*map(sd, R.RQ1["SRM+Ensemble"][3]))
+    ci2 = "[{}, {}]".format(*map(sd, R.RQ2["SRM+Ensemble"][3]))
+    for s in ["0.714", "0.645", "−0.070", ci1, "−0.022", ci2, "18 comparisons",
               "−0.022 to −0.183", "0.062", "0.080", "0.045", "0.034", "600", "360 training, 120 validation and 120 test"]:
         kiem(s in abs_, f"Abstract thiếu/sai: {s}")
     d_all = [v[0] for v in R.RQ3.values()]
     kiem(f3(max(d_all)) == "−0.022" and f3(min(d_all)) == "−0.183", "khoảng ΔAUC RQ3 trong Abstract lệch dữ liệu")
     ket = next(t for t in doan if t.startswith("With the source-cover split fixed before embedding"))
-    kiem("ΔAUC = −0.070, 95% CI [−0.093, −0.046]" in ket, "Conclusion: số RQ1 lệch")
+    kiem(f"ΔAUC = −0.070, 95% CI {ci1}" in ket, "Conclusion: số RQ1 lệch")
+    for bat_dau, s in (("Answer to RQ1.", f"95% CI {ci1}"), ("P3 adds 0.1 bpp WOW", f"95% CI {ci2}"),
+                       ("P3 adds 0.1 bpp WOW", "−0.005 [{}, {}]".format(*map(sd, R.RQ2["Residual-LR"][3]))),
+                       ("Under P1, SRM+Ensemble falls", "+0.024 [{}, {}]".format(*map(sd, R.RQ1["Residual-LR"][3])))):
+        kiem(s in next(t for t in doan if t.startswith(bat_dau)), f"{bat_dau}: thiếu {s}")
+    n_duoi_0 = sum(v[2] < 0 for v in R.RQ3.values())
+    kiem(f"{n_duoi_0} of the 18 intervals lie below zero" in toan or (n_duoi_0 == 18 and "all 18 intervals" in toan),
+         "câu về số khoảng RQ3 nằm dưới 0 lệch dữ liệu")
 
     # Câu thầy yêu cầu bỏ, Acknowledgement, References
     kiem("never completely silent" not in toan, "còn câu 'never completely silent'")

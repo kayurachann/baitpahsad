@@ -4,74 +4,35 @@
 - Sửa trực tiếp trên `Paper_HoanChinh_1.docm` của nhóm: giữ nguyên cấu trúc, lề, cỡ chữ thân bài, các bảng và trường EndNote.
 - Chỉ đổi style "EndNote Bibliography" của References: chữ 10 → 9 pt, giãn dòng 11 pt, thụt lề 341 twip, canh trái. Đây là đúng style `referenceitem` có sẵn trong template LNCS của file (9 pt, line 220), không phải giảm chữ để ép trang.
 - Bản PDF xuất kiểm tra (LibreOffice) dài **12 trang**, kể cả References.
-- Supplementary: `supplementary/StegaGuard_supplementary.docx` (3 trang, Bảng S1–S3).
+- Supplementary: `supplementary/StegaGuard_supplementary.docx` và `.pdf` (3 trang, Bảng S1–S3).
 
-## ⚠️ Điều nhóm cần biết trước khi nộp
 
-Gói code gửi kèm (`StegaGuard_code_va_ket_qua.zip`) **chỉ là thí nghiệm pilot**:
-- 180 cover chia 108/36/36, chỉ có Residual-LR;
-- `run_boss_pilot.py` và `DOC_TRUOC.md` cũng tự ghi như vậy.
+## Đã chạy lại toàn bộ thí nghiệm 600 cover
 
-Bài báo thì báo cáo thí nghiệm **600 cover (360/120/120) với cả Residual-LR và SRM+Ensemble**; manifest của bài có SHA-256 bắt đầu bằng `13c01ca9`, còn pilot là `108fa1d7`. Gói code **không có**:
-1. code SRM+Ensemble (trích đặc trưng bằng sealwatch, FLD ensemble L = 50, d_sub = 500);
-2. kết quả và điểm dự đoán của các lần chạy 600 cover;
-3. script tính ΔAUC ghép cặp và CI cho Table 5, Table 6, Fig. 2 và Bảng S2.
+Nhóm gửi 600 ảnh PGM gốc của BOSSbase (`covers.zip`, 5 phần). Mình chạy lại toàn bộ thí nghiệm bằng `scripts/chay_lai_600.py`. Phần dữ liệu, Residual-LR và cách chọn ngưỡng dùng nguyên `code_nhom/sg.py` của nhóm. Kết quả và cách tái lập nằm trong `data/stegaguard_600/ket_qua_chay_lai/` (xem `README.md` trong thư mục đó).
 
-**Cập nhật: nhóm đã gửi 4 file chuẩn bị dữ liệu của bộ 600 cover** (`manifest.csv`, `preparation.json`, `audit.json`, `source_provenance.json`, nay lưu ở `data/stegaguard_600/`). Đã kiểm bằng `python3 scripts/kiem_du_lieu_600.py`, đạt 16/16 mục:
-- SHA-256 của `manifest.csv` đúng `13c01ca9…2799e8c` như bài ghi, và khớp `preparation.json`;
-- seed 20260918; ảnh thu về 256 × 256 trước khi nhúng; 600 cover, 4.200 ảnh PNG; 360/120/120 cover và 2.160/720/720 stego theo split; audit PASS, không cover nào rò sang split khác;
-- tái lập được 3 bước:
-  - việc chọn 600/10.000 ảnh BOSSbase: `random.Random(20260918).sample(...)` ra đúng 600/600 file;
-  - việc chia split của `sg.py prepare`: 600/600 cover;
-  - seed nhúng: 3.600/3.600;
-- ảnh stego tạo bằng **mô phỏng nhúng của thư viện conseal** (không chứa thông điệp thật). Bài đã thêm chi tiết này vào 3.1 ("by the simulators in the conseal library (https://github.com/uibk-uncover/conseal)", URL kiểm qua PyPI). Không thêm mục mới vào References vì sẽ đổi số [19], [20] và làm bài vượt 12 trang. Khi có `pip freeze`, nên ghi phiên bản conseal (và sealwatch) vào Supplementary. Câu bicubic cũng được viết gọn lại để bài vẫn 12 trang.
+**Dữ liệu**
+- 600/600 ảnh PGM khớp SHA-256 trong `source_provenance.json`.
+- `sg.prepare` (seed 20260918, 256 × 256) cho manifest khớp bản của nhóm ở mọi cột: thứ tự 4.200 dòng, cover_id (là hash điểm ảnh), split, seed nhúng, nguồn.
+- Chỉ cột SHA-256 của file PNG khác, vì bản Pillow/zlib dùng để nén PNG khác. Điểm ảnh thì trùng. Kiểm thêm bằng bộ pilot: tạo lại 180 ảnh pilot rồi chấm bằng chính `model.joblib` của nhóm, điểm trùng tuyệt đối với `predictions.csv` của nhóm ở cả 1.944 ảnh test.
 
-Như vậy phần **dữ liệu** của bài đã được xác nhận đầy đủ, và `sg.py` chính là code đã dùng cho bộ 600 cover. Phần **kết quả** thì vẫn chưa có file. Để làm nốt các chỗ còn thiếu, nhóm cần gửi:
-- thư mục kết quả của 18 lần chạy (2 detector × 3 protocol × 3 seed). Mỗi lần chạy gồm `config.json`, `thresholds.json`, và thư mục `*_test` có `predictions.csv`, `metrics.csv`, `evaluation.json`;
-- code hoặc log chạy SRM+Ensemble;
-- kết quả `pip freeze` của máy đã chạy SRM, để biết phiên bản sealwatch.
+**Kết quả: khớp 216/216 giá trị của Table 4 và Bảng S1** (2 detector × 18 ô × AUC, SD, F1, BER, recall, FPR). Để khớp hoàn toàn cần ba chi tiết của máy và code gốc:
+1. **Nhân tính toán của OpenBLAS.** Laptop của nhóm không có AVX-512 nên OpenBLAS dùng nhân Haswell. Trên máy có AVX-512, Residual-LR P1 (đặc trưng gần như ngẫu nhiên) dừng lbfgs ở điểm hơi khác, F1/BER lệch tới 0,012. Đặt `OPENBLAS_CORETYPE=Haswell` thì khớp hết.
+2. **Thứ tự ghép đặc trưng SRM.** Hàm `srm.extract` của sealwatch trả về dict có thứ tự phụ thuộc hash seed của Python (khi gộp các khối SPAM, hàm duyệt một `set`), nên có 8 thứ tự khả dĩ. Chỉ một thứ tự cho ra đúng 36/36 giá trị SRM P1. Thứ tự này được lưu trong `scripts/srm_thu_tu_nhom.txt`.
+3. **Cách rút cặp train của SRM.** Script SRM của nhóm duyệt các cover train theo cover_id (sg.py thì theo thứ tự manifest) khi rút một biến thể bằng `random.Random(seed)`. Bộ phân loại là `FldEnsembleTrainer(seed=seed, L=50, d_sub=500)` của sealwatch; điểm là `predict_confidence`, tức trung bình phiếu ±1 của 50 FLD. Với cách này P2 và P3 cũng khớp 36/36.
 
-Trang cuối và DOI của [17] không nằm trong dữ liệu của nhóm; cần tra IEEE Xplore khi kỷ yếu EUSIPCO 2025 được đăng.
+**Phiên bản phần mềm** đã tái lập đúng mọi số: Python 3.13, NumPy 2.5.3, SciPy 1.18.1, scikit-learn 1.9.1 (trùng bản ghi trong `model.joblib` của nhóm), conseal 2025.11, sealwatch 2025.9. Hai bản conseal và sealwatch này là bản mới nhất trên PyPI lúc nhóm chạy; `requirements.txt` của nhóm không ghim phiên bản.
 
-Vì vậy:
-- **Đã xác nhận được từ code (`code/sg.py`):** cách tạo 76 đặc trưng, StandardScaler, tham số Logistic Regression, cách chọn ngưỡng τ_BER và τ_low, bootstrap CI của AUC từng điều kiện (1.000 vòng, seed 2026, phân vị 2,5–97,5%), cách chia dữ liệu trước khi nhúng, audit chống rò rỉ, các cột của manifest. Code này dùng chung cho thí nghiệm 600 cover vì manifest của bài có đúng các cột mà `sg.py` tạo ra. Dù vậy nhóm vẫn nên khẳng định lại là đã chạy cùng `sg.py`.
-- **Chưa xác nhận được bằng code hoặc dữ liệu gốc:**
-  - cấu hình SRM+Ensemble;
-  - cách gộp ΔAUC qua 3 seed: bài **không thêm** câu nào về việc này (xem mục 2 bên dưới);
-  - số false positives của Table 7 so với điểm dự đoán từng seed;
-  - toàn bộ số của Table 4–7 so với dữ liệu gốc.
+**ΔAUC và CI (Table 5, Table 6, Fig. 2, Bảng S2)**
+- Cả 22 ước lượng điểm ΔAUC khớp bài.
+- **Cách gộp qua 3 seed** của bản trước đã xác định được: mỗi replicate rút một lần 120 test cover, dùng chung cho cả 3 seed; ΔAUC của replicate là trung bình 3 seed. Cách này cho CI lệch bài trung bình 0,002, trong khi lấy CI riêng từng seed rồi gộp thì lệch 0,013–0,021.
+- **B và dòng số ngẫu nhiên của script gốc thì không khôi phục được.** Đã thử B = 1.000–10.000, nhiều seed và hai loại bộ sinh, không bộ nào cho ra đúng từng chữ số. Script gốc không còn.
+- Vì vậy mọi CI được **tính lại** từ điểm của lần chạy lại bằng `scripts/tinh_lai_ci.py`: B = 10.000, `numpy.random.default_rng(2026)` (seed bootstrap của `sg.py`), phân vị 2,5 và 97,5. Script này cho kết quả giống `verify_stats.paired_bootstrap` (đã kiểm). Bài ghi đúng thủ tục này ở 3.5.
+- Các cận CI đổi tối đa 0,003 và mọi kết luận giữ nguyên, trừ một chỗ: khoảng của **Residual-LR P3 WOW** trước là [−0.046, −0.001], nay là [−0.046, 0.000] (cận trên +0,0003), tức chạm 0. Câu "all 18 intervals lie below zero" vì vậy sửa thành "17 of the 18 intervals lie below zero; the Residual-LR interval for P3 WOW reaches zero". Table 6 ghi 2/3 cho dòng này.
 
-  Hiện các số này chỉ khớp nhau và khớp `scripts/results_data.py`.
-- **Việc nhóm cần làm:** tìm trên máy thư mục kết quả 600 cover (có `manifest.csv` với SHA-256 `13c01ca9…2799e8c`), code SRM+Ensemble và script phân tích ΔAUC, rồi gửi lại. Có các file đó thì:
-  - gộp kết quả bằng `python3 scripts/gop_ket_qua.py <thư mục kết quả> gop --manifest-sha256 13c01ca998193e6925d599e43c6bf478021cac9759ff8a4b15e2a37a32799e8c`. Lệnh này tạo `gop/scores.csv` (điểm test) và `gop/thresholds.csv` (ngưỡng trong `thresholds.json`, vì `sg.py` không lưu điểm validation). Đã thử trên pilot: tính lại khớp `metrics.csv` của `sg.py` ở 54 điều kiện × 5 chỉ số;
-  - chạy `python3 scripts/verify_stats.py gop/scores.csv --thresholds gop/thresholds.csv` để tính lại số của Table 4–7 và các ΔAUC/CI;
-  - nếu khớp thì có thể thêm một câu về cách gộp ΔAUC qua 3 seed vào mục 3.5; nếu không khớp thì sửa theo số tính lại.
+**Kiểm độc lập:** `verify_stats.py` chạy trên `ket_qua_chay_lai/scores.csv` và `thresholds.csv` (B = 10.000) cho ra đúng mọi số trong `results_data.py`, gồm Table 4/S1, FP từng seed và 22 CI (`verify_report.json`).
 
-  Không có các file này thì không thể trả lời trung thực mục 1 (SRM+Ensemble), mục 2 (cách gộp CI) và mục 3 (đối chiếu FP) của thầy.
-- **Với SRM+Ensemble, khi tìm được code hoặc log, cần xác nhận:**
-  - (a) 106 submodel, 34.671 chiều;
-  - (b) L = 50 và d_sub = 500 được cố định, không tự tối ưu;
-  - (c) thư viện huấn luyện FLD ensemble;
-  - (d) điểm nào của ensemble được dùng cho ROC và ngưỡng (tổng hay trung bình projection, hay số phiếu).
-
-  Nếu (d) khác cách hiểu "score" ở 3.2 thì thêm nửa câu cho rõ.
-- **Câu cuối mục 3.5** ("All tables can be recomputed from these files.") chỉ đúng khi nhóm còn giữ `predictions.csv`, `thresholds.json` và `manifest.csv` của bản 600 cover cho cả hai detector. Nếu không còn thì bỏ câu này trước khi nộp.
-- **Cách gửi dữ liệu:** phiên Claude này chạy trên máy chủ đám mây nên không vào được máy của nhóm. Có hai cách:
-  - nén thư mục kết quả 600 cover và code SRM+Ensemble rồi gửi vào khung chat (hoặc đẩy lên repo);
-  - mở Claude ngay trên máy có dữ liệu: ứng dụng Claude Desktop, hoặc lệnh `claude remote-control` chạy trong thư mục đó.
-
-### Các file đã tìm (không có kết quả 600 cover)
-- Phiên Claude này chạy trên máy chủ đám mây, nên không vào được máy của nhóm để tự tìm. Đã xem hết mọi file nhóm gửi vào chat, nhưng không file nào là kết quả chạy 600 cover hay code SRM:
-  - zip code (pilot 180 ảnh);
-  - 4 file chuẩn bị dữ liệu 600 ảnh;
-  - notebook `code_c_a_pp_nghi_n_c_u.ipynb` (code Chương 3, khảo sát giấc ngủ);
-  - 5 script làm video hướng dẫn và mô tả dữ liệu, đều cho bản pilot 180 ảnh;
-  - đợt gửi sau: `sg.py`, `run_boss_pilot.py`, `metrics.csv` và `predictions.csv` của `mixed_algorithms_payloads_seed44`. Cả 4 file trùng từng byte với file đã có trong zip pilot;
-  - `fetch_bossbase_subset.py`: script tải và chọn ảnh BOSSbase. Script dùng `random.Random(seed).sample(...)` trên danh sách PGM sắp theo tên, đúng cách mà `kiem_du_lieu_600.py` đã tái lập ra 600/600 ảnh. Câu "We drew 600 of them (6%) with the fixed seed 20260918" trong bài vì vậy có code xác nhận;
-  - `build_conference_report.py`: script dựng báo cáo pilot bằng tiếng Việt, có hàm bootstrap ΔAUC 2.000 vòng (xem mục 2);
-  - `create_stegaguard_conference_en_revised.py`: script dựng bài pilot 180 ảnh. Script ghi rằng pilot có bootstrap ghép cặp P3–P2 với 2.000 lần lấy mẫu, tính riêng từng seed, nhưng script bootstrap đó không có trong gói. Cách này cũng khác bài 600 cover, nơi ΔAUC được lấy trung bình qua 3 seed với một CI chung. Vì vậy không dùng nó để mô tả cách gộp CI.
-- Các script này khớp với bài ở hai điểm: ảnh được thu nhỏ bằng bicubic (Pillow), và ảnh stego được tạo bằng conseal.
-- Kết quả thường nằm cạnh thư mục `bossbase_pilot_results` trên máy đã chạy, ví dụ `C:\Users\ACER\Downloads\paper\...`. Tìm các thư mục có `thresholds.json` mà `config.json` ghi `manifest_sha256` = `13c01ca9…`.
+[17]: trang cuối và DOI chưa có trên IEEE Xplore; cần bổ sung khi kỷ yếu EUSIPCO 2025 được đăng.
 
 ### Báo cáo CheckAI (Turnitin) nhóm gửi
 - `CheckAI.pdf` ngày 14/10 chấm **một bản cũ** của bài (13 trang, có Table 11 và Fig. 4): 36% bị đánh dấu AI, gồm 21 đoạn.
@@ -79,105 +40,68 @@ Vì vậy:
 - Nhóm nên nộp bản `Paper_HoanChinh_2` lên Turnitin để chấm lại. Nếu còn đoạn bị đánh dấu, gửi báo cáo mới để xem đúng các đoạn đó; tốt nhất là nhóm tự viết lại các đoạn đó bằng lời của mình.
 - Làm theo quy định của trường và hội nghị về việc dùng AI hỗ trợ viết. Springer yêu cầu ghi rõ việc dùng LLM nếu vượt quá mức sửa câu chữ.
 
+
 ## Thầy yêu cầu – đã làm gì
 
 ### 1. Section 3.2 – tái lập thực nghiệm
-Thêm vào đoạn 3.2 (không thêm bảng) các thông tin lấy từ `sg.py` và 9 mô hình `model.joblib`. Mô hình được đọc an toàn, không thực thi file.
+Thêm vào đoạn 3.2 (không thêm bảng) các thông tin lấy từ `sg.py` và các mô hình `model.joblib` của nhóm. Mô hình được đọc bằng joblib, không chạy code lạ.
 - **76 đặc trưng:** sai phân điểm ảnh bậc 1 và bậc 2 theo hai hướng (4 residual). Mỗi residual cho histogram chuẩn hóa 17 bin của giá trị đã cắt về [−8, 8], cộng trung bình trị tuyệt đối và độ lệch chuẩn của residual **chưa cắt**, nên có 4 × 19 = 76 đặc trưng.
 - **Chuẩn hóa:** StandardScaler nằm trong pipeline scikit-learn, chỉ fit trên đặc trưng train của từng lần chạy.
-- **Logistic Regression:** L2, C = 1.0, solver lbfgs, không class weight (cặp train cân bằng 1:1), max_iter = 2000. Mô hình lưu bằng scikit-learn 1.9.1. Điểm số là `decision_function`.
+- **Logistic Regression:** L2, C = 1.0, solver lbfgs, không class weight (cặp train cân bằng 1:1), max_iter = 2000. Điểm số là `decision_function`.
   - random_state = seed của lần chạy, nhưng lbfgs không dùng tới nên việc fit là tất định.
   - Vì vậy đã sửa ô "Seed-dependent parts" của Residual-LR trong Table 2 thành "variant sampling (P2, P3)".
-  - Câu ở 3.3 sửa thành "Seeds 42-44 control the variant draws and the random parts of SRM+Ensemble fitting." 
-- **Mục 3.1:** ghi rõ ảnh được thu nhỏ bằng bicubic ("bicubically downsampled", đúng như `prepare` trong `sg.py`), và ảnh stego được tạo bằng mô phỏng nhúng của conseal (`preparation.json`).
-- **SRM+Ensemble:** giữ nguyên câu cũ (106 submodel, 34,671 đặc trưng, L = 50, d_sub = 500). Mọi tài liệu của nhóm ghi giống nhau nhưng **chưa có code để đối chiếu** (xem phần ⚠️).
+  - Câu ở 3.3 sửa thành "Seeds 42-44 control the variant draws and the random parts of SRM+Ensemble fitting."
+- **Mục 3.1:** ghi rõ ảnh được thu nhỏ bằng bicubic ("bicubically downsampled", đúng như `prepare` trong `sg.py`) và ảnh stego được tạo bằng mô phỏng nhúng của conseal.
+- **SRM+Ensemble:** câu cũ (106 submodel, 34.671 đặc trưng, sealwatch, L = 50, d_sub = 500) nay đã được chạy lại xác nhận. Thêm một câu về điểm số: "Its score is the mean of the 50 base-learner votes (±1)." Đây là `predict_confidence` của sealwatch, cách duy nhất cho ra đúng số của bài.
 
 ### 2. Section 3.5 – bootstrap
-- Thêm câu cuối đoạn đầu 3.5: "The 2.5th and 97.5th percentiles of the replicate differences give the 95% interval." Cả `sg.py` và hàm ΔAUC của nhóm đều lấy CI theo phân vị.
-- **Số vòng bootstrap của CI ΔAUC: chưa ghi vào bài, vì có hai nguồn ghi khác nhau.**
-  - `sg.py evaluate` dùng B = 1.000, seed 2026, nhưng đó là CI của **AUC từng điều kiện** (lưu trong `metrics.csv`), không phải CI của ΔAUC.
-  - Hàm ΔAUC duy nhất của nhóm (`paired_auc_confidence` trong `build_conference_report.py`, bản pilot) dùng **2.000 vòng**, seed 2026+seed, tính riêng từng seed.
-  - Table 5, Table 6 và Fig. 2 của bản 600 cover cho một CI chung qua 3 seed, nên đã dùng một script khác mà nhóm chưa gửi.
-  - Bản trước có câu "B = 1,000 … seed 2026" lấy từ `sg.py`. Câu này đã được **bỏ** để không ghi sai số vòng cho CI của ΔAUC.
-  - **Việc nhóm cần làm:** mở script đã tạo Table 5/6 rồi báo lại số vòng (B), seed và cách gộp qua 3 seed. Khi đó chỉ cần thêm một câu, ví dụ "We use B = 2,000 replicates …", đúng như script.
-- **Không thêm:** cách gộp ΔAUC và CI qua 3 seed. Script tính ΔAUC không có trong gói, và thầy yêu cầu chỉ ghi các bước đã chạy trong code, nên bài giữ nguyên mô tả cũ của nhóm: điểm ước lượng là trung bình của 3 hiệu theo từng seed, CI từ bootstrap ghép cặp theo test cover. Khi tìm được script, có thể thêm một câu như: "Each ΔAUC replicate is the difference of the two replicate AUCs, averaged over the three seeds" (chỉ thêm nếu script làm đúng như vậy).
-- Thêm câu nói rõ CI chỉ phản ánh biến thiên khi lấy mẫu lại 120 test cover cố định, không mở rộng sang nguồn ảnh khác ("they account only for test-cover sampling and do not extend to other image sources").
-- Sửa câu lưu trữ cho đúng code: mỗi lần chạy lưu điểm test từng ảnh và ngưỡng chọn trên validation (code không lưu điểm validation).
-- Table 5 và Table 6: kiểm tự động bằng `scripts/kiem_tra_hoanchinh.py`, khớp `results_data.py`. Fig. 2 và Bảng S2 không được script này đọc, nhưng được vẽ và sinh từ chính `results_data.py` (`make_figures.py`, `build_supplementary.py`).
+- Thêm vào cuối đoạn đầu 3.5: "One draw serves all three seeds, and the replicate ΔAUC is the mean of the three per-seed differences. The 2.5th and 97.5th percentiles of B = 10,000 replicates (NumPy default_rng, seed 2026) give the 95% interval."
+- Đây đúng là thủ tục đã chạy để ra mọi CI trong bài (`scripts/tinh_lai_ci.py`). Cách gộp qua seed giống bản trước; B và seed là của lần tính lại (xem phần "Đã chạy lại").
+- Các CI mới được cập nhật ở Abstract, mục 4.2 và 4.3, Answer to RQ1, Conclusion, Table 5, Table 6, Fig. 2 (vẽ lại bằng `scripts/make_figures.py`, đúng kiểu cũ) và Bảng S2.
+- Câu giới hạn CI: CI chỉ phản ánh biến thiên khi lấy mẫu lại 120 test cover cố định, không mở rộng sang nguồn ảnh khác ("they account only for test-cover sampling and do not extend to other image sources").
+- Câu lưu trữ sửa cho đúng code: mỗi lần chạy lưu điểm test từng ảnh và ngưỡng chọn trên validation. Các file này của lần chạy lại nay nằm trong repo, nên câu "All tables can be recomputed from these files" đúng.
 
 ### 3. Section 4.5 – low FPR
 - Bỏ câu "in none of them were recall and FPR both zero, so the detectors were never completely silent".
-- Viết lại câu 54 rows / 6.480: đó là 6.480 lượt chấm điểm, do 9 mô hình của một detector chấm lặp lại trên cùng 720 ảnh stego (từ 120 cover), nên không phải mẫu độc lập. False positives trong Table 7 cũng là các lượt chấm lặp trên cùng 120 test cover.
-- Kiểm số học Table 7: FP/360 khớp FPR từng ô; dòng gộp 49/1.080 = 0,045 và 37/1.080 = 0,034; recall trung bình 0,062 và 0,080 khớp Abstract.
-- **Sửa một số trong Table 7:** mean recall của SRM+Ensemble P2 từ 0.070 thành **0.069**.
-  - Mỗi recall trong S1 là (số stego bắt được qua 3 seed)/360. Sáu ô của P2 ứng với 14, 56, 9, 35, 10 và 26 ảnh, tổng 150/2.160 = 0,0694, làm tròn là 0,069.
-  - Số 0.070 cũ do lấy trung bình 6 giá trị đã làm tròn (0,0695). Các ô khác của Table 7 không đổi.
-- **Residual-LR P1:** code cho thấy ba lần chạy giống hệt nhau (P1 không rút biến thể, lbfgs tất định). Vì vậy câu ở 4.5 khẳng định chắc 5/120 FP mỗi lần chạy, thay vì viết "nếu".
-- Câu giải thích τ_low viết lại cho khớp code: "τlow rests on the second-highest of only 120 validation cover scores … An exchangeable test cover exceeds this threshold with probability 2/121 ≈ 1.7%". Hàm `thresholds()` của `sg.py` đặt τ_low ngay trên điểm validation cover cao thứ hai (`np.nextafter`), tức là ngưỡng nhỏ nhất thỏa Eq. (1), cho phép tối đa 1 FP trên 120 cover.
+- Viết lại câu 54 rows / 6.480: đó là 6.480 lượt chấm, do 9 mô hình của một detector chấm lặp lại trên cùng 720 ảnh stego (từ 120 cover), nên không phải mẫu độc lập. False positives trong Table 7 cũng là các lượt chấm lặp trên cùng 120 test cover.
+- **Đối chiếu FP với điểm từng seed** (đếm từ điểm test của từng lần chạy, trên 120 test cover):
+
+  | Detector | P1 (seed 42/43/44) | P2 | P3 |
+  |---|---|---|---|
+  | Residual-LR | 5/5/5 = 15 | 4/6/5 = 15 | 6/7/6 = 19 |
+  | SRM+Ensemble | 7/3/8 = 18 | 7/2/2 = 11 | 5/1/2 = 8 |
+
+  Cả 6 tổng khớp Table 7. Chú thích Table 7 sửa thành "False positives are counted over seeds 42-44 (3 × 120 test covers; per seed in Suppl. Table S3)"; Bảng S3 nay ghi số theo từng seed.
+- **Sửa một số trong Table 7:** mean recall của SRM+Ensemble P2 từ 0.070 thành **0.069** (150/2.160 = 0,0694; số cũ do lấy trung bình 6 giá trị đã làm tròn).
+- **Residual-LR P1:** ba lần chạy giống hệt nhau (5/5/5), nên câu ở 4.5 khẳng định 5/120 FP mỗi lần chạy.
+- Câu giải thích τ_low viết lại cho khớp code: τ_low nằm ngay trên điểm validation cover cao thứ hai (`thresholds()` của `sg.py`), nên một test cover có thể hoán đổi vượt ngưỡng với xác suất 2/121 ≈ 1,7%.
 - Giữ nguyên kết luận "did not demonstrate reliable operation at FPR ≤ 1%".
-- **Chưa làm được:** đối chiếu FP với điểm dự đoán từng seed, vì cần kết quả 600 cover.
 
 ### 4. References
 - **Thứ tự [1]–[20] giữ nguyên.** Đã kiểm bằng script: thứ tự xuất hiện lần đầu của 20 tài liệu trong bài không đổi.
 - **Metadata:** đối chiếu với bản ghi của nhà xuất bản hoặc chỉ mục (IEEE Xplore, ACM DL, SpringerOpen, SPIE, ScienceDirect, JMLR, PyPI, dblp, OpenAlex, HAL). Kết quả: 19/20 khớp, riêng [17] chỉ khớp một phần.
-  - **Lưu ý trung thực:** mạng của phiên làm việc chặn mở trực tiếp IEEE Xplore, ACM DL, Crossref, doi.org và dblp. Vì vậy phần lớn thông tin lấy qua đoạn trích của các trang đó trong kết quả tìm kiếm; chỉ PyPI được mở trực tiếp.
-  - Vài trường chỉ có nguồn phụ: DOI của [2] (ResearchGate và bài trích dẫn), số trang của [7] (tóm tắt tìm kiếm), [4] (OpenAlex).
-  - Trước khi nộp, một bạn nên bấm thử từng DOI để chắc chắn.
-  - Đã sửa [5] và [6]: năm và viết hoa tên tạp chí.
-  - Đã sửa [8], [10], [11], [14], [15], [16], [17], [18]: tách đúng tên tác giả, bổ sung nơi đăng, tập, số, trang, DOI.
-  - [9]: ghi số bài SPIE "p. 90280J" thay cho "pp. 204–215" (số bài chính thức của Proc. SPIE 9028).
-  - Mọi mục có DOI ([1]–[16], [18]) đều được thêm DOI.
-- **[17] MODE (EUSIPCO 2025):** xác nhận tác giả, tên, hội nghị (Palermo, 8–12/9/2025) và trang bắt đầu 810.
-  - Đã thêm đường dẫn bản HAL đã kiểm: https://hal.science/hal-05101274.
-  - Chưa có trang kết thúc và DOI trên IEEE Xplore nên không ghi, để tránh đoán. Khi IEEE Xplore đăng kỷ yếu thì bổ sung.
-- **[10]:** ghi trang 534-1–534-11 và nhà xuất bản IS&T thay cho "paper MWSF-534", để thống nhất với các mục kỷ yếu khác.
-- **[11], [13], [15]:** bỏ "Proc." và năm dạng ’25. Ghi giống các mục IEEE, ví dụ "In: 33rd ACM International Conference on Multimedia (MM 2025)".
-- Sau "pp.", "p." và "vol." dùng khoảng trắng không ngắt, như LNCS, để số trang không bị tách xuống dòng. EndNote Update sẽ đổi lại khoảng trắng thường; khi đó chỉ ảnh hưởng chỗ ngắt dòng.
-- **[20] sealwatch:** trích như phần mềm: Beneš, M., Lorch, B. (Đại học Innsbruck, 2024), tên theo PyPI "Implementation of modern image steganalysis algorithms", URL GitHub (xác nhận qua mục Source trên PyPI).
-  - Không ghi "last accessed …", vì chưa mở được trang GitHub để xác nhận ngày.
-  - Nếu hội nghị yêu cầu ngày truy cập: một bạn mở https://github.com/uibk-uncover/sealwatch rồi thêm ", last accessed YYYY/MM/DD" (ngày mở thật) sau URL.
-  - Gói code không ghi phiên bản sealwatch đã dùng. Nếu biết (ví dụ 2024.12) thì thêm ", version 2024.12" sau "Python package".
-- **Trình bày theo Springer LNCS:**
-  - nhãn "1." thay "[1]";
-  - References dùng chữ 9 pt, giãn dòng 11 pt, thụt lề 341 twip, theo đúng style `referenceitem` của template. Đây là quy định của template, không phải giảm cỡ chữ để ép trang;
-  - thân bài và lề giữ nguyên.
-- **Trích dẫn trong bài:**
-  - Câu mở đầu "…such as SPAM or the Spatial Rich Model (SRM) [5-7]" trỏ nhầm sang SRNet, Ensemble và Yedroudj-Net. Đã viết lại câu cho đúng ba tài liệu này (SRM features + Fisher linear discriminant ensemble [6], SRNet [5], Yedroudj-Net [7]) và bỏ trích dẫn lặp "[5, 7]". Số thứ tự không đổi.
-  - Mục 2.3: [10] chỉ nói về algorithm shift với tập train CNN lớn. Câu sửa thành "…or, for algorithm shift, use large CNN training sets [10]" để trích dẫn đỡ đúng vế của nó.
-- **EndNote:**
-  - Bản ghi nhúng trong 42 trường trích dẫn đã được cập nhật theo metadata mới, tên kỷ yếu ghi giống hệt References đang in.
-  - File `docs/endnote_sua_references.ris` có cả 20 bản ghi đã sửa.
-  - **Đã tắt Instant Formatting của EndNote trong file**, để khi mở bằng máy có EndNote, References không tự sinh lại theo style IEEE và thư viện cũ. Xem các bước ở cuối file này.
+  - **Lưu ý trung thực:** mạng của phiên làm việc chặn mở trực tiếp IEEE Xplore, ACM DL, Crossref, doi.org và dblp. Vì vậy phần lớn thông tin lấy qua đoạn trích của các trang đó trong kết quả tìm kiếm; chỉ PyPI được mở trực tiếp. Trước khi nộp, một bạn nên bấm thử từng DOI.
+  - Đã sửa [5], [6] (năm, viết hoa tên tạp chí), [8], [10], [11], [14]–[18] (tên tác giả, nơi đăng, tập, số, trang, DOI); [9] ghi số bài SPIE "p. 90280J". Mọi mục có DOI ([1]–[16], [18]) đều có DOI.
+- **[17] MODE (EUSIPCO 2025):** xác nhận tác giả, tên, hội nghị (Palermo, 8–12/9/2025), thêm bản HAL https://hal.science/hal-05101274. Chưa ghi trang kết thúc và DOI vì IEEE Xplore chưa đăng.
+- **[10]:** trang 534-1–534-11, nhà xuất bản IS&T. **[11], [13], [15]:** ghi tên hội nghị như các mục IEEE.
+- **[20] sealwatch:** nay ghi phiên bản đã dùng: "Python package, version 2025.9, University of Innsbruck (2025)". Bản 2025.9 phát hành ngày 18/9/2025 và cho ra đúng từng giá trị SRM của bài. Không ghi "last accessed" vì chưa mở được trang GitHub để xác nhận ngày; nếu hội nghị yêu cầu thì thêm ", last accessed YYYY/MM/DD" sau URL.
+- **Trình bày theo Springer LNCS:** nhãn "1."; References chữ 9 pt, giãn dòng 11 pt, thụt lề 341 twip theo style `referenceitem` của template; khoảng trắng không ngắt sau "pp.", "p.", "vol.".
+- **Trích dẫn trong bài:** câu mở đầu "[5-7]" được viết lại cho đúng ba tài liệu (SRM features + FLD ensemble [6], SRNet [5], Yedroudj-Net [7]); ở 2.3, [10] chỉ đỡ vế "for algorithm shift, use large CNN training sets".
+- **EndNote:** bản ghi nhúng trong 42 trường trích dẫn đã cập nhật theo metadata mới (kể cả [20]); `docs/endnote_sua_references.ris` có cả 20 bản ghi; Instant Formatting đã tắt trong file.
 
 ### 5. Rà soát cuối
-- **Hình 1, 2:** file của nhóm đang ở khoảng 220 dpi do Word nén. Đã thay bằng bản gốc 600 dpi, cùng tỉ lệ khung.
-- **Bảng 1–7:** dùng trường SEQ nên đánh số liên tục; tên bảng và câu dẫn đúng vị trí.
-- **Số liệu:** Table 4–7, các số chính của Abstract và số RQ1 ở Conclusion được kiểm tự động, khớp `results_data.py`. Các số khác trong Results được dò tay.
-- **Supplementary:** sửa tiêu đề cho trùng tên bài ("Lightweight…"); S1–S3 đầy đủ.
+- **Hình 1, 2:** bản 600 dpi. Fig. 2 được vẽ lại với CI mới bằng đúng script đã tạo hình cũ (chạy với số cũ thì ra file trùng từng byte với hình cũ).
+- **Bảng 1–7:** đánh số liên tục bằng trường SEQ.
+- **Số liệu:** mọi số của Table 4–7 và Bảng S1–S3 đã được tái lập từ ảnh gốc. `kiem_tra_hoanchinh.py` kiểm Table 4–7, Abstract, Conclusion, các CI ở mục 4 và câu 17/18 so với `results_data.py`.
+- **Supplementary:** S2 có CI mới và ghi rõ cách bootstrap; S3 có FP từng seed; thêm một đoạn ngắn ghi phiên bản phần mềm đã tái lập mọi số.
 - **Placeholder và tô vàng:** không còn.
-- **Hình 1:** hình không đánh số stage, nên câu dẫn "Stages 1-3 … stages 4-5 … stages 6-7" được sửa thành mô tả theo vị trí trong hình (left column, two middle lanes, right side).
-- **Số trang:** 12 trang trong LibreOffice, trang 12 còn khoảng 2 dòng trống. Khi mở bằng Word nên xuất PDF kiểm lại.
-  - Để giữ 12 trang mà không đổi font hay lề, đã bỏ một câu bị trùng ở 3.2: "Both detectors keep the same settings in every protocol and seed, so the configuration cannot explain differences between protocols." Ý này đã có ở Table 2 và mục 3.3.
-  - Bỏ thêm chữ "also" ở 2.3.
-  - Viết "Seeds 42-44" thay "Seeds 42, 43 and 44" ở 3.3.
-- **Acknowledgement:** thêm trước References đúng câu của thầy: "This research is funded by the University of Economics Ho Chi Minh City, Vietnam (UEH)."
+- **Số trang:** 12 trang trong LibreOffice, không đổi font hay lề. Khi mở bằng Word nên xuất PDF kiểm lại.
+- **Acknowledgement:** "This research is funded by the University of Economics Ho Chi Minh City, Vietnam (UEH)."
 
 ### Văn phong (tránh văn kiểu AI)
-- Chỉ viết lại các câu đã thêm hoặc sửa trong lần này. Văn bản gốc của nhóm giữ nguyên, nên kết quả kiểm tra đạo văn trước đó vẫn dùng được.
-- Cách làm:
-  - hai người viết độc lập đề xuất bản viết lại;
-  - người phản biện chọn bản giữ đúng ý và số liệu (đối chiếu `sg.py`, `results_data.py`), không dài hơn câu cũ, không thêm khẳng định mới.
-- Đã viết lại:
-  - câu SRM/CNN ở Introduction;
-  - câu dẫn Fig. 1;
-  - hai câu mới ở 3.2: tách câu nối bằng dấu chấm phẩy;
-  - câu bootstrap ở 3.5 (nay chỉ còn câu về phân vị, xem mục 2);
-  - câu giới hạn CI và câu lưu trữ ở 3.5;
-  - câu τ_low ở 4.5;
-  - câu 54 rows / 6.480 ở 4.5 (tách làm ba câu ngắn).
-- Giữ nguyên vì bản mới không tốt hơn: vế [10] ở 2.3, câu Seeds ở 3.3, câu 5/120 ở 4.5.
-- Các câu mới không còn chuỗi mệnh đề nối bằng dấu chấm phẩy. Các dấu chấm phẩy còn lại trong bài là của nhóm.
-- Lưu ý: các công cụ dò AI không chính xác, nên không ai đảm bảo được một điểm số cụ thể. Lần sửa này chỉ làm cho các câu mới tự nhiên và giống giọng phần nhóm tự viết.
+- Chỉ viết lại các câu đã thêm hoặc sửa. Văn bản gốc của nhóm giữ nguyên, nên kết quả kiểm tra đạo văn trước đó vẫn dùng được.
+- Các câu mới ngắn, viết như mô tả phương pháp thông thường, không thêm khẳng định mới.
+- Các công cụ dò AI không chính xác, nên không ai đảm bảo được một điểm số cụ thể.
 
 ## Hướng dẫn EndNote (để References không bị đổi lại khi bấm Update)
 
@@ -192,31 +116,21 @@ EndNote sinh lại References từ **thư viện trên máy bạn** và từ **s
 4. **Update Citations and Bibliography.** Thứ tự [1]–[20] không đổi vì đánh số theo thứ tự trích dẫn. Sau khi update, so từng dòng References với bản PDF kèm theo. Chỗ nào khác (ví dụ cách ghi "LNCS, vol." ở [18] hay "Proc. SPIE" ở [9], phụ thuộc style) thì sửa tay hoặc quay lại file gốc.
 5. **Giữ độ nét của hình:** trước khi lưu trong Word, vào File → Options → Advanced → Image Size and Quality, tick "Do not compress images in file".
 
+
+## Các chỗ đổi trong bài (để nhóm biết khi chạy kiểm tra đạo văn)
+- Đoạn 1 của Introduction; đoạn cuối 2.3; câu mở đầu mục 3 (Fig. 1).
+- Hai đoạn của 3.1; đoạn 3.2 và ô "Seed-dependent parts" của Table 2; câu Seeds ở 3.3.
+- Hai đoạn của 3.5; hai đoạn của 4.5 và một ô của Table 7.
+- Lần này (sau khi chạy lại):
+  - CI ở Abstract, 4.2 (đoạn Under P1… và Answer to RQ1), 4.3, 4.4 (câu 17/18 và Answer to RQ3), Conclusion;
+  - Table 5, Table 6 (cận trên cao nhất, số CI < 0), Fig. 2;
+  - một câu mới ở 3.2 (điểm SRM), hai câu ở 3.5 (cách gộp, B, seed);
+  - chú thích Table 7; mục [20].
+- Acknowledgement và References.
+
 ## Kiểm tra đã chạy
-- `python3 scripts/kiem_tra_hoanchinh.py manuscript/Paper_HoanChinh_2.docm`: khớp số Table 4–7, Abstract, Conclusion; 42 trích dẫn trỏ đúng tài liệu; thứ tự tài liệu không đổi; có Acknowledgement; References đúng danh mục.
-- So văn bản cũ và mới bằng diff. Chỉ đổi các chỗ sau (để nhóm biết khi chạy kiểm tra đạo văn):
-  - đoạn 1 của Introduction;
-  - đoạn cuối 2.3;
-  - câu mở đầu mục 3 (Fig. 1);
-  - hai đoạn của 3.1;
-  - đoạn 3.2 và ô "Seed-dependent parts" của Table 2;
-  - câu Seeds ở 3.3;
-  - hai đoạn của 3.5;
-  - hai đoạn của 4.5 và một ô của Table 7;
-  - Acknowledgement và References.
-- Workflow rà soát 4 hướng (khớp code, checklist thầy, trích dẫn, văn phong). Các lỗi đã sửa đều ghi ở các mục trên.
-- Không làm theo hai đề xuất:
-  - Đổi "Acknowledgement" thành "Acknowledgments": giữ đúng chữ thầy đưa.
-  - Sửa mã băm manifest "13c01ca9…2799e8c": giữ nguyên. Nay đã kiểm với `manifest.csv` nhóm gửi: mã đầy đủ là `13c01ca9…a32799e8c`, nên cách viết tắt trong bài đúng.
-- **`scripts/verify_stats.py`** (script tính lại số liệu từ điểm từng ảnh) đã sửa cho khớp `sg.py`:
-  - B mặc định = 1000, giống `sg.py`. Khi kiểm Table 5/6, đặt `--B` bằng số vòng nhóm đã dùng, ví dụ 2000;
-  - mỗi lần bootstrap dùng một bộ sinh mới `default_rng(2026)`;
-  - cover lấy theo thứ tự manifest;
-  - τ_BER tính giống hệt `sg.py`, kể cả khi có điểm trùng;
-  - đọc được ngưỡng có sẵn từ `thresholds.json` (tùy chọn `--thresholds`), vì `sg.py` không lưu điểm validation.
-
-  Đã kiểm bằng `python3 scripts/kiem_verify_stats.py <thư mục bossbase_pilot_results>`:
-  - AUC và CI 95% khớp `metrics.csv` của `sg.py` ở cả 54/54 điều kiện pilot (sai khác < 1e-12);
-  - τ_BER và τ_low khớp `sg.py` trên 2.000 bộ dữ liệu thử.
-
-  Khi có điểm 600 cover, chạy `verify_stats.py` để kiểm lại toàn bộ Table 4–7 và CI của ΔAUC. Riêng cách gộp CI qua 3 seed là lựa chọn của script (lấy trung bình ΔAUC của từng replicate), chưa có trong code nhóm.
+- `python3 scripts/kiem_tra_hoanchinh.py manuscript/Paper_HoanChinh_2.docm`: OK. Kiểm số Table 4–7, Abstract, Conclusion, CI ở mục 4, câu 17/18; 42 trích dẫn trỏ đúng tài liệu; thứ tự tài liệu không đổi; có Acknowledgement; References đúng danh mục.
+- `verify_stats.py` trên kết quả chạy lại (B = 10.000): mọi số khớp `results_data.py`.
+- `scripts/kiem_verify_stats.py <bossbase_pilot_results>`: `verify_stats.py` tính giống `sg.py` (AUC và CI 54/54 điều kiện pilot, ngưỡng trên 2.000 bộ dữ liệu thử).
+- `scripts/srm_nhanh.py`: bản đếm đồng xuất hiện nhanh cho ra đặc trưng SRM trùng từng bit với sealwatch (14/14 ảnh kiểm).
+- Không làm theo hai đề xuất: đổi "Acknowledgement" thành "Acknowledgments" (giữ đúng chữ thầy đưa); sửa mã băm manifest "13c01ca9…2799e8c" (đúng với `manifest.csv`).

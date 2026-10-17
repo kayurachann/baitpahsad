@@ -1,15 +1,13 @@
 # Trạng thái chạy lại thí nghiệm 600 ảnh
 
-BLOCKED: dde.binghamton.edu not reachable from this environment (HTTP code 000)
+**XONG (15/10/2026).** Kết quả, phiên bản phần mềm và lệnh tái lập nằm trong `data/stegaguard_600/ket_qua_chay_lai/`.
 
-- Ngày kiểm tra: 2026-10-15
-- Lệnh: `curl -sS -o /dev/null -w "%{http_code}\n" -r 0-99 --max-time 30 https://dde.binghamton.edu/download/ImageDB/BOSSbase_1.01.zip`
-- Kết quả: `curl: (56) CONNECT tunnel failed, response 403`, mã HTTP in ra `000`.
-  Proxy egress của môi trường từ chối kết nối tới `dde.binghamton.edu:443`
-  (`connect_rejected`; host không nằm trong danh sách được phép của phiên này).
-- Vì không tải được BOSSbase 1.01, các bước 1–7 (môi trường, tải ảnh, chuẩn bị,
-  trích đặc trưng, chạy, gộp, kiểm chứng) **chưa được chạy**. Không có con số nào
-  được tính lại trong phiên này.
-
-Để chạy được: thêm `dde.binghamton.edu` vào danh sách host được phép trong cấu hình
-mạng của môi trường (hoặc chạy trên máy có Internet), rồi chạy lại quy trình.
+- Nguồn ảnh: máy chủ dde.binghamton.edu bị chặn từ môi trường này, nên nhóm gửi trực tiếp 600 ảnh PGM gốc (`covers.zip`, cắt 5 phần). Cả 600 ảnh khớp SHA-256 trong `source_provenance.json`.
+- Chuẩn bị dữ liệu (`sg.prepare`, seed 20260918): manifest khớp bản của nhóm ở mọi cột. Chỉ SHA của file PNG khác do bản Pillow/zlib, còn điểm ảnh trùng.
+- Trích đặc trưng: 4.200 ảnh × (76 đặc trưng residual + 34.671 đặc trưng SRM).
+- 18 lần huấn luyện: 2 detector × 3 protocol × 3 seed.
+- Đối chiếu:
+  - Table 4/S1 khớp 216/216 giá trị;
+  - FP từng seed khớp các tổng của Table 7;
+  - 22 ΔAUC khớp bài;
+  - CI tính lại với B = 10.000.

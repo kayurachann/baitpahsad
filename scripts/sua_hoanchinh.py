@@ -27,6 +27,17 @@ from lxml import etree
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import docm_edit as de  # noqa: E402
 from refs_hoanchinh import ENDNOTE_TYPE, REFS  # noqa: E402
+from results_data import RQ1, RQ2, RQ3  # noqa: E402
+
+# CI của RQ1/RQ2 trong bản trước (script ΔAUC gốc), để tìm đúng chỗ cần thay
+RQ1_CU = {"Residual-LR": (-0.007, 0.056), "SRM+Ensemble": (-0.093, -0.046)}
+RQ2_CU = {"Residual-LR": (-0.020, 0.007), "SRM+Ensemble": (-0.050, 0.005)}
+
+
+def so(x):
+    """Số có dấu kiểu bài: −0.093, +0.005; số 0 viết 0.000 (như kiem_tra_hoanchinh.py)."""
+    x = round(x, 3) + 0.0
+    return ("+" if x > 0 else "−" if x < 0 else "") + f"{abs(x):.3f}"
 
 W = de.W
 GOC = Path(__file__).resolve().parent.parent
@@ -85,10 +96,13 @@ def sua_noi_dung(blks):
     # 3.5: bootstrap
     p = tim(blks, "Each comparison is a paired difference")
     de.chen_sau(p, " images are never resampled on their own.", [
-        # Chỉ ghi cách lấy CI theo phân vị (có trong cả sg.py và hàm ΔAUC của nhóm). Không ghi B và seed:
-        # sg.py dùng B = 1.000, seed 2026 cho CI AUC từng điều kiện, còn hàm ΔAUC pilot của nhóm
-        # (build_conference_report.py) dùng 2.000 vòng, seed 2026+seed. Script ΔAUC của bản 600 cover chưa có.
-        (" The 2.5th and 97.5th percentiles of the replicate differences give the 95% interval.", False),
+        # Script ΔAUC gốc của nhóm không còn. Chạy lại cho thấy CI trong bài theo cách gộp này (rút chung một lần
+        # cho cả 3 seed, ΔAUC của replicate = trung bình 3 seed; các cách khác lệch 0,013-0,021), nhưng không khôi
+        # phục được B và dòng số ngẫu nhiên. Mọi CI được tính lại bằng scripts/tinh_lai_ci.py (B = 10.000,
+        # default_rng(2026)) từ điểm của lần chạy lại, nên bài ghi đúng thủ tục đã chạy.
+        (" One draw serves all three seeds, and the replicate ΔAUC is the mean of the three per-seed differences. "
+         "The 2.5th and 97.5th percentiles of B\xa0=\xa010,000 replicates (NumPy default_rng, seed 2026) give the "
+         "95% interval.", False),
     ])
     p = tim(blks, "Seed standard deviations (at most 0.028")
     de.thay(p, "so the intervals are conditional on this partition.",
@@ -159,6 +173,60 @@ def sua_noi_dung(blks):
     assert len(hang) == 1
     o = list(hang[0].iter(W + "tc"))[4]
     de.thay(next(o.iter(W + "p")), "0.070", "0.069")
+
+    # ---- kết quả chạy lại 600 cover (scripts/chay_lai_600.py): Table 4/S1 trùng 216/216 giá trị; CI ΔAUC tính lại
+    # với B = 10.000 (scripts/tinh_lai_ci.py), ước lượng điểm không đổi, cận CI đổi tối đa 0,003
+    ci = lambda lo, hi: f"[{so(lo)}, {so(hi)}]"  # noqa: E731
+    for d in ("Residual-LR", "SRM+Ensemble"):
+        assert RQ1_CU[d] != RQ1[d][3] and RQ2_CU[d] != RQ2[d][3]
+    cu1, moi1 = ci(*RQ1_CU["SRM+Ensemble"]), ci(*RQ1["SRM+Ensemble"][3])
+    cu2, moi2 = ci(*RQ2_CU["SRM+Ensemble"]), ci(*RQ2["SRM+Ensemble"][3])
+    p = tim(blks, "Abstract.")
+    de.thay(p, f"95% CI {cu1}", f"95% CI {moi1}")
+    de.thay(p, f"95% CI {cu2}", f"95% CI {moi2}")
+    de.thay(tim(blks, "Under P1, SRM+Ensemble falls from 0.714"), f"+0.024 {ci(*RQ1_CU['Residual-LR'])}",
+            f"+0.024 {ci(*RQ1['Residual-LR'][3])}")
+    de.thay(tim(blks, "Answer to RQ1."), f"95% CI {cu1}", f"95% CI {moi1}")
+    p = tim(blks, "P3 adds 0.1 bpp WOW and S-UNIWARD variants")
+    de.thay(p, f"95% CI {cu2}", f"95% CI {moi2}")
+    de.thay(p, f"−0.005 {ci(*RQ2_CU['Residual-LR'])}", f"−0.005 {ci(*RQ2['Residual-LR'][3])}")
+    de.thay(tim(blks, "With the source-cover split fixed before embedding"), f"95% CI {cu1}", f"95% CI {moi1}")
+    # Fig. 2: khoảng Residual-LR P3 WOW giờ chạm 0 (cận trên +0,0003)
+    assert RQ3[("Residual-LR", "P3", "WOW")][2] >= 0 and sum(v[2] < 0 for v in RQ3.values()) == 17
+    p = tim(blks, "Fig.\xa02 shows ΔAUC between 0.1 and 0.4 bpp")
+    de.thay(p, "All 18 differences are negative and all 18 intervals lie below zero. The SRM+Ensemble losses are about "
+               "three times those of Residual-LR, and one Residual-LR interval ends at −0.001 (P3 WOW).",
+            "All 18 differences are negative, and 17 of the 18 intervals lie below zero; the Residual-LR interval for "
+            "P3 WOW reaches zero. The SRM+Ensemble losses are about three times those of Residual-LR.")
+    de.thay(tim(blks, "Answer to RQ3."), "the weakest Residual-LR intervals end close to zero",
+            "the weakest Residual-LR intervals end at or near zero")
+    # Table 5
+    t5 = next(b for b in blks if b.tag == W + "tbl" and "Reference AUC" in " ".join(de.van_ban(x) for x in b.iter(W + "p")))
+    for cu, moi in ((RQ1_CU, RQ1), (RQ2_CU, RQ2)):
+        for d in ("Residual-LR", "SRM+Ensemble"):
+            o = [x for x in t5.iter(W + "p") if de.van_ban(x) == ci(*cu[d])]
+            assert len(o) == 1, (d, ci(*cu[d]))
+            de.thay(o[0], ci(*cu[d]), ci(*moi[d][3]))
+    # Table 6: cận trên cao nhất và số CI < 0 của mỗi detector × protocol
+    t6 = next(b for b in blks if b.tag == W + "tbl" and "Highest CI upper bound" in " ".join(de.van_ban(x) for x in b.iter(W + "p")))
+    det = None
+    for r in list(t6.iter(W + "tr"))[1:]:
+        o = list(r.iter(W + "tc"))
+        chu = [de.van_ban(next(c.iter(W + "p"))) for c in o]
+        det = chu[0] or det
+        his = [RQ3[(det, chu[1], a)][2] for a in ("WOW", "S-UNIWARD", "HILL")]
+        for i, moi in ((5, so(max(his))), (6, f"{sum(h < 0 for h in his)}/3")):
+            if chu[i] != moi:
+                de.thay(next(o[i].iter(W + "p")), chu[i], moi)
+    # 3.2: điểm của SRM+Ensemble (predict_confidence của sealwatch)
+    de.thay(tim(blks, "Both detectors output a score"), "random feature subspaces of dimension dsub = 500.",
+            "random feature subspaces of dimension dsub = 500. Its score is the mean of the 50 base-learner votes "
+            "(±1).")
+    # Table 7: số false positive đếm từ điểm test của từng lần chạy (từng seed ở Table S3)
+    de.thay(tim(blks, "Table 7. Operating point at"),
+            "False positives over seeds 42-44 (3 × 120 test covers) are implied by the reported mean test FPR "
+            "(Suppl. Table S3)",
+            "False positives are counted over seeds 42-44 (3 × 120 test covers; per seed in Suppl. Table S3)")
 
     # Acknowledgement trước References
     tieu_de = tim(blks, "References")

@@ -283,8 +283,8 @@ TY  - COMP
 AU  - Beneš, M.
 AU  - Lorch, B.
 TI  - sealwatch: Implementation of modern image steganalysis algorithms
-T2  - Python package
-PY  - 2024
+T2  - Python package, version 2025.9
+PY  - 2025
 PB  - University of Innsbruck
 UR  - https://github.com/uibk-uncover/sealwatch
 N1  - StegaGuard reference [20], EndNote RecNum 28

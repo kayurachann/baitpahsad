@@ -8,7 +8,7 @@ from pathlib import Path
 
 from docx_builder import Doc, prepare_template
 from build_manuscript import SECT_PR, f3, ci
-from results_data import MATRIX, RQ3, DETECTORS, PROTOCOLS, ALGORITHMS, low_fpr_summary
+from results_data import MATRIX, RQ3, DETECTORS, PROTOCOLS, ALGORITHMS, FP_PER_SEED, low_fpr_summary
 
 # tên bài theo bản nộp của nhóm (Paper_HoanChinh)
 TITLE = ("StegaGuard: A Controlled Robustness Study of Lightweight Image Steganalysis under Algorithm "
@@ -45,9 +45,8 @@ def build(template_src: Path, out: Path):
            rows, group_rules=(18,), sub_rules=tuple(k for k in range(6, 36, 6) if k != 18))
     d.p("Residual-LR shows a seed SD of 0.000 under P1, consistent with P1 involving no variant sampling and a "
         "deterministic fit. The FPR column is constant within each detector and protocol because the 120 test "
-        "covers are scored identically in all six stego conditions. Multiplying the FPR by 3 × 120 and "
-        "rounding to the nearest integer gives the false-positive totals of the manuscript (e.g. 0.042 → "
-        "15/360).", style="p1a")
+        "covers are scored identically in all six stego conditions. Table S3 lists the false positives behind "
+        "each rate per run.", style="p1a")
 
     rows = []
     for det in DETECTORS:
@@ -58,21 +57,28 @@ def build(template_src: Path, out: Path):
                 rows.append([det if (p, a) == ("P1", "WOW") else "", p if a == "WOW" else "", a, f3(a4), f3(a1),
                              f3(delta, True), ci(lo, hi)])
     d.para(d.runs("**Table S2.** Payload-shift comparisons (RQ3). ΔAUC = AUC(0.1 bpp) − AUC(0.4 bpp), paired "
-                  "on the 120 test covers, with 95% paired bootstrap intervals (resampling unit: source cover). ΔAUC is "
+                  "on the 120 test covers, with 95% paired bootstrap intervals (resampling unit: source cover; one draw shared "
+                  "by the three seeds; B = 10,000; see Sect. 3.5 of the manuscript). ΔAUC is "
                   "computed from unrounded AUCs and may differ by 0.001 from the rounded columns."),
            "tablecaption", '<w:jc w:val="both"/>')
     _table(d, [1400, 400, 1200, 900, 900, 900, 1218],
            [["Detector", "P", "Algorithm", "AUC 0.4", "AUC 0.1", "ΔAUC", "95% CI"]], rows, group_rules=(9,),
            sub_rules=(3, 6, 12, 15))
 
-    rows = [[r["detector"] if r["protocol"] == "P1" else "", r["protocol"], f"{r['fpr']:.3f}",
-             f"{r['fp_total']}/360", f"{r['fp_total'] / 3:.2f}"] for r in low_fpr_summary()]
-    d.para(d.runs("**Table S3.** False-positive counts implied by the reported mean test FPR at τ_{low}. Each "
-                  "count is the unique integer k with k/360 rounding to the reported FPR; per-seed counts are "
-                  "not reported."), "tablecaption", '<w:jc w:val="both"/>')
-    _table(d, [1700, 500, 1500, 1500, 1700],
-           [["Detector", "P", "Mean test FPR", "False positives (3 seeds)", "Mean per run (of 120)"]], rows,
-           group_rules=(3,))
+    rows = []
+    for r in low_fpr_summary():
+        fp = FP_PER_SEED[(r["detector"], r["protocol"])]
+        assert sum(fp) == r["fp_total"], (r["detector"], r["protocol"])
+        rows.append([r["detector"] if r["protocol"] == "P1" else "", r["protocol"], *map(str, fp),
+                     f"{sum(fp)}/360", f"{r['fpr']:.3f}"])
+    d.para(d.runs("**Table S3.** Test false positives at τ_{low} per run (out of 120 test covers), counted from the "
+                  "per-image test scores of each run. The observed test FPR is the total over 3 × 120 cover "
+                  "evaluations."), "tablecaption", '<w:jc w:val="both"/>')
+    _table(d, [1400, 400, 900, 900, 900, 1200, 1218],
+           [["Detector", "P", "Seed 42", "Seed 43", "Seed 44", "Total", "Test FPR"]], rows, group_rules=(3,))
+    d.para(d.runs("**Software.** All values in Tables S1-S3 and in the manuscript were reproduced from the 600 "
+                  "source images with Python 3.13, NumPy 2.5.3 (OpenBLAS, Haswell kernel), SciPy 1.18.1, "
+                  "scikit-learn 1.9.1, conseal 2025.11 and sealwatch 2025.9."), "p1a")
     d.save(out, SECT_PR)
     shutil.rmtree(work)
     return d

@@ -141,14 +141,17 @@ REFS = [
          lncs="Pedregosa, F., et al.: Scikit-learn: Machine learning in Python. J. Mach. Learn. Res. 12, "
               "2825–2830 (2011)"),
     dict(n=20, recnum="28", typ="COMP", authors=["Beneš, M.", "Lorch, B."],
-         title="sealwatch: Implementation of modern image steganalysis algorithms", container="Python package",
-         year="2024", publisher="University of Innsbruck", url="https://github.com/uibk-uncover/sealwatch",
+         title="sealwatch: Implementation of modern image steganalysis algorithms",
+         # phiên bản 2025.9 (PyPI, 18/9/2025): bản mới nhất khi nhóm chạy; chạy lại với bản này cho ra đúng mọi giá
+         # trị SRM+Ensemble của Table 4/S1
+         container="Python package, version 2025.9",
+         year="2025", publisher="University of Innsbruck", url="https://github.com/uibk-uncover/sealwatch",
          lncs_truoc_url="Beneš, M., Lorch, B.: sealwatch: Implementation of modern image steganalysis algorithms. "
-                        "Python package, University of Innsbruck (2024). ",
+                        "Python package, version 2025.9, University of Innsbruck (2025). ",
          # không ghi ngày truy cập: trang GitHub chưa mở được để xác nhận (URL kiểm qua project_urls của PyPI)
          lncs_sau_url="",
          lncs="Beneš, M., Lorch, B.: sealwatch: Implementation of modern image steganalysis algorithms. Python "
-              "package, University of Innsbruck (2024). https://github.com/uibk-uncover/sealwatch"),
+              "package, version 2025.9, University of Innsbruck (2025). https://github.com/uibk-uncover/sealwatch"),
 ]
 
 # kiểu tài liệu EndNote (tên, mã) theo loại
