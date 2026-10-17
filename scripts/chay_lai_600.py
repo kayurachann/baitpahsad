@@ -11,8 +11,8 @@ Các bước (mỗi bước một lệnh con, có thể chạy lại từng bư�
   dac-trung-residual <thư_mục_dữ_liệu> <thư_mục_đặc_trưng>   chỉ 76 đặc trưng residual (vài phút)
   chay      <thư_mục_dữ_liệu> <thư_mục_đặc_trưng> <thư_mục_kết_quả> [--chi-residual]
             9 lần Residual-LR (giống hệt nhánh residual_lr của sg.train/evaluate) và 9 lần SRM+Ensemble
-            (sealwatch FldEnsembleTrainer, L = 50, d_sub = 500). Với SRM ghi hai loại điểm: 'votes'
-            (predict_confidence, tỉ lệ phiếu) và 'proj' (trung bình projection của 50 FLD), mỗi loại một thư mục.
+            (sealwatch FldEnsembleTrainer, L = 50, d_sub = 500, seed của lần chạy; cột SRM theo
+            srm_thu_tu_nhom.txt; biến thể train rút theo thứ tự cover_id; điểm = predict_confidence, tỉ lệ phiếu).
             Kết quả theo đúng định dạng sg.py: <run>/config.json, thresholds.json; <run>_test/predictions.csv, metrics.csv.
 
 Sau đó: python3 gop_ket_qua.py <thư_mục_kết_quả>/<loại> gop --manifest-sha256 ... và verify_stats.py.
@@ -160,6 +160,8 @@ def _mot_anh(args):
     goc, i, path = args
     import khong_torch  # noqa: F401  sealwatch import được mà không cần torch
     import sealwatch
+    import srm_nhanh
+    srm_nhanh.bat()   # cooccurrence4 đếm bằng np.bincount: cùng kết quả từng bit, nhanh hơn khoảng 5 lần
     x = sg.pixels(goc, {"path": path})                       # float32, giống sg.score_pairs
     res = sg.residual_features(x)
     f = sealwatch.srm.extract(x.astype(np.uint8).astype(np.float64))
@@ -224,6 +226,20 @@ def dac_trung_residual(goc, ra, workers=4):
 
 
 # ------------------------------------------------------------------ 4. huấn luyện và đánh giá
+def cot_srm_nhom():
+    """Chỉ số cột đưa vector SRM (lưu theo tên submodel đã sắp xếp) về thứ tự ghép của nhóm (srm_thu_tu_nhom.txt).
+    Thứ tự cột quyết định các không gian con ngẫu nhiên của FLD ensemble, nên phải đúng thì mới ra đúng số."""
+    dong = [x.split("\t") for x in (Path(__file__).resolve().parent / "srm_thu_tu_nhom.txt").read_text(
+        encoding="utf-8").splitlines() if x and not x.startswith("#")]
+    kt = {k: int(n) for k, n in dong}
+    dau, o = {}, 0
+    for k in sorted(kt):
+        dau[k] = o
+        o += kt[k]
+    assert o == SRM_DIM
+    return np.concatenate([np.arange(dau[k], dau[k] + kt[k]) for k, _ in dong])
+
+
 class DacTrung:
     def __init__(self, thu_muc):
         thu_muc = Path(thu_muc)
@@ -231,25 +247,26 @@ class DacTrung:
         self.idx = {p: i for i, p in enumerate(paths)}
         self.res = np.load(thu_muc / "residual.npy", mmap_mode="r")
         self.srm = np.load(thu_muc / "srm.npy", mmap_mode="r") if (thu_muc / "srm.npy").exists() else None
+        self.cot = cot_srm_nhom()
 
     def lay(self, records, loai):
-        m = self.res if loai == "residual" else self.srm
-        return np.asarray(m[[self.idx[r["path"]] for r in records]])
+        ii = [self.idx[r["path"]] for r in records]
+        if loai == "residual":
+            return np.asarray(self.res[ii])
+        return np.asarray(self.srm[ii])[:, self.cot]
 
 
-def _chon_cap(goc, algorithms, payloads, seed):
-    """Giống sg.train: một biến thể cho mỗi cover train, random.Random(seed).choice theo thứ tự manifest."""
+def _chon_cap(goc, algorithms, payloads, seed, theo_cover_id=False):
+    """Giống sg.train: một biến thể cho mỗi cover train, random.Random(seed).choice theo thứ tự manifest.
+    theo_cover_id: duyệt cover theo cover_id tăng dần (cách của script SRM của nhóm)."""
     tr = sg.pairs(goc, "train", algorithms, payloads)
     groups = {}
     for c, s in tr:
         groups.setdefault(c["cover_id"], []).append((c, s))
     rr = random.Random(seed)
-    return [rr.choice(g) for g in groups.values()]
+    keys = sorted(groups) if theo_cover_id else list(groups)
+    return [rr.choice(groups[k]) for k in keys]
 
-
-def _diem_srm(ens, X):
-    proj = np.mean([bl.predict(X) for bl in ens.base_learners], axis=0)
-    return {"votes": ens.predict_confidence(X), "proj": proj}
 
 
 def _ghi_run(ra, ten, model, algorithms, payloads, seed, sha, th, du_doan, chi_so):
@@ -321,15 +338,17 @@ def chay(goc, thu_muc_dt, ra, chi_residual=False):
             if chi_residual:
                 print(f"xong {ten} (Residual-LR)", flush=True)
                 continue
-            # SRM+Ensemble: FLD ensemble của sealwatch, L = 50, d_sub = 500
-            Xc = np.ascontiguousarray(dt.lay([c for c, _ in chon], "srm"))
-            Xs = np.ascontiguousarray(dt.lay([s for _, s in chon], "srm"))
+            # SRM+Ensemble: FLD ensemble của sealwatch (L = 50, d_sub = 500, seed = seed của lần chạy), điểm = tỉ lệ
+            # phiếu (predict_confidence). Script SRM của nhóm duyệt các cover train theo cover_id (sg.py theo thứ tự
+            # manifest) khi rút một biến thể bằng random.Random(seed).choice, và đưa cặp vào FLD theo thứ tự đó.
+            # Cách này cho ra đúng 36/36 giá trị SRM+Ensemble của mỗi protocol trong Table 4/S1.
+            chon_srm = _chon_cap(goc, algs, pls, seed, theo_cover_id=True)
+            Xc = np.ascontiguousarray(dt.lay([c for c, _ in chon_srm], "srm"))
+            Xs = np.ascontiguousarray(dt.lay([s for _, s in chon_srm], "srm"))
             ens, _ = FldEnsembleTrainer(Xc, Xs, seed=seed, L=50, d_sub=500, verbose=0).train()
-            for loai in ("votes", "proj"):
-                fn = lambda recs, loai=loai: _diem_srm(ens, dt.lay(recs, "srm"))[loai]  # noqa: E731
-                th = nguong(fn, va_tat_ca[p])
-                _ghi_run(Path(ra) / f"srm_{loai}", ten, f"srm_ensemble_{loai}", algs, pls, seed, sha, th,
-                         *danh_gia(fn, th))
+            fn = lambda recs: ens.predict_confidence(dt.lay(recs, "srm"))  # noqa: E731
+            th = nguong(fn, va_tat_ca[p])
+            _ghi_run(Path(ra) / "srm_ensemble", ten, "srm_ensemble", algs, pls, seed, sha, th, *danh_gia(fn, th))
             print(f"xong {ten}", flush=True)
 
 
